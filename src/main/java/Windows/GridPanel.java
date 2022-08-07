@@ -35,13 +35,17 @@ public class GridPanel extends JPanel implements ActionListener {
     }
 
     public void draw() {
-        for (int row = 0; row < squares; row++){
-            for (int column = 0; column < squares; column++){
-                if (ant.grid[row][column] == 1)
+        for (int row = 0; row < squares; row++) {
+            for (int column = 0; column < squares; column++) {
+                if (ant.grid[row][column] == 1) {
                     graphics.setColor(Color.WHITE);
-                if (ant.grid[row][column] == 2)
+                }
+                if (ant.grid[row][column] == 2) {
                     graphics.setColor(Color.RED);
-                graphics.drawRect(row * SIZE_OF_SQUARE, column * SIZE_OF_SQUARE, SIZE_OF_SQUARE, SIZE_OF_SQUARE);
+                }
+                if (ant.grid[row][column] == 0) {
+                    graphics.setColor(Color.BLACK);
+                }
                 graphics.fillRect(row * SIZE_OF_SQUARE, column * SIZE_OF_SQUARE, SIZE_OF_SQUARE, SIZE_OF_SQUARE);
             }
         }

@@ -5,10 +5,12 @@ import Utils.Position;
 
 public class Ant {
     public int[][] grid;
+    public int size;
     public Position antPosition = new Position();
 
     public Ant(int size) {
         this.grid = new int[size][size];
+        this.size = size;
         for (int i = 0; i < size; i++) {
             grid[i] = new int[size];
         }
@@ -68,5 +70,15 @@ public class Ant {
                 antPosition.row++;
             }
         }
+    }
+
+    public void printGrid() {
+        for (int row = 0; row < size; row++) {
+            for (int column = 0; column < size; column++) {
+                System.out.print(grid[row][column] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 }
