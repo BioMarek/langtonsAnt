@@ -1,6 +1,8 @@
+package Windows;
+
 import javax.swing.*;
 
-public class GridFrame extends JFrame  {
+public class GridFrame extends JFrame {
     public GridFrame() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(new GridPanel(500));
