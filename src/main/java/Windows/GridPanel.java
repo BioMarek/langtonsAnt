@@ -1,6 +1,7 @@
 package Windows;
 
 import Logic.Ant;
+import Utils.Settings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,9 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GridPanel extends JPanel implements ActionListener {
-    private final int SIZE_IN_PIXELS = 750;
-    private final int SIZE_OF_SQUARE = 10;
-    private final int squares = SIZE_IN_PIXELS / SIZE_OF_SQUARE;
+    private final int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
     private int delay;
     private Graphics2D graphics;
 
@@ -19,7 +18,7 @@ public class GridPanel extends JPanel implements ActionListener {
     public GridPanel(int delay) {
         this.delay = delay;
 
-        this.setPreferredSize(new Dimension(SIZE_IN_PIXELS, SIZE_IN_PIXELS));
+        this.setPreferredSize(new Dimension(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS));
         this.setBackground(Color.gray);
         this.setFocusable(true);
         startAnimation();
@@ -46,7 +45,10 @@ public class GridPanel extends JPanel implements ActionListener {
                 if (ant.grid[row][column] == 0) {
                     graphics.setColor(Color.BLACK);
                 }
-                graphics.fillRect(row * SIZE_OF_SQUARE, column * SIZE_OF_SQUARE, SIZE_OF_SQUARE, SIZE_OF_SQUARE);
+                graphics.fillRect(row * Settings.SIZE_OF_SQUARE,
+                        column * Settings.SIZE_OF_SQUARE,
+                        Settings.SIZE_OF_SQUARE,
+                        Settings.SIZE_OF_SQUARE);
             }
         }
     }
