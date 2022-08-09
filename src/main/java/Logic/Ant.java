@@ -9,6 +9,7 @@ public class Ant {
     public int size;
     private char[] rule;
     public Position antPosition = new Position();
+    public boolean stopped = false;
 
     public Ant(int size) {
         this.grid = new int[size][size];
@@ -24,13 +25,22 @@ public class Ant {
         parseRule();
     }
 
+    private void parseRule() {
+        rule = new char[Settings.rule.length()];
+        for (int i = 0; i < Settings.rule.length(); i++) {
+            rule[i] = Settings.rule.charAt(i);
+        }
+    }
+
     public void nextMove() {
-        Position currentPosition = new Position(antPosition.row, antPosition.column);
-        if (rule[grid[currentPosition.row][currentPosition.column]] == 'L')
+        int currentRow = antPosition.row;
+        int currentColumn = antPosition.column;
+        if (rule[grid[currentRow][currentColumn]] == 'L')
             moveLeft();
-        if (rule[grid[currentPosition.row][currentPosition.column]] == 'R')
+        if (rule[grid[currentRow][currentColumn]] == 'R')
             moveRight();
-        grid[currentPosition.row][currentPosition.column] = (grid[currentPosition.row][currentPosition.column] + 1) % Settings.rule.length();
+        grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] + 1) % Settings.rule.length();
+        checkBorderCollision();
     }
 
     public void moveRight() {
@@ -75,11 +85,9 @@ public class Ant {
         }
     }
 
-    private void parseRule() {
-        rule = new char[Settings.rule.length()];
-        for (int i = 0; i < Settings.rule.length(); i++) {
-            rule[i] = Settings.rule.charAt(i);
-        }
+    public void checkBorderCollision() {
+        if (antPosition.row < 0 || antPosition.column < 0 || antPosition.row == size || antPosition.column == size)
+            stopped = true;
     }
 
     public void printGrid() {

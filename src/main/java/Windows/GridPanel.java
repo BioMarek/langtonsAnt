@@ -12,6 +12,7 @@ public class GridPanel extends JPanel implements ActionListener {
     private final int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
     private static Graphics2D graphics;
     private final Ant ant = new Ant(squares);
+    Timer timer;
 
     public GridPanel() {
         this.setPreferredSize(new Dimension(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS));
@@ -24,8 +25,6 @@ public class GridPanel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         graphics = (Graphics2D) g;
-//        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         draw();
     }
 
@@ -33,6 +32,9 @@ public class GridPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         ant.nextMove();
         repaint();
+
+        if (ant.stopped)
+            timer.stop();
     }
 
     public void draw() {
@@ -48,7 +50,7 @@ public class GridPanel extends JPanel implements ActionListener {
     }
 
     public void startAnimation() {
-        Timer timer = new Timer(Settings.DELAY, this);
+        timer = new Timer(Settings.DELAY, this);
         timer.start();
     }
 
