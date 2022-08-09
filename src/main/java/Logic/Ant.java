@@ -2,32 +2,35 @@ package Logic;
 
 import Utils.Direction;
 import Utils.Position;
+import Utils.Settings;
 
 public class Ant {
     public int[][] grid;
     public int size;
+    private char[] rule;
     public Position antPosition = new Position();
 
     public Ant(int size) {
         this.grid = new int[size][size];
         this.size = size;
+
         for (int i = 0; i < size; i++) {
             grid[i] = new int[size];
         }
         antPosition.row = size / 2;
         antPosition.column = size / 2;
         antPosition.direction = Direction.NORTH;
+
+        parseRule();
     }
 
     public void nextMove() {
-        if (grid[antPosition.row][antPosition.column] == 0 || grid[antPosition.row][antPosition.column] == 1) {
-            grid[antPosition.row][antPosition.column] = 2;
-            moveRight();
-        }
-        if (grid[antPosition.row][antPosition.column] == 2) {
-            grid[antPosition.row][antPosition.column] = 1;
+        Position currentPosition = new Position(antPosition.row, antPosition.column);
+        if (rule[grid[currentPosition.row][currentPosition.column]] == 'L')
             moveLeft();
-        }
+        if (rule[grid[currentPosition.row][currentPosition.column]] == 'R')
+            moveRight();
+        grid[currentPosition.row][currentPosition.column] = (grid[currentPosition.row][currentPosition.column] + 1) % Settings.rule.length();
     }
 
     public void moveRight() {
@@ -69,6 +72,13 @@ public class Ant {
                 antPosition.direction = Direction.SOUTH;
                 antPosition.row++;
             }
+        }
+    }
+
+    private void parseRule() {
+        rule = new char[Settings.rule.length()];
+        for (int i = 0; i < Settings.rule.length(); i++) {
+            rule[i] = Settings.rule.charAt(i);
         }
     }
 

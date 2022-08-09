@@ -10,14 +10,10 @@ import java.awt.event.ActionListener;
 
 public class GridPanel extends JPanel implements ActionListener {
     private final int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
-    private int delay;
-    private Graphics2D graphics;
+    private static Graphics2D graphics;
+    private final Ant ant = new Ant(squares);
 
-    private Ant ant = new Ant(squares);
-
-    public GridPanel(int delay) {
-        this.delay = delay;
-
+    public GridPanel() {
         this.setPreferredSize(new Dimension(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS));
         this.setBackground(Color.gray);
         this.setFocusable(true);
@@ -28,23 +24,21 @@ public class GridPanel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         graphics = (Graphics2D) g;
-        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+//        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         draw();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        ant.nextMove();
+        repaint();
     }
 
     public void draw() {
         for (int row = 0; row < squares; row++) {
             for (int column = 0; column < squares; column++) {
-                if (ant.grid[row][column] == 1) {
-                    graphics.setColor(Color.WHITE);
-                }
-                if (ant.grid[row][column] == 2) {
-                    graphics.setColor(Color.RED);
-                }
-                if (ant.grid[row][column] == 0) {
-                    graphics.setColor(Color.BLACK);
-                }
+                setColor(ant.grid[row][column]);
                 graphics.fillRect(row * Settings.SIZE_OF_SQUARE,
                         column * Settings.SIZE_OF_SQUARE,
                         Settings.SIZE_OF_SQUARE,
@@ -54,13 +48,21 @@ public class GridPanel extends JPanel implements ActionListener {
     }
 
     public void startAnimation() {
-        Timer timer = new Timer(delay, this);
+        Timer timer = new Timer(Settings.DELAY, this);
         timer.start();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        ant.nextMove();
-        repaint();
+    private void setColor(int color) {
+        switch (color) {
+            case 0 -> graphics.setColor(Color.BLACK);
+            case 1 -> graphics.setColor(Color.RED);
+            case 2 -> graphics.setColor(Color.GREEN);
+            case 3 -> graphics.setColor(Color.BLUE);
+            case 4 -> graphics.setColor(Color.YELLOW);
+            case 5 -> graphics.setColor(Color.ORANGE);
+            case 6 -> graphics.setColor(Color.MAGENTA);
+            case 7 -> graphics.setColor(Color.CYAN);
+            case 8 -> graphics.setColor(Color.PINK);
+        }
     }
 }
