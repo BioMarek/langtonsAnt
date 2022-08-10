@@ -56,7 +56,8 @@ public class GridPanel extends JPanel implements ActionListener {
 
     private void setColor(int color) {
         switch (color) {
-            case 0 -> graphics.setColor(Color.BLACK);
+            case -1 -> graphics.setColor(Color.BLACK);
+            case 0 -> graphics.setColor(Color.WHITE);
             case 1 -> graphics.setColor(Color.RED);
             case 2 -> graphics.setColor(Color.GREEN);
             case 3 -> graphics.setColor(Color.BLUE);

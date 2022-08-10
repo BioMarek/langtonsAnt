@@ -4,6 +4,8 @@ import Utils.Direction;
 import Utils.Position;
 import Utils.Settings;
 
+import java.util.Arrays;
+
 public class Ant {
     public int[][] grid;
     public int size;
@@ -17,6 +19,7 @@ public class Ant {
 
         for (int i = 0; i < size; i++) {
             grid[i] = new int[size];
+            Arrays.fill(grid[i], -1);
         }
         antPosition.row = size / 2;
         antPosition.column = size / 2;
@@ -35,11 +38,24 @@ public class Ant {
     public void nextMove() {
         int currentRow = antPosition.row;
         int currentColumn = antPosition.column;
-        if (rule[grid[currentRow][currentColumn]] == 'L')
-            moveLeft();
-        if (rule[grid[currentRow][currentColumn]] == 'R')
-            moveRight();
-        grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] + 1) % Settings.rule.length();
+
+        if (grid[currentRow][currentColumn] == -1){
+            if (rule[0] == 'L')
+                moveRight();
+            else
+                moveRight();
+        } else {
+            if (rule[grid[currentRow][currentColumn]] == 'L')
+                moveLeft();
+            if (rule[grid[currentRow][currentColumn]] == 'R')
+                moveRight();
+        }
+
+        if (grid[currentRow][currentColumn] == -1)
+            grid[currentRow][currentColumn] = 1;
+        else
+            grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] + 1) % Settings.rule.length();
+
         checkBorderCollision();
     }
 
