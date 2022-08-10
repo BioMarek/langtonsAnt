@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Ant {
     public int[][] grid;
     public int size;
-    private char[] rule;
+    public char[] rule;
     public Position antPosition = new Position();
     public boolean stopped = false;
 
@@ -32,10 +32,18 @@ public class Ant {
      * Rules are specified as String of type "LR" where L is turn left and R is turn right. In order to speed up
      * processing Rule is parsed as array of chars rather than call charAt(i) multiple times.
      */
-    private void parseRule() {
+    public void parseRule() {
         rule = new char[Settings.RULE.length()];
         for (int i = 0; i < Settings.RULE.length(); i++) {
             rule[i] = Settings.RULE.charAt(i);
+        }
+    }
+
+    public void nextMoves(){
+        int countDown = Settings.SKIP;
+        while (countDown > 0 && !stopped){
+            nextMove();
+            countDown--;
         }
     }
 

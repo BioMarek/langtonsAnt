@@ -30,7 +30,7 @@ public class GridPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        ant.nextMove();
+        ant.nextMoves();
         repaint();
 
         if (ant.stopped)
