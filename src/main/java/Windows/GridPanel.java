@@ -37,6 +37,9 @@ public class GridPanel extends JPanel implements ActionListener {
             timer.stop();
     }
 
+    /**
+     * Converts grid numbers to graphic.
+     */
     public void draw() {
         for (int row = 0; row < squares; row++) {
             for (int column = 0; column < squares; column++) {
@@ -49,12 +52,21 @@ public class GridPanel extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Starts timer, delay says how often {@link GridPanel is refreshed}.
+     */
     public void startAnimation() {
         timer = new Timer(Settings.DELAY, this);
         timer.start();
     }
 
+    /**
+     * Mapping of grid numbers to colors.
+     *
+     * @param color grid number
+     */
     private void setColor(int color) {
+        // TODO refactor to map
         switch (color) {
             case -1 -> graphics.setColor(Color.BLACK);
             case 0 -> graphics.setColor(Color.WHITE);

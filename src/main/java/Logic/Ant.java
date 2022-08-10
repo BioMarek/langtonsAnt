@@ -28,6 +28,10 @@ public class Ant {
         parseRule();
     }
 
+    /**
+     * Rules are specified as String of type "LR" where L is turn left and R is turn right. In order to speed up
+     * processing Rule is parsed as array of chars rather than call charAt(i) multiple times.
+     */
     private void parseRule() {
         rule = new char[Settings.rule.length()];
         for (int i = 0; i < Settings.rule.length(); i++) {
@@ -35,30 +39,26 @@ public class Ant {
         }
     }
 
+    /**
+     * Moves ant to next tile based on rule and on color of the square the ant is standing on.
+     */
     public void nextMove() {
         int currentRow = antPosition.row;
         int currentColumn = antPosition.column;
+        grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] == -1) ? 0 : grid[currentRow][currentColumn];
 
-        if (grid[currentRow][currentColumn] == -1){
-            if (rule[0] == 'L')
-                moveRight();
-            else
-                moveRight();
-        } else {
-            if (rule[grid[currentRow][currentColumn]] == 'L')
-                moveLeft();
-            if (rule[grid[currentRow][currentColumn]] == 'R')
-                moveRight();
-        }
+        if (rule[grid[currentRow][currentColumn]] == 'L')
+            moveLeft();
+        if (rule[grid[currentRow][currentColumn]] == 'R')
+            moveRight();
 
-        if (grid[currentRow][currentColumn] == -1)
-            grid[currentRow][currentColumn] = 1;
-        else
-            grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] + 1) % Settings.rule.length();
-
+        grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] + 1) % Settings.rule.length();
         checkBorderCollision();
     }
 
+    /**
+     * Moves ant to the right based on direction ant is facing.
+     */
     public void moveRight() {
         switch (antPosition.direction) {
             case NORTH -> {
@@ -80,6 +80,9 @@ public class Ant {
         }
     }
 
+    /**
+     * Moves ant to the left based on direction ant is facing.
+     */
     public void moveLeft() {
         switch (antPosition.direction) {
             case NORTH -> {
@@ -101,11 +104,17 @@ public class Ant {
         }
     }
 
+    /**
+     * Checks whether ant moved out of grid bounds.
+     */
     public void checkBorderCollision() {
         if (antPosition.row < 0 || antPosition.column < 0 || antPosition.row == size || antPosition.column == size)
             stopped = true;
     }
 
+    /**
+     * Prints grid, used for debugging purposes.
+     */
     public void printGrid() {
         for (int row = 0; row < size; row++) {
             for (int column = 0; column < size; column++) {
