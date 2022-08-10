@@ -12,6 +12,7 @@ public class Ant {
     public char[] rule;
     public Position antPosition = new Position();
     public boolean stopped = false;
+    public int moves = 0;
 
     public Ant(int size) {
         this.grid = new int[size][size];
@@ -39,9 +40,9 @@ public class Ant {
         }
     }
 
-    public void nextMoves(){
+    public void nextMoves() {
         int countDown = Settings.SKIP;
-        while (countDown > 0 && !stopped){
+        while (countDown > 0 && !stopped) {
             nextMove();
             countDown--;
         }
@@ -61,6 +62,9 @@ public class Ant {
             moveRight();
 
         grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] + 1) % Settings.RULE.length();
+
+        moves++;
+        stopped = moves > Settings.MAX_MOVES;
         checkBorderCollision();
     }
 

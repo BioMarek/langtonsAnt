@@ -3,10 +3,14 @@ package Windows;
 import Logic.Ant;
 import Utils.Settings;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class GridPanel extends JPanel implements ActionListener {
     private final int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
@@ -33,8 +37,10 @@ public class GridPanel extends JPanel implements ActionListener {
         ant.nextMoves();
         repaint();
 
-        if (ant.stopped)
+        if (ant.stopped) {
             timer.stop();
+            saveImage();
+        }
     }
 
     /**
@@ -96,6 +102,18 @@ public class GridPanel extends JPanel implements ActionListener {
             case 15 -> graphics.setColor(TEAL);
             case 16 -> graphics.setColor(CORAL);
             case 17 -> graphics.setColor(KHAKI);
+        }
+    }
+
+    public void saveImage() {
+        BufferedImage bImg = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D cg = bImg.createGraphics();
+        this.paintAll(cg);
+
+        try {
+            ImageIO.write(bImg, "png", new File("./" + Settings.RULE + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
