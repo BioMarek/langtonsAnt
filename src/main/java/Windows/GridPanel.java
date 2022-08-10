@@ -38,7 +38,7 @@ public class GridPanel extends JPanel implements ActionListener {
     }
 
     /**
-     * Converts grid numbers to graphic.
+     * Converts grid numbers to {@link Graphics2D}.
      */
     public void draw() {
         for (int row = 0; row < squares; row++) {
@@ -53,7 +53,7 @@ public class GridPanel extends JPanel implements ActionListener {
     }
 
     /**
-     * Starts timer, delay says how often {@link GridPanel is refreshed}.
+     * Starts timer, delay says how often {@link Graphics2D} is refreshed.
      */
     public void startAnimation() {
         timer = new Timer(Settings.DELAY, this);
@@ -61,12 +61,11 @@ public class GridPanel extends JPanel implements ActionListener {
     }
 
     /**
-     * Mapping of grid numbers to colors.
+     * Mapping of grid numbers to colors. Sets {@link Graphics2D} to color of current grid tile.
      *
      * @param color grid number
      */
     private void setColor(int color) {
-        // TODO refactor to map
         switch (color) {
             case -1 -> graphics.setColor(Color.BLACK);
             case 0 -> graphics.setColor(Color.WHITE);

@@ -33,9 +33,9 @@ public class Ant {
      * processing Rule is parsed as array of chars rather than call charAt(i) multiple times.
      */
     private void parseRule() {
-        rule = new char[Settings.rule.length()];
-        for (int i = 0; i < Settings.rule.length(); i++) {
-            rule[i] = Settings.rule.charAt(i);
+        rule = new char[Settings.RULE.length()];
+        for (int i = 0; i < Settings.RULE.length(); i++) {
+            rule[i] = Settings.RULE.charAt(i);
         }
     }
 
@@ -52,7 +52,7 @@ public class Ant {
         if (rule[grid[currentRow][currentColumn]] == 'R')
             moveRight();
 
-        grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] + 1) % Settings.rule.length();
+        grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] + 1) % Settings.RULE.length();
         checkBorderCollision();
     }
 
