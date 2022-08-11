@@ -40,6 +40,14 @@ public class Ant {
         }
     }
 
+    public void moveUntilEnd() {
+        long countDown = Settings.MAX_MOVES;
+        while (countDown > 0 && !stopped) {
+            nextMove();
+            countDown--;
+        }
+    }
+
     public void nextMoves() {
         int countDown = Settings.SKIP;
         while (countDown > 0 && !stopped) {

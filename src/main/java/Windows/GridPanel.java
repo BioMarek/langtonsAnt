@@ -1,6 +1,7 @@
 package Windows;
 
 import Logic.Ant;
+import Logic.RulesGenerator;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
@@ -11,17 +12,49 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class GridPanel extends JPanel implements ActionListener {
     private final int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
     private static Graphics2D graphics;
-    private final Ant ant = new Ant(squares);
-    Timer timer;
+    private Ant ant;
+    private Timer timer;
+
 
     public GridPanel() {
         this.setPreferredSize(new Dimension(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS));
-        this.setBackground(Color.gray);
         this.setFocusable(true);
+
+
+        if (Settings.RULES_MAX_LENGTH > 0) {
+            cycleThroughRules();
+        } else {
+            reset();
+        }
+    }
+
+    public void cycleThroughRules() {
+        RulesGenerator rulesGenerator = new RulesGenerator();
+        rulesGenerator.generateRules(Settings.RULES_MAX_LENGTH);
+        List<String> rules = rulesGenerator.allRules;
+
+        for (String rule : rules) {
+            Settings.RULE = rule;
+            ant = new Ant(squares);
+            startAnt();
+        }
+    }
+
+    public void startAnt() {
+        while (!ant.stopped) {
+            ant.moveUntilEnd();
+        }
+        repaint();
+        saveImage();
+    }
+
+    public void reset() {
+        ant = new Ant(squares);
         startAnimation();
     }
 

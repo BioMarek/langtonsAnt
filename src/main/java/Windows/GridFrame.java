@@ -1,7 +1,6 @@
 package Windows;
 
 import javax.swing.*;
-import Utils.Settings;
 
 public class GridFrame extends JFrame {
     public GridFrame() {
