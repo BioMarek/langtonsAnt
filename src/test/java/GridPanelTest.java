@@ -6,7 +6,11 @@ public class GridPanelTest {
 
     @Test
     void rulesGeneratorTest() {
-        rulesGenerator.generateRules(4);
-        System.out.println(rulesGenerator.allRules);
+        rulesGenerator.generateRules(5);
+        System.out.println(rulesGenerator
+                .allRules.
+                stream()
+                .filter(str -> str.length() == 5)
+                .toList());
     }
 }
