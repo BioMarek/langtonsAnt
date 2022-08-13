@@ -1,7 +1,7 @@
 package Utils;
 
 public class Settings {
-    public static int RULES_MAX_LENGTH = 0;
+    public static int RULES_MAX_LENGTH = 3;
     public static String RULE = "RL";
     public static int DELAY = 10;
     public static int SKIP = 1_000_000;

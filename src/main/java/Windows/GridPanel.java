@@ -1,6 +1,7 @@
 package Windows;
 
 import Logic.Ant;
+import Logic.RulesGenerator;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
@@ -23,12 +24,11 @@ public class GridPanel extends JPanel implements ActionListener {
         this.setPreferredSize(new Dimension(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS));
         this.setFocusable(true);
 
-        reset();
-    }
-
-    public void reset() {
         ant = new Ant(squares);
-        startAnimation();
+        if (Settings.RULES_MAX_LENGTH > 2)
+            drawAllRules();
+        else
+            startAnimation();
     }
 
     @Override
@@ -46,6 +46,15 @@ public class GridPanel extends JPanel implements ActionListener {
         if (ant.stopped) {
             timer.stop();
             saveImage();
+        }
+    }
+
+    public void drawAllRules() {
+        java.util.List<String> rules = RulesGenerator.generateRules(Settings.RULES_MAX_LENGTH);
+        for (String rule : rules) {
+            Settings.RULE = rule;
+            ant = new Ant(squares);
+            saveImageWithoutPanel();
         }
     }
 
@@ -112,9 +121,23 @@ public class GridPanel extends JPanel implements ActionListener {
     }
 
     public void saveImage() {
+        // TODO try refactor image generators, do I need two?
         BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
         Graphics2D cg = bImg.createGraphics();
         this.paintAll(cg);
+
+        try {
+            ImageIO.write(bImg, "png", new File("./panel_" + Settings.RULE + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveImageWithoutPanel() {
+        BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
+        graphics = bImg.createGraphics();
+        ant.allMoves();
+        draw();
 
         try {
             ImageIO.write(bImg, "png", new File("./" + Settings.RULE + ".png"));

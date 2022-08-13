@@ -4,19 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RulesGenerator {
-    public List<String> allRules = new ArrayList<>();
+    private static final List<String> allRules = new ArrayList<>();
 
-    public void generateRules(int maxLength) {
+    public static List<String> generateRules(int maxLength) {
         generateRecursive(maxLength, "RL");
         generateRecursive(maxLength, "LR");
+        return allRules;
     }
 
-    public void generateRecursive(int maxLength, String addition) {
-        allRules.add(addition);
-        if (addition.length() == maxLength)
+    private static void generateRecursive(int maxLength, String subString) {
+        allRules.add(subString);
+        if (subString.length() == maxLength)
             return;
 
-        generateRecursive(maxLength, addition + "R");
-        generateRecursive(maxLength, addition + "L");
+        generateRecursive(maxLength, subString + "R");
+        generateRecursive(maxLength, subString + "L");
     }
 }
