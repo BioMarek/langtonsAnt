@@ -1,54 +1,44 @@
-package Windows;
+package Logic;
 
-import Logic.Ant;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class GridPanel extends JPanel implements ActionListener {
-    private final int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
+public class ImageGenerator {
+    private final int squares = Settings.I_SIZE_IN_PIXELS / Settings.I_SIZE_OF_SQUARE;
     private static Graphics2D graphics;
-    private final Ant ant;
-    private Timer timer;
+    private Ant ant;
 
-
-    public GridPanel() {
-        this.setPreferredSize(new Dimension(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS));
-        this.setFocusable(true);
-
-        ant = new Ant(squares, Settings.RULE);
-        startAnimation();
+    public void drawAllRules() {
+        java.util.List<String> rules = RulesGenerator.generateRules(Settings.I_RULES_MAX_LENGTH);
+        for (String rule : rules) {
+            Settings.RULE = rule;
+            ant = new Ant(squares, rule);
+            saveImageWithoutPanel(rule);
+        }
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        graphics = (Graphics2D) g;
+    private void saveImageWithoutPanel(String rule) {
+        BufferedImage bImg = new BufferedImage(Settings.I_SIZE_IN_PIXELS, Settings.I_SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
+        graphics = bImg.createGraphics();
+        ant.allMoves();
         draw();
-    }
 
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        ant.nextMoves();
-        repaint();
-
-        if (ant.stopped) {
-            timer.stop();
-            saveImage();
+        try {
+            ImageIO.write(bImg, "png", new File("./" + rule + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     /**
      * Converts grid numbers to {@link Graphics2D}.
      */
-    public void draw() {
+    private void draw() {
         for (int row = 0; row < squares; row++) {
             for (int column = 0; column < squares; column++) {
                 setColor(ant.grid[row][column]);
@@ -58,14 +48,6 @@ public class GridPanel extends JPanel implements ActionListener {
                         Settings.SIZE_OF_SQUARE);
             }
         }
-    }
-
-    /**
-     * Starts timer, delay says how often {@link Graphics2D} is refreshed.
-     */
-    public void startAnimation() {
-        timer = new Timer(Settings.DELAY, this);
-        timer.start();
     }
 
     /**
@@ -104,19 +86,6 @@ public class GridPanel extends JPanel implements ActionListener {
             case 15 -> graphics.setColor(TEAL);
             case 16 -> graphics.setColor(CORAL);
             case 17 -> graphics.setColor(KHAKI);
-        }
-    }
-
-    public void saveImage() {
-        // TODO try refactor image generators, do I need two?
-        BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
-        Graphics2D cg = bImg.createGraphics();
-        this.paintAll(cg);
-
-        try {
-            ImageIO.write(bImg, "png", new File("./panel_" + Settings.RULE + ".png"));
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

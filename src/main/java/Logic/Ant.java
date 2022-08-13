@@ -14,7 +14,7 @@ public class Ant {
     public boolean stopped = false;
     public int moves = 0;
 
-    public Ant(int size) {
+    public Ant(int size, String givenRule) {
         this.grid = new int[size][size];
         this.size = size;
 
@@ -26,23 +26,23 @@ public class Ant {
         antPosition.column = size / 2;
         antPosition.direction = Direction.NORTH;
 
-        parseRule();
+        parseRule(givenRule);
     }
 
     /**
      * Rules are specified as String of type "LR" where L is turn left and R is turn right. In order to speed up
      * processing Rule is parsed as array of chars rather than call charAt(i) multiple times.
      */
-    public void parseRule() {
-        rule = new char[Settings.RULE.length()];
-        for (int i = 0; i < Settings.RULE.length(); i++) {
-            rule[i] = Settings.RULE.charAt(i);
+    public void parseRule(String givenRule) {
+        rule = new char[givenRule.length()];
+        for (int i = 0; i < givenRule.length(); i++) {
+            rule[i] = givenRule.charAt(i);
         }
     }
 
     public void allMoves() {
-        // TODO refactor
-        long countDown = Settings.MAX_MOVES;
+        // TODO refactor, shouldn't max moves be passed as parameter
+        long countDown = Settings.I_MAX_MOVES;
         while (countDown > 0 && !stopped) {
             nextMove();
             countDown--;
