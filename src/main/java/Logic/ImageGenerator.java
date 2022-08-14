@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class ImageGenerator {
     private Ant ant;
@@ -15,7 +16,7 @@ public class ImageGenerator {
      * Cycles through all rules from length 2 to Settings.I_SIZE_IN_PIXELS and saves images into file.
      */
     public void drawAllRules() {
-        java.util.List<String> rules = RulesGenerator.generateRules(Settings.I_RULES_MAX_LENGTH);
+        List<String> rules = RulesGenerator.generateRules(Settings.I_RULES_MIN_LENGTH, Settings.I_RULES_MAX_LENGTH);
         int squares = Settings.I_SIZE_IN_PIXELS / Settings.I_SIZE_OF_SQUARE;
         for (String rule : rules) {
             System.out.println("working on: " + rule);

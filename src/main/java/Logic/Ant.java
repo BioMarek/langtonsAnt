@@ -46,7 +46,6 @@ public class Ant {
     }
 
     public void allMoves() {
-        // TODO refactor, shouldn't max moves be passed as parameter
         long countDown = maxMoves;
         while (countDown > 0 && !stopped) {
             nextMove();
