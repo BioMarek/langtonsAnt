@@ -1,7 +1,6 @@
 package Windows;
 
 import Logic.Ant;
-import Utils.ColorsPicker;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
@@ -14,8 +13,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class GridPanel extends JPanel implements ActionListener {
-    private final int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
-    private static Graphics2D graphics;
     private final Ant ant;
     private Timer timer;
 
@@ -24,6 +21,7 @@ public class GridPanel extends JPanel implements ActionListener {
         this.setPreferredSize(new Dimension(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS));
         this.setFocusable(true);
 
+        int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
         ant = new Ant(squares, Settings.RULE);
         startAnimation();
     }
@@ -31,8 +29,8 @@ public class GridPanel extends JPanel implements ActionListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        graphics = (Graphics2D) g;
-        draw();
+        Graphics2D graphics = (Graphics2D) g;
+        ant.draw(graphics);
     }
 
     @Override
@@ -43,21 +41,6 @@ public class GridPanel extends JPanel implements ActionListener {
         if (ant.stopped) {
             timer.stop();
             saveImage();
-        }
-    }
-
-    /**
-     * Converts grid numbers to {@link Graphics2D}.
-     */
-    public void draw() {
-        for (int row = 0; row < squares; row++) {
-            for (int column = 0; column < squares; column++) {
-                ColorsPicker.setColor(graphics, ant.grid[row][column]);
-                graphics.fillRect(row * Settings.SIZE_OF_SQUARE,
-                        column * Settings.SIZE_OF_SQUARE,
-                        Settings.SIZE_OF_SQUARE,
-                        Settings.SIZE_OF_SQUARE);
-            }
         }
     }
 

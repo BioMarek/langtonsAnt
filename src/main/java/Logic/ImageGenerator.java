@@ -1,6 +1,5 @@
 package Logic;
 
-import Utils.ColorsPicker;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
@@ -10,12 +9,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImageGenerator {
-    private final int squares = Settings.I_SIZE_IN_PIXELS / Settings.I_SIZE_OF_SQUARE;
-    private static Graphics2D graphics;
     private Ant ant;
 
     public void drawAllRules() {
         java.util.List<String> rules = RulesGenerator.generateRules(Settings.I_RULES_MAX_LENGTH);
+        int squares = Settings.I_SIZE_IN_PIXELS / Settings.I_SIZE_OF_SQUARE;
         for (String rule : rules) {
             ant = new Ant(squares, rule);
             saveImageWithoutPanel(rule);
@@ -29,29 +27,14 @@ public class ImageGenerator {
      */
     private void saveImageWithoutPanel(String rule) {
         BufferedImage bImg = new BufferedImage(Settings.I_SIZE_IN_PIXELS, Settings.I_SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
-        graphics = bImg.createGraphics();
+        Graphics2D graphics = bImg.createGraphics();
         ant.allMoves();
-        draw();
+        ant.draw(graphics);
 
         try {
             ImageIO.write(bImg, "png", new File("./" + rule + ".png"));
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    /**
-     * Converts grid numbers to {@link Graphics2D}.
-     */
-    private void draw() {
-        for (int row = 0; row < squares; row++) {
-            for (int column = 0; column < squares; column++) {
-                ColorsPicker.setColor(graphics, ant.grid[row][column]);
-                graphics.fillRect(row * Settings.SIZE_OF_SQUARE,
-                        column * Settings.SIZE_OF_SQUARE,
-                        Settings.SIZE_OF_SQUARE,
-                        Settings.SIZE_OF_SQUARE);
-            }
         }
     }
 }

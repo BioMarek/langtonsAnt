@@ -1,12 +1,15 @@
 package Logic;
 
+import Utils.ColorsPicker;
 import Utils.Direction;
 import Utils.Position;
 import Utils.Settings;
 
+import java.awt.*;
 import java.util.Arrays;
 
 public class Ant {
+    private final int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
     public int[][] grid;
     public int size;
     public char[] rule;
@@ -131,6 +134,21 @@ public class Ant {
     public void checkBorderCollision() {
         if (antPosition.row < 0 || antPosition.column < 0 || antPosition.row == size || antPosition.column == size)
             stopped = true;
+    }
+
+    /**
+     * Converts grid numbers to {@link Graphics2D}.
+     */
+    public void draw(Graphics2D graphics) {
+        for (int row = 0; row < squares; row++) {
+            for (int column = 0; column < squares; column++) {
+                ColorsPicker.setColor(graphics, grid[row][column]);
+                graphics.fillRect(row * Settings.SIZE_OF_SQUARE,
+                        column * Settings.SIZE_OF_SQUARE,
+                        Settings.SIZE_OF_SQUARE,
+                        Settings.SIZE_OF_SQUARE);
+            }
+        }
     }
 
     /**
