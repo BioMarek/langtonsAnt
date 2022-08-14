@@ -11,10 +11,14 @@ import java.io.IOException;
 public class ImageGenerator {
     private Ant ant;
 
+    /**
+     * Cycles through all rules from length 2 to Settings.I_SIZE_IN_PIXELS and saves images into file.
+     */
     public void drawAllRules() {
         java.util.List<String> rules = RulesGenerator.generateRules(Settings.I_RULES_MAX_LENGTH);
         int squares = Settings.I_SIZE_IN_PIXELS / Settings.I_SIZE_OF_SQUARE;
         for (String rule : rules) {
+            System.out.println("working on: " + rule);
             ant = new Ant(squares, rule);
             saveImageWithoutPanel(rule);
         }
@@ -32,7 +36,7 @@ public class ImageGenerator {
         ant.draw(graphics);
 
         try {
-            ImageIO.write(bImg, "png", new File("./" + rule + ".png"));
+            ImageIO.write(bImg, "png", new File("./images/" + rule + ".png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
