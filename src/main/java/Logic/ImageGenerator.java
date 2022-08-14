@@ -19,7 +19,7 @@ public class ImageGenerator {
         int squares = Settings.I_SIZE_IN_PIXELS / Settings.I_SIZE_OF_SQUARE;
         for (String rule : rules) {
             System.out.println("working on: " + rule);
-            ant = new Ant(squares, rule);
+            ant = new Ant(squares, Settings.I_MAX_MOVES, rule);
             saveImageWithoutPanel(rule);
         }
     }

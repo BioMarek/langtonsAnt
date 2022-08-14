@@ -10,16 +10,18 @@ import java.util.Arrays;
 
 public class Ant {
     private final int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
-    public int[][] grid;
-    public int size;
+    private final int[][] grid;
+    private final int size;
+    private final long maxMoves;
     public char[] rule;
     public Position antPosition = new Position();
     public boolean stopped = false;
-    public int moves = 0;
+    private int moves = 0;
 
-    public Ant(int size, String givenRule) {
+    public Ant(int size, long maxMoves, String givenRule) {
         this.grid = new int[size][size];
         this.size = size;
+        this.maxMoves = maxMoves;
 
         for (int i = 0; i < size; i++) {
             grid[i] = new int[size];
@@ -45,7 +47,7 @@ public class Ant {
 
     public void allMoves() {
         // TODO refactor, shouldn't max moves be passed as parameter
-        long countDown = Settings.I_MAX_MOVES;
+        long countDown = maxMoves;
         while (countDown > 0 && !stopped) {
             nextMove();
             countDown--;
@@ -73,10 +75,10 @@ public class Ant {
         if (rule[grid[currentRow][currentColumn]] == 'R')
             moveRight();
 
-        grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] + 1) % Settings.RULE.length();
+        grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] + 1) % rule.length;
 
         moves++;
-        stopped = moves > Settings.MAX_MOVES;
+        stopped = moves > maxMoves;
         checkBorderCollision();
     }
 

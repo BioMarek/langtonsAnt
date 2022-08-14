@@ -22,7 +22,7 @@ public class GridPanel extends JPanel implements ActionListener {
         this.setFocusable(true);
 
         int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
-        ant = new Ant(squares, Settings.RULE);
+        ant = new Ant(squares, Settings.MAX_MOVES, Settings.RULE);
         startAnimation();
     }
 
