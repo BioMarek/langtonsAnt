@@ -6,31 +6,38 @@ package Logic;
 public class InterestingnessEvaluator {
     private final int[][] grid;
     private final int dimension;
+    private final int[] helperArray;
 
     public InterestingnessEvaluator(int[][] grid) {
         this.grid = grid;
         dimension = grid.length;
+        helperArray = new int[dimension + 1];
+        helperArray[dimension] = 100;
     }
 
     public double horizontalLineEvaluator(int line) {
-        double currentLineLength = 0;
-        int startIndex = 0;
-        int startSameValue = grid[line][0];
-        for (int i = 0; i < dimension; i++) {
-            if (grid[line][i] == -1 || grid[line][i] != startSameValue || (i == dimension - 1)) {
+        System.arraycopy(grid[line], 0, helperArray, 0, dimension);
+
+        int lastValue = helperArray[0];
+        int lastIndex = 0;
+        double currentLineScore = 0;
+
+        for (int i = 1; i < dimension + 1; i++) {
+            if (helperArray[i] != lastValue) {
                 // we subtract 1 because we want to give 0 score to line of length 1;
-                int lengthAdjusted = ((i - startIndex - 1) == -1) ? 0 : i - startIndex - 1;
-                currentLineLength += (Math.pow(lengthAdjusted, 2) * 0.1);
-                startIndex = i;
-                startSameValue = grid[line][i];
+                if (lastValue != -1)
+                    currentLineScore += (Math.pow(i - lastIndex - 1, 2) * 0.1);
+                System.out.println(i - lastIndex);
+                lastValue = helperArray[i];
+                lastIndex = i;
             }
         }
-        return currentLineLength;
+        return currentLineScore;
     }
 
-    public double evaluateAllHorizontalLines(){
+    public double evaluateAllHorizontalLines() {
         double result = 0;
-        for (int line = 0; line < dimension; line++){
+        for (int line = 0; line < dimension; line++) {
             result += horizontalLineEvaluator(line);
         }
         return result;

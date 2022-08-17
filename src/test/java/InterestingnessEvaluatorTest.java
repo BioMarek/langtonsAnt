@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.is;
 
 
 public class InterestingnessEvaluatorTest {
-    private int grid[][];
+    private int[][] grid;
     private final int SIZE = 6;
     private InterestingnessEvaluator interestingnessEvaluator;
 
@@ -76,7 +76,6 @@ public class InterestingnessEvaluatorTest {
         grid[3][3] = 2;
         grid[3][4] = 2;
         grid[3][5] = 2; // 1.6
-        printGrid();
         assertThat(interestingnessEvaluator.evaluateAllHorizontalLines(), is(2.2));
     }
 
