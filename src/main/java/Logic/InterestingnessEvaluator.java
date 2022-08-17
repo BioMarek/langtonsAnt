@@ -12,34 +12,50 @@ public class InterestingnessEvaluator {
         this.grid = grid;
         dimension = grid.length;
         helperArray = new int[dimension + 1];
-        helperArray[dimension] = 100;
+        helperArray[dimension] = 100; // sentinel
     }
 
-    public double horizontalLineEvaluator(int line) {
-        System.arraycopy(grid[line], 0, helperArray, 0, dimension);
-
-        int lastValue = helperArray[0];
+    public double arrayEvaluator(int[] line) {
+        int lastValue = line[0];
         int lastIndex = 0;
         double currentLineScore = 0;
 
         for (int i = 1; i < dimension + 1; i++) {
-            if (helperArray[i] != lastValue) {
+            if (line[i] != lastValue) {
                 // we subtract 1 because we want to give 0 score to line of length 1;
                 if (lastValue != -1)
                     currentLineScore += (Math.pow(i - lastIndex - 1, 2) * 0.1);
-                System.out.println(i - lastIndex);
-                lastValue = helperArray[i];
+                lastValue = line[i];
                 lastIndex = i;
             }
         }
         return currentLineScore;
     }
 
-    public double evaluateAllHorizontalLines() {
+    public double evaluateAllLines() {
         double result = 0;
         for (int line = 0; line < dimension; line++) {
-            result += horizontalLineEvaluator(line);
+            result += arrayEvaluator(getLineForEvaluation(LineType.HORIZONTAL, line));
+            result += arrayEvaluator(getLineForEvaluation(LineType.VERTICAL, line));
         }
         return result;
+    }
+
+    public int[] getLineForEvaluation(LineType lineType, int line) {
+        switch (lineType) {
+            case HORIZONTAL -> {
+                System.arraycopy(grid[line], 0, helperArray, 0, dimension);
+            }
+            case VERTICAL -> {
+                for (int column = 0; column < dimension; column++) {
+                    helperArray[column] = grid[column][line];
+                }
+            }
+        }
+        return helperArray;
+    }
+
+    public enum LineType {
+        HORIZONTAL, VERTICAL, DIAGONAL_LEFT_RIGHT, DIAGONAL_RIGHT_LEFT
     }
 }

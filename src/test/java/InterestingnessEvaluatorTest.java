@@ -28,7 +28,8 @@ public class InterestingnessEvaluatorTest {
         grid[1][0] = 1;
         grid[1][1] = 1;
         grid[1][2] = 1;
-        assertThat(interestingnessEvaluator.horizontalLineEvaluator(1), is(0.4));
+        assertThat(interestingnessEvaluator.arrayEvaluator(
+                interestingnessEvaluator.getLineForEvaluation(InterestingnessEvaluator.LineType.HORIZONTAL, 1)), is(0.4));
     }
 
     @Test
@@ -37,7 +38,8 @@ public class InterestingnessEvaluatorTest {
         grid[1][1] = 1;
         grid[1][4] = 1;
         grid[1][5] = 1;
-        assertThat(interestingnessEvaluator.horizontalLineEvaluator(1), is(0.2));
+        assertThat(interestingnessEvaluator.arrayEvaluator(
+                interestingnessEvaluator.getLineForEvaluation(InterestingnessEvaluator.LineType.HORIZONTAL, 1)), is(0.2));
     }
 
     @Test
@@ -45,7 +47,8 @@ public class InterestingnessEvaluatorTest {
         grid[1][2] = 1;
         grid[1][3] = 1;
         grid[1][4] = 1;
-        assertThat(interestingnessEvaluator.horizontalLineEvaluator(1), is(0.4));
+        assertThat(interestingnessEvaluator.arrayEvaluator(
+                interestingnessEvaluator.getLineForEvaluation(InterestingnessEvaluator.LineType.HORIZONTAL, 1)), is(0.4));
     }
 
     @Test
@@ -53,7 +56,8 @@ public class InterestingnessEvaluatorTest {
         grid[1][0] = 1;
         grid[1][2] = 1;
         grid[1][4] = 1;
-        assertThat(interestingnessEvaluator.horizontalLineEvaluator(1), is(0.0));
+        assertThat(interestingnessEvaluator.arrayEvaluator(
+                interestingnessEvaluator.getLineForEvaluation(InterestingnessEvaluator.LineType.HORIZONTAL, 1)), is(0.0));
     }
 
     @Test
@@ -76,7 +80,27 @@ public class InterestingnessEvaluatorTest {
         grid[3][3] = 2;
         grid[3][4] = 2;
         grid[3][5] = 2; // 1.6
-        assertThat(interestingnessEvaluator.evaluateAllHorizontalLines(), is(2.2));
+        assertThat(interestingnessEvaluator.evaluateAllLines(), is(2.2));
+    }
+
+    @Test
+    void getLineForEvaluation_horizontal() {
+        grid[1][0] = 1;
+        grid[2][2] = 1;
+        grid[3][4] = 1;
+
+        assertThat(interestingnessEvaluator.getLineForEvaluation(InterestingnessEvaluator.LineType.HORIZONTAL, 1), is(new int[]{1, -1, -1, -1, -1, -1, 100}));
+        assertThat(interestingnessEvaluator.getLineForEvaluation(InterestingnessEvaluator.LineType.HORIZONTAL, 2), is(new int[]{-1, -1, 1, -1, -1, -1, 100}));
+    }
+
+    @Test
+    void getLineForEvaluation_vertical() {
+        grid[1][0] = 1;
+        grid[2][2] = 1;
+        grid[3][4] = 1;
+
+        assertThat(interestingnessEvaluator.getLineForEvaluation(InterestingnessEvaluator.LineType.VERTICAL, 0), is(new int[]{-1, 1, -1, -1, -1, -1, 100}));
+        assertThat(interestingnessEvaluator.getLineForEvaluation(InterestingnessEvaluator.LineType.VERTICAL, 2), is(new int[]{-1, -1, 1, -1, -1, -1, 100}));
     }
 
     /**
