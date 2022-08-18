@@ -155,6 +155,7 @@ public class Ant {
         }
     }
 
+
     public double getScore() {
         return interestingnessEvaluator.evaluateAllLines();
     }

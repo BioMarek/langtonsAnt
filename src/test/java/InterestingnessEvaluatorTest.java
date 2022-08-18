@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.closeTo;
 
 
 public class InterestingnessEvaluatorTest {
@@ -101,6 +102,15 @@ public class InterestingnessEvaluatorTest {
 
         assertThat(interestingnessEvaluator.getLineForEvaluation(InterestingnessEvaluator.LineType.VERTICAL, 0), is(new int[]{-1, 1, -1, -1, -1, -1, 100}));
         assertThat(interestingnessEvaluator.getLineForEvaluation(InterestingnessEvaluator.LineType.VERTICAL, 2), is(new int[]{-1, -1, 1, -1, -1, -1, 100}));
+    }
+
+    @Test
+    void girdFillFraction_works(){
+        grid[1][0] = 1;
+        grid[2][2] = 1;
+        grid[3][4] = 1;
+        grid[3][5] = 1;
+        assertThat(interestingnessEvaluator.girdFillFraction(), is(closeTo(0.11, 0.01)));
     }
 
     /**
