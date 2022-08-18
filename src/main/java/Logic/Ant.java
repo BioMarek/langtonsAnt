@@ -141,16 +141,31 @@ public class Ant {
      * Converts grid numbers to {@link Graphics2D}.
      */
     public void draw(Graphics2D graphics) {
+        setBackground(graphics);
         for (int row = 0; row < squares; row++) {
             for (int column = 0; column < squares; column++) {
                 ColorsPicker.setColor(graphics, grid[row][column]);
-                graphics.fillRect(row * Settings.SIZE_OF_SQUARE,
+                if (Settings.I_SHOW_GRID || Settings.SHOW_GRID)
+                    graphics.fillRect(row * Settings.SIZE_OF_SQUARE + 1,
+                            column * Settings.SIZE_OF_SQUARE + 1,
+                            Settings.SIZE_OF_SQUARE - 1,
+                            Settings.SIZE_OF_SQUARE - 1);
+                else graphics.fillRect(row * Settings.SIZE_OF_SQUARE,
                         column * Settings.SIZE_OF_SQUARE,
                         Settings.SIZE_OF_SQUARE,
                         Settings.SIZE_OF_SQUARE);
             }
         }
     }
+
+    public void setBackground(Graphics2D graphics) {
+        graphics.setColor(new Color(40, 40, 40));
+        if (Settings.I_SHOW_GRID || Settings.SHOW_GRID)
+            graphics.fillRect(0, 0, Settings.SIZE_IN_PIXELS + 1, Settings.SIZE_IN_PIXELS + 1);
+        else
+            graphics.fillRect(0, 0, Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS);
+    }
+
 
     /**
      * Prints grid, used for debugging purposes.
