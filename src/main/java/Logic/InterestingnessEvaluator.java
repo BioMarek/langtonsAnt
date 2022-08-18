@@ -39,9 +39,12 @@ public class InterestingnessEvaluator {
         return currentLineScore;
     }
 
+    public double getFinalScore() {
+        return evaluateAllLines() / girdFillFraction();
+    }
+
     /**
-     * Goes through all possible grid 1D arrays we want evaluate and calculates score. Final score is adjusted by
-     * how much is the image filled.
+     * Goes through all possible grid 1D arrays we want evaluate and calculates score.
      *
      * @return final score
      */
@@ -51,7 +54,7 @@ public class InterestingnessEvaluator {
             result += arrayEvaluator(getLineForEvaluation(LineType.HORIZONTAL, line));
             result += arrayEvaluator(getLineForEvaluation(LineType.VERTICAL, line));
         }
-        return result / girdFillFraction();
+        return result;
     }
 
     /**

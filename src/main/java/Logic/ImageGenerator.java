@@ -35,9 +35,10 @@ public class ImageGenerator {
         Graphics2D graphics = bImg.createGraphics();
         ant.allMoves();
         ant.draw(graphics);
+        InterestingnessEvaluator interestingnessEvaluator = new InterestingnessEvaluator(ant.grid);
 
         try {
-            ImageIO.write(bImg, "png", new File(String.format("./images/%.2f_%s.png", ant.getScore(), rule)));
+            ImageIO.write(bImg, "png", new File(String.format("./images/%.2f_%s.png", interestingnessEvaluator.getFinalScore(), rule)));
         } catch (IOException e) {
             e.printStackTrace();
         }

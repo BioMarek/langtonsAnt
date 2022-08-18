@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class Ant {
     private final int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
-    private final int[][] grid;
+    public final int[][] grid;
     private final int size;
     private final long maxMoves;
     public char[] rule;
@@ -18,13 +18,10 @@ public class Ant {
     public boolean stopped = false;
     private int moves = 0;
 
-    private final InterestingnessEvaluator interestingnessEvaluator;
-
     public Ant(int size, long maxMoves, String givenRule) {
         this.grid = new int[size][size];
         this.size = size;
         this.maxMoves = maxMoves;
-        interestingnessEvaluator = new InterestingnessEvaluator(grid);
 
         for (int i = 0; i < size; i++) {
             grid[i] = new int[size];
@@ -153,11 +150,6 @@ public class Ant {
                         Settings.SIZE_OF_SQUARE);
             }
         }
-    }
-
-
-    public double getScore() {
-        return interestingnessEvaluator.evaluateAllLines();
     }
 
     /**
