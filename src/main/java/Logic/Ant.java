@@ -18,10 +18,13 @@ public class Ant {
     public boolean stopped = false;
     private int moves = 0;
 
+    private final InterestingnessEvaluator interestingnessEvaluator;
+
     public Ant(int size, long maxMoves, String givenRule) {
         this.grid = new int[size][size];
         this.size = size;
         this.maxMoves = maxMoves;
+        interestingnessEvaluator = new InterestingnessEvaluator(grid);
 
         for (int i = 0; i < size; i++) {
             grid[i] = new int[size];
@@ -150,6 +153,10 @@ public class Ant {
                         Settings.SIZE_OF_SQUARE);
             }
         }
+    }
+
+    public double getScore() {
+        return interestingnessEvaluator.evaluateAllLines();
     }
 
     /**

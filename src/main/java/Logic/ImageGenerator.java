@@ -37,7 +37,7 @@ public class ImageGenerator {
         ant.draw(graphics);
 
         try {
-            ImageIO.write(bImg, "png", new File("./images/" + rule + ".png"));
+            ImageIO.write(bImg, "png", new File(String.format("./images/%.2f_%s.png", ant.getScore(), rule)));
         } catch (IOException e) {
             e.printStackTrace();
         }
