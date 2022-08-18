@@ -145,25 +145,17 @@ public class Ant {
         for (int row = 0; row < squares; row++) {
             for (int column = 0; column < squares; column++) {
                 ColorsPicker.setColor(graphics, grid[row][column]);
-                if (Settings.I_SHOW_GRID || Settings.SHOW_GRID)
-                    graphics.fillRect(row * Settings.SIZE_OF_SQUARE + 1,
-                            column * Settings.SIZE_OF_SQUARE + 1,
-                            Settings.SIZE_OF_SQUARE - 1,
-                            Settings.SIZE_OF_SQUARE - 1);
-                else graphics.fillRect(row * Settings.SIZE_OF_SQUARE,
-                        column * Settings.SIZE_OF_SQUARE,
-                        Settings.SIZE_OF_SQUARE,
-                        Settings.SIZE_OF_SQUARE);
+                int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
+                int squareShift = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE + 1 : Settings.SIZE_OF_SQUARE;
+                graphics.fillRect(row * squareShift, column * squareShift, sizeOfSquare, sizeOfSquare);
             }
         }
     }
 
     public void setBackground(Graphics2D graphics) {
         graphics.setColor(new Color(40, 40, 40));
-        if (Settings.I_SHOW_GRID || Settings.SHOW_GRID)
-            graphics.fillRect(0, 0, Settings.SIZE_IN_PIXELS + 1, Settings.SIZE_IN_PIXELS + 1);
-        else
-            graphics.fillRect(0, 0, Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS);
+        int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
+        graphics.fillRect(0, 0, sizeInPixels, sizeInPixels);
     }
 
 
