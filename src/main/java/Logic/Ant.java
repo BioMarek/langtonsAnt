@@ -138,7 +138,7 @@ public class Ant {
     }
 
     /**
-     * Converts grid numbers to {@link Graphics2D}.
+     * Converts grid of numbers to {@link Graphics2D}.
      */
     public void draw(Graphics2D graphics) {
         setBackground(graphics);
@@ -152,6 +152,12 @@ public class Ant {
         }
     }
 
+    /**
+     * Sets background of {@link Graphics2D} object. Because default {@link Graphics2D} setBackground method
+     * doesn't work.
+     *
+     * @param graphics {@link Graphics2D} where we want to set color.
+     */
     public void setBackground(Graphics2D graphics) {
         graphics.setColor(new Color(40, 40, 40));
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;

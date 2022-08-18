@@ -44,7 +44,7 @@ public class InterestingnessEvaluator {
     }
 
     /**
-     * Goes through all possible grid 1D arrays we want evaluate and calculates score.
+     * Goes through all possible grid 1D arrays we want to evaluate and calculates score.
      *
      * @return final score
      */
@@ -80,7 +80,7 @@ public class InterestingnessEvaluator {
 
     /**
      * Calculates fraction of filled grid. Because big images can have lots of small random lines but small image with
-     * interesting lines would get lower score. Therefore we calculate how much of the image is filled.
+     * interesting lines would get lower score. Therefore, we calculate how much of the image is filled.
      *
      * @return fraction of filed squares
      */
