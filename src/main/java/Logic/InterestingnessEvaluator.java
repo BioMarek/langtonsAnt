@@ -95,6 +95,49 @@ public class InterestingnessEvaluator {
         return filled / (dimension * dimension);
     }
 
+    public double highwayEvaluator() {
+        double result = 0.0D;
+        int maxCircles = dimension / 2;
+
+        for (int circle = 0; circle < maxCircles; circle++) {
+            int circleLength = 0;
+            int filled = 0;
+            // horizontal top
+            for (int cell = circle; cell < dimension - circle - 1; cell++) {
+                circleLength++;
+                if (grid[circle][cell] != -1)
+                    filled++;
+//                System.out.print(grid[circle][cell] + " ");
+            }
+            //vertical right
+            for (int cell = circle; cell < dimension - circle - 1; cell++) {
+                circleLength++;
+                if (grid[cell][dimension - circle - 1] != -1)
+                    filled++;
+//                System.out.print(grid[cell][dimension - circle - 1] + " ");
+            }
+            //vertical left
+            for (int cell = circle; cell < dimension - circle - 1; cell++) {
+                circleLength++;
+                if (grid[cell + 1][circle] != -1)
+                    filled++;
+//                System.out.print(grid[cell + 1][circle] + " ");
+            }
+            // horizontal bottom
+            for (int cell = circle; cell < dimension - circle - 1; cell++) {
+                circleLength++;
+                if (grid[dimension - circle - 1][cell + 1] != -1)
+                    filled++;
+//                System.out.print(grid[dimension - circle - 1][cell + 1] + " ");
+            }
+            double filledRation = 1.0D * filled / circleLength;
+            if (circle == 0 && filledRation > 0.5 || circle == 0 && filledRation == 0)
+                return 1.0D;
+            result += filledRation;
+        }
+        return 1 / (result / maxCircles);
+    }
+
     public enum LineType {
         HORIZONTAL, VERTICAL, DIAGONAL_LEFT_RIGHT, DIAGONAL_RIGHT_LEFT
     }
