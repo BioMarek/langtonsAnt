@@ -31,14 +31,26 @@ public class ImageGenerator {
      * @param rule that ant is running
      */
     private void saveImageWithoutPanel(String rule) {
+        InterestingnessEvaluator interestingnessEvaluator = new InterestingnessEvaluator(ant.grid);
+        String fileName;
+
+        ant.allMoves();
+
+        if (Settings.I_ONLY_HIGHWAYS)
+            if (interestingnessEvaluator.highwayEvaluator() < 2.2D)
+                return;
+            else
+                fileName = String.format("./images/%.2f_%s.png", interestingnessEvaluator.highwayEvaluator(), rule);
+        else
+            fileName = String.format("./images/%.2f_%s.png", interestingnessEvaluator.getFinalScore(), rule);
+
+
         BufferedImage bImg = new BufferedImage(Settings.I_SIZE_IN_PIXELS, Settings.I_SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = bImg.createGraphics();
-        ant.allMoves();
         ant.draw(graphics);
-        InterestingnessEvaluator interestingnessEvaluator = new InterestingnessEvaluator(ant.grid);
 
         try {
-            ImageIO.write(bImg, "png", new File(String.format("./images/%.2f_%s.png", interestingnessEvaluator.getFinalScore(), rule)));
+            ImageIO.write(bImg, "png", new File(fileName));
         } catch (IOException e) {
             e.printStackTrace();
         }
