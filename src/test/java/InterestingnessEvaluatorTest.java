@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.closeTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 
 public class InterestingnessEvaluatorTest {
@@ -130,57 +129,41 @@ public class InterestingnessEvaluatorTest {
     }
 
     @Test
-    void highwayEvaluator_horizontalTop() {
-        grid[0][0] = 1;
-        grid[0][4] = 1;
-        grid[1][1] = 2;
-        grid[1][3] = 2;
-        grid[2][2] = 3;
-        printGrid();
-        interestingnessEvaluator.highwayEvaluator();
-    }
-
-    @Test
-    void highwayEvaluator_verticalLeft() {
-        grid[1][0] = 1;
-        grid[5][0] = 1;
-        grid[2][1] = 2;
-        grid[4][1] = 2;
-        grid[3][2] = 3;
-        printGrid();
-        interestingnessEvaluator.highwayEvaluator();
-    }
-
-    @Test
-    void highwayEvaluator_verticalRight() {
-        grid[0][5] = 1;
-        grid[4][5] = 1;
-        grid[1][4] = 2;
-        grid[3][4] = 2;
-        grid[2][3] = 3;
-        printGrid();
-        interestingnessEvaluator.highwayEvaluator();
-    }
-
-    @Test
-    void highwayEvaluator_horizontalBottom() {
-        grid[5][1] = 1;
-        grid[5][5] = 1;
-        grid[4][2] = 2;
-        grid[4][4] = 2;
-        grid[3][3] = 3;
-        printGrid();
-        interestingnessEvaluator.highwayEvaluator();
-    }
-    @Test
-    void highwayEvaluator_all() {
+    void highwayEvaluator_touchesBorderNutNoHighway() {
         grid[0][0] = 1;
         grid[0][1] = 1;
         grid[0][2] = 1;
         grid[0][3] = 1;
         grid[0][4] = 1;
         grid[0][5] = 1;
-        printGrid();
-        System.out.println(interestingnessEvaluator.highwayEvaluator());
+
+        grid[5][1] = 1;
+        grid[5][2] = 1;
+        grid[5][3] = 1;
+        grid[5][4] = 1;
+        assertThat(interestingnessEvaluator.highwayEvaluator(), is(greaterThan(1.0D)));
+        grid[5][5] = 1;
+        assertThat(interestingnessEvaluator.highwayEvaluator(), is(1.0D));
+    }
+
+    @Test
+    void highwayEvaluator_NoHighway() {
+        grid[1][1] = 1;
+        grid[1][2] = 1;
+        grid[2][2] = 1;
+        grid[2][3] = 1;
+        grid[3][3] = 1;
+        assertThat(interestingnessEvaluator.highwayEvaluator(), is(1.0D));
+    }
+
+    @Test
+    void highwayEvaluator_all() {
+        grid[0][0] = 1;
+        grid[0][1] = 1;
+        grid[1][1] = 1;
+        grid[1][2] = 1;
+        grid[2][2] = 1;
+        grid[2][3] = 1;
+        assertThat(interestingnessEvaluator.highwayEvaluator(), is(greaterThan(3.5D)));
     }
 }

@@ -100,45 +100,31 @@ public class InterestingnessEvaluator {
         int maxCircles = dimension / 2;
 
         for (int circle = 0; circle < maxCircles; circle++) {
-            int circleLength = 0;
+            int circleLength = (dimension - circle * 2 - 1) * 4;
             int filled = 0;
-            // horizontal top
             for (int cell = circle; cell < dimension - circle - 1; cell++) {
-                circleLength++;
+                // horizontal top
                 if (grid[circle][cell] != -1)
                     filled++;
-//                System.out.print(grid[circle][cell] + " ");
-            }
-            //vertical right
-            for (int cell = circle; cell < dimension - circle - 1; cell++) {
-                circleLength++;
+                // vertical right
                 if (grid[cell][dimension - circle - 1] != -1)
                     filled++;
-//                System.out.print(grid[cell][dimension - circle - 1] + " ");
-            }
-            //vertical left
-            for (int cell = circle; cell < dimension - circle - 1; cell++) {
-                circleLength++;
+                // vertical left
                 if (grid[cell + 1][circle] != -1)
                     filled++;
-//                System.out.print(grid[cell + 1][circle] + " ");
-            }
-            // horizontal bottom
-            for (int cell = circle; cell < dimension - circle - 1; cell++) {
-                circleLength++;
+                // horizontal bottom
                 if (grid[dimension - circle - 1][cell + 1] != -1)
                     filled++;
-//                System.out.print(grid[dimension - circle - 1][cell + 1] + " ");
             }
-            double filledRation = 1.0D * filled / circleLength;
-            if (circle == 0 && filledRation > 0.5 || circle == 0 && filledRation == 0)
+            double filledPortion = 1.0D * filled / circleLength;
+            if (circle == 0 && filledPortion > 0.5 || circle == 0 && filledPortion == 0)
                 return 1.0D;
-            result += filledRation;
+            result += filledPortion;
         }
         return 1 / (result / maxCircles);
     }
 
     public enum LineType {
-        HORIZONTAL, VERTICAL, DIAGONAL_LEFT_RIGHT, DIAGONAL_RIGHT_LEFT
+        HORIZONTAL, VERTICAL
     }
 }
