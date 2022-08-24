@@ -7,18 +7,18 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 public class ImageGenerator {
     private Ant ant;
 
     /**
-     * Cycles through all rules from length 2 to Settings.I_SIZE_IN_PIXELS and saves images into file.
+     * Cycles through all rules from length 2 to Settings.SIZE_IN_PIXELS and saves images into file.
      */
     public void drawAllRules() {
-        List<String> rules = RulesGenerator.generateRules(Settings.RULES_MIN_LENGTH, Settings.RULES_MAX_LENGTH);
+        RulesGenerator rulesGenerator = new RulesGenerator(Settings.RULES_LENGTH);
         int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
-        for (String rule : rules) {
+        while (rulesGenerator.hasNext()) {
+            String rule = rulesGenerator.next();
             System.out.println("working on: " + rule);
             ant = new Ant(squares, Settings.MAX_MOVES, rule);
             saveImageWithoutPanel(rule);
