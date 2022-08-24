@@ -19,4 +19,5 @@ public class Settings {
     public static int I_SIZE_IN_PIXELS = 900;
     public static int I_SIZE_OF_SQUARE = 10;
     public static boolean I_ONLY_HIGHWAYS = false;
+    public static double FILED_PORTION_LIMIT = 0.5D;
 }

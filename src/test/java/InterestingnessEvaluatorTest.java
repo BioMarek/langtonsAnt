@@ -11,6 +11,7 @@ import static org.hamcrest.Matchers.*;
 public class InterestingnessEvaluatorTest {
     private int[][] grid;
     private final int SIZE = 6;
+    private final double FILED_PORTION_LIMIT = 0.5d;
     private InterestingnessEvaluator interestingnessEvaluator;
 
     @BeforeEach
@@ -141,9 +142,9 @@ public class InterestingnessEvaluatorTest {
         grid[5][2] = 1;
         grid[5][3] = 1;
         grid[5][4] = 1;
-        assertThat(interestingnessEvaluator.highwayEvaluator(), is(greaterThan(1.0D)));
+        assertThat(interestingnessEvaluator.highwayEvaluator(FILED_PORTION_LIMIT), is(greaterThan(1.0D)));
         grid[5][5] = 1;
-        assertThat(interestingnessEvaluator.highwayEvaluator(), is(1.0D));
+        assertThat(interestingnessEvaluator.highwayEvaluator(FILED_PORTION_LIMIT), is(1.0D));
     }
 
     @Test
@@ -153,7 +154,7 @@ public class InterestingnessEvaluatorTest {
         grid[2][2] = 1;
         grid[2][3] = 1;
         grid[3][3] = 1;
-        assertThat(interestingnessEvaluator.highwayEvaluator(), is(1.0D));
+        assertThat(interestingnessEvaluator.highwayEvaluator(FILED_PORTION_LIMIT), is(1.0D));
     }
 
     @Test
@@ -164,7 +165,7 @@ public class InterestingnessEvaluatorTest {
         grid[1][2] = 1;
         grid[2][2] = 1;
         grid[2][3] = 1;
-        assertThat(interestingnessEvaluator.highwayEvaluator(), is(greaterThan(3.5D)));
+        assertThat(interestingnessEvaluator.highwayEvaluator(FILED_PORTION_LIMIT), is(greaterThan(3.5D)));
     }
 
     @Test
@@ -190,6 +191,6 @@ public class InterestingnessEvaluatorTest {
         grid[2][3] = 1;
         grid[2][4] = 1;
         printGrid();
-        assertThat(interestingnessEvaluator.bestVerticalSymmetry(1), is(3));
+        assertThat(interestingnessEvaluator.bestVerticalSymmetry(1), is(3.0D));
     }
 }

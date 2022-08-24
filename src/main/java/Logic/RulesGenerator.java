@@ -8,6 +8,7 @@ public class RulesGenerator {
 
     public static List<String> generateRules(int minLength, int maxLength) {
         // TODO refactor so bounds work same as in regular Java
+        // TODO rules starting with LL and RR must be included as well
         int finalMinLength = Math.max(minLength, 2);
         generateRecursive(maxLength, "RL");
         generateRecursive(maxLength, "LR");

@@ -37,10 +37,10 @@ public class ImageGenerator {
         ant.allMoves();
 
         if (Settings.I_ONLY_HIGHWAYS)
-            if (interestingnessEvaluator.highwayEvaluator() < 2.2D)
+            if (interestingnessEvaluator.highwayEvaluator(Settings.FILED_PORTION_LIMIT) < 2.2D)
                 return;
             else
-                fileName = String.format("./images/%.2f_%s.png", interestingnessEvaluator.highwayEvaluator(), rule);
+                fileName = String.format("./images/%.2f_%s.png", interestingnessEvaluator.highwayEvaluator(Settings.FILED_PORTION_LIMIT), rule);
         else
             fileName = String.format("./images/%.2f_%s.png", interestingnessEvaluator.getFinalScore(), rule);
 
