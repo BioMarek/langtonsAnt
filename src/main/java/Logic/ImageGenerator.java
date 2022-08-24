@@ -16,11 +16,11 @@ public class ImageGenerator {
      * Cycles through all rules from length 2 to Settings.I_SIZE_IN_PIXELS and saves images into file.
      */
     public void drawAllRules() {
-        List<String> rules = RulesGenerator.generateRules(Settings.I_RULES_MIN_LENGTH, Settings.I_RULES_MAX_LENGTH);
-        int squares = Settings.I_SIZE_IN_PIXELS / Settings.I_SIZE_OF_SQUARE;
+        List<String> rules = RulesGenerator.generateRules(Settings.RULES_MIN_LENGTH, Settings.RULES_MAX_LENGTH);
+        int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
         for (String rule : rules) {
             System.out.println("working on: " + rule);
-            ant = new Ant(squares, Settings.I_MAX_MOVES, rule);
+            ant = new Ant(squares, Settings.MAX_MOVES, rule);
             saveImageWithoutPanel(rule);
         }
     }
@@ -36,7 +36,7 @@ public class ImageGenerator {
 
         ant.allMoves();
 
-        if (Settings.I_ONLY_HIGHWAYS)
+        if (Settings.ONLY_HIGHWAYS)
             if (interestingnessEvaluator.highwayEvaluator(Settings.FILED_PORTION_LIMIT) < 2.2D)
                 return;
             else
@@ -44,8 +44,7 @@ public class ImageGenerator {
         else
             fileName = String.format("./images/%.2f_%s.png", interestingnessEvaluator.getFinalScore(), rule);
 
-
-        BufferedImage bImg = new BufferedImage(Settings.I_SIZE_IN_PIXELS, Settings.I_SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
+        BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = bImg.createGraphics();
         ant.draw(graphics);
 
