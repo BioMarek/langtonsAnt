@@ -124,6 +124,30 @@ public class InterestingnessEvaluator {
         return 1 / (result / maxCircles);
     }
 
+    public double bestVerticalSymmetry(int edgeLimit) {
+        // why has 891.00_RLLRRLLRRLLR low score?
+        int result = 0;
+        for (int center = edgeLimit; center < dimension - edgeLimit; center++) {
+            result = Math.max(result, verticalSymmetryEvaluator(center, edgeLimit));
+        }
+        return result;
+    }
+
+    public int verticalSymmetryEvaluator(int center, int limit) {
+        int sameCells = 0;
+        for (int row = 0; row < dimension; row++) {
+            int left = center;
+            int right = center + 1;
+            while (left >= limit && right <= dimension - limit - 1) {
+                if (grid[row][left] != -1 && grid[row][left] == grid[row][right])
+                    sameCells++;
+                left--;
+                right++;
+            }
+        }
+        return sameCells;
+    }
+
     public enum LineType {
         HORIZONTAL, VERTICAL
     }

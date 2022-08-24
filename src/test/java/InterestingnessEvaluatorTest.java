@@ -166,4 +166,30 @@ public class InterestingnessEvaluatorTest {
         grid[2][3] = 1;
         assertThat(interestingnessEvaluator.highwayEvaluator(), is(greaterThan(3.5D)));
     }
+
+    @Test
+    void verticalSymmetryEvaluator_works() {
+        grid[0][2] = 1;
+        grid[0][3] = 1;
+        grid[0][1] = 1;
+        grid[0][4] = 1;
+        grid[1][4] = 1;
+        assertThat(interestingnessEvaluator.verticalSymmetryEvaluator(2, 1), is(2));
+    }
+
+    @Test
+    void bestVerticalSymmetry_works() {
+        grid[0][2] = 1;
+        grid[0][3] = 1;
+        grid[0][1] = 1;
+        grid[0][4] = 1;
+
+        grid[1][2] = 1;
+        grid[1][3] = 1;
+
+        grid[2][3] = 1;
+        grid[2][4] = 1;
+        printGrid();
+        assertThat(interestingnessEvaluator.bestVerticalSymmetry(1), is(3));
+    }
 }
