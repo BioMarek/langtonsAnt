@@ -18,6 +18,8 @@ public class RulesGeneratorTest {
         assertThat(rulesGenerator.allRulesExhausted(), is(false));
         rulesGenerator.charArray = new char[]{'R', 'L'};
         assertThat(rulesGenerator.allRulesExhausted(), is(false));
+        rulesGenerator.charArray = new char[]{'L', 'R'};
+        assertThat(rulesGenerator.allRulesExhausted(), is(true));
         rulesGenerator.charArray = new char[]{'R', 'R'};
         assertThat(rulesGenerator.allRulesExhausted(), is(true));
     }
