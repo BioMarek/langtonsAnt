@@ -14,4 +14,6 @@ public class Settings {
     public static int RULES_LENGTH = 3;
     public static boolean ONLY_HIGHWAYS = false; // saves image only if highway is detected
     public static double FILED_PORTION_LIMIT = 0.5D; // highest portion of filled blocks on border allowed in highway
+    public static boolean NO_EVAL = true;
+    public static String BASE_PATH = "/media/marek/Data/AntImages";
 }

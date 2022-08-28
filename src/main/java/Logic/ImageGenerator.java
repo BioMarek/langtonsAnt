@@ -36,13 +36,18 @@ public class ImageGenerator {
 
         ant.allMoves();
 
-        if (Settings.ONLY_HIGHWAYS)
-            if (interestingnessEvaluator.highwayEvaluator(Settings.FILED_PORTION_LIMIT) < 2.2D)
-                return;
+        if (Settings.NO_EVAL){
+            fileName = String.format(Settings.BASE_PATH + "/%d/%s.png", rule.length(), rule);
+        } else {
+            if (Settings.ONLY_HIGHWAYS)
+                if (interestingnessEvaluator.highwayEvaluator(Settings.FILED_PORTION_LIMIT) < 2.2D)
+                    return;
+                else
+                    fileName = String.format("./images/%.2f_%s.png", interestingnessEvaluator.highwayEvaluator(Settings.FILED_PORTION_LIMIT), rule);
             else
-                fileName = String.format("./images/%.2f_%s.png", interestingnessEvaluator.highwayEvaluator(Settings.FILED_PORTION_LIMIT), rule);
-        else
-            fileName = String.format("./images/%.2f_%s.png", interestingnessEvaluator.getFinalScore(), rule);
+                fileName = String.format("./images/%.2f_%s.png", interestingnessEvaluator.getFinalScore(), rule);
+        }
+
 
         BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = bImg.createGraphics();
