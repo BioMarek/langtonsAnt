@@ -137,11 +137,10 @@ public class InterestingnessEvaluator {
      * @return the highest number of symmetric blocks from all vertical axes of symmetry
      */
     public double bestVerticalSymmetry(int edgeLimit) {
-        // TODO check that having edgeLimit same in bestVerticalSymmetry and verticalSymmetryEvaluator makes sense
-        // why has 891.00_RLLRRLLRRLLR low score?
+        // why has 891.00_RLLRRLLRRLLR, 249.00_LLLLRRRRLLRR, 677.00_LRRLLLLRRRRL low score?
         int result = 0;
         for (int center = edgeLimit; center < dimension - edgeLimit; center++) {
-            result = Math.max(result, verticalSymmetryEvaluator(center, edgeLimit));
+            result = Math.max(result, verticalSymmetryEvaluator(center));
         }
         return result;
     }
@@ -149,20 +148,16 @@ public class InterestingnessEvaluator {
     /**
      * Calculates number of symmetric blocks in grid when axis of symmetry is given.
      *
-     * @param axis      horizontal axis of symmetry
-     * @param edgeLimit how close to the border we won't calculate symmetry
+     * @param axis horizontal axis of symmetry
      * @return number of symmetric blocks in grid
      */
-    public int verticalSymmetryEvaluator(int axis, int edgeLimit) {
+    public int verticalSymmetryEvaluator(int axis) {
         int sameCells = 0;
+        int maxDistanceFromAxis = Math.min(axis, dimension - axis - 1);
         for (int row = 0; row < dimension; row++) {
-            int left = axis;
-            int right = axis + 1;
-            while (left >= edgeLimit && right <= dimension - edgeLimit - 1) {
-                if (grid[row][left] != -1 && grid[row][left] == grid[row][right])
+            for (int i = 0; i < maxDistanceFromAxis; i++) {
+                if (grid[row][axis - i] != -1 && grid[row][axis - i] == grid[row][axis + i + 1])
                     sameCells++;
-                left--;
-                right++;
             }
         }
         return sameCells;

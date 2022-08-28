@@ -175,7 +175,7 @@ public class InterestingnessEvaluatorTest {
         grid[0][1] = 1;
         grid[0][4] = 1;
         grid[1][4] = 1;
-        assertThat(interestingnessEvaluator.verticalSymmetryEvaluator(2, 1), is(2));
+        assertThat(interestingnessEvaluator.verticalSymmetryEvaluator(2), is(2));
     }
 
     @Test
