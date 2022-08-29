@@ -9,29 +9,39 @@ public class ColorsPicker {
      * @param color color number
      */
     public static void setColor(Graphics2D graphics, int color) {
-        Color VIOLET = new Color(127, 0, 255);
-        Color BROWN = new Color(139, 69, 19);
-        Color LIGHT_GREEN = new Color(128, 255, 0);
-        Color LIGHT_BLUE = new Color(0, 128, 255);
-        Color OLIVE = new Color(128, 128, 0);
-        Color NAVY = new Color(0, 0, 128);
-        Color TEAL = new Color(0, 128, 128);
-        Color CORAL = new Color(240, 128, 128);
-        Color KHAKI = new Color(240, 232, 170);
+        Color WHITE = new Color(255, 255, 255, Settings.ALPHA);
+        Color RED = new Color(255, 0, 0, Settings.ALPHA);
+        Color GREEN = new Color(0, 255, 0, Settings.ALPHA);
+        Color BLUE = new Color(0, 0, 255, Settings.ALPHA);
+        Color YELLOW = new Color(255, 255, 0, Settings.ALPHA);
+        Color ORANGE = new Color(255, 200, 0, Settings.ALPHA);
+        Color MAGENTA = new Color(255, 0, 255, Settings.ALPHA);
+        Color CYAN = new Color(0, 255, 255, Settings.ALPHA);
+        Color PINK = new Color(255, 175, 175, Settings.ALPHA);
+
+        Color VIOLET = new Color(127, 0, 255, Settings.ALPHA);
+        Color BROWN = new Color(139, 69, 19, Settings.ALPHA);
+        Color LIGHT_GREEN = new Color(128, 255, 0, Settings.ALPHA);
+        Color LIGHT_BLUE = new Color(0, 128, 255, Settings.ALPHA);
+        Color OLIVE = new Color(128, 128, 0, Settings.ALPHA);
+        Color NAVY = new Color(0, 0, 128, Settings.ALPHA);
+        Color TEAL = new Color(0, 128, 128, Settings.ALPHA);
+        Color CORAL = new Color(240, 128, 128, Settings.ALPHA);
+        Color KHAKI = new Color(240, 232, 170, Settings.ALPHA);
         Color BACKGROUND = new Color(41, 41, 41, 255);
 
         switch (color) {
             case -1 -> graphics.setColor(BACKGROUND);
-            case 0 -> graphics.setColor(Color.WHITE);
-            case 1 -> graphics.setColor(Color.RED);
-            case 2 -> graphics.setColor(Color.GREEN);
-            case 3 -> graphics.setColor(Color.BLUE);
-            case 4 -> graphics.setColor(Color.YELLOW);
-            case 5 -> graphics.setColor(Color.ORANGE);
+            case 0 -> graphics.setColor(WHITE);
+            case 1 -> graphics.setColor(RED);
+            case 2 -> graphics.setColor(GREEN);
+            case 3 -> graphics.setColor(BLUE);
+            case 4 -> graphics.setColor(YELLOW);
+            case 5 -> graphics.setColor(ORANGE);
             case 6 -> graphics.setColor(VIOLET);
-            case 7 -> graphics.setColor(Color.MAGENTA);
-            case 8 -> graphics.setColor(Color.CYAN);
-            case 9 -> graphics.setColor(Color.PINK);
+            case 7 -> graphics.setColor(MAGENTA);
+            case 8 -> graphics.setColor(CYAN);
+            case 9 -> graphics.setColor(PINK);
             case 10 -> graphics.setColor(BROWN);
             case 11 -> graphics.setColor(LIGHT_GREEN);
             case 12 -> graphics.setColor(LIGHT_BLUE);
