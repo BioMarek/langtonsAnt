@@ -17,17 +17,6 @@ public class RulesGeneratorTest {
     }
 
     @Test
-    void allRulesExhausted() {
-        assertThat(rulesGenerator.allRulesExhausted(), is(false));
-        rulesGenerator.charArray = new char[]{'R', 'L'};
-        assertThat(rulesGenerator.allRulesExhausted(), is(false));
-        rulesGenerator.charArray = new char[]{'L', 'R'};
-        assertThat(rulesGenerator.allRulesExhausted(), is(true));
-        rulesGenerator.charArray = new char[]{'R', 'R'};
-        assertThat(rulesGenerator.allRulesExhausted(), is(true));
-    }
-
-    @Test
     void increaseByOne() {
         rulesGenerator.increaseByOne();
         assertThat(rulesGenerator.charArray, is(new char[]{'R', 'L'}));
@@ -40,13 +29,24 @@ public class RulesGeneratorTest {
     }
 
     @Test
-    void rulesGenerator_createsCorrectNumberOfRules() {
-        assertThat(getAllRules(2), is(2));
-        assertThat(getAllRules(3), is(6));
-        assertThat(getAllRules(8), is(254));
+    void rulesGenerator_returnsCorrectRules() {
+        assertThat(rulesGenerator.next(), is("RL"));
+        assertThat(rulesGenerator.hasNext(), is(false));
+        rulesGenerator = new RulesGenerator(3);
+        assertThat(rulesGenerator.next(), is("RLL"));
+        assertThat(rulesGenerator.next(), is("LRL"));
+        assertThat(rulesGenerator.next(), is("RRL"));
+        assertThat(rulesGenerator.hasNext(), is(false));
     }
 
-    public int getAllRules(int length) {
+    @Test
+    void rulesGenerator_createsCorrectNumberOfRules() {
+        assertThat(getAllRules(2), is(1));
+        assertThat(getAllRules(3), is(3));
+        assertThat(getAllRules(8), is(127));
+    }
+
+    private int getAllRules(int length) {
         rulesGenerator = new RulesGenerator(length);
         List<String> result = new ArrayList<>();
         while (rulesGenerator.hasNext())
