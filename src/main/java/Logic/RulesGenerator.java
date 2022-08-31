@@ -1,7 +1,9 @@
 package Logic;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Rules are saved as binary array of 'R's and 'L's which correspond to 1s and 0s in binary array. Array is returned
@@ -10,6 +12,7 @@ import java.util.Iterator;
  * rules.
  */
 public class RulesGenerator implements Iterator<String> {
+    // TODO are they really all There is never R as last letter
     private final int rulesLength;
     public char[] charArray;
     private int rulesReturned = 1;
@@ -50,5 +53,21 @@ public class RulesGenerator implements Iterator<String> {
                 charArray[index] = 'L';
             index++;
         }
+    }
+
+    public List<List<String>> getAllRulesForThreads(int threads) {
+        List<List<String>> result = new ArrayList<>();
+        int forThread = totalNumOfRules / threads + 1;
+
+        for (int i = 0; i < threads; i++) {
+            List<String> sublist = new ArrayList<>();
+            int count = 0;
+            while (hasNext() && count < forThread) {
+                sublist.add(next());
+                count++;
+            }
+            result.add(sublist);
+        }
+        return result;
     }
 }

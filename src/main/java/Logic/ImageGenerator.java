@@ -36,7 +36,7 @@ public class ImageGenerator {
 
         ant.allMoves();
 
-        if (Settings.NO_EVAL){
+        if (Settings.NO_EVAL) {
             fileName = String.format(Settings.BASE_PATH + "/%d/%s.png", rule.length(), rule);
         } else {
             if (Settings.ONLY_HIGHWAYS)
