@@ -12,7 +12,7 @@ public class Settings {
 //    public static int SIZE_IN_PIXELS = 900;
 //    public static int SIZE_OF_SQUARE = 10;
 
-    public static long MAX_MOVES = 20_000_000;
+    public static long MAX_MOVES = 50_000_000;
     public static int SIZE_IN_PIXELS = 2000;
     public static int SIZE_OF_SQUARE = 2;
 

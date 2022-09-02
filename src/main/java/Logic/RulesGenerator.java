@@ -12,7 +12,6 @@ import java.util.List;
  * rules.
  */
 public class RulesGenerator implements Iterator<String> {
-    // TODO are they really all There is never R as last letter
     private final int rulesLength;
     public char[] charArray;
     private int rulesReturned = 1;
