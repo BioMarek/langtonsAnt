@@ -4,17 +4,17 @@ public class Settings {
     // General
 
     public static int ALPHA = 200;
-    public static boolean SHOW_GRID = false;
-    public static String RULE = "RL";
+    public static boolean SHOW_GRID = true;
+    public static String RULE = "RLRRLL";
     public static int DELAY = 10;
     public static int SKIP = 10;
-//    public static long MAX_MOVES = 1_000_000;
-//    public static int SIZE_IN_PIXELS = 900;
-//    public static int SIZE_OF_SQUARE = 10;
+    public static long MAX_MOVES = 1_000_000;
+    public static int SIZE_IN_PIXELS = 900;
+    public static int SIZE_OF_SQUARE = 10;
 
-    public static long MAX_MOVES = 50_000_000;
-    public static int SIZE_IN_PIXELS = 2000;
-    public static int SIZE_OF_SQUARE = 2;
+//    public static long MAX_MOVES = 50_000_000;
+//    public static int SIZE_IN_PIXELS = 2000;
+//    public static int SIZE_OF_SQUARE = 2;
 
     // Settings for image generation
     public static int RULES_LENGTH = 10;
@@ -23,4 +23,5 @@ public class Settings {
     public static boolean NO_EVAL = true;
     public static String BASE_PATH = "/media/marek/Data/AntImages";
     public static int THREADS = 6;
+    public static int RIGHT_MARGIN = 300;
 }

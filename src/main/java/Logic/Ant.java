@@ -142,14 +142,15 @@ public class Ant {
      */
     public void draw(Graphics2D graphics) {
         setBackground(graphics);
-        for (int row = 0; row < squares; row++) {
-            for (int column = 0; column < squares; column++) {
-                ColorsPicker.setColor(graphics, grid[row][column]);
+        for (int column = 0; column < squares; column++) {
+            for (int row = 0; row < squares; row++) {
+                ColorsPicker.setColor(graphics, grid[column][row]);
                 int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
                 int squareShift = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE + 1 : Settings.SIZE_OF_SQUARE;
-                graphics.fillRect(row * squareShift, column * squareShift, sizeOfSquare, sizeOfSquare);
+                graphics.fillRect(column * squareShift, row * squareShift, sizeOfSquare, sizeOfSquare);
             }
         }
+        drawInfo(graphics);
     }
 
     /**
@@ -161,9 +162,19 @@ public class Ant {
     public void setBackground(Graphics2D graphics) {
         graphics.setColor(new Color(40, 40, 40));
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
-        graphics.fillRect(0, 0, sizeInPixels, sizeInPixels);
+        graphics.fillRect(0, 0, sizeInPixels + Settings.RIGHT_MARGIN, sizeInPixels);
+        graphics.setColor(Color.GRAY);
+        Stroke stroke = new BasicStroke(2f);
+        graphics.setStroke(stroke);
+        graphics.drawLine(sizeInPixels, 0, sizeInPixels, sizeInPixels);
     }
 
+    public void drawInfo(Graphics2D graphics) {
+        graphics.setColor(Color.GRAY);
+        graphics.setFont(new Font("Arial", Font.BOLD, 18));
+        graphics.drawString("Rule:   " + new String(rule), Settings.SIZE_IN_PIXELS + 15, 30);
+        graphics.drawString("Steps: " + moves, Settings.SIZE_IN_PIXELS + 15, 60);
+    }
 
     /**
      * Prints grid, used for debugging purposes.

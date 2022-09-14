@@ -19,7 +19,7 @@ public class GridPanel extends JPanel implements ActionListener {
 
     public GridPanel() {
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
-        this.setPreferredSize(new Dimension(sizeInPixels, sizeInPixels));
+        this.setPreferredSize(new Dimension(sizeInPixels + Settings.RIGHT_MARGIN, sizeInPixels));
         this.setFocusable(true);
 
         int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;

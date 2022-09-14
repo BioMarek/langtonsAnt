@@ -28,7 +28,7 @@ public class ColorsPicker {
         Color TEAL = new Color(0, 128, 128, Settings.ALPHA);
         Color CORAL = new Color(240, 128, 128, Settings.ALPHA);
         Color KHAKI = new Color(240, 232, 170, Settings.ALPHA);
-        Color BACKGROUND = new Color(41, 41, 41, 255);
+        Color BACKGROUND = new Color(40, 40, 40, 255);
 
         switch (color) {
             case -1 -> graphics.setColor(BACKGROUND);
