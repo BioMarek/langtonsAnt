@@ -3,7 +3,6 @@ package Logic;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +11,7 @@ public class ImageGenerator {
     private Ant ant;
 
     /**
-     * Cycles through all rules from length 2 to Settings.SIZE_IN_PIXELS and saves images into file.
+     * Cycles through all rules of length Settings.RULES_LENGTH and saves images into file.
      */
     public void drawAllRules() {
         RulesGenerator rulesGenerator = new RulesGenerator(Settings.RULES_LENGTH);
@@ -50,8 +49,7 @@ public class ImageGenerator {
 
 
         BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
-        Graphics2D graphics = bImg.createGraphics();
-        ant.draw(graphics);
+        ant.draw(bImg.createGraphics());
 
         try {
             ImageIO.write(bImg, "png", new File(fileName));

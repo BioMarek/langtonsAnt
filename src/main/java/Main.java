@@ -1,16 +1,15 @@
 import Logic.ImageGenerator;
+import Threads.AntParallelWorker;
+import Utils.Settings;
 
 public class Main {
     public static void main(String[] args) {
-//        new GridFrame();
+//        new GridFrame();  // Runs one rule based on setting realtime
 
-        ImageGenerator imageGenerator = new ImageGenerator();
-        imageGenerator.drawAllRules();
+//        ImageGenerator imageGenerator = new ImageGenerator();
+//        imageGenerator.drawAllRules();
 
-//        for (int i = 2; i < 10; i++) {
-//            Settings.RULES_LENGTH = i;
-//            ImageGenerator imageGenerator = new ImageGenerator();
-//            imageGenerator.drawAllRules();
-//        }
+        AntParallelWorker antParallelWorker = new AntParallelWorker();
+        antParallelWorker.drawAllRulesInParallel();
     }
 }
