@@ -5,23 +5,16 @@ import Utils.Settings;
 
 import java.util.List;
 
-public class AntThreadWorker {
-    private List<List<String>> items;
-
-    private List<List<String>> rules;
-
-    public AntThreadWorker(List<List<String>> items) {
-        this.items = items;
-    }
-
-    public void doWork() {
+/**
+ * Divides list of generated rules into sublists and evaluates in parallel them in {@link AntRunnable}.
+ */
+public class AntParallelWorker {
+    public void drawAllRulesInParallel() {
         RulesGenerator rulesGenerator = new RulesGenerator(Settings.RULES_LENGTH);
-        rules = rulesGenerator.getAllRulesForThreads(Settings.THREADS);
+        List<List<String>> rules = rulesGenerator.getAllRulesForThreads(Settings.THREADS);
         for (List<String> item : rules) {
             Thread t = new Thread(new AntRunnable(item));
             t.start();
         }
     }
-
-
 }
