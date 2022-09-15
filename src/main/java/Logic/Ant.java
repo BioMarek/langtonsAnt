@@ -139,10 +139,26 @@ public class Ant {
     }
 
     /**
+     * Draws image that can be saved as file.
+     */
+    public void drawImage(Graphics2D graphics) {
+        setBackground(graphics);
+        draw(graphics);
+    }
+
+    /**
+     * Draws image that can be presented as frame of animation. Contains info on the right side of image.
+     */
+    public void drawPresentation(Graphics2D graphics) {
+        setBackgroundPresentation(graphics);
+        draw(graphics);
+        drawInfo(graphics);
+    }
+
+    /**
      * Converts grid of numbers to {@link Graphics2D}.
      */
     public void draw(Graphics2D graphics) {
-        setBackground(graphics);
         for (int column = 0; column < squares; column++) {
             for (int row = 0; row < squares; row++) {
                 ColorsPicker.setColor(graphics, grid[column][row]);
@@ -151,19 +167,6 @@ public class Ant {
                 graphics.fillRect(column * squareShift, row * squareShift, sizeOfSquare, sizeOfSquare);
             }
         }
-    }
-
-    public void drawPresentation(Graphics2D graphics) {
-        setBackgroundPresentation(graphics);
-        for (int column = 0; column < squares; column++) {
-            for (int row = 0; row < squares; row++) {
-                ColorsPicker.setColor(graphics, grid[column][row]);
-                int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
-                int squareShift = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE + 1 : Settings.SIZE_OF_SQUARE;
-                graphics.fillRect(column * squareShift, row * squareShift, sizeOfSquare, sizeOfSquare);
-            }
-        }
-        drawInfo(graphics);
     }
 
     /**
@@ -178,12 +181,21 @@ public class Ant {
         graphics.fillRect(0, 0, sizeInPixels, sizeInPixels);
     }
 
+    /**
+     * Sets background of {@link Graphics2D} object for presentation animation the background is wider to accomodate for
+     * information displayed on the right side.
+     *
+     * @param graphics {@link Graphics2D} where we want to set color.
+     */
     public void setBackgroundPresentation(Graphics2D graphics) {
         graphics.setColor(new Color(40, 40, 40));
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
         graphics.fillRect(0, 0, sizeInPixels + Settings.SIZE_IN_PIXELS / 3, sizeInPixels);
     }
 
+    /**
+     * Displays information about ant rule being animated and number of steps ant has made.
+     */
     public void drawInfo(Graphics2D graphics) {
         graphics.setColor(Color.GRAY);
         int fontUnit = Settings.SIZE_IN_PIXELS / 60;

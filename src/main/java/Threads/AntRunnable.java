@@ -38,7 +38,7 @@ public class AntRunnable implements Runnable {
         Ant ant = new Ant(Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE, Settings.MAX_MOVES, rule);
         ant.allMoves();
         BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
-        ant.draw(bImg.createGraphics());
+        ant.drawImage(bImg.createGraphics());
 
         try {
             ImageIO.write(bImg, "png", new File(String.format(Settings.BASE_PATH + "/%d/%s.png", rule.length(), rule)));
