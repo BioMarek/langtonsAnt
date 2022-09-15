@@ -133,6 +133,7 @@ public class Ant {
      * Checks whether ant moved out of grid bounds.
      */
     public void checkBorderCollision() {
+        // TODO ant runs out of border
         if (antPosition.row < 0 || antPosition.column < 0 || antPosition.row == size || antPosition.column == size)
             stopped = true;
     }
@@ -142,6 +143,18 @@ public class Ant {
      */
     public void draw(Graphics2D graphics) {
         setBackground(graphics);
+        for (int column = 0; column < squares; column++) {
+            for (int row = 0; row < squares; row++) {
+                ColorsPicker.setColor(graphics, grid[column][row]);
+                int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
+                int squareShift = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE + 1 : Settings.SIZE_OF_SQUARE;
+                graphics.fillRect(column * squareShift, row * squareShift, sizeOfSquare, sizeOfSquare);
+            }
+        }
+    }
+
+    public void drawPresentation(Graphics2D graphics) {
+        setBackgroundPresentation(graphics);
         for (int column = 0; column < squares; column++) {
             for (int row = 0; row < squares; row++) {
                 ColorsPicker.setColor(graphics, grid[column][row]);
@@ -162,18 +175,24 @@ public class Ant {
     public void setBackground(Graphics2D graphics) {
         graphics.setColor(new Color(40, 40, 40));
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
-        graphics.fillRect(0, 0, sizeInPixels + Settings.RIGHT_MARGIN, sizeInPixels);
+        graphics.fillRect(0, 0, sizeInPixels, sizeInPixels);
+    }
+
+    public void setBackgroundPresentation(Graphics2D graphics) {
+        graphics.setColor(new Color(40, 40, 40));
+        int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
+        graphics.fillRect(0, 0, sizeInPixels + Settings.SIZE_IN_PIXELS / 3, sizeInPixels);
         graphics.setColor(Color.GRAY);
-        Stroke stroke = new BasicStroke(2f);
-        graphics.setStroke(stroke);
-        graphics.drawLine(sizeInPixels, 0, sizeInPixels, sizeInPixels);
+        graphics.setStroke(new BasicStroke(2f));
+        graphics.drawLine(sizeInPixels, 0, sizeInPixels, sizeInPixels); // TODO fix the line 900 and 1200 size, broader line
     }
 
     public void drawInfo(Graphics2D graphics) {
         graphics.setColor(Color.GRAY);
-        graphics.setFont(new Font("Arial", Font.BOLD, 18));
-        graphics.drawString("Rule:   " + new String(rule), Settings.SIZE_IN_PIXELS + 15, 30);
-        graphics.drawString("Steps: " + moves, Settings.SIZE_IN_PIXELS + 15, 60);
+        int fontUnit = Settings.SIZE_IN_PIXELS / 60;
+        graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.2)));
+        graphics.drawString("Rule:   " + new String(rule), Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 2);
+        graphics.drawString("Steps: " + moves, Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 4);
     }
 
     /**

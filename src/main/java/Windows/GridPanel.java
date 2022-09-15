@@ -19,7 +19,8 @@ public class GridPanel extends JPanel implements ActionListener {
 
     public GridPanel() {
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
-        this.setPreferredSize(new Dimension(sizeInPixels + Settings.RIGHT_MARGIN, sizeInPixels));
+        // Settings.SIZE_IN_PIXELS / 3 is for left margin with info
+        this.setPreferredSize(new Dimension(sizeInPixels + Settings.SIZE_IN_PIXELS / 3, sizeInPixels));
         this.setFocusable(true);
 
         int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
@@ -31,7 +32,7 @@ public class GridPanel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D graphics = (Graphics2D) g;
-        ant.draw(graphics);
+        ant.drawPresentation(graphics);
     }
 
     @Override

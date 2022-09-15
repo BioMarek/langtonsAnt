@@ -23,5 +23,4 @@ public class Settings {
     public static boolean NO_EVAL = true;
     public static String BASE_PATH = "/media/marek/Data/AntImages";
     public static int THREADS = 6;
-    public static int RIGHT_MARGIN = 300;
 }
