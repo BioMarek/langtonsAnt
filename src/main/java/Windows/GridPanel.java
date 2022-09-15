@@ -19,7 +19,7 @@ public class GridPanel extends JPanel implements ActionListener {
 
     public GridPanel() {
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
-        // Settings.SIZE_IN_PIXELS / 3 is for left margin with info
+        // Settings.SIZE_IN_PIXELS / 3 space is for left margin with info
         this.setPreferredSize(new Dimension(sizeInPixels + Settings.SIZE_IN_PIXELS / 3, sizeInPixels));
         this.setFocusable(true);
 

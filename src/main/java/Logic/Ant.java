@@ -133,7 +133,6 @@ public class Ant {
      * Checks whether ant moved out of grid bounds.
      */
     public void checkBorderCollision() {
-        // TODO ant runs out of border
         if (antPosition.row < 0 || antPosition.column < 0 || antPosition.row == size || antPosition.column == size)
             stopped = true;
     }
@@ -163,8 +162,7 @@ public class Ant {
             for (int row = 0; row < squares; row++) {
                 ColorsPicker.setColor(graphics, grid[column][row]);
                 int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
-                int squareShift = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE + 1 : Settings.SIZE_OF_SQUARE;
-                graphics.fillRect(column * squareShift, row * squareShift, sizeOfSquare, sizeOfSquare);
+                graphics.fillRect(column * Settings.SIZE_OF_SQUARE, row * Settings.SIZE_OF_SQUARE, sizeOfSquare, sizeOfSquare);
             }
         }
     }

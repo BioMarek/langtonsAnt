@@ -9,7 +9,7 @@ public class Settings {
     public static int DELAY = 10;
     public static int SKIP = 10;
     public static long MAX_MOVES = 1_000_000;
-    public static int SIZE_IN_PIXELS = 900;
+    public static int SIZE_IN_PIXELS = 1000;
     public static int SIZE_OF_SQUARE = 10;
 
 //    public static long MAX_MOVES = 50_000_000;
