@@ -182,9 +182,6 @@ public class Ant {
         graphics.setColor(new Color(40, 40, 40));
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
         graphics.fillRect(0, 0, sizeInPixels + Settings.SIZE_IN_PIXELS / 3, sizeInPixels);
-        graphics.setColor(Color.GRAY);
-        graphics.setStroke(new BasicStroke(2f));
-        graphics.drawLine(sizeInPixels, 0, sizeInPixels, sizeInPixels); // TODO fix the line 900 and 1200 size, broader line
     }
 
     public void drawInfo(Graphics2D graphics) {
@@ -193,6 +190,10 @@ public class Ant {
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.2)));
         graphics.drawString("Rule:   " + new String(rule), Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 2);
         graphics.drawString("Steps: " + moves, Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 4);
+
+        graphics.setColor(Color.GRAY);
+        graphics.setStroke(new BasicStroke(3f));
+        graphics.drawLine(Settings.SIZE_IN_PIXELS, 0, Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS);
     }
 
     /**
