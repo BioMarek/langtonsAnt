@@ -49,7 +49,7 @@ public class ImageGenerator {
 
 
         BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
-        ant.draw(bImg.createGraphics());
+        ant.drawImage(bImg.createGraphics());
 
         try {
             ImageIO.write(bImg, "png", new File(fileName));
