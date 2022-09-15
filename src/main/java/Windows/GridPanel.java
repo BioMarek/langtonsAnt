@@ -58,7 +58,7 @@ public class GridPanel extends JPanel implements ActionListener {
      * Saves image after ant stops moving either because move limit was exceeded or because ant moved over border.
      */
     public void saveImage() {
-        BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
+        BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS + Settings.SIZE_IN_PIXELS / 3, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
         Graphics2D cg = bImg.createGraphics();
         this.paintAll(cg);
 
