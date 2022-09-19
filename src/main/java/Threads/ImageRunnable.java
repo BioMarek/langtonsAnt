@@ -12,11 +12,11 @@ import java.util.List;
 /**
  * Evaluates rules supplied to constructor and saves result as image.
  */
-public class AntRunnable implements Runnable {
+public class ImageRunnable implements Runnable {
 
     private final List<String> rules;
 
-    public AntRunnable(List<String> rules) {
+    public ImageRunnable(List<String> rules) {
         this.rules = rules;
     }
 

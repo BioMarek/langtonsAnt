@@ -3,7 +3,6 @@ package Logic;
 import Utils.*;
 
 import java.awt.*;
-import java.text.DecimalFormat;
 import java.util.Arrays;
 
 public class Ant {
@@ -59,7 +58,7 @@ public class Ant {
             nextMove();
             countDown--;
         }
-        if (stopped){
+        if (stopped) {
             long stop = System.currentTimeMillis();
             System.out.println("It took: " + (stop - start) / 1000 + "s");
         }

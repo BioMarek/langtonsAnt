@@ -1,6 +1,3 @@
-import Logic.ImageGenerator;
-import Threads.AntParallelWorker;
-import Utils.Settings;
 import Windows.GridFrame;
 
 public class Main {
