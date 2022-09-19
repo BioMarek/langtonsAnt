@@ -1,11 +1,9 @@
 package Logic;
 
-import Utils.ColorsPicker;
-import Utils.Direction;
-import Utils.Position;
-import Utils.Settings;
+import Utils.*;
 
 import java.awt.*;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 public class Ant {
@@ -16,7 +14,7 @@ public class Ant {
     public char[] rule;
     public Position antPosition = new Position();
     public boolean stopped = false;
-    private int moves = 0;
+    private int steps = 0;
     long start;
 
     public Ant(int size, long maxMoves, String givenRule) {
@@ -83,8 +81,8 @@ public class Ant {
 
         grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] + 1) % rule.length;
 
-        moves++;
-        stopped = moves > maxMoves;
+        steps++;
+        stopped = steps > maxMoves;
         checkBorderCollision();
     }
 
@@ -165,6 +163,7 @@ public class Ant {
      * Converts grid of numbers to {@link Graphics2D}.
      */
     public void draw(Graphics2D graphics) {
+        long start = System.currentTimeMillis();
         for (int column = 0; column < squares; column++) {
             for (int row = 0; row < squares; row++) {
                 ColorsPicker.setColor(graphics, grid[column][row]);
@@ -172,6 +171,8 @@ public class Ant {
                 graphics.fillRect(column * Settings.SIZE_OF_SQUARE, row * Settings.SIZE_OF_SQUARE, sizeOfSquare, sizeOfSquare);
             }
         }
+        long stop = System.currentTimeMillis();
+        System.out.println("draw: " + (stop - start) + "ms");
     }
 
     /**
@@ -206,23 +207,10 @@ public class Ant {
         int fontUnit = Settings.SIZE_IN_PIXELS / 60;
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.2)));
         graphics.drawString("Rule:   " + new String(rule), Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 2);
-        graphics.drawString("Steps: " + moves, Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 4);
+        graphics.drawString("Steps: " + Util.numberFormatter(steps), Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 4);
 
         graphics.setColor(Color.GRAY);
         graphics.setStroke(new BasicStroke(3f));
         graphics.drawLine(Settings.SIZE_IN_PIXELS, 0, Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS);
-    }
-
-    /**
-     * Prints grid, used for debugging purposes.
-     */
-    public void printGrid() {
-        for (int row = 0; row < size; row++) {
-            for (int column = 0; column < size; column++) {
-                System.out.print(grid[row][column] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
     }
 }

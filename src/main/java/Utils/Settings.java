@@ -5,9 +5,9 @@ public class Settings {
 
     public static int ALPHA = 200;
     public static boolean SHOW_GRID = false;
-    public static String RULE = "RRLLLRLLLLL";
+    public static String RULE = "LLRLRLRRRRRRRL";
     public static int DELAY = 10;
-    public static int SKIP = 100000;
+    public static int SKIP = 50000;
     public static long MAX_MOVES = 50_000_000;
     public static int SIZE_IN_PIXELS = 1000;
     public static int SIZE_OF_SQUARE = 1;
