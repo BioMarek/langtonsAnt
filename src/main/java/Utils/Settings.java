@@ -2,12 +2,11 @@ package Utils;
 
 public class Settings {
     // General
-
     public static int ALPHA = 200;
     public static boolean SHOW_GRID = false;
-    public static String RULE = "RRLLLRLLLLL";
+    public static String RULE = "LLRRRLRRRRRRLLL";
     public static int DELAY = 10;
-    public static int SKIP = 100000;
+    public static int SKIP = 50000;
     public static long MAX_MOVES = 50_000_000;
     public static int SIZE_IN_PIXELS = 1000;
     public static int SIZE_OF_SQUARE = 1;
@@ -23,4 +22,10 @@ public class Settings {
     public static boolean NO_EVAL = true;
     public static String BASE_PATH = "/media/marek/Data/AntImages";
     public static int THREADS = 6;
+
+    // Settings for gif generation
+    public static int GIF_DELAY = 100;
+    public static int GIF_WIDTH = 1333;
+    public static int GIF_HEIGHT = 1000;
+    public static String GIF_BASE_PATH = "./gifs/";
 }

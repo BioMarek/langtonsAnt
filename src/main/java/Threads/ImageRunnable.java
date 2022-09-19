@@ -12,18 +12,18 @@ import java.util.List;
 /**
  * Evaluates rules supplied to constructor and saves result as image.
  */
-public class AntRunnable implements Runnable {
+public class ImageRunnable implements Runnable {
 
     private final List<String> rules;
 
-    public AntRunnable(List<String> rules) {
+    public ImageRunnable(List<String> rules) {
         this.rules = rules;
     }
 
     @Override
     public void run() {
         for (String rule : rules) {
-            saveImageWithoutPanel(rule);
+            saveImage(rule);
         }
     }
 
@@ -32,7 +32,8 @@ public class AntRunnable implements Runnable {
      *
      * @param rule that ant is running
      */
-    private void saveImageWithoutPanel(String rule) {
+    // TODO consolidate image creators
+    private void saveImage(String rule) {
         System.out.println(Thread.currentThread().getName() + " working on: " + rule);
 
         Ant ant = new Ant(Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE, Settings.MAX_MOVES, rule);
