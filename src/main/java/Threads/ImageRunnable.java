@@ -23,7 +23,7 @@ public class ImageRunnable implements Runnable {
     @Override
     public void run() {
         for (String rule : rules) {
-            saveImageWithoutPanel(rule);
+            saveImage(rule);
         }
     }
 
@@ -33,7 +33,7 @@ public class ImageRunnable implements Runnable {
      * @param rule that ant is running
      */
     // TODO consolidate image creators
-    private void saveImageWithoutPanel(String rule) {
+    private void saveImage(String rule) {
         System.out.println(Thread.currentThread().getName() + " working on: " + rule);
 
         Ant ant = new Ant(Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE, Settings.MAX_MOVES, rule);
