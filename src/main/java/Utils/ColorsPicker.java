@@ -55,29 +55,4 @@ public class ColorsPicker {
         }
         throw new RuntimeException("Wrong number supplied");
     }
-
-
-    public static int colorToNumber(Colors color) {
-        return switch (color) {
-            case BACKGROUND -> -1;
-            case WHITE -> 0;
-            case RED -> 1;
-            case GREEN -> 2;
-            case BLUE -> 3;
-            case YELLOW -> 4;
-            case ORANGE -> 5;
-            case VIOLET -> 6;
-            case MAGENTA -> 7;
-            case CYAN -> 8;
-            case PINK -> 9;
-            case BROWN -> 10;
-            case LIGHT_GREEN -> 11;
-            case LIGHT_BLUE -> 12;
-            case OLIVE -> 13;
-            case NAVY -> 14;
-            case TEAL -> 15;
-            case CORAL -> 16;
-            case KHAKI -> 17;
-        };
-    }
 }

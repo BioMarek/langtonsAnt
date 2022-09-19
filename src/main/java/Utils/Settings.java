@@ -25,4 +25,6 @@ public class Settings {
 
     // Settings for gif generation
     public static int GIF_DELAY = 100;
+    public static int GIF_WIDTH = 1333;
+    public static int GIF_HEIGHT = 1000;
 }
