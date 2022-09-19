@@ -2,7 +2,6 @@ package Utils;
 
 public class Settings {
     // General
-
     public static int ALPHA = 200;
     public static boolean SHOW_GRID = false;
     public static String RULE = "LLRRRLRRRRRRLLL";
@@ -23,4 +22,7 @@ public class Settings {
     public static boolean NO_EVAL = true;
     public static String BASE_PATH = "/media/marek/Data/AntImages";
     public static int THREADS = 6;
+
+    // Settings for gif generation
+    public static int GIF_DELAY = 100;
 }

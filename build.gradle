@@ -12,6 +12,7 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     testImplementation 'org.hamcrest:hamcrest:2.2'
+    implementation group: 'com.squareup', name: 'gifencoder', version: '0.10.1'
 }
 
 test {

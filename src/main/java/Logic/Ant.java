@@ -171,7 +171,7 @@ public class Ant {
             }
         }
         long stop = System.currentTimeMillis();
-        System.out.println("draw: " + (stop - start) + "ms");
+        System.out.println("draw: " + (stop - start) + " ms");
     }
 
     /**

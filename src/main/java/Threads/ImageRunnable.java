@@ -32,6 +32,7 @@ public class ImageRunnable implements Runnable {
      *
      * @param rule that ant is running
      */
+    // TODO consolidate image creators
     private void saveImageWithoutPanel(String rule) {
         System.out.println(Thread.currentThread().getName() + " working on: " + rule);
 
