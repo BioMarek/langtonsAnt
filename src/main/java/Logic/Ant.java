@@ -14,10 +14,8 @@ public class Ant {
     public Position antPosition = new Position();
     public boolean stopped = false;
     private int steps = 0;
-    long start;
 
     public Ant(int size, long maxMoves, String givenRule) {
-        start = System.currentTimeMillis();
         this.grid = new int[size][size];
         this.size = size;
         this.maxMoves = maxMoves;
@@ -60,7 +58,6 @@ public class Ant {
         }
         if (stopped) {
             long stop = System.currentTimeMillis();
-            System.out.println("It took: " + (stop - start) / 1000 + "s");
         }
 
     }
@@ -171,7 +168,6 @@ public class Ant {
             }
         }
         long stop = System.currentTimeMillis();
-        System.out.println("draw: " + (stop - start) + " ms");
     }
 
     /**
