@@ -14,6 +14,7 @@ public class Ant {
     public Position antPosition = new Position();
     public boolean stopped = false;
     private int steps = 0;
+    public boolean usedTopColor = false;
 
     public Ant(int size, long maxMoves, String givenRule) {
         this.grid = new int[size][size];
@@ -56,10 +57,6 @@ public class Ant {
             nextMove();
             countDown--;
         }
-        if (stopped) {
-            long stop = System.currentTimeMillis();
-        }
-
     }
 
     /**
@@ -75,6 +72,8 @@ public class Ant {
         if (rule[grid[currentRow][currentColumn]] == 'R')
             moveRight();
 
+        if (grid[currentRow][currentColumn] == rule.length - 1)
+            usedTopColor = true;
         grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] + 1) % rule.length;
 
         steps++;
@@ -159,7 +158,6 @@ public class Ant {
      * Converts grid of numbers to {@link Graphics2D}.
      */
     public void draw(Graphics2D graphics) {
-        long start = System.currentTimeMillis();
         for (int column = 0; column < squares; column++) {
             for (int row = 0; row < squares; row++) {
                 ColorsPicker.setColor(graphics, grid[column][row]);
@@ -167,7 +165,6 @@ public class Ant {
                 graphics.fillRect(column * Settings.SIZE_OF_SQUARE, row * Settings.SIZE_OF_SQUARE, sizeOfSquare, sizeOfSquare);
             }
         }
-        long stop = System.currentTimeMillis();
     }
 
     /**

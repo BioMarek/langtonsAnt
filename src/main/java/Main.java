@@ -1,4 +1,5 @@
 import Logic.GifGenerator;
+import Threads.ImageParallelWorker;
 import Windows.GridFrame;
 
 public class Main {
@@ -8,8 +9,8 @@ public class Main {
 //        ImageGenerator imageGenerator = new ImageGenerator();
 //        imageGenerator.drawAllRules();
 
-//        AntParallelWorker antParallelWorker = new AntParallelWorker();
-//        antParallelWorker.drawAllRulesInParallel();
+//        ImageParallelWorker imageParallelWorker = new ImageParallelWorker();
+//        imageParallelWorker.drawAllRulesInParallel();
 
         GifGenerator gifGenerator = new GifGenerator();
         gifGenerator.createGif();
