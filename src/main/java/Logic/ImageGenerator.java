@@ -29,7 +29,6 @@ public class ImageGenerator {
      *
      * @param rule that ant is running
      */
-    // TODO consolidate image creators
     private void saveImageWithoutPanel(String rule) {
         InterestingnessEvaluator interestingnessEvaluator = new InterestingnessEvaluator(ant.grid);
         String fileName;

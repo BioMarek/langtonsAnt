@@ -32,19 +32,21 @@ public class ImageRunnable implements Runnable {
      *
      * @param rule that ant is running
      */
-    // TODO consolidate image creators
     private void saveImage(String rule) {
         System.out.println(Thread.currentThread().getName() + " working on: " + rule);
 
         Ant ant = new Ant(Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE, Settings.MAX_MOVES, rule);
         ant.allMoves();
-        BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
-        ant.drawImage(bImg.createGraphics());
+        if (ant.usedTopColor) {
+            BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
+            ant.drawImage(bImg.createGraphics());
 
-        try {
-            ImageIO.write(bImg, "png", new File(String.format(Settings.BASE_PATH + "/%d/%s.png", rule.length(), rule)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            try {
+                ImageIO.write(bImg, "png", new File(String.format(Settings.BASE_PATH + "/%d/%s.png", rule.length(), rule)));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else
+            System.out.println("--- not saving: " + rule);
     }
 }
