@@ -22,7 +22,9 @@ public enum Colors {
     TEAL(new Color(0, 128, 128, Settings.ALPHA)),
     CORAL(new Color(240, 128, 128, Settings.ALPHA)),
     KHAKI(new Color(240, 232, 170, Settings.ALPHA)),
-    BACKGROUND(new Color(40, 40, 40, 255));
+    BACKGROUND(new Color(40, 40, 40, 255)),
+
+    TEXT(new Color(215, 215, 215, 255));
 
     private final Color color;
 

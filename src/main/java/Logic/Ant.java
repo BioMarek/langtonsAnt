@@ -45,7 +45,7 @@ public class Ant {
 
     public void allMoves() {
         long countDown = maxMoves;
-        while (countDown > 0 && !stopped) {
+        while (countDown >= 0 && !stopped) {
             nextMove();
             countDown--;
         }
@@ -195,13 +195,13 @@ public class Ant {
      * Displays information about ant rule being animated and number of steps ant has made.
      */
     public void drawInfo(Graphics2D graphics) {
-        graphics.setColor(Color.GRAY);
+        graphics.setColor(Colors.TEXT.getColor());
         int fontUnit = Settings.SIZE_IN_PIXELS / 60;
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.2)));
         graphics.drawString("Rule:   " + new String(rule), Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 2);
         graphics.drawString("Steps: " + Util.numberFormatter(steps), Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 4);
 
-        graphics.setColor(Color.GRAY);
+        graphics.setColor(Colors.TEXT.getColor());
         graphics.setStroke(new BasicStroke(3f));
         graphics.drawLine(Settings.SIZE_IN_PIXELS, 0, Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS);
     }
