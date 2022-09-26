@@ -4,7 +4,7 @@ public class Settings {
     // General
     public static int ALPHA = 200;
     public static boolean SHOW_GRID = false;
-    public static String RULE = "LLLRLLRRLLLLL";
+    public static String RULE = "LLLRLLRRLLLLLLLL";
     public static int DELAY = 10;
     public static int SKIP = 50000;
     public static long MAX_MOVES = 50_000_000;

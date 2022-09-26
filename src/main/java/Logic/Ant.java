@@ -152,6 +152,7 @@ public class Ant {
         setBackgroundPresentation(graphics);
         draw(graphics);
         drawInfo(graphics);
+        drawLegend(graphics);
     }
 
     /**
@@ -195,6 +196,9 @@ public class Ant {
      * Displays information about ant rule being animated and number of steps ant has made.
      */
     public void drawInfo(Graphics2D graphics) {
+        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
         graphics.setColor(Colors.TEXT.getColor());
         int fontUnit = Settings.SIZE_IN_PIXELS / 60;
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.2)));
@@ -204,5 +208,64 @@ public class Ant {
         graphics.setColor(Colors.TEXT.getColor());
         graphics.setStroke(new BasicStroke(3f));
         graphics.drawLine(Settings.SIZE_IN_PIXELS, 0, Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS);
+
+        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
+        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+    }
+
+    public void drawLegend(Graphics2D graphics) {
+        int squareSize = Settings.SIZE_IN_PIXELS / 40;
+        int topPadding = squareSize * 5;
+        for (int i = 0; i < rule.length; i++) {
+            graphics.setColor(Colors.TEXT.getColor());
+            graphics.drawRect(Settings.SIZE_IN_PIXELS + squareSize * 3, i * (squareSize * 2) + topPadding, squareSize, squareSize);
+            graphics.setColor(Colors.getColor(i));
+            graphics.fillRect(Settings.SIZE_IN_PIXELS + squareSize * 3 + 1, i * (squareSize * 2) + topPadding + 1, squareSize - 1, squareSize - 1);
+            graphics.setColor(Colors.TEXT.getColor());
+            graphics.setStroke(new BasicStroke(2.0f));
+            if (rule[i] == 'L') {
+                drawLeftArrow(graphics, Settings.SIZE_IN_PIXELS + squareSize * 3 + 3, i * (squareSize * 2) + topPadding + squareSize / 2);
+            } else
+                drawRightArrow(graphics, Settings.SIZE_IN_PIXELS + squareSize * 3 + 3, i * (squareSize * 2) + topPadding + squareSize / 2);
+            if (i < rule.length - 1)
+                drawDownArrow(graphics, Settings.SIZE_IN_PIXELS + squareSize * 3 + squareSize / 2, i * (squareSize * 2) + topPadding + squareSize + 5);
+            graphics.setStroke(new BasicStroke(3.0f));
+        }
+        drawTurnArrow(graphics, Settings.SIZE_IN_PIXELS + squareSize * 5 - 5, topPadding - squareSize, Settings.SIZE_IN_PIXELS + squareSize * 5 - 5, rule.length * (squareSize * 2) + topPadding, squareSize);
+    }
+
+    public void drawDownArrow(Graphics2D graphics, int x, int y) {
+        graphics.drawLine(x, y, x, y + 15);
+        graphics.drawLine(x, y + 15, x - 5, y + 5);
+        graphics.drawLine(x, y + 15, x + 5, y + 5);
+    }
+
+    public void drawRightArrow(Graphics2D graphics, int x, int y) {
+        graphics.drawLine(x, y, x + 20, y);
+        graphics.drawLine(x + 20, y, x + 10, y + 5);
+        graphics.drawLine(x + 20, y, x + 10, y - 5);
+    }
+
+    public void drawLeftArrow(Graphics2D graphics, int x, int y) {
+        graphics.drawLine(x, y, x + 20, y);
+        graphics.drawLine(x, y, x + 10, y + 5);
+        graphics.drawLine(x, y, x + 10, y - 5);
+    }
+
+    public void drawTurnArrow(Graphics2D graphics, int x1, int y1, int x2, int y2, int squareSize) {
+        graphics.setStroke(new BasicStroke(2.0f));
+
+        graphics.drawLine(x1, y1, x1 - squareSize * 4 / 3, y1);
+        graphics.drawLine(x1 - squareSize * 4 / 3, y1, x1 - squareSize * 4 / 3, y1 + squareSize);
+
+        graphics.drawLine(x1, y1, x2, y2);
+        graphics.drawLine(x1, y2 / 2, x2 + 5, y2 / 2 + 10);
+        graphics.drawLine(x1, y2 / 2, x2 - 5, y2 / 2 + 10);
+
+        graphics.drawLine(x2, y2, x2 - squareSize * 4 / 3, y2);
+        graphics.drawLine(x2 - squareSize * 4 / 3, y2, x2 - squareSize * 4 / 3, y2 - squareSize + 2);
+
+
+        graphics.setStroke(new BasicStroke(3.0f));
     }
 }

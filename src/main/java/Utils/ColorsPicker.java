@@ -17,7 +17,7 @@ public class ColorsPicker {
             case -1:
                 return Colors.BACKGROUND.getColor();
             case 0:
-                return Colors.WHITE.getColor();
+                return Colors.GREY.getColor();
             case 1:
                 return Colors.RED.getColor();
             case 2:

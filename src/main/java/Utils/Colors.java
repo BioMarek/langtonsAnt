@@ -3,7 +3,7 @@ package Utils;
 import java.awt.*;
 
 public enum Colors {
-    WHITE(new Color(255, 255, 255, Settings.ALPHA)),
+    GREY(new Color(128, 128, 128, Settings.ALPHA)),
     RED(new Color(255, 0, 0, Settings.ALPHA)),
     GREEN(new Color(0, 255, 0, Settings.ALPHA)),
     BLUE(new Color(0, 0, 255, Settings.ALPHA)),
@@ -34,5 +34,30 @@ public enum Colors {
 
     public Color getColor() {
         return this.color;
+    }
+
+    public static Color getColor(int ordinal) {
+        return switch (ordinal) {
+            case 0 -> GREY.getColor();
+            case 1 -> RED.getColor();
+            case 2 -> GREEN.getColor();
+            case 3 -> BLUE.getColor();
+            case 4 -> YELLOW.getColor();
+            case 5 -> ORANGE.getColor();
+            case 6 -> MAGENTA.getColor();
+            case 7 -> CYAN.getColor();
+            case 8 -> PINK.getColor();
+            case 9 -> VIOLET.getColor();
+            case 10 -> BROWN.getColor();
+            case 11 -> LIGHT_GREEN.getColor();
+            case 12 -> LIGHT_BLUE.getColor();
+            case 13 -> OLIVE.getColor();
+            case 14 -> NAVY.getColor();
+            case 15 -> TEAL.getColor();
+            case 16 -> CORAL.getColor();
+            case 17 -> KHAKI.getColor();
+            case -1 -> TEXT.getColor();
+            default -> BACKGROUND.getColor();
+        };
     }
 }

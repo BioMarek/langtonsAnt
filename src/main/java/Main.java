@@ -4,7 +4,7 @@ import Windows.GridFrame;
 
 public class Main {
     public static void main(String[] args) {
-//        new GridFrame();  // Runs one rule based on setting realtime
+        new GridFrame();  // Runs one rule based on setting realtime
 
 //        ImageGenerator imageGenerator = new ImageGenerator();
 //        imageGenerator.drawAllRules();
@@ -12,7 +12,7 @@ public class Main {
 //        ImageParallelWorker imageParallelWorker = new ImageParallelWorker();
 //        imageParallelWorker.drawAllRulesInParallel();
 
-        GifGenerator gifGenerator = new GifGenerator();
-        gifGenerator.createGif();
+//        GifGenerator gifGenerator = new GifGenerator();
+//        gifGenerator.createGif();
     }
 }
