@@ -215,6 +215,7 @@ public class Ant {
     }
 
     public void drawLegend(Graphics2D graphics) {
+        // pretty ugly but best is enemy of good
         int squareSize = Settings.SIZE_IN_PIXELS / 25;
         int topPadding = squareSize * 4;
         int gap = squareSize * 2;
@@ -227,29 +228,32 @@ public class Ant {
                 squareSize * ruleHalf * 2, 20, 20));
 
         drawLeftArrow(graphics, (int) (Settings.SIZE_IN_PIXELS + 3.75 * squareSize), (int) (topPadding - 0.5 * squareSize));
-        drawRightArrow(graphics, (int) (Settings.SIZE_IN_PIXELS + 3.75 * squareSize), (int) (topPadding - 0.5 * squareSize + ruleHalf * 2 * squareSize));
+        drawRightArrow(graphics, (int) (Settings.SIZE_IN_PIXELS + 3.75 * squareSize), (int) (topPadding - 0.5 * squareSize + ruleHalf * gap));
 
         for (int i = 0; i < ruleHalf; i++) {
             graphics.setColor(Colors.TEXT.getColor());
             if (i != ruleHalf - 1)
-                drawDownArrow(graphics, (int) (Settings.SIZE_IN_PIXELS + squareSize * 2.5), (int) (i * squareSize * 2 + topPadding + squareSize * 1.5));
-            graphics.drawRect(Settings.SIZE_IN_PIXELS + gap, i * gap + topPadding, squareSize, squareSize);
-            graphics.setColor(Colors.BACKGROUND.getColor());
-            graphics.fillRect(Settings.SIZE_IN_PIXELS + gap + 1, i * gap + topPadding + 1, squareSize - 1, squareSize - 1);
-            graphics.setColor(Colors.getColor(i));
-            graphics.fillRect(Settings.SIZE_IN_PIXELS + gap + 1, i * gap + topPadding + 1, squareSize - 1, squareSize - 1);
+                drawDownArrow(graphics, (int) (Settings.SIZE_IN_PIXELS + squareSize * 2.5), (int) (i * gap + topPadding + squareSize * 1.5));
+            drawFilledRect(graphics, Settings.SIZE_IN_PIXELS + gap, i * gap + topPadding, i);
         }
 
         for (int i = ruleHalf; i < rule.length; i++) {
             graphics.setColor(Colors.TEXT.getColor());
             if (i != rule.length - 1)
                 drawUpArrow(graphics, (int) (Settings.SIZE_IN_PIXELS + squareSize * 5.5), (int) ((i - ruleHalf) * squareSize * 2 + topPadding + squareSize * 1.5));
-            graphics.drawRect(Settings.SIZE_IN_PIXELS + squareSize * 5, (i - ruleHalf) * gap + topPadding, squareSize, squareSize);
-            graphics.setColor(Colors.BACKGROUND.getColor());
-            graphics.fillRect(Settings.SIZE_IN_PIXELS + squareSize * 5 + 1, (i - ruleHalf) * gap + topPadding + 1, squareSize - 1, squareSize - 1);
-            graphics.setColor(Colors.getColor(i));
-            graphics.fillRect(Settings.SIZE_IN_PIXELS + squareSize * 5 + 1, (i - ruleHalf) * gap + topPadding + 1, squareSize - 1, squareSize - 1);
+            drawFilledRect(graphics, Settings.SIZE_IN_PIXELS + squareSize * 5, (i - ruleHalf) * gap + topPadding, i);
         }
+    }
+
+    public void drawFilledRect(Graphics2D graphics, int x, int y, int i) {
+        int squareSize = Settings.SIZE_IN_PIXELS / 25;
+        int fillSquareSize = squareSize - 1;
+        graphics.drawRect(x, y, squareSize, squareSize);
+        graphics.setColor(Colors.BACKGROUND.getColor());
+        graphics.fillRect(x + 1, y + 1, fillSquareSize, fillSquareSize);
+        graphics.setColor(Colors.getColor(i));
+        graphics.fillRect(x + 1, y + 1, fillSquareSize, fillSquareSize);
+
     }
 
     public void drawDownArrow(Graphics2D graphics, int x, int y) {
