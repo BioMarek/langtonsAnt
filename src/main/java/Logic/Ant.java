@@ -225,9 +225,7 @@ public class Ant {
         drawLeftArrow(Settings.SIZE_IN_PIXELS + squareSize * 15 / 4, squareSize * 7 / 2);
         drawRightArrow(Settings.SIZE_IN_PIXELS + squareSize * 15 / 4, squareSize * 7 / 2 + ruleHalf * gap);
 
-
         for (int i = 0; i < ruleHalf; i++) {
-            graphics.setColor(Colors.TEXT.getColor());
             if (i != ruleHalf - 1)
                 drawDownArrow(Settings.SIZE_IN_PIXELS + squareSize * 5 / 2, i * gap + squareSize * 11 / 2);
             drawFilledRect(Settings.SIZE_IN_PIXELS + gap, i * gap + topPadding, i);
@@ -235,7 +233,6 @@ public class Ant {
         }
 
         for (int i = ruleHalf; i < rule.length; i++) {
-            graphics.setColor(Colors.TEXT.getColor());
             if (i != rule.length - 1)
                 drawUpArrow(Settings.SIZE_IN_PIXELS + squareSize * 11 / 2, (i - ruleHalf) * gap + squareSize * 11 / 2);
             drawFilledRect(Settings.SIZE_IN_PIXELS + squareSize * 5, (i - ruleHalf) * gap + topPadding, i);
@@ -255,7 +252,7 @@ public class Ant {
         int squareSize = Settings.SIZE_IN_PIXELS / 25;
         int fillSquareSize = squareSize - 1;
         graphics.drawRect(x, y, squareSize, squareSize);
-        graphics.setColor(Colors.BACKGROUND.getColor()); // drawing background square over white arrow rectangle
+        graphics.setColor(Colors.BACKGROUND.getColor()); // drawing background square over white rectangle with arrows
         graphics.fillRect(x + 1, y + 1, fillSquareSize, fillSquareSize);
         graphics.setColor(Colors.getColor(i));
         if (i != 0)
@@ -266,11 +263,13 @@ public class Ant {
     }
 
     public void drawDownArrow(int x, int y) {
+        graphics.setColor(Colors.TEXT.getColor());
         graphics.drawLine(x, y + 15, x - 10, y);
         graphics.drawLine(x, y + 15, x + 10, y);
     }
 
     public void drawUpArrow(int x, int y) {
+        graphics.setColor(Colors.TEXT.getColor());
         graphics.drawLine(x, y - 15, x - 10, y);
         graphics.drawLine(x, y - 15, x + 10, y);
     }
@@ -287,11 +286,7 @@ public class Ant {
 
     public void drawInnerLeftArrow(int x, int y) {
         graphics.setStroke(new BasicStroke(2f));
-        graphics.draw(new Arc2D.Double(x, y,
-                20,
-                20,
-                -90, 225,
-                Arc2D.OPEN));
+        graphics.draw(new Arc2D.Double(x, y, 20, 20, -90, 225, Arc2D.OPEN));
         graphics.drawLine(x + 1, y + 1, x + 7, y - 6);
         graphics.drawLine(x + 1, y + 2, x + 9, y + 6);
         graphics.setStroke(new BasicStroke(3f));
@@ -299,11 +294,7 @@ public class Ant {
 
     public void drawInnerRightArrow(int x, int y) {
         graphics.setStroke(new BasicStroke(2f));
-        graphics.draw(new Arc2D.Double(x, y,
-                20,
-                20,
-                45, 225,
-                Arc2D.OPEN));
+        graphics.draw(new Arc2D.Double(x, y, 20, 20, 45, 225, Arc2D.OPEN));
         graphics.drawLine(x + 19, y + 1, x + 10, y - 6);
         graphics.drawLine(x + 18, y + 1, x + 9, y + 6);
         graphics.setStroke(new BasicStroke(3f));
