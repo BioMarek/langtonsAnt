@@ -3,6 +3,8 @@ package Logic;
 import Utils.*;
 
 import java.awt.*;
+import java.awt.geom.Arc2D;
+import java.awt.geom.RoundRectangle2D;
 import java.util.Arrays;
 
 public class Ant {
@@ -15,6 +17,7 @@ public class Ant {
     public boolean stopped = false;
     private int steps = 0;
     public boolean usedTopColor = false;
+    private Graphics2D graphics;
 
     public Ant(int size, long maxMoves, String givenRule) {
         this.grid = new int[size][size];
@@ -141,24 +144,29 @@ public class Ant {
      * Draws image that can be saved as file.
      */
     public void drawImage(Graphics2D graphics) {
-        setBackground(graphics);
-        draw(graphics);
+        this.graphics = graphics;
+        setBackground();
+        draw();
     }
 
     /**
      * Draws image that can be presented as frame of animation. Contains info on the right side of image.
      */
     public void drawPresentation(Graphics2D graphics) {
-        setBackgroundPresentation(graphics);
-        draw(graphics);
-        drawInfo(graphics);
-        drawLegend(graphics);
+        this.graphics = graphics;
+        setBackgroundPresentation();
+        draw();
+
+        turnAntiAliasingOn(true);
+        drawInfo();
+        drawLegend();
+        turnAntiAliasingOn(false);
     }
 
     /**
      * Converts grid of numbers to {@link Graphics2D}.
      */
-    public void draw(Graphics2D graphics) {
+    public void draw() {
         for (int column = 0; column < squares; column++) {
             for (int row = 0; row < squares; row++) {
                 ColorsPicker.setColor(graphics, grid[column][row]);
@@ -171,10 +179,8 @@ public class Ant {
     /**
      * Sets background of {@link Graphics2D} object. Because default {@link Graphics2D} setBackground method
      * doesn't work.
-     *
-     * @param graphics {@link Graphics2D} where we want to set color.
      */
-    public void setBackground(Graphics2D graphics) {
+    public void setBackground() {
         graphics.setColor(new Color(40, 40, 40));
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
         graphics.fillRect(0, 0, sizeInPixels, sizeInPixels);
@@ -183,10 +189,8 @@ public class Ant {
     /**
      * Sets background of {@link Graphics2D} object for presentation animation the background is wider to accomodate for
      * information displayed on the right side.
-     *
-     * @param graphics {@link Graphics2D} where we want to set color.
      */
-    public void setBackgroundPresentation(Graphics2D graphics) {
+    public void setBackgroundPresentation() {
         graphics.setColor(new Color(40, 40, 40));
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
         graphics.fillRect(0, 0, sizeInPixels + Settings.SIZE_IN_PIXELS / 3, sizeInPixels);
@@ -195,77 +199,114 @@ public class Ant {
     /**
      * Displays information about ant rule being animated and number of steps ant has made.
      */
-    public void drawInfo(Graphics2D graphics) {
-        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-
-        graphics.setColor(Colors.TEXT.getColor());
+    public void drawInfo() {
         int fontUnit = Settings.SIZE_IN_PIXELS / 60;
+        graphics.setColor(Colors.TEXT.getColor());
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.2)));
         graphics.drawString("Rule:   " + new String(rule), Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 2);
         graphics.drawString("Steps: " + Util.numberFormatter(steps), Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 4);
 
-        graphics.setColor(Colors.TEXT.getColor());
         graphics.setStroke(new BasicStroke(3f));
         graphics.drawLine(Settings.SIZE_IN_PIXELS, 0, Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS);
-
-        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
-        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
     }
 
-    public void drawLegend(Graphics2D graphics) {
-        int squareSize = Settings.SIZE_IN_PIXELS / 40;
-        int topPadding = squareSize * 5;
-        for (int i = 0; i < rule.length; i++) {
-            graphics.setColor(Colors.TEXT.getColor());
-            graphics.drawRect(Settings.SIZE_IN_PIXELS + squareSize * 3, i * (squareSize * 2) + topPadding, squareSize, squareSize);
-            graphics.setColor(Colors.getColor(i));
-            graphics.fillRect(Settings.SIZE_IN_PIXELS + squareSize * 3 + 1, i * (squareSize * 2) + topPadding + 1, squareSize - 1, squareSize - 1);
-            graphics.setColor(Colors.TEXT.getColor());
-            graphics.setStroke(new BasicStroke(2.0f));
-            if (rule[i] == 'L') {
-                drawLeftArrow(graphics, Settings.SIZE_IN_PIXELS + squareSize * 3 + 3, i * (squareSize * 2) + topPadding + squareSize / 2);
-            } else
-                drawRightArrow(graphics, Settings.SIZE_IN_PIXELS + squareSize * 3 + 3, i * (squareSize * 2) + topPadding + squareSize / 2);
-            if (i < rule.length - 1)
-                drawDownArrow(graphics, Settings.SIZE_IN_PIXELS + squareSize * 3 + squareSize / 2, i * (squareSize * 2) + topPadding + squareSize + 5);
-            graphics.setStroke(new BasicStroke(3.0f));
+    public void drawLegend() {
+        int squareSize = Settings.SIZE_IN_PIXELS / 25;
+        int topPadding = squareSize * 4;
+        int gap = squareSize * 2;
+        int ruleHalf = (rule.length % 2 == 0) ? rule.length / 2 : rule.length / 2 + 1; // ensures left column is longer than right one
+
+        graphics.setColor(Colors.TEXT.getColor());
+        graphics.draw(new RoundRectangle2D.Double(Settings.SIZE_IN_PIXELS + 2.5 * squareSize,
+                squareSize * 3.5,
+                squareSize * 3,
+                squareSize * ruleHalf * 2, 20, 20));
+
+        drawLeftArrow(Settings.SIZE_IN_PIXELS + squareSize * 15 / 4, squareSize * 7 / 2);
+        drawRightArrow(Settings.SIZE_IN_PIXELS + squareSize * 15 / 4, squareSize * 7 / 2 + ruleHalf * gap);
+
+        for (int i = 0; i < ruleHalf; i++) {
+            if (i != ruleHalf - 1)
+                drawDownArrow(Settings.SIZE_IN_PIXELS + squareSize * 5 / 2, i * gap + squareSize * 11 / 2);
+            drawFilledRect(Settings.SIZE_IN_PIXELS + gap, i * gap + topPadding, i);
+            drawLegendInnerArrows(i, squareSize, 2.3);
         }
-        drawTurnArrow(graphics, Settings.SIZE_IN_PIXELS + squareSize * 5 - 5, topPadding - squareSize, Settings.SIZE_IN_PIXELS + squareSize * 5 - 5, rule.length * (squareSize * 2) + topPadding, squareSize);
+
+        for (int i = ruleHalf; i < rule.length; i++) {
+            if (i != rule.length - 1)
+                drawUpArrow(Settings.SIZE_IN_PIXELS + squareSize * 11 / 2, (i - ruleHalf) * gap + squareSize * 11 / 2);
+            drawFilledRect(Settings.SIZE_IN_PIXELS + squareSize * 5, (i - ruleHalf) * gap + topPadding, i);
+            drawLegendInnerArrows(i - ruleHalf, squareSize, 5.2);
+        }
     }
 
-    public void drawDownArrow(Graphics2D graphics, int x, int y) {
-        graphics.drawLine(x, y, x, y + 15);
-        graphics.drawLine(x, y + 15, x - 5, y + 5);
-        graphics.drawLine(x, y + 15, x + 5, y + 5);
+    public void drawLegendInnerArrows(int i, int squareSize, double xLegendColumnCoefficient) {
+        graphics.setColor(Colors.TEXT.getColor());
+        if (rule[i] == 'L') {
+            drawInnerLeftArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
+        } else
+            drawInnerRightArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
     }
 
-    public void drawRightArrow(Graphics2D graphics, int x, int y) {
-        graphics.drawLine(x, y, x + 20, y);
-        graphics.drawLine(x + 20, y, x + 10, y + 5);
-        graphics.drawLine(x + 20, y, x + 10, y - 5);
+    public void drawFilledRect(int x, int y, int i) {
+        int squareSize = Settings.SIZE_IN_PIXELS / 25;
+        int fillSquareSize = squareSize - 1;
+        graphics.drawRect(x, y, squareSize, squareSize);
+        graphics.setColor(Colors.BACKGROUND.getColor()); // drawing background square over white rectangle with arrows
+        graphics.fillRect(x + 1, y + 1, fillSquareSize, fillSquareSize);
+        graphics.setColor(Colors.getColor(i));
+        if (i != 0)
+            graphics.fillRect(x + 1, y + 1, fillSquareSize, fillSquareSize);
+        else {
+            graphics.fillPolygon(new int[]{x + 1, x - 1 + squareSize, x + 1}, new int[]{y + 1, y + 1, y - 1 + squareSize}, 3);
+        }
     }
 
-    public void drawLeftArrow(Graphics2D graphics, int x, int y) {
-        graphics.drawLine(x, y, x + 20, y);
-        graphics.drawLine(x, y, x + 10, y + 5);
-        graphics.drawLine(x, y, x + 10, y - 5);
+    public void drawDownArrow(int x, int y) {
+        graphics.setColor(Colors.TEXT.getColor());
+        graphics.drawLine(x, y + 15, x - 10, y);
+        graphics.drawLine(x, y + 15, x + 10, y);
     }
 
-    public void drawTurnArrow(Graphics2D graphics, int x1, int y1, int x2, int y2, int squareSize) {
-        graphics.setStroke(new BasicStroke(2.0f));
+    public void drawUpArrow(int x, int y) {
+        graphics.setColor(Colors.TEXT.getColor());
+        graphics.drawLine(x, y - 15, x - 10, y);
+        graphics.drawLine(x, y - 15, x + 10, y);
+    }
 
-        graphics.drawLine(x1, y1, x1 - squareSize * 4 / 3, y1);
-        graphics.drawLine(x1 - squareSize * 4 / 3, y1, x1 - squareSize * 4 / 3, y1 + squareSize);
+    public void drawRightArrow(int x, int y) {
+        graphics.drawLine(x + 20, y, x, y + 10);
+        graphics.drawLine(x + 20, y, x, y - 10);
+    }
 
-        graphics.drawLine(x1, y1, x2, y2);
-        graphics.drawLine(x1, y2 / 2, x2 + 5, y2 / 2 + 10);
-        graphics.drawLine(x1, y2 / 2, x2 - 5, y2 / 2 + 10);
+    public void drawLeftArrow(int x, int y) {
+        graphics.drawLine(x, y, x + 20, y + 10);
+        graphics.drawLine(x, y, x + 20, y - 10);
+    }
 
-        graphics.drawLine(x2, y2, x2 - squareSize * 4 / 3, y2);
-        graphics.drawLine(x2 - squareSize * 4 / 3, y2, x2 - squareSize * 4 / 3, y2 - squareSize + 2);
+    public void drawInnerLeftArrow(int x, int y) {
+        graphics.setStroke(new BasicStroke(2f));
+        graphics.draw(new Arc2D.Double(x, y, 20, 20, -90, 225, Arc2D.OPEN));
+        graphics.drawLine(x + 1, y + 1, x + 7, y - 6);
+        graphics.drawLine(x + 1, y + 2, x + 9, y + 6);
+        graphics.setStroke(new BasicStroke(3f));
+    }
 
+    public void drawInnerRightArrow(int x, int y) {
+        graphics.setStroke(new BasicStroke(2f));
+        graphics.draw(new Arc2D.Double(x, y, 20, 20, 45, 225, Arc2D.OPEN));
+        graphics.drawLine(x + 19, y + 1, x + 10, y - 6);
+        graphics.drawLine(x + 18, y + 1, x + 9, y + 6);
+        graphics.setStroke(new BasicStroke(3f));
+    }
 
-        graphics.setStroke(new BasicStroke(3.0f));
+    public void turnAntiAliasingOn(boolean on) {
+        if (on) {
+            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        } else {
+            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
+            graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+        }
     }
 }
