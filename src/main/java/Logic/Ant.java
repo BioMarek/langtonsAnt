@@ -16,6 +16,7 @@ public class Ant {
     public boolean stopped = false;
     private int steps = 0;
     public boolean usedTopColor = false;
+    private Graphics2D graphics;
 
     public Ant(int size, long maxMoves, String givenRule) {
         this.grid = new int[size][size];
@@ -142,24 +143,26 @@ public class Ant {
      * Draws image that can be saved as file.
      */
     public void drawImage(Graphics2D graphics) {
-        setBackground(graphics);
-        draw(graphics);
+        this.graphics = graphics;
+        setBackground();
+        draw();
     }
 
     /**
      * Draws image that can be presented as frame of animation. Contains info on the right side of image.
      */
     public void drawPresentation(Graphics2D graphics) {
-        setBackgroundPresentation(graphics);
-        draw(graphics);
-        drawInfo(graphics);
-        drawLegend(graphics);
+        this.graphics = graphics;
+        setBackgroundPresentation();
+        draw();
+        drawInfo();
+        drawLegend();
     }
 
     /**
      * Converts grid of numbers to {@link Graphics2D}.
      */
-    public void draw(Graphics2D graphics) {
+    public void draw() {
         for (int column = 0; column < squares; column++) {
             for (int row = 0; row < squares; row++) {
                 ColorsPicker.setColor(graphics, grid[column][row]);
@@ -172,10 +175,8 @@ public class Ant {
     /**
      * Sets background of {@link Graphics2D} object. Because default {@link Graphics2D} setBackground method
      * doesn't work.
-     *
-     * @param graphics {@link Graphics2D} where we want to set color.
      */
-    public void setBackground(Graphics2D graphics) {
+    public void setBackground() {
         graphics.setColor(new Color(40, 40, 40));
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
         graphics.fillRect(0, 0, sizeInPixels, sizeInPixels);
@@ -184,10 +185,8 @@ public class Ant {
     /**
      * Sets background of {@link Graphics2D} object for presentation animation the background is wider to accomodate for
      * information displayed on the right side.
-     *
-     * @param graphics {@link Graphics2D} where we want to set color.
      */
-    public void setBackgroundPresentation(Graphics2D graphics) {
+    public void setBackgroundPresentation() {
         graphics.setColor(new Color(40, 40, 40));
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
         graphics.fillRect(0, 0, sizeInPixels + Settings.SIZE_IN_PIXELS / 3, sizeInPixels);
@@ -196,7 +195,7 @@ public class Ant {
     /**
      * Displays information about ant rule being animated and number of steps ant has made.
      */
-    public void drawInfo(Graphics2D graphics) {
+    public void drawInfo() {
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
@@ -214,7 +213,7 @@ public class Ant {
         graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
     }
 
-    public void drawLegend(Graphics2D graphics) {
+    public void drawLegend() {
         // pretty ugly but best is enemy of good
         int squareSize = Settings.SIZE_IN_PIXELS / 25;
         int topPadding = squareSize * 4;
@@ -223,55 +222,54 @@ public class Ant {
 
         graphics.setColor(Colors.TEXT.getColor());
         graphics.draw(new RoundRectangle2D.Double(Settings.SIZE_IN_PIXELS + 2.5 * squareSize,
-                topPadding - 0.5 * squareSize,
+                squareSize * 3.5,
                 squareSize * 3,
                 squareSize * ruleHalf * 2, 20, 20));
 
-        drawLeftArrow(graphics, (int) (Settings.SIZE_IN_PIXELS + 3.75 * squareSize), (int) (topPadding - 0.5 * squareSize));
-        drawRightArrow(graphics, (int) (Settings.SIZE_IN_PIXELS + 3.75 * squareSize), (int) (topPadding - 0.5 * squareSize + ruleHalf * gap));
+        drawLeftArrow(Settings.SIZE_IN_PIXELS + squareSize * 15 / 4, squareSize * 7 / 2);
+        drawRightArrow(Settings.SIZE_IN_PIXELS + squareSize * 15 / 4, squareSize * 7 / 2 + ruleHalf * gap);
 
         for (int i = 0; i < ruleHalf; i++) {
             graphics.setColor(Colors.TEXT.getColor());
             if (i != ruleHalf - 1)
-                drawDownArrow(graphics, (int) (Settings.SIZE_IN_PIXELS + squareSize * 2.5), (int) (i * gap + topPadding + squareSize * 1.5));
-            drawFilledRect(graphics, Settings.SIZE_IN_PIXELS + gap, i * gap + topPadding, i);
+                drawDownArrow(Settings.SIZE_IN_PIXELS + squareSize * 5 / 2, i * gap + squareSize * 11 / 2);
+            drawFilledRect(Settings.SIZE_IN_PIXELS + gap, i * gap + topPadding, i);
         }
 
         for (int i = ruleHalf; i < rule.length; i++) {
             graphics.setColor(Colors.TEXT.getColor());
             if (i != rule.length - 1)
-                drawUpArrow(graphics, (int) (Settings.SIZE_IN_PIXELS + squareSize * 5.5), (int) ((i - ruleHalf) * squareSize * 2 + topPadding + squareSize * 1.5));
-            drawFilledRect(graphics, Settings.SIZE_IN_PIXELS + squareSize * 5, (i - ruleHalf) * gap + topPadding, i);
+                drawUpArrow(Settings.SIZE_IN_PIXELS + squareSize * 11 / 2, (i - ruleHalf) * squareSize * 2 + topPadding + squareSize * 3 / 2);
+            drawFilledRect(Settings.SIZE_IN_PIXELS + squareSize * 5, (i - ruleHalf) * gap + topPadding, i);
         }
     }
 
-    public void drawFilledRect(Graphics2D graphics, int x, int y, int i) {
+    public void drawFilledRect(int x, int y, int i) {
         int squareSize = Settings.SIZE_IN_PIXELS / 25;
         int fillSquareSize = squareSize - 1;
         graphics.drawRect(x, y, squareSize, squareSize);
-        graphics.setColor(Colors.BACKGROUND.getColor());
+        graphics.setColor(Colors.BACKGROUND.getColor()); // drawing background square over white arrow rectangle
         graphics.fillRect(x + 1, y + 1, fillSquareSize, fillSquareSize);
         graphics.setColor(Colors.getColor(i));
         graphics.fillRect(x + 1, y + 1, fillSquareSize, fillSquareSize);
-
     }
 
-    public void drawDownArrow(Graphics2D graphics, int x, int y) {
+    public void drawDownArrow(int x, int y) {
         graphics.drawLine(x, y + 15, x - 10, y);
         graphics.drawLine(x, y + 15, x + 10, y);
     }
 
-    public void drawUpArrow(Graphics2D graphics, int x, int y) {
+    public void drawUpArrow(int x, int y) {
         graphics.drawLine(x, y - 15, x - 10, y);
         graphics.drawLine(x, y - 15, x + 10, y);
     }
 
-    public void drawRightArrow(Graphics2D graphics, int x, int y) {
+    public void drawRightArrow(int x, int y) {
         graphics.drawLine(x + 20, y, x, y + 10);
         graphics.drawLine(x + 20, y, x, y - 10);
     }
 
-    public void drawLeftArrow(Graphics2D graphics, int x, int y) {
+    public void drawLeftArrow(int x, int y) {
         graphics.drawLine(x, y, x + 20, y + 10);
         graphics.drawLine(x, y, x + 20, y - 10);
     }
