@@ -156,8 +156,11 @@ public class Ant {
         this.graphics = graphics;
         setBackgroundPresentation();
         draw();
+
+        turnAntiAliasingOn(true);
         drawInfo();
         drawLegend();
+        turnAntiAliasingOn(false);
     }
 
     /**
@@ -198,21 +201,16 @@ public class Ant {
      */
     public void drawInfo() {
         int fontUnit = Settings.SIZE_IN_PIXELS / 60;
-
-        turnAntiAliasingOn(true);
         graphics.setColor(Colors.TEXT.getColor());
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.2)));
         graphics.drawString("Rule:   " + new String(rule), Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 2);
         graphics.drawString("Steps: " + Util.numberFormatter(steps), Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 4);
 
-        graphics.setColor(Colors.TEXT.getColor());
         graphics.setStroke(new BasicStroke(3f));
         graphics.drawLine(Settings.SIZE_IN_PIXELS, 0, Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS);
-        turnAntiAliasingOn(false);
     }
 
     public void drawLegend() {
-        // pretty ugly but best is enemy of good
         int squareSize = Settings.SIZE_IN_PIXELS / 25;
         int topPadding = squareSize * 4;
         int gap = squareSize * 2;
@@ -233,24 +231,24 @@ public class Ant {
             if (i != ruleHalf - 1)
                 drawDownArrow(Settings.SIZE_IN_PIXELS + squareSize * 5 / 2, i * gap + squareSize * 11 / 2);
             drawFilledRect(Settings.SIZE_IN_PIXELS + gap, i * gap + topPadding, i);
-            graphics.setColor(Colors.TEXT.getColor());
-            if (rule[i] == 'L') {
-                drawInnerLeftArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * 2.3), (int) (i * gap + squareSize * 2.3 + gap));
-            } else
-                drawInnerRightArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * 2.3), (int) (i * gap + squareSize * 2.3 + gap));
+            drawLegendInnerArrows(i, squareSize, 2.3);
         }
 
         for (int i = ruleHalf; i < rule.length; i++) {
             graphics.setColor(Colors.TEXT.getColor());
             if (i != rule.length - 1)
-                drawUpArrow(Settings.SIZE_IN_PIXELS + squareSize * 11 / 2, (i - ruleHalf) * squareSize * 2 + topPadding + squareSize * 3 / 2);
+                drawUpArrow(Settings.SIZE_IN_PIXELS + squareSize * 11 / 2, (i - ruleHalf) * gap + squareSize * 11 / 2);
             drawFilledRect(Settings.SIZE_IN_PIXELS + squareSize * 5, (i - ruleHalf) * gap + topPadding, i);
-            graphics.setColor(Colors.TEXT.getColor());
-            if (rule[i] == 'L') {
-                drawInnerLeftArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * 5.2), (int) ((i - ruleHalf) * gap + squareSize * 2.3 + gap));
-            } else
-                drawInnerRightArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * 5.2), (int) ((i - ruleHalf) * gap + squareSize * 2.3 + gap));
+            drawLegendInnerArrows(i - ruleHalf, squareSize, 5.2);
         }
+    }
+
+    public void drawLegendInnerArrows(int i, int squareSize, double xLegendColumnCoefficient) {
+        graphics.setColor(Colors.TEXT.getColor());
+        if (rule[i] == 'L') {
+            drawInnerLeftArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
+        } else
+            drawInnerRightArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
     }
 
     public void drawFilledRect(int x, int y, int i) {
@@ -263,9 +261,7 @@ public class Ant {
         if (i != 0)
             graphics.fillRect(x + 1, y + 1, fillSquareSize, fillSquareSize);
         else {
-            int[] xpoints = {x + 1, x - 1 + squareSize, x + 1};
-            int[] ypoints = {y + 1, y + 1, y - 1 + squareSize};
-            graphics.fillPolygon(xpoints, ypoints, 3);
+            graphics.fillPolygon(new int[]{x + 1, x - 1 + squareSize, x + 1}, new int[]{y + 1, y + 1, y - 1 + squareSize}, 3);
         }
     }
 
@@ -290,7 +286,6 @@ public class Ant {
     }
 
     public void drawInnerLeftArrow(int x, int y) {
-        turnAntiAliasingOn(true);
         graphics.setStroke(new BasicStroke(2f));
         graphics.draw(new Arc2D.Double(x, y,
                 20,
@@ -300,11 +295,9 @@ public class Ant {
         graphics.drawLine(x + 1, y + 1, x + 7, y - 6);
         graphics.drawLine(x + 1, y + 2, x + 9, y + 6);
         graphics.setStroke(new BasicStroke(3f));
-        turnAntiAliasingOn(false);
     }
 
     public void drawInnerRightArrow(int x, int y) {
-        turnAntiAliasingOn(true);
         graphics.setStroke(new BasicStroke(2f));
         graphics.draw(new Arc2D.Double(x, y,
                 20,
@@ -314,7 +307,6 @@ public class Ant {
         graphics.drawLine(x + 19, y + 1, x + 10, y - 6);
         graphics.drawLine(x + 18, y + 1, x + 9, y + 6);
         graphics.setStroke(new BasicStroke(3f));
-        turnAntiAliasingOn(false);
     }
 
     public void turnAntiAliasingOn(boolean on) {
