@@ -3,6 +3,7 @@ package Logic;
 import Utils.*;
 
 import java.awt.*;
+import java.awt.geom.Arc2D;
 import java.awt.geom.RoundRectangle2D;
 import java.util.Arrays;
 
@@ -196,11 +197,10 @@ public class Ant {
      * Displays information about ant rule being animated and number of steps ant has made.
      */
     public void drawInfo() {
-        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-
-        graphics.setColor(Colors.TEXT.getColor());
         int fontUnit = Settings.SIZE_IN_PIXELS / 60;
+
+        turnAntiAliasingOn(true);
+        graphics.setColor(Colors.TEXT.getColor());
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.2)));
         graphics.drawString("Rule:   " + new String(rule), Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 2);
         graphics.drawString("Steps: " + Util.numberFormatter(steps), Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 4);
@@ -208,9 +208,7 @@ public class Ant {
         graphics.setColor(Colors.TEXT.getColor());
         graphics.setStroke(new BasicStroke(3f));
         graphics.drawLine(Settings.SIZE_IN_PIXELS, 0, Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS);
-
-        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
-        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+        turnAntiAliasingOn(false);
     }
 
     public void drawLegend() {
@@ -229,11 +227,17 @@ public class Ant {
         drawLeftArrow(Settings.SIZE_IN_PIXELS + squareSize * 15 / 4, squareSize * 7 / 2);
         drawRightArrow(Settings.SIZE_IN_PIXELS + squareSize * 15 / 4, squareSize * 7 / 2 + ruleHalf * gap);
 
+
         for (int i = 0; i < ruleHalf; i++) {
             graphics.setColor(Colors.TEXT.getColor());
             if (i != ruleHalf - 1)
                 drawDownArrow(Settings.SIZE_IN_PIXELS + squareSize * 5 / 2, i * gap + squareSize * 11 / 2);
             drawFilledRect(Settings.SIZE_IN_PIXELS + gap, i * gap + topPadding, i);
+            graphics.setColor(Colors.TEXT.getColor());
+            if (rule[i] == 'L') {
+                drawInnerLeftArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * 2.3), (int) (i * gap + squareSize * 2.3 + gap));
+            } else
+                drawInnerRightArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * 2.3), (int) (i * gap + squareSize * 2.3 + gap));
         }
 
         for (int i = ruleHalf; i < rule.length; i++) {
@@ -241,6 +245,11 @@ public class Ant {
             if (i != rule.length - 1)
                 drawUpArrow(Settings.SIZE_IN_PIXELS + squareSize * 11 / 2, (i - ruleHalf) * squareSize * 2 + topPadding + squareSize * 3 / 2);
             drawFilledRect(Settings.SIZE_IN_PIXELS + squareSize * 5, (i - ruleHalf) * gap + topPadding, i);
+            graphics.setColor(Colors.TEXT.getColor());
+            if (rule[i] == 'L') {
+                drawInnerLeftArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * 5.2), (int) ((i - ruleHalf) * gap + squareSize * 2.3 + gap));
+            } else
+                drawInnerRightArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * 5.2), (int) ((i - ruleHalf) * gap + squareSize * 2.3 + gap));
         }
     }
 
@@ -272,5 +281,43 @@ public class Ant {
     public void drawLeftArrow(int x, int y) {
         graphics.drawLine(x, y, x + 20, y + 10);
         graphics.drawLine(x, y, x + 20, y - 10);
+    }
+
+    public void drawInnerLeftArrow(int x, int y) {
+        turnAntiAliasingOn(true);
+        graphics.setStroke(new BasicStroke(2f));
+        graphics.draw(new Arc2D.Double(x, y,
+                20,
+                20,
+                -90, 225,
+                Arc2D.OPEN));
+        graphics.drawLine(x + 1, y + 1, x + 7, y - 6);
+        graphics.drawLine(x + 1, y + 2, x + 9, y + 6);
+        graphics.setStroke(new BasicStroke(3f));
+        turnAntiAliasingOn(false);
+    }
+
+    public void drawInnerRightArrow(int x, int y) {
+        turnAntiAliasingOn(true);
+        graphics.setStroke(new BasicStroke(2f));
+        graphics.draw(new Arc2D.Double(x, y,
+                20,
+                20,
+                45, 225,
+                Arc2D.OPEN));
+        graphics.drawLine(x + 19, y + 1, x + 10, y - 6);
+        graphics.drawLine(x + 18, y + 1, x + 9, y + 6);
+        graphics.setStroke(new BasicStroke(3f));
+        turnAntiAliasingOn(false);
+    }
+
+    public void turnAntiAliasingOn(boolean on) {
+        if (on) {
+            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        } else {
+            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
+            graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+        }
     }
 }
