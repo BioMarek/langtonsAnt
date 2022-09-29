@@ -260,7 +260,13 @@ public class Ant {
         graphics.setColor(Colors.BACKGROUND.getColor()); // drawing background square over white arrow rectangle
         graphics.fillRect(x + 1, y + 1, fillSquareSize, fillSquareSize);
         graphics.setColor(Colors.getColor(i));
-        graphics.fillRect(x + 1, y + 1, fillSquareSize, fillSquareSize);
+        if (i != 0)
+            graphics.fillRect(x + 1, y + 1, fillSquareSize, fillSquareSize);
+        else {
+            int[] xpoints = {x + 1, x - 1 + squareSize, x + 1};
+            int[] ypoints = {y + 1, y + 1, y - 1 + squareSize};
+            graphics.fillPolygon(xpoints, ypoints, 3);
+        }
     }
 
     public void drawDownArrow(int x, int y) {
