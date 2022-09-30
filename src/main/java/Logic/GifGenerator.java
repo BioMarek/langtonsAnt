@@ -43,7 +43,11 @@ public class GifGenerator {
         while (!ant.stopped) {
             System.out.println("creating image " + count++);
             ant.nextMoves();
-            BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS + Settings.SIZE_IN_PIXELS / 3, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
+            BufferedImage bImg;
+            if (Settings.INFO_FOR_4_IMAGES)
+                bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
+            else
+                bImg = new BufferedImage(Settings.SIZE_IN_PIXELS + Settings.SIZE_IN_PIXELS / 3, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
             ant.drawPresentation(bImg.createGraphics());
             result.add(bImg);
         }

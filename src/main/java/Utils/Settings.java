@@ -25,7 +25,8 @@ public class Settings {
 
     // Settings for gif generation
     public static int GIF_DELAY = 100;
-    public static int GIF_WIDTH = 1333;
+    public static int GIF_WIDTH = 1333; // set to 1000 when 4 images on screen
     public static int GIF_HEIGHT = 1000;
     public static String GIF_BASE_PATH = "./gifs/";
+    public static boolean INFO_FOR_4_IMAGES = false; // image with only rule info, used when there is 4 images on screen
 }

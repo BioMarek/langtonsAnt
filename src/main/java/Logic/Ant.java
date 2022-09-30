@@ -157,10 +157,14 @@ public class Ant {
         setBackgroundPresentation();
         draw();
 
-        turnAntiAliasingOn(true);
-        drawInfo();
-        drawLegend();
-        turnAntiAliasingOn(false);
+        if (Settings.INFO_FOR_4_IMAGES)
+            drawInfoForForImages();
+        else {
+            turnAntiAliasingOn(true);
+            drawInfo();
+            drawLegend();
+            turnAntiAliasingOn(false);
+        }
     }
 
     /**
@@ -187,13 +191,16 @@ public class Ant {
     }
 
     /**
-     * Sets background of {@link Graphics2D} object for presentation animation the background is wider to accomodate for
+     * Sets background of {@link Graphics2D} object for presentation animation the background is wider to accommodate for
      * information displayed on the right side.
      */
     public void setBackgroundPresentation() {
         graphics.setColor(new Color(40, 40, 40));
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
-        graphics.fillRect(0, 0, sizeInPixels + Settings.SIZE_IN_PIXELS / 3, sizeInPixels);
+        if (Settings.INFO_FOR_4_IMAGES)
+            graphics.fillRect(0, 0, sizeInPixels, sizeInPixels);
+        else
+            graphics.fillRect(0, 0, sizeInPixels + Settings.SIZE_IN_PIXELS / 3, sizeInPixels);
     }
 
     /**
@@ -208,6 +215,16 @@ public class Ant {
 
         graphics.setStroke(new BasicStroke(3f));
         graphics.drawLine(Settings.SIZE_IN_PIXELS, 0, Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS);
+    }
+
+    /**
+     * Info is just name of rule written over grid in big font, used when there are 4 images per screen
+     */
+    public void drawInfoForForImages() {
+        int fontUnit = Settings.SIZE_IN_PIXELS / 60;
+        graphics.setColor(Colors.TEXT.getColor());
+        graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.5)));
+        graphics.drawString("Rule: " + new String(rule), fontUnit * 2, fontUnit * 3);
     }
 
     public void drawLegend() {
