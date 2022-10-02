@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class Ant {
     private final int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
     public final int[][] grid;
-    private final int size;
+    private final int size; // TODO is it same as squares?
     private final long maxMoves;
     public char[] rule;
     public Position antPosition = new Position();
@@ -20,6 +20,7 @@ public class Ant {
     private Graphics2D graphics;
 
     public Ant(int size, long maxMoves, String givenRule) {
+        size = size + Settings.IMAGE_PADDING;
         this.grid = new int[size][size];
         this.size = size;
         this.maxMoves = maxMoves;
@@ -171,9 +172,10 @@ public class Ant {
      * Converts grid of numbers to {@link Graphics2D}.
      */
     public void draw() {
+        int borderPadding = Settings.IMAGE_PADDING / 2;
         for (int column = 0; column < squares; column++) {
             for (int row = 0; row < squares; row++) {
-                ColorsPicker.setColor(graphics, grid[column][row]);
+                ColorsPicker.setColor(graphics, grid[column + borderPadding][row + borderPadding]);
                 int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
                 graphics.fillRect(column * Settings.SIZE_OF_SQUARE, row * Settings.SIZE_OF_SQUARE, sizeOfSquare, sizeOfSquare);
             }
