@@ -6,7 +6,7 @@ public class Settings {
     public static boolean SHOW_GRID = false;
     public static String RULE = "RRLLLRLLLLLLLLL";
     public static int DELAY = 10;
-    public static int SKIP = 500000;
+    public static int SKIP = 40000;
     public static long MAX_MOVES = 50_000_000;
     public static int SIZE_IN_PIXELS = 1000;
     public static int SIZE_OF_SQUARE = 1;
@@ -24,12 +24,12 @@ public class Settings {
     public static int THREADS = 6;
 
     // Settings for gif generation
-    public static int GIF_DELAY = 100;
+    public static int GIF_DELAY = 35; // 35ms delay for video
     public static int GIF_WIDTH = 1333; // set to 1000 when 4 images on screen
     public static int GIF_HEIGHT = 1000;
     public static String GIF_BASE_PATH = "./gifs/";
     public static boolean INFO_FOR_4_IMAGES = false; // image with only rule info, used when there is 4 images on screen
     // use to show only center of image and fill entire screen with even if some part already reached the border,
     // use 500 for thumbnail image
-    public static int IMAGE_PADDING = 0;
+    public static int IMAGE_PADDING = 300;
 }
