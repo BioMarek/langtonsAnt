@@ -13,6 +13,6 @@ public class Main {
 //        imageParallelWorker.drawAllRulesInParallel();
 
         GifGenerator gifGenerator = new GifGenerator();
-        gifGenerator.createGif();
+        gifGenerator.generateInteresting();
     }
 }

@@ -11,5 +11,7 @@ do
   ffmpeg -i $i.gif -vb 100M -vcodec libx264 -preset veryslow -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" $i.mp4
 done
 
+# ffmpeg -framerate 30 -pattern_type glob -i '*.png' -vcodec libx264 out.mp4
+
 
 

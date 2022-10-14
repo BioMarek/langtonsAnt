@@ -31,5 +31,5 @@ public class Settings {
     public static boolean INFO_FOR_4_IMAGES = false; // image with only rule info, used when there is 4 images on screen
     // use to show only center of image and fill entire screen with even if some part already reached the border,
     // use 500 for thumbnail image
-    public static int IMAGE_PADDING = 300;
+    public static int IMAGE_PADDING = 250;
 }

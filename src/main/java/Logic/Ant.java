@@ -15,7 +15,7 @@ public class Ant {
     public char[] rule;
     public Position antPosition = new Position();
     public boolean stopped = false;
-    private int steps = 0;
+    public int steps = 0;
     public boolean usedTopColor = false;
     private Graphics2D graphics;
 

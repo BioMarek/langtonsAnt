@@ -1,10 +1,13 @@
 package Logic;
 
 import Utils.Settings;
+import Utils.Util;
 import com.squareup.gifencoder.GifEncoder;
 import com.squareup.gifencoder.ImageOptions;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,6 +57,30 @@ public class GifGenerator {
         return result;
     }
 
+    private List<BufferedImage> saveImages() {
+        new File("gifs/" + Settings.RULE).mkdirs();
+        Ant ant = new Ant(Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE, Settings.MAX_MOVES, Settings.RULE);
+        List<BufferedImage> result = new ArrayList<>();
+        int count = 0;
+
+        while (!ant.stopped) {
+            System.out.println("creating image " + count++);
+            ant.nextMoves();
+            BufferedImage bImg;
+            if (Settings.INFO_FOR_4_IMAGES)
+                bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
+            else
+                bImg = new BufferedImage(Settings.SIZE_IN_PIXELS + Settings.SIZE_IN_PIXELS / 3, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
+            ant.drawPresentation(bImg.createGraphics());
+            try {
+                ImageIO.write(bImg, "png", new File("gifs/" + Settings.RULE + "/" + String.format("%03d", count) + "_" + Settings.RULE + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
     /**
      * Convert BufferedImage into RGB pixel array
      */
@@ -65,5 +92,19 @@ public class GifGenerator {
             }
         }
         return rgbArray;
+    }
+
+    public void generateInteresting() {
+        for (String rule : Util.getInteresting()) {
+            System.out.println("working on " + rule);
+            Settings.RULE = rule;
+            Ant ant = new Ant(Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE, Settings.MAX_MOVES, Settings.RULE);
+            ant.allMoves();
+
+            Settings.SKIP = ant.steps / 240;
+            System.out.println("max steps: " + ant.steps + " skip: " + Settings.SKIP);
+
+            saveImages();
+        }
     }
 }
