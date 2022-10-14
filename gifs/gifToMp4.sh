@@ -1,17 +1,13 @@
 #! /bin/bash
 #
-# This script finds all files with *.gif extension in current directory and converts them to files with *.mp4 extension.
+# This script goes trough all folders and creates *mp4 from images in the folder
 
-# find finds all files with ".gif" extension, -type f means file not directory
-# tr replaces ".gif" with "\n" and "/" with nothing
-for i in $(find . -type f -name "*.gif" | tr ".gif" "\n" | tr "/" " ")
+# -maxdepth 1 current directory won't be listed
+for i in $(find . -maxdepth 1 -type d | tr "./" " ")
 do
-  echo $i
-  # creates *.mp4
-  ffmpeg -i $i.gif -vb 100M -vcodec libx264 -preset veryslow -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" $i.mp4
+  rm $i.mp4  # removes previous video
+  cd $i
+  ffmpeg -framerate 30 -pattern_type glob -i '*.png' -vcodec libx264 $i.mp4
+  cd ..
 done
-
-# ffmpeg -framerate 30 -pattern_type glob -i '*.png' -vcodec libx264 out.mp4
-
-
 
