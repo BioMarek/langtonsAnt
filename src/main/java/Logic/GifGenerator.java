@@ -57,10 +57,9 @@ public class GifGenerator {
         return result;
     }
 
-    private List<BufferedImage> saveImages() {
+    private void saveImages() {
         new File("gifs/" + Settings.RULE).mkdirs();
         Ant ant = new Ant(Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE, Settings.MAX_MOVES, Settings.RULE);
-        List<BufferedImage> result = new ArrayList<>();
         int count = 0;
 
         while (!ant.stopped) {
@@ -78,7 +77,6 @@ public class GifGenerator {
                 e.printStackTrace();
             }
         }
-        return result;
     }
 
     /**
