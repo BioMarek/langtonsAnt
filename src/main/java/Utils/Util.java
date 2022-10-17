@@ -79,43 +79,21 @@ public class Util {
 
     public static List<String> getHighways() {
         List<String> interesting = new ArrayList<>();
-        interesting.add("LRLRLLLLRLRLRRL");
-        interesting.add("RRRRRLRRRRLLL");
-        interesting.add("RRRRRLRRRRLLLL");
-        interesting.add("LLLLLLRRLLRLLL");
-        interesting.add("LLRLLRLRRRLLLLL");
-        interesting.add("LRLRLLLRLLLLL");
-        interesting.add("LRLRRLRLLRRLLL");
-        interesting.add("LRLRRLRLRRLLLLL");
-        interesting.add("LRRRLLLRRRLLLLL");
-        interesting.add("LRRRLRRRLLLLRRL");
-        interesting.add("LRRRLRRRLRLLLL");
+        interesting.add("LLRLRLLLLRLRLRRL");
+        interesting.add("LRRRRRLRRRRLLL");
+        interesting.add("LRRRRRLRRRRLLLL");
+        interesting.add("LLLLLLLRRLLRLLL");
+        interesting.add("LLLRLLRLRRRLLLLL");
+        interesting.add("LLRLRLLLRLLLLL");
+        interesting.add("LLRLRRLRLRRLLLLL");
+        interesting.add("LLRRRLLLRRRLLLLL");
+        interesting.add("LLRRRLRRRLLLLRRL");
+        interesting.add("LLRRRLRRRLRLLLL");
         interesting.add("RRLRLLLLRLLRLLL");
         interesting.add("RRLRLLLRLLRRRRLL");
-        interesting.add("LLLRLLLRRLRLLL");
+        interesting.add("LLLLRLLLRRLRLLL");
         interesting.add("RRLLLRRLRRRRLLLL");
         interesting.add("RRLRLLRRRRLL");
-        interesting.add("LLLLLLRLRLLLRL");
-        interesting.add("LLLLLLRRLLRRLRLL");
-        interesting.add("LLLLLLRRLRRRRRLL");
-        interesting.add("LLLLRLLLRRLRRLLL");
-        interesting.add("LLLLRRLRLLLL");
-        interesting.add("LLLRLLLLRLRLRL");
-        interesting.add("LLLRLLRRLRLLLL");
-        interesting.add("LLLRLRRLRLRRLLLL");
-        interesting.add("LLRLRRLLLL");
-        interesting.add("LLRLRRLLRLLLLLL");
-        interesting.add("LLRLRRRLRRLLLL");
-        interesting.add("LRLRRLRLLLRLRLRL");
-        interesting.add("RLLRLRRRRLLLLLRL");
-        interesting.add("RLRLRLRLLLLLLLRL");
-        interesting.add("RLRLRLRRLLLLRLL");
-        interesting.add("RRLLLRLRRLRRRL");
-        interesting.add("RRLLLRRRRRLRLLL");
-        interesting.add("RRLRLLRRRRLLRRRL");
-        interesting.add("RRRLLLRRLLLRLLL");
-        interesting.add("RRRLLLRRLLLRLRLL");
-        interesting.add("RRRLRRLLRLRRRLL");
 
         return interesting;
     }

@@ -1,7 +1,6 @@
 package Logic;
 
 import Utils.Settings;
-import Utils.Util;
 import com.squareup.gifencoder.GifEncoder;
 import com.squareup.gifencoder.ImageOptions;
 
@@ -92,14 +91,14 @@ public class GifGenerator {
         return rgbArray;
     }
 
-    public void generateInteresting() {
-        for (String rule : Util.getInteresting()) {
+    public void generateInteresting(List<String> interesting) {
+        for (String rule : interesting) {
             System.out.println("working on " + rule);
             Settings.RULE = rule;
             Ant ant = new Ant(Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE, Settings.MAX_MOVES, Settings.RULE);
             ant.allMoves();
 
-            Settings.SKIP = ant.steps / 240;
+            Settings.SKIP = ant.steps / Settings.GIF_NUM_IMAGES;
             System.out.println("max steps: " + ant.steps + " skip: " + Settings.SKIP);
 
             saveImages();
