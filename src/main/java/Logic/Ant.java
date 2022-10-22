@@ -57,6 +57,8 @@ public class Ant {
 
     public void nextMoves() {
         int countDown = Settings.SKIP;
+        if (steps > Settings.SLOWDOWN_STEPS)
+            countDown = (int) (countDown * Settings.SLOWDOWN_MODIFIER);
         while (countDown > 0 && !stopped) {
             nextMove();
             countDown--;

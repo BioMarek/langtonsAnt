@@ -33,4 +33,7 @@ public class Settings {
     // use to show only center of image and fill entire screen with even if some part already reached the border,
     // use 500 for thumbnail image
     public static int IMAGE_PADDING = 0;
+
+    public static int SLOWDOWN_STEPS = 50_000_000;
+    public static double SLOWDOWN_MODIFIER = 1.0;
 }

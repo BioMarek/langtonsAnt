@@ -1,5 +1,6 @@
 package Logic;
 
+import Utils.Rule;
 import Utils.Settings;
 import com.squareup.gifencoder.GifEncoder;
 import com.squareup.gifencoder.ImageOptions;
@@ -43,15 +44,7 @@ public class GifGenerator {
         int count = 0;
 
         while (!ant.stopped) {
-            System.out.println("creating image " + count++);
-            ant.nextMoves();
-            BufferedImage bImg;
-            if (Settings.INFO_FOR_4_IMAGES)
-                bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
-            else
-                bImg = new BufferedImage(Settings.SIZE_IN_PIXELS + Settings.SIZE_IN_PIXELS / 3, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
-            ant.drawPresentation(bImg.createGraphics());
-            result.add(bImg);
+            result.add(createBufferedImage(ant, count++));
         }
         return result;
     }
@@ -62,20 +55,25 @@ public class GifGenerator {
         int count = 0;
 
         while (!ant.stopped) {
-            System.out.println("creating image " + count++);
-            ant.nextMoves();
-            BufferedImage bImg;
-            if (Settings.INFO_FOR_4_IMAGES)
-                bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
-            else
-                bImg = new BufferedImage(Settings.SIZE_IN_PIXELS + Settings.SIZE_IN_PIXELS / 3, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
-            ant.drawPresentation(bImg.createGraphics());
             try {
-                ImageIO.write(bImg, "png", new File("gifs/" + Settings.RULE + "/" + String.format("%03d", count) + "_" + Settings.RULE + ".png"));
+                ImageIO.write(createBufferedImage(ant, count), "png", new File("gifs/" + Settings.RULE + "/" + String.format("%03d", count) + "_" + Settings.RULE + ".png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            count++;
         }
+    }
+
+    private BufferedImage createBufferedImage(Ant ant, int count) {
+        System.out.println("creating image " + count);
+        ant.nextMoves();
+        BufferedImage bImg;
+        if (Settings.INFO_FOR_4_IMAGES)
+            bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
+        else
+            bImg = new BufferedImage(Settings.SIZE_IN_PIXELS + Settings.SIZE_IN_PIXELS / 3, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
+        ant.drawPresentation(bImg.createGraphics());
+        return bImg;
     }
 
     /**
@@ -91,10 +89,12 @@ public class GifGenerator {
         return rgbArray;
     }
 
-    public void generateInteresting(List<String> interesting) {
-        for (String rule : interesting) {
-            System.out.println("working on " + rule);
-            Settings.RULE = rule;
+    public void generateInteresting(List<Rule> interesting) {
+        for (Rule rule : interesting) {
+            System.out.println("working on " + rule.rule);
+            Settings.RULE = rule.rule;
+            Settings.SLOWDOWN_STEPS = rule.slowdownSteps;
+            Settings.SLOWDOWN_MODIFIER = rule.slowdownModifier;
             Ant ant = new Ant(Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE, Settings.MAX_MOVES, Settings.RULE);
             ant.allMoves();
 
