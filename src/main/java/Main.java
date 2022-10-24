@@ -14,6 +14,7 @@ public class Main {
 //        imageParallelWorker.drawAllRulesInParallel();
 
         GifGenerator gifGenerator = new GifGenerator();
-        gifGenerator.generateInteresting(Util.getHighways());
+//        gifGenerator.generateInteresting(Util.getInteresting());
+        gifGenerator.createMP4();
     }
 }

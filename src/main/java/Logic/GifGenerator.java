@@ -2,8 +2,16 @@ package Logic;
 
 import Utils.Rule;
 import Utils.Settings;
+import Utils.Util;
 import com.squareup.gifencoder.GifEncoder;
 import com.squareup.gifencoder.ImageOptions;
+import org.jcodec.api.SequenceEncoder;
+import org.jcodec.api.awt.AWTSequenceEncoder;
+import org.jcodec.common.Codec;
+import org.jcodec.common.Format;
+import org.jcodec.common.io.NIOUtils;
+import org.jcodec.common.model.Rational;
+import org.jcodec.scale.AWTUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -13,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 
 public class GifGenerator {
 
@@ -33,6 +42,21 @@ public class GifGenerator {
             }
             encoder.finishEncoding();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createMP4() {
+        List<BufferedImage> bufferedImages = createImages();
+        try {
+            SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File("gifs/" + Settings.RULE + ".mp4")),
+                    Rational.R(30, 1), Format.MOV, Codec.PNG, null);
+            for (int i = 0; i < bufferedImages.size(); i++) {
+                System.out.println("encoding image " + i);
+                encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(bufferedImages.get(i)));
+            }
+            encoder.finish();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,7 +95,9 @@ public class GifGenerator {
         if (Settings.INFO_FOR_4_IMAGES)
             bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
         else
-            bImg = new BufferedImage(Settings.SIZE_IN_PIXELS + Settings.SIZE_IN_PIXELS / 3, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
+            bImg = new BufferedImage(Util.sizeDivisibleByTwo(Settings.SIZE_IN_PIXELS + Settings.SIZE_IN_PIXELS / 3),
+                    Settings.SIZE_IN_PIXELS,
+                    BufferedImage.TYPE_INT_RGB);
         ant.drawPresentation(bImg.createGraphics());
         return bImg;
     }
