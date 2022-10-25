@@ -1,7 +1,5 @@
-import Logic.GifGenerator;
-import Threads.ImageParallelWorker;
+import Logic.VideoGenerator;
 import Utils.Util;
-import Windows.GridFrame;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,7 +11,7 @@ public class Main {
 //        ImageParallelWorker imageParallelWorker = new ImageParallelWorker();
 //        imageParallelWorker.drawAllRulesInParallel();
 
-        GifGenerator gifGenerator = new GifGenerator();
-        gifGenerator.generateInteresting(Util.getHighways());
+        VideoGenerator videoGenerator = new VideoGenerator();
+        videoGenerator.generateInteresting(Util.getInteresting());
     }
 }

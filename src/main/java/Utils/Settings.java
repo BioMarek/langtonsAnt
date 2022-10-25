@@ -34,6 +34,6 @@ public class Settings {
     // use 500 for thumbnail image
     public static int IMAGE_PADDING = 0;
 
-    public static int SLOWDOWN_STEPS = 50_000_000;
+    public static int SLOWDOWN_STEPS = 100_000_000;
     public static double SLOWDOWN_MODIFIER = 1.0;
 }
