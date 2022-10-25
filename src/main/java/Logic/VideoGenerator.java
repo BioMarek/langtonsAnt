@@ -6,7 +6,6 @@ import Utils.Util;
 import com.squareup.gifencoder.GifEncoder;
 import com.squareup.gifencoder.ImageOptions;
 import org.jcodec.api.SequenceEncoder;
-import org.jcodec.api.awt.AWTSequenceEncoder;
 import org.jcodec.common.Codec;
 import org.jcodec.common.Format;
 import org.jcodec.common.io.NIOUtils;
@@ -23,29 +22,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public class GifGenerator {
-
-    /**
-     * Creates images of rule according to Settings and from these images creates gif.
-     */
-    public void createGif() {
-        try (FileOutputStream outputStream = new FileOutputStream(Settings.GIF_BASE_PATH + Settings.RULE + ".gif")) {
-            GifEncoder encoder = new GifEncoder(outputStream, Settings.GIF_WIDTH, Settings.GIF_HEIGHT, 1);
-            ImageOptions options = new ImageOptions();
-            options.setDelay(Settings.GIF_DELAY, TimeUnit.MILLISECONDS);
-
-            List<BufferedImage> bufferedImages = createImages();
-
-            for (int i = 0; i < bufferedImages.size(); i++) {
-                System.out.println("rendering image " + i);
-                encoder.addImage(convertImageToArray(bufferedImages.get(i)), options);
-            }
-            encoder.finishEncoding();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+public class VideoGenerator {
 
     public void createMP4() {
         List<BufferedImage> bufferedImages = createImages();
@@ -73,21 +50,6 @@ public class GifGenerator {
         return result;
     }
 
-    private void saveImages() {
-        new File("gifs/" + Settings.RULE).mkdirs();
-        Ant ant = new Ant(Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE, Settings.MAX_MOVES, Settings.RULE);
-        int count = 0;
-
-        while (!ant.stopped) {
-            try {
-                ImageIO.write(createBufferedImage(ant, count), "png", new File("gifs/" + Settings.RULE + "/" + String.format("%03d", count) + "_" + Settings.RULE + ".png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            count++;
-        }
-    }
-
     private BufferedImage createBufferedImage(Ant ant, int count) {
         System.out.println("creating image " + count);
         ant.nextMoves();
@@ -103,18 +65,9 @@ public class GifGenerator {
     }
 
     /**
-     * Convert BufferedImage into RGB pixel array
+     * Generates *.mp4 for interesting rules which are passed as argument.
+     * @param interesting list of {@link Rule} for which we want to create videos
      */
-    private int[][] convertImageToArray(BufferedImage bufferedImage) {
-        int[][] rgbArray = new int[bufferedImage.getHeight()][bufferedImage.getWidth()];
-        for (int i = 0; i < bufferedImage.getHeight(); i++) {
-            for (int j = 0; j < bufferedImage.getWidth(); j++) {
-                rgbArray[i][j] = bufferedImage.getRGB(j, i);
-            }
-        }
-        return rgbArray;
-    }
-
     public void generateInteresting(List<Rule> interesting) {
         for (Rule rule : interesting) {
             System.out.println("working on " + rule.rule);
@@ -127,7 +80,55 @@ public class GifGenerator {
             Settings.SKIP = ant.steps / Settings.GIF_NUM_IMAGES;
             System.out.println("max steps: " + ant.steps + " skip: " + Settings.SKIP);
 
-            saveImages();
+            createMP4();
+        }
+    }
+
+    /**
+     * Creates images of rule according to Settings and from these images creates gif.
+     */
+    public void createGif() {
+        try (FileOutputStream outputStream = new FileOutputStream(Settings.GIF_BASE_PATH + Settings.RULE + ".gif")) {
+            GifEncoder encoder = new GifEncoder(outputStream, Settings.GIF_WIDTH, Settings.GIF_HEIGHT, 1);
+            ImageOptions options = new ImageOptions();
+            options.setDelay(Settings.GIF_DELAY, TimeUnit.MILLISECONDS);
+
+            List<BufferedImage> bufferedImages = createImages();
+
+            for (int i = 0; i < bufferedImages.size(); i++) {
+                System.out.println("rendering image " + i);
+                encoder.addImage(convertImageToArray(bufferedImages.get(i)), options);
+            }
+            encoder.finishEncoding();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Convert BufferedImage into RGB pixel array
+     */
+    private int[][] convertImageToArray(BufferedImage bufferedImage) {
+        int[][] rgbArray = new int[bufferedImage.getHeight()][bufferedImage.getWidth()];
+        for (int i = 0; i < bufferedImage.getHeight(); i++) {
+            for (int j = 0; j < bufferedImage.getWidth(); j++) {
+                rgbArray[i][j] = bufferedImage.getRGB(j, i);
+            }
+        }
+        return rgbArray;
+    }
+
+    private void saveImages() {
+        new File("gifs/" + Settings.RULE).mkdirs();
+        List<BufferedImage> bufferedImages = createImages();
+
+        for (int i = 0; i < bufferedImages.size(); i++) {
+            try {
+                ImageIO.write(bufferedImages.get(i), "png", new File("gifs/" + Settings.RULE + "/" + String.format("%03d", i) + "_" + Settings.RULE + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
