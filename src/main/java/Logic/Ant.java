@@ -250,20 +250,21 @@ public class Ant {
             if (i != ruleHalf - 1)
                 drawDownArrow(Settings.SIZE_IN_PIXELS + squareSize * 5 / 2, i * gap + squareSize * 11 / 2);
             drawFilledRect(Settings.SIZE_IN_PIXELS + gap, i * gap + topPadding, i);
-            drawLegendInnerArrows(i, squareSize, 2.3);
+            drawLegendInnerArrows(i, squareSize, 2.3, false);
         }
 
         for (int i = ruleHalf; i < rule.length; i++) {
             if (i != rule.length - 1)
                 drawUpArrow(Settings.SIZE_IN_PIXELS + squareSize * 11 / 2, (i - ruleHalf) * gap + squareSize * 11 / 2);
             drawFilledRect(Settings.SIZE_IN_PIXELS + squareSize * 5, (i - ruleHalf) * gap + topPadding, i);
-            drawLegendInnerArrows(i - ruleHalf, squareSize, 5.2);
+            drawLegendInnerArrows(i - ruleHalf, squareSize, 5.2, true);
         }
     }
 
-    public void drawLegendInnerArrows(int i, int squareSize, double xLegendColumnCoefficient) {
+    public void drawLegendInnerArrows(int i, int squareSize, double xLegendColumnCoefficient, boolean reverse) {
         graphics.setColor(Colors.TEXT.getColor());
-        if (rule[i] == 'L') {
+        char ruleArrow = reverse ? rule[rule.length - i - 1] : rule[i];
+        if (ruleArrow == 'L') {
             drawInnerLeftArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
         } else
             drawInnerRightArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
