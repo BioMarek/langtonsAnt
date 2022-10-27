@@ -25,14 +25,14 @@ public class Settings {
 
     // Settings for gif generation
     public static int GIF_DELAY = 35; // 35ms delay for video
-    public static int GIF_NUM_IMAGES = 180; // number of images in video, we expect 30 images per second, 240 image, 180 highway
+    public static int GIF_NUM_IMAGES = 240; // number of images in video, we expect 30 images per second, 240 image, 180 highway
     public static int GIF_WIDTH = 1333; // set to 1000 when 4 images on screen
     public static int GIF_HEIGHT = 1000;
     public static String GIF_BASE_PATH = "./gifs/";
     public static boolean INFO_FOR_4_IMAGES = false; // image with only rule info, used when there is 4 images on screen
     // use to show only center of image and fill entire screen with even if some part already reached the border,
     // use 500 for thumbnail image
-    public static int IMAGE_PADDING = 0;
+    public static int IMAGE_PADDING = 200;
 
     public static int SLOWDOWN_STEPS = 100_000_000;
     public static double SLOWDOWN_MODIFIER = 1.0;
