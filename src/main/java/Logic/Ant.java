@@ -175,9 +175,9 @@ public class Ant {
      */
     public void draw() {
         int borderPadding = Settings.IMAGE_PADDING / 2;
-        for (int column = 0; column < squares; column++) {
-            for (int row = 0; row < squares; row++) {
-                ColorsPicker.setColor(graphics, grid[column + borderPadding][row + borderPadding]);
+        for (int row = 0; row < squares; row++) {
+            for (int column = 0; column < squares; column++) {
+                ColorsPicker.setColor(graphics, grid[row + borderPadding][column + borderPadding]);
                 int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
                 graphics.fillRect(column * Settings.SIZE_OF_SQUARE, row * Settings.SIZE_OF_SQUARE, sizeOfSquare, sizeOfSquare);
             }

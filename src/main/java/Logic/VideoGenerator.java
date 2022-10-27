@@ -119,7 +119,7 @@ public class VideoGenerator {
         return rgbArray;
     }
 
-    private void saveImages() {
+    public void saveImages() {
         new File("gifs/" + Settings.RULE).mkdirs();
         List<BufferedImage> bufferedImages = createImages();
 
