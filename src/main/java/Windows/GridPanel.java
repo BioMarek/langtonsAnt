@@ -1,21 +1,32 @@
 package Windows;
 
 import Logic.Ant;
+import Utils.Position;
 import Utils.Settings;
+import Utils.Util;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GridPanel extends JPanel implements ActionListener {
     private final Ant ant;
     private Timer timer;
 
+    private int currentCycle = 0;
+    private BufferedImage antImage = null;
 
     public GridPanel() {
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
@@ -27,7 +38,15 @@ public class GridPanel extends JPanel implements ActionListener {
         this.setFocusable(true);
 
         int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
+
         ant = new Ant(squares, Settings.MAX_MOVES, Settings.RULE);
+
+        try {
+            File imageFile = new File("gifs/ant.png");
+            antImage = ImageIO.read(imageFile);
+        } catch (IOException ignored) {
+        }
+
         startAnimation();
     }
 
@@ -36,11 +55,16 @@ public class GridPanel extends JPanel implements ActionListener {
         super.paintComponent(g);
         Graphics2D graphics = (Graphics2D) g;
         ant.drawPresentation(graphics);
+        drawExplanation(graphics, getRotationAngles(0, 90));
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        ant.nextMoves();
+        if (Settings.EXPLANATION_ANIMATION) {
+            if (currentCycle++ % Settings.FRAMES_BETWEEN_STEPS == 0) // we have time for ant move animation
+                ant.nextMoves();
+        } else
+            ant.nextMoves();
         repaint();
 
         if (ant.stopped) {
@@ -71,4 +95,28 @@ public class GridPanel extends JPanel implements ActionListener {
             e.printStackTrace();
         }
     }
+
+    private void drawExplanation(Graphics2D graphics, double angle) {
+        double locationX = antImage.getWidth() / 2;
+        double locationY = antImage.getHeight() / 2;
+        AffineTransform tx = AffineTransform.getRotateInstance(angle, locationX, locationY);
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+
+        Position position = Util.explanationAnimationPositions(ant.steps);
+        graphics.drawImage(antImage, op, position.row, position.column);
+    }
+
+    private double getRotationAngles(int degreesFrom, int degreesTo) {
+        List<Double> result = new ArrayList<>();
+        double radiansFrom = Math.toRadians(degreesFrom);
+        double radiansTo = Math.toRadians(degreesTo);
+
+        double step = (radiansTo - radiansFrom) / Settings.FRAMES_BETWEEN_STEPS;
+        for (int i = 0; i < Settings.FRAMES_BETWEEN_STEPS; i++) {
+            result.add(i * step);
+        }
+
+        return result.get(currentCycle);
+    }
+
 }

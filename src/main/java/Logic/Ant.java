@@ -4,8 +4,10 @@ import Utils.*;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 import java.awt.geom.RoundRectangle2D;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +24,6 @@ public class Ant {
     public int steps = 0;
     public boolean usedTopColor = false;
     private Graphics2D graphics;
-    private BufferedImage antImage = null;
 
     public Ant(int size, long maxMoves, String givenRule) {
         size = size + Settings.IMAGE_PADDING;
@@ -37,12 +38,6 @@ public class Ant {
         antPosition.row = size / 2;
         antPosition.column = size / 2;
         antPosition.direction = Direction.NORTH;
-
-        try {
-            File imageFile = new File("gifs/ant.png");
-            antImage = ImageIO.read(imageFile);
-        } catch (IOException ignored) {
-        }
 
         parseRule(givenRule);
     }
@@ -170,7 +165,6 @@ public class Ant {
         this.graphics = graphics;
         setBackgroundPresentation();
         draw();
-        drawExplanation();
 
         if (Settings.INFO_FOR_4_IMAGES)
             drawInfoForForImages();
@@ -194,10 +188,6 @@ public class Ant {
                 graphics.fillRect(column * Settings.SIZE_OF_SQUARE, row * Settings.SIZE_OF_SQUARE, sizeOfSquare, sizeOfSquare);
             }
         }
-    }
-
-    public void drawExplanation() {
-        graphics.drawImage(antImage, null, 500, 500);
     }
 
     /**
