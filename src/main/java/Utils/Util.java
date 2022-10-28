@@ -45,7 +45,7 @@ public class Util {
         interesting.add(new Rule("LLLLLRLLLRRLLLLL", 0, 1));
         interesting.add(new Rule("LLLRLLRRRLLLLL", 0, 1));
         interesting.add(new Rule("LLRLRRLLRLLLLLL", 0, 1));
-        interesting.add(new Rule("LLRLRRLRLRRRRRRL", 0, 1)); // more steps?
+        interesting.add(new Rule("LLRLRRLRLRRRRRRL", 0, 1));
         interesting.add(new Rule("LRLRRLLLLLLLRL", 0, 1));
         interesting.add(new Rule("LRRLRLLLLLRRLL", 0, 1));
         interesting.add(new Rule("LRRRLLLLLLRRLL", 0, 1));
@@ -53,17 +53,17 @@ public class Util {
         interesting.add(new Rule("RLLLLLRRRLLLLRRL", 0, 1));
         interesting.add(new Rule("RLLLLRRRLLL", 0, 1));
         interesting.add(new Rule("RRLLLLRLRLRRLLL", 0, 1));
-        interesting.add(new Rule("RRLRLRRRRRLRRLL", 38_000_000, 0.1)); // column moved by 250
-        interesting.add(new Rule("RRRRRRRRLLLLLLLL", 0, 1)); // 15 frames per sec, 150 images, 2 pixel size
+//        interesting.add(new Rule("RRLRLRRRRRLRRLL", 38_000_000, 0.1)); // column moved by 250
+//        interesting.add(new Rule("RRRRRRRRLLLLLLLL", 0, 1)); // 15 frames per sec, 150 images, 2 pixel size
         interesting.add(new Rule("LLLLRRRRRLLRRRRL", 0, 1));
         interesting.add(new Rule("LLLRRRRRRLLL", 0, 1));
         interesting.add(new Rule("LLRLLLRRRRRRRLLL", 0, 1));
         interesting.add(new Rule("LLRLRLRRRRRRL", 0, 1));
         interesting.add(new Rule("LLRLRRLLLLLRLRL", 0, 1));
         interesting.add(new Rule("LRLRLLRLLLRRLLLL", 0, 1));
-        interesting.add(new Rule("LRRLLLRLRLRRLLL", 0, 1)); // 300 frames
+//        interesting.add(new Rule("LRRLLLRLRLRRLLL", 0, 1)); // 300 frames
         interesting.add(new Rule("LRRRRLLLRLRRRRL", 0, 1));
-        interesting.add(new Rule("LRRRRLRRLLRRRRRL", 0, 1)); // IMAGE_PADDING 100
+//        interesting.add(new Rule("LRRRRLRRLLRRRRRL", 0, 1)); // IMAGE_PADDING 100
         interesting.add(new Rule("RLLLLLLLRRL", 0, 1));
         interesting.add(new Rule("RRLLLLRLLLLRRLLL", 0, 1));
         interesting.add(new Rule("RRLLLLRRLRLLLLLL", 0, 1));
@@ -72,7 +72,7 @@ public class Util {
         interesting.add(new Rule("RRLRLLLLRLLLLLLL", 0, 1));
         interesting.add(new Rule("RRLRLLLRRRRRLL", 0, 1));
         interesting.add(new Rule("RRRLRRLLRLRRRLL", 0, 1));
-        interesting.add(new Rule("LLRLLLRRRRRLLRLL", 0, 1)); // IMAGE_PADDING 500
+//        interesting.add(new Rule("LLRLLLRRRRRLLRLL", 0, 1)); // IMAGE_PADDING 500
         interesting.add(new Rule("LLRRLLRRRRLLRRLL", 0, 1));
         interesting.add(new Rule("LRRLLLRLRRRRRRL", 0, 1));
         interesting.add(new Rule("LRRLLRRLLLRRRLLL", 0, 1));

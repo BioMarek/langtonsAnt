@@ -4,12 +4,12 @@ public class Settings {
     // General
     public static int ALPHA = 200;
     public static boolean SHOW_GRID = false;
-    public static String RULE = "RRLLLRLLLLLLLLL";
-    public static int DELAY = 10;
-    public static int SKIP = 40000;
-    public static long MAX_MOVES = 50_000_000;
+    public static String RULE = "RL";
+    public static int DELAY = 500; // animation frame delay
+    public static int SKIP = 1;
+    public static long MAX_MOVES = 300;
     public static int SIZE_IN_PIXELS = 1000;
-    public static int SIZE_OF_SQUARE = 1;
+    public static int SIZE_OF_SQUARE = 40;
 
 //    public static long MAX_MOVES = 50_000_000;
 //    public static int SIZE_IN_PIXELS = 2000;
