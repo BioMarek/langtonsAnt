@@ -35,7 +35,7 @@ public class Util {
         return result.reverse().toString().trim();
     }
 
-    public static int sizeDivisibleByTwo(int originalSize){
+    public static int sizeDivisibleByTwo(int originalSize) {
         return (originalSize % 2 == 0) ? originalSize : originalSize + 1;
     }
 
@@ -128,12 +128,24 @@ public class Util {
         return interesting;
     }
 
-    public static Position explanationAnimationPositions(int i){
+    public static Position explanationAnimationPositions(int i) {
         List<Position> positions = new ArrayList<>();
-        positions.add(new Position(460, 460, Direction.NORTH));
-        positions.add(new Position(500, 460, Direction.EAST));
-        positions.add(new Position(500, 500, Direction.SOUTH));
-        positions.add(new Position(460, 500, Direction.WEST));
+
+        positions.add(new Position(0, 0, Direction.RIGHT));
+        positions.add(new Position(40, 0, Direction.RIGHT));
+        positions.add(new Position(0, 40, Direction.RIGHT));
+        positions.add(new Position(-40, 0, Direction.RIGHT));
+        positions.add(new Position(0, -40, Direction.LEFT));
+
+        positions.add(new Position(-40, 0, Direction.RIGHT));
+        positions.add(new Position(0, -40, Direction.RIGHT));
+        positions.add(new Position(40, 0, Direction.RIGHT));
+
+        positions.add(new Position(0, 40, Direction.RIGHT));
+        positions.add(new Position(-40, 0, Direction.LEFT));
+
+        positions.add(new Position(0, 0, Direction.RIGHT));
+        positions.add(new Position(0, 0, Direction.RIGHT));
 
         return (i < positions.size()) ? positions.get(i) : new Position(460, 460);
     }

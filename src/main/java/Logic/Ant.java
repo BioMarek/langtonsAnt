@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class Ant {
     private final int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
     public final int[][] grid;
-    private final int size; // TODO is it same as squares?
+    private final int size;
     private final long maxMoves;
     public char[] rule;
     public Position antPosition = new Position();

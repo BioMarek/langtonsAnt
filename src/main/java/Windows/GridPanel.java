@@ -1,6 +1,7 @@
 package Windows;
 
 import Logic.Ant;
+import Utils.Direction;
 import Utils.Position;
 import Utils.Settings;
 import Utils.Util;
@@ -24,9 +25,13 @@ import java.util.List;
 public class GridPanel extends JPanel implements ActionListener {
     private final Ant ant;
     private Timer timer;
-
     private int currentCycle = 0;
     private BufferedImage antImage = null;
+
+    private double rotateAngle = (Math.toRadians(90) - Math.toRadians(0)) / Settings.FRAMES_BETWEEN_STEPS;
+    private double startAngle = Math.toRadians(0);
+    private double startX = 450;
+    private double startY = 450;
 
     public GridPanel() {
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
@@ -55,13 +60,13 @@ public class GridPanel extends JPanel implements ActionListener {
         super.paintComponent(g);
         Graphics2D graphics = (Graphics2D) g;
         ant.drawPresentation(graphics);
-        drawExplanation(graphics, getRotationAngles(0, 90));
+        drawExplanation(graphics);
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if (Settings.EXPLANATION_ANIMATION) {
-            if (currentCycle++ % Settings.FRAMES_BETWEEN_STEPS == 0) // we have time for ant move animation
+            if (++currentCycle % Settings.FRAMES_BETWEEN_STEPS == 0) // we have time for ant move animation
                 ant.nextMoves();
         } else
             ant.nextMoves();
@@ -96,14 +101,22 @@ public class GridPanel extends JPanel implements ActionListener {
         }
     }
 
-    private void drawExplanation(Graphics2D graphics, double angle) {
-        double locationX = antImage.getWidth() / 2;
-        double locationY = antImage.getHeight() / 2;
-        AffineTransform tx = AffineTransform.getRotateInstance(angle, locationX, locationY);
+    private void drawExplanation(Graphics2D graphics) {
+        double locationX = antImage.getWidth() / 2.0;
+        double locationY = antImage.getHeight() / 2.0;
+        AffineTransform tx = AffineTransform.getRotateInstance(startAngle, locationX, locationY);
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 
         Position position = Util.explanationAnimationPositions(ant.steps);
-        graphics.drawImage(antImage, op, position.row, position.column);
+        System.out.println(ant.steps + " " + position);
+        startX = startX + position.row * 1.0 / Settings.FRAMES_BETWEEN_STEPS;
+        startY = startY + position.column * 1.0 / Settings.FRAMES_BETWEEN_STEPS;
+        System.out.println(startX + " " + startY);
+        graphics.drawImage(antImage, op, (int) startX, (int) startY);
+        if (position.direction == Direction.RIGHT)
+            startAngle += rotateAngle;
+        else
+            startAngle -= rotateAngle;
     }
 
     private double getRotationAngles(int degreesFrom, int degreesTo) {
