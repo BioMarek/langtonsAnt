@@ -4,7 +4,6 @@ import Logic.Ant;
 import Utils.Direction;
 import Utils.Position;
 import Utils.Settings;
-import Utils.Util;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -19,6 +18,8 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GridPanel extends JPanel implements ActionListener {
     private final Ant ant;
@@ -106,14 +107,12 @@ public class GridPanel extends JPanel implements ActionListener {
         AffineTransform tx = AffineTransform.getRotateInstance(currentAngle, locationX, locationY);
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 
-        Position position = Util.explanationAnimationPositions(ant.steps);
-
         graphics.drawImage(antImage, op, (int) startX, (int) startY);
+        Position position = explanationAnimationPositions(ant.steps);
 
         if (currentCycle < 15) {
             startX = startX + position.row * 2.0 / Settings.FRAMES_BETWEEN_STEPS;
-            startY = startY + position.column * 2. / Settings.FRAMES_BETWEEN_STEPS;
-
+            startY = startY + position.column * 2.0 / Settings.FRAMES_BETWEEN_STEPS;
         }
         if (currentCycle >= 15) {
             if (position.direction == Direction.RIGHT)
@@ -121,5 +120,25 @@ public class GridPanel extends JPanel implements ActionListener {
             if (position.direction == Direction.LEFT)
                 currentAngle -= rotateAngle;
         }
+    }
+
+    private Position explanationAnimationPositions(int i) {
+        List<Position> positions = new ArrayList<>();
+
+        positions.add(new Position(0, 0, Direction.RIGHT));
+        positions.add(new Position(80, 0, Direction.RIGHT));
+        positions.add(new Position(0, 80, Direction.RIGHT));
+        positions.add(new Position(-80, 0, Direction.RIGHT));
+
+        positions.add(new Position(0, -80, Direction.LEFT));
+        positions.add(new Position(-80, 0, Direction.RIGHT));
+        positions.add(new Position(0, -80, Direction.RIGHT));
+        positions.add(new Position(80, 0, Direction.RIGHT));
+
+        positions.add(new Position(0, 80, Direction.RIGHT));
+        positions.add(new Position(-80, 0, Direction.LEFT));
+        positions.add(new Position(0, 80, Direction.RIGHT));
+
+        return (i < positions.size()) ? positions.get(i) : new Position(0, 0, Direction.RIGHT);
     }
 }

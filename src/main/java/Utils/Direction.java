@@ -1,5 +1,5 @@
 package Utils;
 
 public enum Direction {
-    NORTH, SOUTH, EAST, WEST, RIGHT, LEFT, NONE
+    NORTH, SOUTH, EAST, WEST, RIGHT, LEFT
 }
