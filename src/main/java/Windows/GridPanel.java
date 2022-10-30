@@ -26,8 +26,8 @@ public class GridPanel extends JPanel implements ActionListener {
     private int currentCycle = 0;
     private BufferedImage antImage = null;
     private double rotateAngle = Math.toRadians(6);
-    private double currentAngle = Math.toRadians(90);
-    private double startX = 485;
+    private double currentAngle = Math.toRadians(0);
+    private double startX = 490;
     private double startY = 475;
 
     public GridPanel() {
@@ -107,7 +107,6 @@ public class GridPanel extends JPanel implements ActionListener {
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 
         Position position = Util.explanationAnimationPositions(ant.steps);
-        System.out.println(currentCycle + " " + ant.steps + " " + position);
 
         graphics.drawImage(antImage, op, (int) startX, (int) startY);
 
@@ -122,6 +121,5 @@ public class GridPanel extends JPanel implements ActionListener {
             if (position.direction == Direction.LEFT)
                 currentAngle -= rotateAngle;
         }
-        System.out.println(startX + " " + startY + " " + Math.toDegrees(currentAngle));
     }
 }

@@ -9,7 +9,7 @@ public class Settings {
     public static int SKIP = 1;
     public static long MAX_MOVES = 300;
     public static int SIZE_IN_PIXELS = 1000;
-    public static int SIZE_OF_SQUARE = 40;
+    public static int SIZE_OF_SQUARE = 80;
 
 //    public static long MAX_MOVES = 50_000_000;
 //    public static int SIZE_IN_PIXELS = 2000;
