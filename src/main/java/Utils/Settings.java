@@ -3,13 +3,13 @@ package Utils;
 public class Settings {
     // General
     public static int ALPHA = 200;
-    public static boolean SHOW_GRID = false;
-    public static String RULE = "RRLLLRLLLLLLLLL";
-    public static int DELAY = 10;
-    public static int SKIP = 40000;
-    public static long MAX_MOVES = 50_000_000;
+    public static boolean SHOW_GRID = true;
+    public static String RULE = "RL";
+    public static int DELAY = 100; // animation frame delay
+    public static int SKIP = 1;
+    public static long MAX_MOVES = 300;
     public static int SIZE_IN_PIXELS = 1000;
-    public static int SIZE_OF_SQUARE = 1;
+    public static int SIZE_OF_SQUARE = 80;
 
 //    public static long MAX_MOVES = 50_000_000;
 //    public static int SIZE_IN_PIXELS = 2000;
@@ -33,7 +33,8 @@ public class Settings {
     // use to show only center of image and fill entire screen with even if some part already reached the border,
     // use 500 for thumbnail image
     public static int IMAGE_PADDING = 200;
-
     public static int SLOWDOWN_STEPS = 100_000_000;
     public static double SLOWDOWN_MODIFIER = 1.0;
+    public static boolean EXPLANATION_ANIMATION = true; // true only when we are doing explanation animation, (more frames for animation)
+    public static int FRAMES_BETWEEN_STEPS = 30; // for explanation animation frames
 }

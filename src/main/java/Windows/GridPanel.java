@@ -1,21 +1,35 @@
 package Windows;
 
 import Logic.Ant;
+import Utils.Direction;
+import Utils.Position;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GridPanel extends JPanel implements ActionListener {
     private final Ant ant;
     private Timer timer;
-
+    private int currentCycle = 0;
+    private BufferedImage antImage = null;
+    private double rotateAngle = Math.toRadians(6);
+    private double currentAngle = Math.toRadians(0);
+    private double startX = 490;
+    private double startY = 475;
 
     public GridPanel() {
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
@@ -27,7 +41,15 @@ public class GridPanel extends JPanel implements ActionListener {
         this.setFocusable(true);
 
         int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
+
         ant = new Ant(squares, Settings.MAX_MOVES, Settings.RULE);
+
+        try {
+            File imageFile = new File("gifs/ant.png");
+            antImage = ImageIO.read(imageFile);
+        } catch (IOException ignored) {
+        }
+
         startAnimation();
     }
 
@@ -36,11 +58,18 @@ public class GridPanel extends JPanel implements ActionListener {
         super.paintComponent(g);
         Graphics2D graphics = (Graphics2D) g;
         ant.drawPresentation(graphics);
+        drawExplanation(graphics);
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        ant.nextMoves();
+        if (Settings.EXPLANATION_ANIMATION) {
+            if (++currentCycle % Settings.FRAMES_BETWEEN_STEPS == 0) // we have time for ant move animation
+                ant.nextMoves();
+            if (currentCycle == 30)
+                currentCycle = 0;
+        } else
+            ant.nextMoves();
         repaint();
 
         if (ant.stopped) {
@@ -70,5 +99,46 @@ public class GridPanel extends JPanel implements ActionListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void drawExplanation(Graphics2D graphics) {
+        double locationX = antImage.getWidth() / 2.0;
+        double locationY = antImage.getHeight() / 2.0;
+        AffineTransform tx = AffineTransform.getRotateInstance(currentAngle, locationX, locationY);
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+
+        graphics.drawImage(antImage, op, (int) startX, (int) startY);
+        Position position = explanationAnimationPositions(ant.steps);
+
+        if (currentCycle < 15) {
+            startX = startX + position.row * 2.0 / Settings.FRAMES_BETWEEN_STEPS;
+            startY = startY + position.column * 2.0 / Settings.FRAMES_BETWEEN_STEPS;
+        }
+        if (currentCycle >= 15) {
+            if (position.direction == Direction.RIGHT)
+                currentAngle += rotateAngle;
+            if (position.direction == Direction.LEFT)
+                currentAngle -= rotateAngle;
+        }
+    }
+
+    private Position explanationAnimationPositions(int i) {
+        List<Position> positions = new ArrayList<>();
+
+        positions.add(new Position(0, 0, Direction.RIGHT));
+        positions.add(new Position(80, 0, Direction.RIGHT));
+        positions.add(new Position(0, 80, Direction.RIGHT));
+        positions.add(new Position(-80, 0, Direction.RIGHT));
+
+        positions.add(new Position(0, -80, Direction.LEFT));
+        positions.add(new Position(-80, 0, Direction.RIGHT));
+        positions.add(new Position(0, -80, Direction.RIGHT));
+        positions.add(new Position(80, 0, Direction.RIGHT));
+
+        positions.add(new Position(0, 80, Direction.RIGHT));
+        positions.add(new Position(-80, 0, Direction.LEFT));
+        positions.add(new Position(0, 80, Direction.RIGHT));
+
+        return (i < positions.size()) ? positions.get(i) : new Position(0, 0, Direction.RIGHT);
     }
 }
