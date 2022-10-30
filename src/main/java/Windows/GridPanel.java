@@ -19,19 +19,16 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GridPanel extends JPanel implements ActionListener {
     private final Ant ant;
     private Timer timer;
     private int currentCycle = 0;
     private BufferedImage antImage = null;
-
-    private double rotateAngle = (Math.toRadians(90) - Math.toRadians(0)) / Settings.FRAMES_BETWEEN_STEPS;
-    private double startAngle = Math.toRadians(0);
-    private double startX = 450;
-    private double startY = 450;
+    private double rotateAngle = Math.toRadians(6);
+    private double currentAngle = Math.toRadians(90);
+    private double startX = 485;
+    private double startY = 475;
 
     public GridPanel() {
         int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
@@ -68,6 +65,8 @@ public class GridPanel extends JPanel implements ActionListener {
         if (Settings.EXPLANATION_ANIMATION) {
             if (++currentCycle % Settings.FRAMES_BETWEEN_STEPS == 0) // we have time for ant move animation
                 ant.nextMoves();
+            if (currentCycle == 30)
+                currentCycle = 0;
         } else
             ant.nextMoves();
         repaint();
@@ -104,32 +103,25 @@ public class GridPanel extends JPanel implements ActionListener {
     private void drawExplanation(Graphics2D graphics) {
         double locationX = antImage.getWidth() / 2.0;
         double locationY = antImage.getHeight() / 2.0;
-        AffineTransform tx = AffineTransform.getRotateInstance(startAngle, locationX, locationY);
-        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+        AffineTransform tx = AffineTransform.getRotateInstance(currentAngle, locationX, locationY);
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 
         Position position = Util.explanationAnimationPositions(ant.steps);
-        System.out.println(ant.steps + " " + position);
-        startX = startX + position.row * 1.0 / Settings.FRAMES_BETWEEN_STEPS;
-        startY = startY + position.column * 1.0 / Settings.FRAMES_BETWEEN_STEPS;
-        System.out.println(startX + " " + startY);
+        System.out.println(currentCycle + " " + ant.steps + " " + position);
+
         graphics.drawImage(antImage, op, (int) startX, (int) startY);
-        if (position.direction == Direction.RIGHT)
-            startAngle += rotateAngle;
-        else
-            startAngle -= rotateAngle;
-    }
 
-    private double getRotationAngles(int degreesFrom, int degreesTo) {
-        List<Double> result = new ArrayList<>();
-        double radiansFrom = Math.toRadians(degreesFrom);
-        double radiansTo = Math.toRadians(degreesTo);
+        if (currentCycle < 15) {
+            startX = startX + position.row * 2.0 / Settings.FRAMES_BETWEEN_STEPS;
+            startY = startY + position.column * 2. / Settings.FRAMES_BETWEEN_STEPS;
 
-        double step = (radiansTo - radiansFrom) / Settings.FRAMES_BETWEEN_STEPS;
-        for (int i = 0; i < Settings.FRAMES_BETWEEN_STEPS; i++) {
-            result.add(i * step);
         }
-
-        return result.get(currentCycle);
+        if (currentCycle >= 15) {
+            if (position.direction == Direction.RIGHT)
+                currentAngle += rotateAngle;
+            if (position.direction == Direction.LEFT)
+                currentAngle -= rotateAngle;
+        }
+        System.out.println(startX + " " + startY + " " + Math.toDegrees(currentAngle));
     }
-
 }

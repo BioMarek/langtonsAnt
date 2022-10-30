@@ -131,7 +131,7 @@ public class Util {
     public static Position explanationAnimationPositions(int i) {
         List<Position> positions = new ArrayList<>();
 
-        positions.add(new Position(0, 0, Direction.RIGHT));
+        positions.add(new Position(0, 0, Direction.NONE));
         positions.add(new Position(40, 0, Direction.RIGHT));
         positions.add(new Position(0, 40, Direction.RIGHT));
         positions.add(new Position(-40, 0, Direction.RIGHT));
@@ -147,6 +147,6 @@ public class Util {
         positions.add(new Position(0, 0, Direction.RIGHT));
         positions.add(new Position(0, 0, Direction.RIGHT));
 
-        return (i < positions.size()) ? positions.get(i) : new Position(460, 460);
+        return (i < positions.size()) ? positions.get(i) : new Position(0, 0, Direction.NONE);
     }
 }

@@ -3,7 +3,7 @@ package Utils;
 public class Settings {
     // General
     public static int ALPHA = 200;
-    public static boolean SHOW_GRID = false;
+    public static boolean SHOW_GRID = true;
     public static String RULE = "RL";
     public static int DELAY = 100; // animation frame delay
     public static int SKIP = 1;
