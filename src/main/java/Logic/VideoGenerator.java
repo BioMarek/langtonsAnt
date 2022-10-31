@@ -33,6 +33,10 @@ public class VideoGenerator {
                 System.out.println("encoding image " + i);
                 encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(bufferedImages.get(i)));
             }
+            for (int i = 0; i < Settings.END_WAIT_FRAMES; i++) {
+                System.out.println("encoding image " + (bufferedImages.size() - 1));
+                encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(bufferedImages.get(bufferedImages.size() - 1)));
+            }
             encoder.finish();
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,14 +70,13 @@ public class VideoGenerator {
 
     /**
      * Generates *.mp4 for interesting rules which are passed as argument.
+     *
      * @param interesting list of {@link Rule} for which we want to create videos
      */
     public void generateInteresting(List<Rule> interesting) {
         for (Rule rule : interesting) {
             System.out.println("working on " + rule.rule);
-            Settings.RULE = rule.rule;
-            Settings.SLOWDOWN_STEPS = rule.slowdownSteps;
-            Settings.SLOWDOWN_MODIFIER = rule.slowdownModifier;
+            rule.setVariables();
             Ant ant = new Ant(Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE, Settings.MAX_MOVES, Settings.RULE);
             ant.allMoves();
 

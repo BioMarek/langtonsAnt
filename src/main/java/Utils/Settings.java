@@ -3,13 +3,13 @@ package Utils;
 public class Settings {
     // General
     public static int ALPHA = 200;
-    public static boolean SHOW_GRID = true;
+    public static boolean SHOW_GRID = false;
     public static String RULE = "RL";
     public static int DELAY = 100; // animation frame delay
-    public static int SKIP = 1;
-    public static long MAX_MOVES = 300;
+    public static int SKIP = 40000;
+    public static long MAX_MOVES = 50_000_000;
     public static int SIZE_IN_PIXELS = 1000;
-    public static int SIZE_OF_SQUARE = 80;
+    public static int SIZE_OF_SQUARE = 1;
 
 //    public static long MAX_MOVES = 50_000_000;
 //    public static int SIZE_IN_PIXELS = 2000;
@@ -25,16 +25,46 @@ public class Settings {
 
     // Settings for gif generation
     public static int GIF_DELAY = 35; // 35ms delay for video
-    public static int GIF_NUM_IMAGES = 240; // number of images in video, we expect 30 images per second, 240 image, 180 highway
+    public static int GIF_NUM_IMAGES = 180; // number of images in video, we expect 30 images per second, 240 image, 180 highway
     public static int GIF_WIDTH = 1333; // set to 1000 when 4 images on screen
     public static int GIF_HEIGHT = 1000;
     public static String GIF_BASE_PATH = "./gifs/";
     public static boolean INFO_FOR_4_IMAGES = false; // image with only rule info, used when there is 4 images on screen
     // use to show only center of image and fill entire screen with even if some part already reached the border,
     // use 500 for thumbnail image
-    public static int IMAGE_PADDING = 200;
+    public static int IMAGE_PADDING = 0;
     public static int SLOWDOWN_STEPS = 100_000_000;
     public static double SLOWDOWN_MODIFIER = 1.0;
-    public static boolean EXPLANATION_ANIMATION = true; // true only when we are doing explanation animation, (more frames for animation)
+    public static boolean EXPLANATION_ANIMATION = false; // true only when we are doing explanation animation, (more frames for animation)
     public static int FRAMES_BETWEEN_STEPS = 30; // for explanation animation frames
+    public static int END_WAIT_FRAMES = 30;
+
+    public static void showExplanationSettings() {
+        Settings.SHOW_GRID = true;
+        Settings.RULE = "RL";
+        Settings.SKIP = 1;
+        Settings.MAX_MOVES = 300;
+        Settings.SIZE_OF_SQUARE = 80;
+        Settings.EXPLANATION_ANIMATION = true;
+    }
+
+    public static void generateHighwaysSettings() {
+        Settings.SHOW_GRID = false;
+        Settings.RULE = "RL";
+        Settings.SKIP = 40000;
+        Settings.MAX_MOVES = 50_000_000;
+        Settings.SIZE_OF_SQUARE = 1;
+        Settings.EXPLANATION_ANIMATION = false;
+        Settings.GIF_NUM_IMAGES = 180;
+    }
+
+    public static void generateInterestingSettings() {
+        Settings.SHOW_GRID = false;
+        Settings.RULE = "RL";
+        Settings.SKIP = 40000;
+        Settings.MAX_MOVES = 50_000_000;
+        Settings.SIZE_OF_SQUARE = 1;
+        Settings.EXPLANATION_ANIMATION = false;
+        Settings.GIF_NUM_IMAGES = 240;
+    }
 }
