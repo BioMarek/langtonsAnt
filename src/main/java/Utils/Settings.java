@@ -25,7 +25,7 @@ public class Settings {
 
     // Settings for gif and mp4 generation
     public static int GIF_DELAY = 35; // 35ms delay for video
-    public static  int VIDEO_FPS = 30; // frames per second for mp4
+    public static int VIDEO_FPS = 30; // frames per second for mp4
     public static int VIDEO_NUM_IMAGES = 180; // number of images in video, we expect 30 images per second, 240 image, 180 highway
     public static int GIF_WIDTH = 1333; // set to 1000 when 4 images on screen
     public static int GIF_HEIGHT = 1000;

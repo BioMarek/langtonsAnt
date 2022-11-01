@@ -1,6 +1,6 @@
 package Utils;
 
-import java.awt.*;
+import java.awt.Color;
 
 public enum Colors {
     GREY(new Color(128, 128, 128, Settings.ALPHA)),
