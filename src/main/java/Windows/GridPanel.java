@@ -1,6 +1,7 @@
 package Windows;
 
 import Logic.Ant;
+import Logic.AntGraphic;
 import Utils.Direction;
 import Utils.Position;
 import Utils.Settings;
@@ -57,7 +58,8 @@ public class GridPanel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D graphics = (Graphics2D) g;
-        ant.drawPresentation(graphics);
+        AntGraphic antGraphic = new AntGraphic(ant);
+        antGraphic.drawPresentation(graphics);
         drawExplanation(graphics);
     }
 

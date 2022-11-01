@@ -64,7 +64,8 @@ public class VideoGenerator {
             bImg = new BufferedImage(Util.sizeDivisibleByTwo(Settings.SIZE_IN_PIXELS + Settings.SIZE_IN_PIXELS / 3),
                     Settings.SIZE_IN_PIXELS,
                     BufferedImage.TYPE_INT_RGB);
-        ant.drawPresentation(bImg.createGraphics());
+        AntGraphic antGraphic = new AntGraphic(ant);
+        antGraphic.drawPresentation(bImg.createGraphics());
         return bImg;
     }
 
