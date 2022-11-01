@@ -1,40 +1,30 @@
 package Logic;
 
-import Utils.*;
+import Utils.Direction;
+import Utils.Position;
+import Utils.Settings;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Arc2D;
-import java.awt.geom.RoundRectangle2D;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 
 public class Ant {
     public final int[][] grid;
-    private final int size;
-    private final long maxMoves;
+    private final int gridDimension;
     public char[] rule;
     public Position antPosition = new Position();
     public boolean stopped = false;
     public int steps = 0;
     public boolean usedTopColor = false;
 
-    public Ant(int size, long maxMoves, String givenRule) {
-        size = size + Settings.IMAGE_PADDING;
-        this.grid = new int[size][size];
-        this.size = size;
-        this.maxMoves = maxMoves;
+    public Ant(String givenRule) {
+        this.gridDimension = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE + Settings.IMAGE_PADDING;
+        this.grid = new int[gridDimension][gridDimension];
 
-        for (int i = 0; i < size; i++) {
-            grid[i] = new int[size];
+        for (int i = 0; i < gridDimension; i++) {
+            grid[i] = new int[gridDimension];
             Arrays.fill(grid[i], -1);
         }
-        antPosition.row = size / 2;
-        antPosition.column = size / 2;
+        antPosition.row = gridDimension / 2;
+        antPosition.column = gridDimension / 2;
         antPosition.direction = Direction.NORTH;
 
         parseRule(givenRule);
@@ -52,7 +42,7 @@ public class Ant {
     }
 
     public void allMoves() {
-        long countDown = maxMoves;
+        long countDown = Settings.MAX_MOVES;
         while (countDown >= 0 && !stopped) {
             nextMove();
             countDown--;
@@ -87,7 +77,7 @@ public class Ant {
         grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] + 1) % rule.length;
 
         steps++;
-        stopped = steps > maxMoves;
+        stopped = steps > Settings.MAX_MOVES;
         checkBorderCollision();
     }
 
@@ -143,7 +133,7 @@ public class Ant {
      * Checks whether ant moved out of grid bounds.
      */
     public void checkBorderCollision() {
-        if (antPosition.row < 0 || antPosition.column < 0 || antPosition.row == size || antPosition.column == size)
+        if (antPosition.row < 0 || antPosition.column < 0 || antPosition.row == gridDimension || antPosition.column == gridDimension)
             stopped = true;
     }
 }

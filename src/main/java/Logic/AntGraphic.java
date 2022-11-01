@@ -6,7 +6,6 @@ import Utils.Settings;
 import Utils.Util;
 
 import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -68,7 +67,7 @@ public class AntGraphic {
      * doesn't work.
      */
     public void setBackground() {
-        graphics.setColor(new Color(40, 40, 40));
+        graphics.setColor(Colors.BACKGROUND.getColor());
         int sizeInPixels = Util.sizeDivisibleByTwo(Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS);
         graphics.fillRect(0, 0, sizeInPixels, sizeInPixels);
     }
@@ -78,7 +77,7 @@ public class AntGraphic {
      * information displayed on the right side.
      */
     public void setBackgroundPresentation() {
-        graphics.setColor(new Color(40, 40, 40));
+        graphics.setColor(Colors.BACKGROUND.getColor());
         int sizeInPixels = Util.sizeDivisibleByTwo(Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS);
         if (Settings.INFO_FOR_4_IMAGES)
             graphics.fillRect(0, 0, sizeInPixels, sizeInPixels);

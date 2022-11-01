@@ -41,9 +41,7 @@ public class GridPanel extends JPanel implements ActionListener {
             this.setPreferredSize(new Dimension(sizeInPixels + Settings.SIZE_IN_PIXELS / 3, sizeInPixels));
         this.setFocusable(true);
 
-        int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
-
-        ant = new Ant(squares, Settings.MAX_MOVES, Settings.RULE);
+        ant = new Ant(Settings.RULE);
 
         try {
             File imageFile = new File("gifs/ant.png");

@@ -36,7 +36,7 @@ public class ImageRunnable implements Runnable {
     private void saveImage(String rule) {
         System.out.println(Thread.currentThread().getName() + " working on: " + rule);
 
-        Ant ant = new Ant(Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE, Settings.MAX_MOVES, rule);
+        Ant ant = new Ant(rule);
         AntGraphic antGraphic = new AntGraphic(ant);
         ant.allMoves();
         if (ant.usedTopColor) {
