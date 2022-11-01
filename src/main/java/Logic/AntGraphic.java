@@ -12,6 +12,9 @@ import java.awt.RenderingHints;
 import java.awt.geom.Arc2D;
 import java.awt.geom.RoundRectangle2D;
 
+/**
+ * Creates graphic for ant grid and handles legend.
+ */
 public class AntGraphic {
     private Graphics2D graphics;
     public final int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
@@ -109,6 +112,9 @@ public class AntGraphic {
         graphics.drawString("Rule: " + new String(ant.rule), fontUnit * 2, fontUnit * 3);
     }
 
+    /**
+     * Draws legend on the right side of the window. works only for SIZE_IN_PIXELS = 1000 because arrows in legend.
+     */
     public void drawLegend() {
         int squareSize = Settings.SIZE_IN_PIXELS / 25;
         int topPadding = squareSize * 4;
@@ -200,8 +206,8 @@ public class AntGraphic {
         graphics.setStroke(new BasicStroke(3f));
     }
 
-    public void turnAntiAliasingOn(boolean on) {
-        if (on) {
+    public void turnAntiAliasingOn(boolean isOn) {
+        if (isOn) {
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         } else {

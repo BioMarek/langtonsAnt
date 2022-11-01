@@ -6,7 +6,7 @@ import Utils.Settings;
 import java.util.List;
 
 /**
- * Divides list of generated rules into sublists and evaluates in parallel them in {@link ImageRunnable}.
+ * Divides list of generated rules into sub-lists and evaluates in parallel them in {@link ImageRunnable}.
  */
 public class ImageParallelWorker {
     public void drawAllRulesInParallel() {
