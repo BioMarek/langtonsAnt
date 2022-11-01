@@ -28,12 +28,12 @@ public class VideoGenerator {
         List<BufferedImage> bufferedImages = createImages();
         try {
             SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File("gifs/" + Settings.RULE + ".mp4")),
-                    Rational.R(30, 1), Format.MOV, Codec.PNG, null);
+                    Rational.R(Settings.VIDEO_FPS, 1), Format.MOV, Codec.PNG, null);
             for (int i = 0; i < bufferedImages.size(); i++) {
                 System.out.println("encoding image " + i);
                 encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(bufferedImages.get(i)));
             }
-            for (int i = 0; i < Settings.END_WAIT_FRAMES; i++) {
+            for (int i = 0; i < Settings.VIDEO_REPEAT_LAST_FRAME; i++) {
                 System.out.println("encoding image " + (bufferedImages.size() - 1));
                 encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(bufferedImages.get(bufferedImages.size() - 1)));
             }
@@ -80,7 +80,7 @@ public class VideoGenerator {
             Ant ant = new Ant(Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE, Settings.MAX_MOVES, Settings.RULE);
             ant.allMoves();
 
-            Settings.SKIP = ant.steps / Settings.GIF_NUM_IMAGES;
+            Settings.SKIP = ant.steps / Settings.VIDEO_NUM_IMAGES;
             System.out.println("max steps: " + ant.steps + " skip: " + Settings.SKIP);
 
             createMP4();
