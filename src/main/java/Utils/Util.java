@@ -32,6 +32,11 @@ public class Util {
         return result.reverse().toString().trim();
     }
 
+    /**
+     * Ensures that size is divisible by two by increasing odd sizes by one. Required for mpr4 encoding
+     * @param originalSize size of image in pixels
+     * @return either originalSize or originalSize + 1 whichever is even
+     */
     public static int sizeDivisibleByTwo(int originalSize) {
         return (originalSize % 2 == 0) ? originalSize : originalSize + 1;
     }

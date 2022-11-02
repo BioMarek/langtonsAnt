@@ -72,6 +72,7 @@ public class Rule {
     }
 
     public static List<Rule> getHighways() {
+        // should be tuned
         Settings.generateHighwaysSettings();
         List<Rule> interesting = new ArrayList<>();
         interesting.add(new Rule("LLRLRLLLLRLRLRRL", 1_500_000, 0.1, 1));
@@ -93,7 +94,7 @@ public class Rule {
     }
 
     public static List<Rule> getFour() {
-        Settings.generateInterestingSettings();
+        Settings.generateFourSettings();
         List<Rule> interesting = new ArrayList<>();
         interesting.add(new Rule("LRRLLLRRRLLLL", 0, 1, 1));
         interesting.add(new Rule("LRRLLLRRRLLLLL", 0, 1, 1));
@@ -102,8 +103,8 @@ public class Rule {
 
         interesting.add(new Rule("LRRRRRLRRRRLLL", 0, 1, 1));
         interesting.add(new Rule("LRRRRRLRRRRLLLL", 0, 1, 1));
-        interesting.add(new Rule("LRRRRRLRRRRLLLLL", 0, 1, 1)); //
-        interesting.add(new Rule("LRRRRRLRRRRLLLLLL", 0, 1, 1)); //
+        interesting.add(new Rule("LRRRRRLRRRRLLLLL", 0, 1, 1));
+        interesting.add(new Rule("LRRRRRLRRRRLLLLLL", 0, 1, 1));
 
         interesting.add(new Rule("RRLLLRLLLRRRLLL", 0, 1, 1));
         interesting.add(new Rule("RRLLLRLLLRRRLRL", 0, 1, 1));
@@ -116,6 +117,17 @@ public class Rule {
         interesting.add(new Rule("RRLLRLLLLLLLL", 0, 1, 1));
         interesting.add(new Rule("RRLLRLLLLLLLLL", 0, 1, 1));
         interesting.add(new Rule("RRLLRLLLLLLLLLL", 0, 1, 1));
+
+        return interesting;
+    }
+
+    public static List<Rule> getSymmetricRules() {
+        Settings.generateFourSettings();
+        List<Rule> interesting = new ArrayList<>();
+        interesting.add(new Rule("RRL", 0, 1, 2));
+        interesting.add(new Rule("LLR", 0, 1, 2));
+        interesting.add(new Rule("LRLRLRLRRRRRRL", 0, 1, 1));
+        interesting.add(new Rule("RLRLRLRLLLLLLR", 0, 1, 1));
 
         return interesting;
     }

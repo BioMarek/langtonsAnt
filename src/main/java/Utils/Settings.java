@@ -42,7 +42,6 @@ public class Settings {
 
     public static void showExplanationSettings() {
         Settings.SHOW_GRID = true;
-        Settings.RULE = "RL";
         Settings.SKIP = 1;
         Settings.MAX_MOVES = 300;
         Settings.SIZE_OF_SQUARE = 80;
@@ -52,23 +51,26 @@ public class Settings {
 
     public static void generateHighwaysSettings() {
         Settings.SHOW_GRID = false;
-        Settings.RULE = "RL";
-        Settings.SKIP = 40000;
         Settings.MAX_MOVES = 50_000_000;
         Settings.SIZE_OF_SQUARE = 1;
-        Settings.EXPLANATION_ANIMATION = false;
         Settings.VIDEO_NUM_IMAGES = 180;
         Settings.IMAGE_PADDING = 0;
     }
 
     public static void generateInterestingSettings() {
         Settings.SHOW_GRID = false;
-        Settings.RULE = "RL";
-        Settings.SKIP = 40000;
         Settings.MAX_MOVES = 50_000_000;
         Settings.SIZE_OF_SQUARE = 1;
-        Settings.EXPLANATION_ANIMATION = false;
         Settings.VIDEO_NUM_IMAGES = 240;
         Settings.IMAGE_PADDING = 200;
+    }
+
+    public static void generateFourSettings() {
+        Settings.SHOW_GRID = false;
+        Settings.MAX_MOVES = 50_000_000;
+        Settings.SIZE_OF_SQUARE = 1;
+        Settings.VIDEO_NUM_IMAGES = 240;
+        Settings.IMAGE_PADDING = 200;
+        Settings.INFO_FOR_4_IMAGES = true;
     }
 }
