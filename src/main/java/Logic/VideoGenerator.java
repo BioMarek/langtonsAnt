@@ -44,7 +44,7 @@ public class VideoGenerator {
     }
 
     private List<BufferedImage> createImages() {
-        Ant ant = new Ant(Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE, Settings.MAX_MOVES, Settings.RULE);
+        Ant ant = new Ant(Settings.RULE);
         List<BufferedImage> result = new ArrayList<>();
         int count = 0;
 
@@ -64,7 +64,8 @@ public class VideoGenerator {
             bImg = new BufferedImage(Util.sizeDivisibleByTwo(Settings.SIZE_IN_PIXELS + Settings.SIZE_IN_PIXELS / 3),
                     Settings.SIZE_IN_PIXELS,
                     BufferedImage.TYPE_INT_RGB);
-        ant.drawPresentation(bImg.createGraphics());
+        AntGraphic antGraphic = new AntGraphic(ant);
+        antGraphic.drawPresentation(bImg.createGraphics());
         return bImg;
     }
 
@@ -77,7 +78,7 @@ public class VideoGenerator {
         for (Rule rule : interesting) {
             System.out.println("working on " + rule.rule);
             rule.setVariables();
-            Ant ant = new Ant(Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE, Settings.MAX_MOVES, Settings.RULE);
+            Ant ant = new Ant(Settings.RULE);
             ant.allMoves();
 
             Settings.SKIP = ant.steps / Settings.VIDEO_NUM_IMAGES;

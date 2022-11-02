@@ -15,11 +15,10 @@ public class ImageGenerator {
      */
     public void drawAllRules() {
         RulesGenerator rulesGenerator = new RulesGenerator(Settings.RULES_LENGTH);
-        int squares = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE;
         while (rulesGenerator.hasNext()) {
             String rule = rulesGenerator.next();
             System.out.println("working on: " + rule);
-            ant = new Ant(squares, Settings.MAX_MOVES, rule);
+            ant = new Ant(rule);
             saveImageWithoutPanel(rule);
         }
     }
@@ -49,7 +48,8 @@ public class ImageGenerator {
 
 
         BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
-        ant.drawImage(bImg.createGraphics());
+        AntGraphic antGraphic = new AntGraphic(ant);
+        antGraphic.drawImage(bImg.createGraphics());
 
         try {
             ImageIO.write(bImg, "png", new File(fileName));

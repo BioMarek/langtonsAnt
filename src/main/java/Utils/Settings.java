@@ -25,7 +25,7 @@ public class Settings {
 
     // Settings for gif and mp4 generation
     public static int GIF_DELAY = 35; // 35ms delay for video
-    public static  int VIDEO_FPS = 30; // frames per second for mp4
+    public static int VIDEO_FPS = 30; // frames per second for mp4
     public static int VIDEO_NUM_IMAGES = 180; // number of images in video, we expect 30 images per second, 240 image, 180 highway
     public static int GIF_WIDTH = 1333; // set to 1000 when 4 images on screen
     public static int GIF_HEIGHT = 1000;
@@ -42,7 +42,6 @@ public class Settings {
 
     public static void showExplanationSettings() {
         Settings.SHOW_GRID = true;
-        Settings.RULE = "RL";
         Settings.SKIP = 1;
         Settings.MAX_MOVES = 300;
         Settings.SIZE_OF_SQUARE = 80;
@@ -52,23 +51,26 @@ public class Settings {
 
     public static void generateHighwaysSettings() {
         Settings.SHOW_GRID = false;
-        Settings.RULE = "RL";
-        Settings.SKIP = 40000;
         Settings.MAX_MOVES = 50_000_000;
         Settings.SIZE_OF_SQUARE = 1;
-        Settings.EXPLANATION_ANIMATION = false;
         Settings.VIDEO_NUM_IMAGES = 180;
         Settings.IMAGE_PADDING = 0;
     }
 
     public static void generateInterestingSettings() {
         Settings.SHOW_GRID = false;
-        Settings.RULE = "RL";
-        Settings.SKIP = 40000;
         Settings.MAX_MOVES = 50_000_000;
         Settings.SIZE_OF_SQUARE = 1;
-        Settings.EXPLANATION_ANIMATION = false;
         Settings.VIDEO_NUM_IMAGES = 240;
         Settings.IMAGE_PADDING = 200;
+    }
+
+    public static void generateFourSettings() {
+        Settings.SHOW_GRID = false;
+        Settings.MAX_MOVES = 50_000_000;
+        Settings.SIZE_OF_SQUARE = 1;
+        Settings.VIDEO_NUM_IMAGES = 240;
+        Settings.IMAGE_PADDING = 200;
+        Settings.INFO_FOR_4_IMAGES = true;
     }
 }
