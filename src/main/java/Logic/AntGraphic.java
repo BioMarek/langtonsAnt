@@ -1,7 +1,6 @@
 package Logic;
 
 import Utils.Colors;
-import Utils.ColorsPicker;
 import Utils.Settings;
 import Utils.Util;
 
@@ -58,7 +57,7 @@ public class AntGraphic {
         int borderPadding = Settings.IMAGE_PADDING / 2;
         for (int row = 0; row < squares; row++) {
             for (int column = 0; column < squares; column++) {
-                ColorsPicker.setColor(graphics, ant.grid[row + borderPadding][column + borderPadding]);
+                Colors.setColor(graphics, ant.grid[row + borderPadding][column + borderPadding]);
                 int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
                 graphics.fillRect(column * Settings.SIZE_OF_SQUARE, row * Settings.SIZE_OF_SQUARE, sizeOfSquare, sizeOfSquare);
             }

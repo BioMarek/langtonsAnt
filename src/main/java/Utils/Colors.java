@@ -1,6 +1,7 @@
 package Utils;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 
 public enum Colors {
     GREY(new Color(128, 128, 128, Settings.ALPHA)),
@@ -44,10 +45,10 @@ public enum Colors {
             case 3 -> BLUE.getColor();
             case 4 -> YELLOW.getColor();
             case 5 -> ORANGE.getColor();
-            case 6 -> MAGENTA.getColor();
-            case 7 -> CYAN.getColor();
-            case 8 -> PINK.getColor();
-            case 9 -> VIOLET.getColor();
+            case 6 -> VIOLET.getColor();
+            case 7 -> MAGENTA.getColor();
+            case 8 -> CYAN.getColor();
+            case 9 -> PINK.getColor();
             case 10 -> BROWN.getColor();
             case 11 -> LIGHT_GREEN.getColor();
             case 12 -> LIGHT_BLUE.getColor();
@@ -56,8 +57,12 @@ public enum Colors {
             case 15 -> TEAL.getColor();
             case 16 -> CORAL.getColor();
             case 17 -> KHAKI.getColor();
-            case -1 -> TEXT.getColor();
-            default -> BACKGROUND.getColor();
+            case -1 -> BACKGROUND.getColor();
+            default -> throw new RuntimeException("Wrong number supplied");
         };
+    }
+
+    public static void setColor(Graphics2D graphics, int color) {
+        graphics.setColor(getColor(color));
     }
 }
