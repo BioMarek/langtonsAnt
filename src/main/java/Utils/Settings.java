@@ -68,9 +68,16 @@ public class Settings {
     public static void generateFourSettings() {
         Settings.SHOW_GRID = false;
         Settings.MAX_MOVES = 50_000_000;
-        Settings.SIZE_OF_SQUARE = 1;
         Settings.VIDEO_NUM_IMAGES = 240;
-        Settings.IMAGE_PADDING = 200;
+        Settings.IMAGE_PADDING = 0;
         Settings.INFO_FOR_4_IMAGES = true;
+    }
+
+    public static void generateRandomWithPatternSettings() {
+        Settings.SHOW_GRID = false;
+        Settings.MAX_MOVES = 50_000_000;
+        Settings.SIZE_OF_SQUARE = 1;
+        Settings.VIDEO_NUM_IMAGES = 180;
+        Settings.IMAGE_PADDING = 0;
     }
 }

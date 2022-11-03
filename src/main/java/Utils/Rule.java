@@ -44,7 +44,7 @@ public class Rule {
         interesting.add(new Rule("RLLLLRRRLLL", 0, 1, 1));
         interesting.add(new Rule("RRLLLLRLRLRRLLL", 0, 1, 1));
 //        interesting.add(new Rule("RRLRLRRRRRLRRLL", 38_000_000, 0.1, 1)); // column moved by 250
-//        interesting.add(new Rule("RRRRRRRRLLLLLLLL", 0, 1, 2)); // 15 frames per sec, 150 images,
+//        interesting.add(new Rule("RRRRRRRRLLLLLLLL", 0, 1, 2)); // 10 frames per sec, 150 images
         interesting.add(new Rule("LLLLRRRRRLLRRRRL", 0, 1, 1));
         interesting.add(new Rule("LLLRRRRRRLLL", 0, 1, 1));
         interesting.add(new Rule("LLRLLLRRRRRRRLLL", 0, 1, 1));
@@ -124,10 +124,26 @@ public class Rule {
     public static List<Rule> getSymmetricRules() {
         Settings.generateFourSettings();
         List<Rule> interesting = new ArrayList<>();
-        interesting.add(new Rule("RRL", 0, 1, 2));
-        interesting.add(new Rule("LLR", 0, 1, 2));
-        interesting.add(new Rule("LRLRLRLRRRRRRL", 0, 1, 1));
-        interesting.add(new Rule("RLRLRLRLLLLLLR", 0, 1, 1));
+        interesting.add(new Rule("RL", 0, 1, 10));
+        interesting.add(new Rule("LR", 0, 1, 10));
+        interesting.add(new Rule("RRLRLLRRRRRLRL", 0, 1, 2));
+        interesting.add(new Rule("LLRLRRLLLLLRLR", 0, 1, 2));
+
+        return interesting;
+    }
+
+    public static List<Rule> getRandomWithPatternRules() {
+        Settings.generateRandomWithPatternSettings();
+        List<Rule> interesting = new ArrayList<>();
+        interesting.add(new Rule("RRLLLRLRRLRRLRLL", 0, 1, 1));
+        interesting.add(new Rule("RLRLRRRRRRRRRL", 0, 1, 1));
+        interesting.add(new Rule("LRRRRLLLRLLLLLLL", 0, 1, 1));
+        interesting.add(new Rule("LRRLRLLLLL", 0, 1, 1));
+        interesting.add(new Rule("LRRLLRRLLLRLLLL", 0, 1, 1));
+        interesting.add(new Rule("LRRLLLLRLLRRLLLL", 0, 1, 1));
+        interesting.add(new Rule("LRLLLRRRRRLRLL", 0, 1, 1));
+        interesting.add(new Rule("LLRLRRRLRRRRRRLL", 0, 1, 1));
+        interesting.add(new Rule("LLLRLLRRLLLLLRRL", 0, 1, 1));
 
         return interesting;
     }
