@@ -72,7 +72,6 @@ public class Rule {
     }
 
     public static List<Rule> getHighways() {
-        // should be tuned
         Settings.generateHighwaysSettings();
         List<Rule> interesting = new ArrayList<>();
         interesting.add(new Rule("LLRLRLLLLRLRLRRL", 1_500_000, 0.1, 1));
@@ -144,6 +143,28 @@ public class Rule {
         interesting.add(new Rule("LRLLLRRRRRLRLL", 0, 1, 1));
         interesting.add(new Rule("LLRLRRRLRRRRRRLL", 0, 1, 1));
         interesting.add(new Rule("LLLRLLRRLLLLLRRL", 0, 1, 1));
+
+        return interesting;
+    }
+    public static List<Rule> getHighWayScreenFillRules() {
+        List<Rule> interesting = new ArrayList<>();
+        interesting.add(new Rule("RRL", 0, 1, 10)); // add grid
+        interesting.add(new Rule("RLRRRL", 0, 1, 1));
+        interesting.add(new Rule("RRLLLRLLLLLLLLL", 0, 1, 1)); // padding 500
+
+        return interesting;
+    }
+
+    public static List<Rule> getDifferentRuleSamePatternRules() {
+        Settings.generateHighwaysSettings();
+        List<Rule> interesting = new ArrayList<>();
+        interesting.add(new Rule("RLRL", 0, 1, 5));
+        interesting.add(new Rule("RLRLRL", 0, 1, 5));
+        interesting.add(new Rule("RLRLRLRL", 0, 1, 5));
+        interesting.add(new Rule("RLRLRLRLRL", 0, 1, 5));
+        interesting.add(new Rule("RLRLRLRLRLRL", 0, 1, 5));
+        interesting.add(new Rule("RLRLRLRLRLRLRL", 0, 1, 5));
+        interesting.add(new Rule("RLRLRLRLRLRLRLRL", 0, 1, 5));
 
         return interesting;
     }

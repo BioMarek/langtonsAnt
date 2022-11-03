@@ -58,7 +58,8 @@ public class GridPanel extends JPanel implements ActionListener {
         Graphics2D graphics = (Graphics2D) g;
         AntGraphic antGraphic = new AntGraphic(ant);
         antGraphic.drawPresentation(graphics);
-        drawExplanation(graphics);
+        if (Settings.EXPLANATION_ANIMATION)
+           drawExplanation(graphics);
     }
 
     @Override
