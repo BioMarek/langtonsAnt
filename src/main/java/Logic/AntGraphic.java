@@ -59,7 +59,10 @@ public class AntGraphic {
             for (int column = 0; column < squares; column++) {
                 Colors.setColor(graphics, ant.grid[row + borderPadding][column + borderPadding]);
                 int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
-                graphics.fillRect(column * Settings.SIZE_OF_SQUARE, row * Settings.SIZE_OF_SQUARE, sizeOfSquare, sizeOfSquare);
+                if (Settings.ZOOMED)
+                    graphics.fillRect(column * Settings.SIZE_OF_SQUARE + Settings.GRAPHIC_SHIFT, row * Settings.SIZE_OF_SQUARE + Settings.GRAPHIC_SHIFT, sizeOfSquare, sizeOfSquare);
+                else
+                    graphics.fillRect(column * Settings.SIZE_OF_SQUARE, row * Settings.SIZE_OF_SQUARE, sizeOfSquare, sizeOfSquare);
             }
         }
     }
