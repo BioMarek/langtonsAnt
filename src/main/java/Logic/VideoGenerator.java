@@ -27,7 +27,7 @@ public class VideoGenerator {
     public void createMP4() {
         List<BufferedImage> bufferedImages = createImages();
         try {
-            SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File("gifs/" + Settings.RULE + ".mp4")),
+            SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File(Settings.VIDEO_BASE_PATH + Settings.RULE + ".mp4")),
                     Rational.R(Settings.VIDEO_FPS, 1), Format.MOV, Codec.PNG, null);
             for (int i = 0; i < bufferedImages.size(); i++) {
                 System.out.println("encoding image " + i);
@@ -92,7 +92,7 @@ public class VideoGenerator {
      * Creates images of rule according to Settings and from these images creates gif.
      */
     public void createGif() {
-        try (FileOutputStream outputStream = new FileOutputStream(Settings.GIF_BASE_PATH + Settings.RULE + ".gif")) {
+        try (FileOutputStream outputStream = new FileOutputStream(Settings.VIDEO_BASE_PATH + Settings.RULE + ".gif")) {
             GifEncoder encoder = new GifEncoder(outputStream, Settings.GIF_WIDTH, Settings.GIF_HEIGHT, 1);
             ImageOptions options = new ImageOptions();
             options.setDelay(Settings.GIF_DELAY, TimeUnit.MILLISECONDS);

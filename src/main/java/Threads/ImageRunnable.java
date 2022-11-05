@@ -43,7 +43,7 @@ public class ImageRunnable implements Runnable {
             antGraphic.drawImage(bImg.createGraphics());
 
             try {
-                ImageIO.write(bImg, "png", new File(String.format(Settings.BASE_PATH + "/%d/%s.png", rule.length(), rule)));
+                ImageIO.write(bImg, "png", new File(String.format(Settings.IMAGE_BASE_PATH + "/%d/%s.png", rule.length(), rule)));
             } catch (IOException e) {
                 e.printStackTrace();
             }

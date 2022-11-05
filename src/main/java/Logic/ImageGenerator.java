@@ -35,7 +35,7 @@ public class ImageGenerator {
         ant.allMoves();
 
         if (Settings.NO_EVAL) {
-            fileName = String.format(Settings.BASE_PATH + "/%d/%s.png", rule.length(), rule);
+            fileName = String.format(Settings.IMAGE_BASE_PATH + "/%d/%s.png", rule.length(), rule);
         } else {
             if (Settings.ONLY_HIGHWAYS)
                 if (interestingnessEvaluator.highwayEvaluator(Settings.FILED_PORTION_LIMIT) < 2.2D)
