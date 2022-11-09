@@ -59,8 +59,9 @@ public class GridPanel extends JPanel implements ActionListener {
         AntGraphic antGraphic = new AntGraphic(ant);
         antGraphic.drawPresentation(graphics);
         if (Settings.EXPLANATION_ANIMATION)
-            if (ant.steps <= 2)
+            if (ant.steps <= Settings.ZOOM_STEPS)
                 drawExplanation(graphics);
+        //
         // part that increases speed of animation after zoom
         if (Settings.SIZE_OF_SQUARE == 20 && Settings.DELAY > 20) {
             Settings.DELAY -= 1;
@@ -75,8 +76,9 @@ public class GridPanel extends JPanel implements ActionListener {
                 ant.nextMoves();
             if (currentCycle == 30)
                 currentCycle = 0;
+            //
             // part that makes zoom
-            if (ant.steps > 2) {
+            if (ant.steps > Settings.ZOOM_STEPS) {
                 Settings.ZOOMED = true;
                 if (Settings.SIZE_OF_SQUARE > 20) {
                     Settings.SIZE_OF_SQUARE -= 2;

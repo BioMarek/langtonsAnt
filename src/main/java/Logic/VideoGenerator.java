@@ -24,8 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 public class VideoGenerator {
 
-    public void createMP4() {
-        List<BufferedImage> bufferedImages = createImages();
+    public void createMP4(List<BufferedImage> bufferedImages) {
         try {
             SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File(Settings.VIDEO_BASE_PATH + Settings.RULE + ".mp4")),
                     Rational.R(Settings.VIDEO_FPS, 1), Format.MOV, Codec.PNG, null);
@@ -84,7 +83,7 @@ public class VideoGenerator {
             Settings.SKIP = ant.steps / Settings.VIDEO_NUM_IMAGES;
             System.out.println("max steps: " + ant.steps + " skip: " + Settings.SKIP);
 
-            createMP4();
+            createMP4(createImages());
         }
     }
 

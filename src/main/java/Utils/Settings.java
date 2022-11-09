@@ -36,13 +36,14 @@ public class Settings {
     public static int FRAMES_BETWEEN_STEPS = 30; // for explanation animation frames
     public static int VIDEO_REPEAT_LAST_FRAME = 30; // how many times the last image should be repeated in video, 30 is one second
     public static boolean ZOOMED = false; // whether graphic has been zoomed in
+    public static int ZOOM_STEPS = 10; // number of ant steps after which there will be zoom
     // TODO better explanation
     public static int GRAPHIC_SHIFT = 0; // during zoom how much is graphic row and column moved with respect to grid row and column
 
     public static void showExplanationSettings() {
         Settings.SHOW_GRID = true;
         Settings.SKIP = 1;
-        Settings.MAX_MOVES = 1000;
+        Settings.MAX_MOVES = 300;
         Settings.SIZE_OF_SQUARE = 80;
         Settings.EXPLANATION_ANIMATION = true;
         Settings.IMAGE_PADDING = 500;
