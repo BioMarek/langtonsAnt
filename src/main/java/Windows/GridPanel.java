@@ -63,7 +63,7 @@ public class GridPanel extends JPanel implements ActionListener {
                 drawExplanation(graphics);
         //
         // part that increases speed of animation after zoom
-        if (Settings.SIZE_OF_SQUARE == 20 && Settings.DELAY > 20) {
+        if (Settings.SIZE_OF_SQUARE == 10 && Settings.DELAY > 20) {
             Settings.DELAY -= 1;
             startTimer();
         }
@@ -80,7 +80,7 @@ public class GridPanel extends JPanel implements ActionListener {
             // part that makes zoom
             if (ant.steps > Settings.ZOOM_STEPS) {
                 Settings.ZOOMED = true;
-                if (Settings.SIZE_OF_SQUARE > 20) {
+                if (Settings.SIZE_OF_SQUARE > 10) {
                     Settings.SIZE_OF_SQUARE -= 2;
                     Settings.GRAPHIC_SHIFT += 12;
                 }

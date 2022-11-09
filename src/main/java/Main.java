@@ -5,7 +5,7 @@ import Windows.GridFrame;
 
 public class Main {
     public static void main(String[] args) {
-        Settings.showExplanationSettings();
+        Settings.showExplanationSecondPartSettings();
         new GridFrame();  // Runs one rule based on setting realtime
 
 //        ImageGenerator imageGenerator = new ImageGenerator();

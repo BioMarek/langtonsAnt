@@ -43,10 +43,19 @@ public class Settings {
     public static void showExplanationSettings() {
         Settings.SHOW_GRID = true;
         Settings.SKIP = 1;
-        Settings.MAX_MOVES = 300;
+        Settings.MAX_MOVES = 200;
         Settings.SIZE_OF_SQUARE = 80;
         Settings.EXPLANATION_ANIMATION = true;
         Settings.IMAGE_PADDING = 500;
+    }
+
+    public static void showExplanationSecondPartSettings() {
+        Settings.SHOW_GRID = true;
+        Settings.SKIP = 20;
+        Settings.MAX_MOVES = 20000;
+        Settings.SIZE_OF_SQUARE = 10;
+        Settings.EXPLANATION_ANIMATION = false;
+        Settings.DELAY = 20;
     }
 
     public static void generateHighwaysSettings() {
