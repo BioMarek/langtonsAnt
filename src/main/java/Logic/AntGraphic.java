@@ -144,7 +144,7 @@ public class AntGraphic {
             if (i != ant.rule.length - 1)
                 drawUpArrow(Settings.SIZE_IN_PIXELS + squareSize * 11 / 2, (i - ruleHalf) * gap + squareSize * 11 / 2);
             drawFilledRect(Settings.SIZE_IN_PIXELS + squareSize * 5, (i - ruleHalf) * gap + topPadding, i);
-            drawLegendInnerArrows(i - ruleHalf, squareSize, 5.2, true);
+            drawLegendInnerArrows(i - ruleHalf, squareSize, 5.3, true);
         }
     }
 

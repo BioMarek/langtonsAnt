@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 public enum Colors {
-    GREY(new Color(128, 128, 128, Settings.ALPHA)),
+    LIGHT_GREY(new Color(210, 210, 210, Settings.ALPHA)),
     RED(new Color(255, 0, 0, Settings.ALPHA)),
     GREEN(new Color(0, 255, 0, Settings.ALPHA)),
     BLUE(new Color(0, 0, 255, Settings.ALPHA)),
@@ -39,7 +39,7 @@ public enum Colors {
 
     public static Color getColor(int ordinal) {
         return switch (ordinal) {
-            case 0 -> GREY.getColor();
+            case 0 -> LIGHT_GREY.getColor();
             case 1 -> RED.getColor();
             case 2 -> GREEN.getColor();
             case 3 -> BLUE.getColor();
