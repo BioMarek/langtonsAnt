@@ -49,7 +49,7 @@ public class GridPanel extends JPanel implements ActionListener {
         } catch (IOException ignored) {
         }
 
-        startAnimation();
+        startTimer();
     }
 
     @Override
@@ -59,7 +59,14 @@ public class GridPanel extends JPanel implements ActionListener {
         AntGraphic antGraphic = new AntGraphic(ant);
         antGraphic.drawPresentation(graphics);
         if (Settings.EXPLANATION_ANIMATION)
-           drawExplanation(graphics);
+            if (ant.steps <= Settings.ZOOM_STEPS)
+                drawExplanation(graphics);
+        //
+        // part that increases speed of animation after zoom
+        if (Settings.SIZE_OF_SQUARE == 10 && Settings.DELAY > 20) {
+            Settings.DELAY -= 1;
+            startTimer();
+        }
     }
 
     @Override
@@ -69,6 +76,15 @@ public class GridPanel extends JPanel implements ActionListener {
                 ant.nextMoves();
             if (currentCycle == 30)
                 currentCycle = 0;
+            //
+            // part that makes zoom
+            if (ant.steps > Settings.ZOOM_STEPS) {
+                Settings.ZOOMED = true;
+                if (Settings.SIZE_OF_SQUARE > 10) {
+                    Settings.SIZE_OF_SQUARE -= 2;
+                    Settings.GRAPHIC_SHIFT += 12;
+                }
+            }
         } else
             ant.nextMoves();
         repaint();
@@ -82,7 +98,7 @@ public class GridPanel extends JPanel implements ActionListener {
     /**
      * Starts timer, delay says how often {@link Graphics2D} is repainted.
      */
-    public void startAnimation() {
+    public void startTimer() {
         timer = new Timer(Settings.DELAY, this);
         timer.start();
     }
