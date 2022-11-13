@@ -38,6 +38,6 @@ public class Util {
      * @return either originalSize or originalSize + 1 whichever is even
      */
     public static int sizeDivisibleByTwo(int originalSize) {
-        return (originalSize % 2 == 0) ? originalSize : originalSize + 1;
+        return (originalSize % 2 == 0) ? originalSize : originalSize - 1;
     }
 }

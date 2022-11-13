@@ -88,7 +88,7 @@ public class AntGraphic {
         if (Settings.INFO_FOR_4_IMAGES)
             graphics.fillRect(0, 0, sizeInPixels, sizeInPixels);
         else
-            graphics.fillRect(0, 0, sizeInPixels + Settings.SIZE_IN_PIXELS / 3, sizeInPixels);
+            graphics.fillRect(0, 0, sizeInPixels + Settings.SIZE_OF_LEGEND, sizeInPixels);
     }
 
     /**
