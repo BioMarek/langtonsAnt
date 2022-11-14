@@ -61,7 +61,7 @@ public class VideoGenerator {
         if (Settings.INFO_FOR_4_IMAGES)
             bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
         else
-            bImg = new BufferedImage(Util.sizeDivisibleByTwo(Settings.SIZE_IN_PIXELS + Settings.SIZE_OF_LEGEND),
+            bImg = new BufferedImage(Util.sizeDivisibleByTwo(Settings.SIZE_IN_PIXELS + Settings.LEGEND_WIDTH),
                     Settings.SIZE_IN_PIXELS,
                     BufferedImage.TYPE_INT_RGB);
         AntGraphic antGraphic = new AntGraphic(ant);

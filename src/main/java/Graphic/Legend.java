@@ -34,11 +34,11 @@ public class Legend {
         int fontUnit = Settings.SIZE_IN_PIXELS / 60;
         graphics.setColor(Colors.TEXT.getColor());
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.2)));
-        graphics.drawString("Rule:   " + new String(ant.rule), Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 2);
-        graphics.drawString("Steps: " + Util.numberFormatter(ant.steps), Settings.SIZE_IN_PIXELS + fontUnit, fontUnit * 4);
+        graphics.drawString("Rule:   " + new String(ant.rule), Settings.LEGEND_START_X + fontUnit, fontUnit * 2);
+        graphics.drawString("Steps: " + Util.numberFormatter(ant.steps), Settings.LEGEND_START_X + fontUnit, fontUnit * 4);
 
         graphics.setStroke(new BasicStroke(3f));
-        graphics.drawLine(Settings.SIZE_IN_PIXELS, 0, Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS);
+        graphics.drawLine(Settings.LEGEND_START_X, 0, Settings.LEGEND_START_X, Settings.SIZE_IN_PIXELS);
     }
 
     /**
@@ -61,25 +61,25 @@ public class Legend {
         int ruleHalf = (ant.rule.length % 2 == 0) ? ant.rule.length / 2 : ant.rule.length / 2 + 1; // ensures left column is longer than right one
 
         graphics.setColor(Colors.TEXT.getColor());
-        graphics.draw(new RoundRectangle2D.Double(Settings.SIZE_IN_PIXELS + 2.5 * squareSize,
+        graphics.draw(new RoundRectangle2D.Double(Settings.LEGEND_START_X + 2.5 * squareSize,
                 squareSize * 3.5,
                 squareSize * 3,
                 squareSize * ruleHalf * 2, 20, 20));
 
-        drawLeftArrow(Settings.SIZE_IN_PIXELS + squareSize * 15 / 4, squareSize * 7 / 2);
-        drawRightArrow(Settings.SIZE_IN_PIXELS + squareSize * 15 / 4, squareSize * 7 / 2 + ruleHalf * gap);
+        drawLeftArrow(Settings.LEGEND_START_X + squareSize * 15 / 4, squareSize * 7 / 2);
+        drawRightArrow(Settings.LEGEND_START_X + squareSize * 15 / 4, squareSize * 7 / 2 + ruleHalf * gap);
 
         for (int i = 0; i < ruleHalf; i++) {
             if (i != ruleHalf - 1)
-                drawDownArrow(Settings.SIZE_IN_PIXELS + squareSize * 5 / 2, i * gap + squareSize * 11 / 2);
-            drawFilledRect(Settings.SIZE_IN_PIXELS + gap, i * gap + topPadding, i);
+                drawDownArrow(Settings.LEGEND_START_X + squareSize * 5 / 2, i * gap + squareSize * 11 / 2);
+            drawFilledRect(Settings.LEGEND_START_X + gap, i * gap + topPadding, i);
             drawLegendInnerArrows(i, squareSize, 2.3, false);
         }
 
         for (int i = ruleHalf; i < ant.rule.length; i++) {
             if (i != ant.rule.length - 1)
-                drawUpArrow(Settings.SIZE_IN_PIXELS + squareSize * 11 / 2, (i - ruleHalf) * gap + squareSize * 11 / 2);
-            drawFilledRect(Settings.SIZE_IN_PIXELS + squareSize * 5, (i - ruleHalf) * gap + topPadding, i);
+                drawUpArrow(Settings.LEGEND_START_X + squareSize * 11 / 2, (i - ruleHalf) * gap + squareSize * 11 / 2);
+            drawFilledRect(Settings.LEGEND_START_X + squareSize * 5, (i - ruleHalf) * gap + topPadding, i);
             drawLegendInnerArrows(i - ruleHalf, squareSize, 5.3, true);
         }
     }
@@ -88,9 +88,9 @@ public class Legend {
         graphics.setColor(Colors.TEXT.getColor());
         char ruleArrow = reverse ? ant.rule[ant.rule.length - i - 1] : ant.rule[i];
         if (ruleArrow == 'L') {
-            drawInnerLeftArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
+            drawInnerLeftArrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
         } else
-            drawInnerRightArrow((int) (Settings.SIZE_IN_PIXELS + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
+            drawInnerRightArrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
     }
 
     private void drawFilledRect(int x, int y, int i) {

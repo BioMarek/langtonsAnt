@@ -33,11 +33,7 @@ public class GridPanel extends JPanel implements ActionListener {
     private double startY = 475;
 
     public GridPanel() {
-        int sizeInPixels = Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS;
-        if (Settings.INFO_FOR_4_IMAGES)
-            this.setPreferredSize(new Dimension(sizeInPixels, sizeInPixels));
-        else
-            this.setPreferredSize(new Dimension(sizeInPixels + Settings.SIZE_OF_LEGEND, sizeInPixels));
+        this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
         this.setFocusable(true);
 
         ant = new Ant(Settings.RULE);
@@ -106,7 +102,7 @@ public class GridPanel extends JPanel implements ActionListener {
      * Saves image after ant stops moving either because move limit was exceeded or because ant moved over border.
      */
     public void saveImage() {
-        BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS + Settings.SIZE_OF_LEGEND, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
+        BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS + Settings.LEGEND_WIDTH, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
         Graphics2D cg = bImg.createGraphics();
         this.paintAll(cg);
 

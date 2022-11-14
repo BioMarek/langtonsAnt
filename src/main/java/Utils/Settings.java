@@ -9,8 +9,12 @@ public class Settings {
     public static int SKIP = 1; // steps to skip between frames
     public static long MAX_MOVES = 50_000_000;
     public static int SIZE_IN_PIXELS = 1080; // size of ant board
-    public static int SIZE_OF_LEGEND = 420;
     public static int SIZE_OF_SQUARE = 1; // size of square on ant board
+    public static int LEGEND_START_X = 1500;
+    public static int LEGEND_WIDTH = 420;
+    public static int BACKGROUND_WIDTH = 1920;
+    public static int BACKGROUND_HEIGHT = 1080;
+
 
     // Settings for image generation
     public static int RULES_LENGTH = 10;
