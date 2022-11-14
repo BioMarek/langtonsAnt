@@ -146,6 +146,7 @@ public class Rule {
 
         return interesting;
     }
+
     public static List<Rule> getHighWayScreenFillRules() {
         List<Rule> interesting = new ArrayList<>();
         interesting.add(new Rule("RRL", 0, 1, 10)); // add grid

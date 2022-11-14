@@ -1,7 +1,7 @@
 package Threads;
 
-import Logic.Ant;
 import Graphic.AntGraphic;
+import Logic.Ant;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class ImageRunnable implements Runnable {
     private final List<String> rules;
+
     public ImageRunnable(List<String> rules) {
         this.rules = rules;
     }

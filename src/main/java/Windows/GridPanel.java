@@ -1,7 +1,7 @@
 package Windows;
 
-import Logic.Ant;
 import Graphic.AntGraphic;
+import Logic.Ant;
 import Utils.Direction;
 import Utils.Position;
 import Utils.Settings;

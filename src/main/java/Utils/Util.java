@@ -34,6 +34,7 @@ public class Util {
 
     /**
      * Ensures that size is divisible by two by increasing odd sizes by one. Required for mpr4 encoding
+     *
      * @param originalSize size of image in pixels
      * @return either originalSize or originalSize + 1 whichever is even
      */
