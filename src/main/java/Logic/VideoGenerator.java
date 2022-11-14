@@ -1,5 +1,6 @@
 package Logic;
 
+import Graphic.AntGraphic;
 import Utils.Rule;
 import Utils.Settings;
 import Utils.Util;

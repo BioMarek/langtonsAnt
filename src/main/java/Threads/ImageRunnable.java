@@ -1,7 +1,7 @@
 package Threads;
 
 import Logic.Ant;
-import Logic.AntGraphic;
+import Graphic.AntGraphic;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
