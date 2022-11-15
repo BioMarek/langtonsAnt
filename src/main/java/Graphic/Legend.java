@@ -61,26 +61,26 @@ public class Legend {
         int ruleHalf = (ant.rule.length % 2 == 0) ? ant.rule.length / 2 : ant.rule.length / 2 + 1; // ensures left column is longer than right one
 
         graphics.setColor(Colors.TEXT.getColor());
-        graphics.draw(new RoundRectangle2D.Double(Settings.LEGEND_START_X + 2.5 * squareSize,
+        graphics.draw(new RoundRectangle2D.Double(Settings.LEGEND_START_X + 3.5 * squareSize,
                 squareSize * 3.5,
                 squareSize * 3,
                 squareSize * ruleHalf * 2, 20, 20));
 
-        drawLeftArrow(Settings.LEGEND_START_X + squareSize * 15 / 4, squareSize * 7 / 2);
-        drawRightArrow(Settings.LEGEND_START_X + squareSize * 15 / 4, squareSize * 7 / 2 + ruleHalf * gap);
+        drawLeftArrow(Settings.LEGEND_START_X + squareSize * 19 / 4, squareSize * 7 / 2);
+        drawRightArrow(Settings.LEGEND_START_X + squareSize * 19 / 4, squareSize * 7 / 2 + ruleHalf * gap);
 
         for (int i = 0; i < ruleHalf; i++) {
             if (i != ruleHalf - 1)
-                drawDownArrow(Settings.LEGEND_START_X + squareSize * 5 / 2, i * gap + squareSize * 11 / 2);
-            drawFilledRect(Settings.LEGEND_START_X + gap, i * gap + topPadding, i);
-            drawLegendInnerArrows(i, squareSize, 2.3, false);
+                drawDownArrow(Settings.LEGEND_START_X + squareSize * 7 / 2, i * gap + squareSize * 11 / 2);
+            drawFilledRect(Settings.LEGEND_START_X + squareSize * 3, i * gap + topPadding, i);
+            drawLegendInnerArrows(i, squareSize, 3.3, false);
         }
 
         for (int i = ruleHalf; i < ant.rule.length; i++) {
             if (i != ant.rule.length - 1)
-                drawUpArrow(Settings.LEGEND_START_X + squareSize * 11 / 2, (i - ruleHalf) * gap + squareSize * 11 / 2);
-            drawFilledRect(Settings.LEGEND_START_X + squareSize * 5, (i - ruleHalf) * gap + topPadding, i);
-            drawLegendInnerArrows(i - ruleHalf, squareSize, 5.3, true);
+                drawUpArrow(Settings.LEGEND_START_X + squareSize * 13 / 2, (i - ruleHalf) * gap + squareSize * 11 / 2);
+            drawFilledRect(Settings.LEGEND_START_X + squareSize * 6, (i - ruleHalf) * gap + topPadding, i);
+            drawLegendInnerArrows(i - ruleHalf, squareSize, 6.3, true);
         }
     }
 
