@@ -8,7 +8,8 @@ import java.util.Arrays;
 
 public class Ant {
     public final int[][] grid;
-    private final int gridDimension;
+    public final int gridColumns;
+    public final int gridRows;
     public char[] rule;
     public Position antPosition = new Position();
     public boolean stopped = false;
@@ -16,15 +17,16 @@ public class Ant {
     public boolean usedTopColor = false;
 
     public Ant(String givenRule) {
-        this.gridDimension = Settings.SIZE_IN_PIXELS / Settings.SIZE_OF_SQUARE + Settings.IMAGE_PADDING;
-        this.grid = new int[gridDimension][gridDimension];
+        this.gridColumns = Settings.GRID_WIDTH / Settings.SIZE_OF_SQUARE;
+        this.gridRows = Settings.BACKGROUND_HEIGHT / Settings.SIZE_OF_SQUARE;
+        this.grid = new int[gridRows][gridColumns];
 
-        for (int i = 0; i < gridDimension; i++) {
-            grid[i] = new int[gridDimension];
+        for (int i = 0; i < gridRows; i++) {
+            grid[i] = new int[gridColumns];
             Arrays.fill(grid[i], -1);
         }
-        antPosition.row = gridDimension / 2;
-        antPosition.column = gridDimension / 2;
+        antPosition.row = gridRows / 2;
+        antPosition.column = gridColumns / 2;
         antPosition.direction = Direction.NORTH;
 
         parseRule(givenRule);
@@ -133,7 +135,7 @@ public class Ant {
      * Checks whether ant moved out of grid bounds.
      */
     public void checkBorderCollision() {
-        if (antPosition.row < 0 || antPosition.column < 0 || antPosition.row == gridDimension || antPosition.column == gridDimension)
+        if (antPosition.row < 0 || antPosition.column < 0 || antPosition.row == gridRows || antPosition.column == gridColumns)
             stopped = true;
     }
 }

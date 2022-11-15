@@ -11,7 +11,6 @@ import java.awt.Graphics2D;
  */
 public class AntGraphic {
     private Graphics2D graphics;
-    public final int squares = (Settings.SIZE_IN_PIXELS + Settings.IMAGE_PADDING) / Settings.SIZE_OF_SQUARE;
     private final Ant ant;
     private final Legend legend;
     private final Background background;
@@ -50,8 +49,8 @@ public class AntGraphic {
      */
     public void draw() {
         int borderPadding = Settings.IMAGE_PADDING / 2;
-        for (int row = 0; row < squares; row++) {
-            for (int column = 0; column < squares; column++) {
+        for (int row = 0; row < ant.gridRows; row++) {
+            for (int column = 0; column < ant.gridColumns; column++) {
                 Colors.setColor(graphics, ant.grid[row + borderPadding][column + borderPadding]);
                 int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
                 // part that makes zoom
