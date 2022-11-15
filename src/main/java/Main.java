@@ -1,6 +1,5 @@
-import Logic.VideoGenerator;
+import Graphic.VideoGenerator;
 import Utils.Rule;
-import Utils.Settings;
 import Windows.GridFrame;
 
 public class Main {
@@ -15,7 +14,7 @@ public class Main {
 //        imageParallelWorker.drawAllRulesInParallel();
 
 //        VideoGenerator videoGenerator = new VideoGenerator();
-//        videoGenerator.generateInteresting(Rule.getDifferentRuleSamePatternRules());
+//        videoGenerator.generateInteresting(Rule.getHighways());
 //        videoGenerator.createMP4();
     }
 }

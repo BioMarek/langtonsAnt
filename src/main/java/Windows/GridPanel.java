@@ -24,6 +24,7 @@ import java.util.List;
 
 public class GridPanel extends JPanel implements ActionListener {
     private final Ant ant;
+    private final AntGraphic antGraphic;
     private Timer timer;
     private int currentCycle = 0;
     private BufferedImage antImage = null;
@@ -35,8 +36,8 @@ public class GridPanel extends JPanel implements ActionListener {
     public GridPanel() {
         this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
         this.setFocusable(true);
-
-        ant = new Ant(Settings.RULE);
+        this.ant = new Ant(Settings.RULE);
+        this.antGraphic = new AntGraphic(ant);
 
         try {
             File imageFile = new File("gifs/ant.png");
@@ -51,7 +52,6 @@ public class GridPanel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D graphics = (Graphics2D) g;
-        AntGraphic antGraphic = new AntGraphic(ant);
         antGraphic.drawPresentation(graphics);
         if (Settings.EXPLANATION_ANIMATION)
             if (ant.steps <= Settings.ZOOM_STEPS)

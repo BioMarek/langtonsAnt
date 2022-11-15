@@ -1,6 +1,6 @@
-package Logic;
+package Graphic;
 
-import Graphic.AntGraphic;
+import Logic.Ant;
 import Utils.Rule;
 import Utils.Settings;
 import Utils.Util;
@@ -24,6 +24,8 @@ import java.util.concurrent.TimeUnit;
 
 
 public class VideoGenerator {
+    private Ant ant;
+    private AntGraphic antGraphic;
 
     public void createMP4(List<BufferedImage> bufferedImages) {
         try {
@@ -44,17 +46,18 @@ public class VideoGenerator {
     }
 
     private List<BufferedImage> createImages() {
-        Ant ant = new Ant(Settings.RULE);
+        ant = new Ant(Settings.RULE);
+        antGraphic = new AntGraphic(ant);
         List<BufferedImage> result = new ArrayList<>();
         int count = 0;
 
         while (!ant.stopped) {
-            result.add(createBufferedImage(ant, count++));
+            result.add(createBufferedImage(count++));
         }
         return result;
     }
 
-    private BufferedImage createBufferedImage(Ant ant, int count) {
+    private BufferedImage createBufferedImage(int count) {
         System.out.println("creating image " + count);
         ant.nextMoves();
         BufferedImage bImg;
@@ -64,7 +67,6 @@ public class VideoGenerator {
             bImg = new BufferedImage(Util.sizeDivisibleByTwo(Settings.SIZE_IN_PIXELS + Settings.LEGEND_WIDTH),
                     Settings.SIZE_IN_PIXELS,
                     BufferedImage.TYPE_INT_RGB);
-        AntGraphic antGraphic = new AntGraphic(ant);
         antGraphic.drawPresentation(bImg.createGraphics());
         return bImg;
     }
@@ -79,7 +81,7 @@ public class VideoGenerator {
             System.out.println("working on " + rule.rule);
             rule.setVariables();
             Ant ant = new Ant(Settings.RULE);
-            ant.allMoves();
+            ant.allMoves(); // calculates number of moves in total
 
             Settings.SKIP = ant.steps / Settings.VIDEO_NUM_IMAGES;
             System.out.println("max steps: " + ant.steps + " skip: " + Settings.SKIP);
