@@ -48,10 +48,10 @@ public class AntGraphic {
      * Converts grid of numbers to {@link Graphics2D}.
      */
     public void draw() {
-        int borderPadding = Settings.IMAGE_PADDING / 2;
-        for (int row = 0; row < ant.gridRows; row++) {
-            for (int column = 0; column < ant.gridColumns; column++) {
-                Colors.setColor(graphics, ant.grid[row + borderPadding][column + borderPadding]);
+        int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
+        for (int row = 0; row < ant.gridRows - borderPadding; row++) {
+            for (int column = 0; column < ant.gridColumns - borderPadding; column++) {
+                Colors.setColor(graphics, ant.grid[row + borderPadding / 2][column + borderPadding / 2]);
                 int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
                 // part that makes zoom
                 if (Settings.ZOOMED)

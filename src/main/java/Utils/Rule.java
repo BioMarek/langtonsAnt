@@ -173,8 +173,9 @@ public class Rule {
     public static List<Rule> getDifferentTestRules() {
         Settings.generateTestSettings();
         List<Rule> interesting = new ArrayList<>();
-        interesting.add(new Rule("LRRRRRLRRRRLLLL", 480_000, 0.5, 2));
-        interesting.add(new Rule("RRLLLRLLLLLLLLL", 0, 1, 1));  // IMAGE_PADDING 500
+//        interesting.add(new Rule("LRRRRRLRRRRLLLL", 480_000, 0.5, 2));
+//        interesting.add(new Rule("RRLLLRLLLLLLLLL", 0, 1, 1));  // IMAGE_PADDING 500
+        interesting.add(new Rule("RLL", 0, 1, 1));
 
         return interesting;
     }
