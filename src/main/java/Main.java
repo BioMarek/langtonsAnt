@@ -1,4 +1,5 @@
 import Graphic.VideoGenerator;
+import Threads.ImageParallelWorker;
 import Utils.Rule;
 import Windows.GridFrame;
 

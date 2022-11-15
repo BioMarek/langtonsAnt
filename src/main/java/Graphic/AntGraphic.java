@@ -28,7 +28,7 @@ public class AntGraphic {
         this.graphics = graphics;
         legend.graphics = graphics;
         background.graphics = graphics;
-        background.setBackground();
+        background.setBackground(false);
         draw();
     }
 
@@ -39,7 +39,7 @@ public class AntGraphic {
         this.graphics = graphics;
         legend.graphics = graphics;
         background.graphics = graphics;
-        background.setBackground();
+        background.setBackground(true);
         legend.drawLegend();
         draw();
     }

@@ -32,7 +32,7 @@ public class Settings {
     public static boolean INFO_FOR_4_IMAGES = false; // image with only rule info, used when there is 4 images on screen TODO doesn't work currently
 
     // use to show only center of image and fill entire screen with even if some part already reached the border,
-    public static int IMAGE_PADDING = 500; // use 500 for thumbnail image TODO doesn't work currently
+    public static int IMAGE_PADDING = 0; // use 500 for thumbnail image
     public static int SLOWDOWN_STEPS = 100_000_000;
     public static double SLOWDOWN_MODIFIER = 1.0;
     public static boolean EXPLANATION_ANIMATION = false; // true only when we are doing explanation animation, (more frames for animation)
@@ -86,5 +86,6 @@ public class Settings {
 
     public static void generateTestSettings() {
         Settings.VIDEO_NUM_IMAGES = 100;
+        Settings.IMAGE_PADDING = 600;
     }
 }

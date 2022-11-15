@@ -26,6 +26,25 @@ public class VideoGenerator {
     private Ant ant;
     private AntGraphic antGraphic;
 
+    /**
+     * Generates *.mp4 for interesting rules which are passed as argument.
+     *
+     * @param interesting list of {@link Rule} for which we want to create videos
+     */
+    public void generateInteresting(List<Rule> interesting) {
+        for (Rule rule : interesting) {
+            System.out.println("working on " + rule.rule);
+            rule.setVariables();
+            Ant ant = new Ant(Settings.RULE);
+            ant.allMoves(); // calculates number of moves in total
+
+            Settings.SKIP = ant.steps / Settings.VIDEO_NUM_IMAGES;
+            System.out.println("max steps: " + ant.steps + " skip: " + Settings.SKIP);
+
+            createMP4(createImages());
+        }
+    }
+
     public void createMP4(List<BufferedImage> bufferedImages) {
         try {
             SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File(Settings.VIDEO_BASE_PATH + Settings.RULE + ".mp4")),
@@ -51,13 +70,13 @@ public class VideoGenerator {
         int count = 0;
 
         while (!ant.stopped) {
-            result.add(createBufferedImage(count++));
+            System.out.println("creating image " + count++);
+            result.add(createBufferedImage());
         }
         return result;
     }
 
-    private BufferedImage createBufferedImage(int count) {
-        System.out.println("creating image " + count);
+    private BufferedImage createBufferedImage() {
         BufferedImage bImg = new BufferedImage(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT, BufferedImage.TYPE_INT_RGB);
         ant.nextMoves();
         antGraphic.drawPresentation(bImg.createGraphics());
@@ -65,27 +84,9 @@ public class VideoGenerator {
     }
 
     /**
-     * Generates *.mp4 for interesting rules which are passed as argument.
-     *
-     * @param interesting list of {@link Rule} for which we want to create videos
+     * Obsolete *.mp4 is used. Creates images of rule according to Settings and from these images creates gif.
      */
-    public void generateInteresting(List<Rule> interesting) {
-        for (Rule rule : interesting) {
-            System.out.println("working on " + rule.rule);
-            rule.setVariables();
-            Ant ant = new Ant(Settings.RULE);
-            ant.allMoves(); // calculates number of moves in total
-
-            Settings.SKIP = ant.steps / Settings.VIDEO_NUM_IMAGES;
-            System.out.println("max steps: " + ant.steps + " skip: " + Settings.SKIP);
-
-            createMP4(createImages());
-        }
-    }
-
-    /**
-     * Creates images of rule according to Settings and from these images creates gif.
-     */
+    @Deprecated
     public void createGif() {
         try (FileOutputStream outputStream = new FileOutputStream(Settings.VIDEO_BASE_PATH + Settings.RULE + ".gif")) {
             GifEncoder encoder = new GifEncoder(outputStream, Settings.GIF_WIDTH, Settings.GIF_HEIGHT, 1);
@@ -106,8 +107,9 @@ public class VideoGenerator {
     }
 
     /**
-     * Convert BufferedImage into RGB pixel array
+     * Obsolete *.mp4 is used. Convert BufferedImage into RGB pixel array
      */
+    @Deprecated
     private int[][] convertImageToArray(BufferedImage bufferedImage) {
         int[][] rgbArray = new int[bufferedImage.getHeight()][bufferedImage.getWidth()];
         for (int i = 0; i < bufferedImage.getHeight(); i++) {
@@ -118,6 +120,7 @@ public class VideoGenerator {
         return rgbArray;
     }
 
+    @Deprecated
     public void saveImages() {
         new File("gifs/" + Settings.RULE).mkdirs();
         List<BufferedImage> bufferedImages = createImages();
