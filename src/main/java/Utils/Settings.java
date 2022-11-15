@@ -6,10 +6,10 @@ public class Settings {
     public static boolean SHOW_GRID = false;
     public static String RULE = "RL";
     public static int DELAY = 100; // realtime animation delay between frames
-    public static int SKIP = 1; // steps to skip between frames
+    public static int SKIP = 100; // steps to skip between frames
     public static long MAX_MOVES = 50_000_000;
     public static int SIZE_IN_PIXELS = 1080; // size of ant board
-    public static int SIZE_OF_SQUARE = 1; // size of square on ant board
+    public static int SIZE_OF_SQUARE = 10; // size of square on ant board
     public static int LEGEND_START_X = 1500;
     public static int LEGEND_WIDTH = 420;
     public static int BACKGROUND_WIDTH = 1920;
@@ -28,7 +28,7 @@ public class Settings {
     public static int GIF_WIDTH = 1413; // determine size when 4 images
     public static int GIF_HEIGHT = 1080;
     public static String VIDEO_BASE_PATH = "./gifs/";
-    public static boolean INFO_FOR_4_IMAGES = false; // image with only rule info, used when there is 4 images on screen
+    public static boolean INFO_FOR_4_IMAGES = false; // image with only rule info, used when there is 4 images on screen TODO doesn't work currently
 
     // use to show only center of image and fill entire screen with even if some part already reached the border,
     public static int IMAGE_PADDING = 0; // use 500 for thumbnail image TODO doesn't work currently
@@ -61,7 +61,7 @@ public class Settings {
     }
 
     public static void generateHighwaysSettings() {
-        Settings.VIDEO_NUM_IMAGES = 180;
+        Settings.VIDEO_NUM_IMAGES = 100; // TODO 180
     }
 
     public static void generateInterestingSettings() {

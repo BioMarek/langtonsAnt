@@ -74,8 +74,8 @@ public class Rule {
     public static List<Rule> getHighways() {
         Settings.generateHighwaysSettings();
         List<Rule> interesting = new ArrayList<>();
-        interesting.add(new Rule("LLRLRLLLLRLRLRRL", 1_500_000, 0.1, 1));
         interesting.add(new Rule("LRRRRRLRRRRLLLL", 480_000, 0.5, 2));
+        interesting.add(new Rule("LLRLRLLLLRLRLRRL", 1_500_000, 0.1, 1));
         interesting.add(new Rule("LLLLLLLRRLLRLLL", 0, 1, 2));
         interesting.add(new Rule("LLLRLLRLRRRLLLLL", 0, 1, 2));
         interesting.add(new Rule("LLRLRLLLRLLLLL", 6_500_000, 0.1, 1));

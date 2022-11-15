@@ -34,7 +34,7 @@ public class ImageGenerator {
         ant.allMoves();
         BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
         AntGraphic antGraphic = new AntGraphic(ant);
-        antGraphic.drawImage(bImg.createGraphics()); // TODO legend is missing
+        antGraphic.drawImage(bImg.createGraphics());
 
         try {
             ImageIO.write(bImg, "png", new File(String.format(Settings.IMAGE_BASE_PATH + "/%d/%s.png", rule.length(), rule)));

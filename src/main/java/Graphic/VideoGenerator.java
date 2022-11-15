@@ -3,7 +3,6 @@ package Graphic;
 import Logic.Ant;
 import Utils.Rule;
 import Utils.Settings;
-import Utils.Util;
 import com.squareup.gifencoder.GifEncoder;
 import com.squareup.gifencoder.ImageOptions;
 import org.jcodec.api.SequenceEncoder;
@@ -59,14 +58,8 @@ public class VideoGenerator {
 
     private BufferedImage createBufferedImage(int count) {
         System.out.println("creating image " + count);
+        BufferedImage bImg = new BufferedImage(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT, BufferedImage.TYPE_INT_RGB);
         ant.nextMoves();
-        BufferedImage bImg;
-        if (Settings.INFO_FOR_4_IMAGES)
-            bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
-        else
-            bImg = new BufferedImage(Util.sizeDivisibleByTwo(Settings.SIZE_IN_PIXELS + Settings.LEGEND_WIDTH),
-                    Settings.SIZE_IN_PIXELS,
-                    BufferedImage.TYPE_INT_RGB);
         antGraphic.drawPresentation(bImg.createGraphics());
         return bImg;
     }

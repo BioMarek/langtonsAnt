@@ -3,7 +3,6 @@ package Graphic;
 import Logic.Ant;
 import Utils.Colors;
 import Utils.Settings;
-import Utils.Util;
 
 import java.awt.Graphics2D;
 
@@ -42,13 +41,8 @@ public class AntGraphic {
         legend.graphics = graphics;
         background.graphics = graphics;
         background.setBackground();
+        legend.drawLegend();
         draw();
-
-        if (Settings.INFO_FOR_4_IMAGES)
-            legend.drawInfoForForImages();
-        else {
-            legend.drawLegend();
-        }
     }
 
     /**
@@ -68,27 +62,4 @@ public class AntGraphic {
             }
         }
     }
-
-//    /**
-//     * Sets background of {@link Graphics2D} object. Because default {@link Graphics2D} setBackground method
-//     * doesn't work.
-//     */
-//    public void setBackground() {
-//        graphics.setColor(Colors.BACKGROUND.getColor());
-//        int sizeInPixels = Util.sizeDivisibleByTwo(Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS);
-//        graphics.fillRect(0, 0, sizeInPixels, sizeInPixels);
-//    }
-
-//    /**
-//     * Sets background of {@link Graphics2D} object for presentation animation the background is wider to accommodate for
-//     * information displayed on the right side.
-//     */
-//    public void setBackgroundPresentation() {
-//        graphics.setColor(Colors.BACKGROUND.getColor());
-//        int sizeInPixels = Util.sizeDivisibleByTwo(Settings.SHOW_GRID ? Settings.SIZE_IN_PIXELS + 1 : Settings.SIZE_IN_PIXELS);
-//        if (Settings.INFO_FOR_4_IMAGES)
-//            graphics.fillRect(0, 0, sizeInPixels, sizeInPixels);
-//        else
-//            graphics.fillRect(0, 0, sizeInPixels + Settings.SIZE_OF_LEGEND, sizeInPixels);
-//    }
 }
