@@ -46,10 +46,11 @@ public class Settings {
     public static void showExplanationSettings() {
         Settings.SHOW_GRID = true;
         Settings.SKIP = 1;
-        Settings.MAX_MOVES = 200;
+        Settings.MAX_MOVES = 6;
         Settings.SIZE_OF_SQUARE = 80;
         Settings.EXPLANATION_ANIMATION = true;
-        Settings.IMAGE_PADDING = 500;
+//        Settings.IMAGE_PADDING = 500;
+        Settings.VIDEO_REPEAT_LAST_FRAME = 0;
     }
 
     public static void showExplanationSecondPartSettings() {

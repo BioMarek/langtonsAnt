@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 public class VideoGenerator {
     private Ant ant;
-    private AntGraphic antGraphic;
+    private AntVisualization antVisualization;
 
     /**
      * Generates *.mp4 for interesting rules which are passed as argument.
@@ -35,17 +35,26 @@ public class VideoGenerator {
         for (Rule rule : interesting) {
             System.out.println("working on " + rule.rule);
             rule.setVariables();
-            Ant ant = new Ant(Settings.RULE);
+            this.ant = new Ant(Settings.RULE);
             ant.allMoves(); // calculates number of moves in total
 
             Settings.SKIP = ant.steps / Settings.VIDEO_NUM_IMAGES;
             System.out.println("max steps: " + ant.steps + " skip: " + Settings.SKIP);
 
+            this.ant = new Ant(Settings.RULE);
+            antVisualization = new AntGraphic(ant);
+
             createMP4(createImages());
         }
     }
 
-    public void createMP4(List<BufferedImage> bufferedImages) {
+    public void generateExplanation() {
+        ant = new Ant(Settings.RULE);
+        antVisualization = new AntExplanation(ant);
+        createMP4(createImages());
+    }
+
+    private void createMP4(List<BufferedImage> bufferedImages) {
         try {
             SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File(Settings.VIDEO_BASE_PATH + Settings.RULE + ".mp4")),
                     Rational.R(Settings.VIDEO_FPS, 1), Format.MOV, Codec.PNG, null);
@@ -64,13 +73,10 @@ public class VideoGenerator {
     }
 
     private List<BufferedImage> createImages() {
-        ant = new Ant(Settings.RULE);
-        antGraphic = new AntGraphic(ant);
         List<BufferedImage> result = new ArrayList<>();
-        int count = 0;
 
         while (!ant.stopped) {
-            System.out.println("creating image " + count++);
+            antVisualization.createNextImage();
             result.add(createBufferedImage());
         }
         return result;
@@ -78,8 +84,7 @@ public class VideoGenerator {
 
     private BufferedImage createBufferedImage() {
         BufferedImage bImg = new BufferedImage(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT, BufferedImage.TYPE_INT_RGB);
-        ant.nextMoves();
-        antGraphic.drawPresentation(bImg.createGraphics());
+        antVisualization.drawPresentation(bImg.createGraphics());
         return bImg;
     }
 

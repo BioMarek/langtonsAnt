@@ -9,11 +9,12 @@ import java.awt.Graphics2D;
 /**
  * Creates graphic for ant grid and handles legend.
  */
-public class AntGraphic {
+public class AntGraphic implements AntVisualization {
     private Graphics2D graphics;
     private final Ant ant;
     private final Legend legend;
     private final Background background;
+    private int imageCount = 0;
 
     public AntGraphic(Ant ant) {
         this.ant = ant;
@@ -32,9 +33,16 @@ public class AntGraphic {
         draw();
     }
 
+    @Override
+    public void createNextImage() {
+        System.out.println("creating image " + imageCount++);
+        ant.nextMoves();
+    }
+
     /**
      * Draws image that can be presented as frame of animation. Contains info on the right side of image.
      */
+    @Override
     public void drawPresentation(Graphics2D graphics) {
         this.graphics = graphics;
         legend.graphics = graphics;
