@@ -1,4 +1,4 @@
-package Graphic;
+package Graphic.Visualization;
 
 import Logic.Ant;
 import Utils.Colors;

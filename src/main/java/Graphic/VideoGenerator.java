@@ -43,28 +43,23 @@ public class VideoGenerator {
 
             this.ant = new Ant(Settings.RULE);
             antVisualization = new AntGraphic(ant);
-
-            createMP4(createImages());
+            createMP4();
         }
     }
 
     public void generateExplanation() {
         ant = new Ant(Settings.RULE);
         antVisualization = new AntExplanation(ant);
-        createMP4(createImages());
+        createMP4();
     }
 
-    private void createMP4(List<BufferedImage> bufferedImages) {
+    private void createMP4() {
+        ImageIterator imageIterator = new ImageIterator(ant, antVisualization);
         try {
             SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File(Settings.VIDEO_BASE_PATH + Settings.RULE + ".mp4")),
                     Rational.R(Settings.VIDEO_FPS, 1), Format.MOV, Codec.PNG, null);
-            for (int i = 0; i < bufferedImages.size(); i++) {
-                System.out.println("encoding image " + i);
-                encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(bufferedImages.get(i)));
-            }
-            for (int i = 0; i < Settings.VIDEO_REPEAT_LAST_FRAME; i++) {
-                System.out.println("encoding image " + (bufferedImages.size() - 1));
-                encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(bufferedImages.get(bufferedImages.size() - 1)));
+            while (imageIterator.hasNext()) {
+                encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(imageIterator.next()));
             }
             encoder.finish();
         } catch (IOException e) {
@@ -76,7 +71,7 @@ public class VideoGenerator {
         List<BufferedImage> result = new ArrayList<>();
 
         while (!ant.stopped) {
-            antVisualization.createNextImage();
+            antVisualization.createNextFrame();
             result.add(createBufferedImage());
         }
         return result;

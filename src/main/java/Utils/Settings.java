@@ -11,7 +11,6 @@ public class Settings {
     public static int SIZE_IN_PIXELS = 1080; // size of ant board
     public static int SIZE_OF_SQUARE = 1; // size of square on ant board
     public static int LEGEND_START_X = 1500;
-    public static int LEGEND_WIDTH = 420;
     public static int GRID_WIDTH = 1500;
     public static int BACKGROUND_WIDTH = 1920;
     public static int BACKGROUND_HEIGHT = 1080;
@@ -46,7 +45,7 @@ public class Settings {
     public static void showExplanationSettings() {
         Settings.SHOW_GRID = true;
         Settings.SKIP = 1;
-        Settings.MAX_MOVES = 6;
+        Settings.MAX_MOVES = 10;
         Settings.SIZE_OF_SQUARE = 80;
         Settings.EXPLANATION_ANIMATION = true;
 //        Settings.IMAGE_PADDING = 500;

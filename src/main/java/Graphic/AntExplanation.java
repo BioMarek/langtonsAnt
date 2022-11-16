@@ -1,5 +1,7 @@
 package Graphic;
 
+import Graphic.Visualization.Background;
+import Graphic.Visualization.Legend;
 import Logic.Ant;
 import Utils.Colors;
 import Utils.Direction;
@@ -43,8 +45,8 @@ public class AntExplanation implements AntVisualization {
     }
 
     @Override
-    public void createNextImage() {
-        System.out.println("creating image " + imageCount++);
+    public void createNextFrame() {
+        System.out.println("creating frame " + imageCount++);
         if (++currentCycle % explanationFrames == 0) // we have time for ant move animation
             ant.nextMoves();
         if (currentCycle == explanationFrames)

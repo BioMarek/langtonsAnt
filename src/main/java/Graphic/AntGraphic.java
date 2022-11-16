@@ -1,5 +1,8 @@
 package Graphic;
 
+import Graphic.AntVisualization;
+import Graphic.Visualization.Background;
+import Graphic.Visualization.Legend;
 import Logic.Ant;
 import Utils.Colors;
 import Utils.Settings;
@@ -34,8 +37,8 @@ public class AntGraphic implements AntVisualization {
     }
 
     @Override
-    public void createNextImage() {
-        System.out.println("creating image " + imageCount++);
+    public void createNextFrame() {
+        System.out.println("creating frame " + imageCount++);
         ant.nextMoves();
     }
 
