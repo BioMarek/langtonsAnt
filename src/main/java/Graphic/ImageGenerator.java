@@ -1,5 +1,7 @@
-package Logic;
+package Graphic;
 
+import Logic.Ant;
+import Logic.RulesGenerator;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
@@ -29,30 +31,13 @@ public class ImageGenerator {
      * @param rule that ant is running
      */
     private void saveImageWithoutPanel(String rule) {
-        InterestingnessEvaluator interestingnessEvaluator = new InterestingnessEvaluator(ant.grid);
-        String fileName;
-
         ant.allMoves();
-
-        if (Settings.NO_EVAL) {
-            fileName = String.format(Settings.IMAGE_BASE_PATH + "/%d/%s.png", rule.length(), rule);
-        } else {
-            if (Settings.ONLY_HIGHWAYS)
-                if (interestingnessEvaluator.highwayEvaluator(Settings.FILED_PORTION_LIMIT) < 2.2D)
-                    return;
-                else
-                    fileName = String.format("./images/%.2f_%s.png", interestingnessEvaluator.highwayEvaluator(Settings.FILED_PORTION_LIMIT), rule);
-            else
-                fileName = String.format("./images/%.2f_%s.png", interestingnessEvaluator.getFinalScore(), rule);
-        }
-
-
-        BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
+        BufferedImage bImg = new BufferedImage(Settings.GRID_WIDTH, Settings.BACKGROUND_HEIGHT, BufferedImage.TYPE_INT_RGB);
         AntGraphic antGraphic = new AntGraphic(ant);
         antGraphic.drawImage(bImg.createGraphics());
 
         try {
-            ImageIO.write(bImg, "png", new File(fileName));
+            ImageIO.write(bImg, "png", new File(String.format(Settings.IMAGE_BASE_PATH + "/%d/%s.png", rule.length(), rule)));
         } catch (IOException e) {
             e.printStackTrace();
         }

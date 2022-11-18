@@ -1,7 +1,7 @@
 package Threads;
 
+import Graphic.AntGraphic;
 import Logic.Ant;
-import Logic.AntGraphic;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class ImageRunnable implements Runnable {
     private final List<String> rules;
+
     public ImageRunnable(List<String> rules) {
         this.rules = rules;
     }
@@ -39,7 +40,7 @@ public class ImageRunnable implements Runnable {
         AntGraphic antGraphic = new AntGraphic(ant);
         ant.allMoves();
         if (ant.usedTopColor) {
-            BufferedImage bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
+            BufferedImage bImg = new BufferedImage(Settings.GRID_WIDTH, Settings.BACKGROUND_HEIGHT, BufferedImage.TYPE_INT_RGB);
             antGraphic.drawImage(bImg.createGraphics());
 
             try {

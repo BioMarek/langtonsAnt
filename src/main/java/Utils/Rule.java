@@ -31,7 +31,7 @@ public class Rule {
     public static List<Rule> getInteresting() {
         Settings.generateInterestingSettings();
         List<Rule> interesting = new ArrayList<>();
-        interesting.add(new Rule("RRLLLRLLLLLLLLL", 0, 1, 1));  // IMAGE_PADDING 500
+        interesting.add(new Rule("RRLLLRLLLLLLLLL", 0, 1, 1));  // IMAGE_PADDING 600
         interesting.add(new Rule("LLLLLRLLLRRLLLLL", 0, 1, 1));
         interesting.add(new Rule("LLLRLLRRRLLLLL", 0, 1, 1));
         interesting.add(new Rule("LLRLRRLLRLLLLLL", 0, 1, 1));
@@ -74,8 +74,8 @@ public class Rule {
     public static List<Rule> getHighways() {
         Settings.generateHighwaysSettings();
         List<Rule> interesting = new ArrayList<>();
-        interesting.add(new Rule("LLRLRLLLLRLRLRRL", 1_500_000, 0.1, 1));
         interesting.add(new Rule("LRRRRRLRRRRLLLL", 480_000, 0.5, 2));
+        interesting.add(new Rule("LLRLRLLLLRLRLRRL", 1_500_000, 0.1, 1));
         interesting.add(new Rule("LLLLLLLRRLLRLLL", 0, 1, 2));
         interesting.add(new Rule("LLLRLLRLRRRLLLLL", 0, 1, 2));
         interesting.add(new Rule("LLRLRLLLRLLLLL", 6_500_000, 0.1, 1));
@@ -146,6 +146,7 @@ public class Rule {
 
         return interesting;
     }
+
     public static List<Rule> getHighWayScreenFillRules() {
         List<Rule> interesting = new ArrayList<>();
         interesting.add(new Rule("RRL", 0, 1, 10)); // add grid
@@ -165,6 +166,16 @@ public class Rule {
         interesting.add(new Rule("RLRLRLRLRLRL", 0, 1, 5));
         interesting.add(new Rule("RLRLRLRLRLRLRL", 0, 1, 5));
         interesting.add(new Rule("RLRLRLRLRLRLRLRL", 0, 1, 5));
+
+        return interesting;
+    }
+
+    public static List<Rule> getDifferentTestRules() {
+        Settings.generateTestSettings();
+        List<Rule> interesting = new ArrayList<>();
+        interesting.add(new Rule("LRRRRRLRRRRLLLL", 480_000, 0.5, 2));
+        interesting.add(new Rule("RRLLLRLLLLLLLLL", 0, 1, 1));  // IMAGE_PADDING 600
+        interesting.add(new Rule("RLL", 0, 1, 1));
 
         return interesting;
     }

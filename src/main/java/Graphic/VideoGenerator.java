@@ -1,8 +1,8 @@
-package Logic;
+package Graphic;
 
+import Logic.Ant;
 import Utils.Rule;
 import Utils.Settings;
-import Utils.Util;
 import com.squareup.gifencoder.GifEncoder;
 import com.squareup.gifencoder.ImageOptions;
 import org.jcodec.api.SequenceEncoder;
@@ -23,50 +23,8 @@ import java.util.concurrent.TimeUnit;
 
 
 public class VideoGenerator {
-
-    public void createMP4(List<BufferedImage> bufferedImages) {
-        try {
-            SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File(Settings.VIDEO_BASE_PATH + Settings.RULE + ".mp4")),
-                    Rational.R(Settings.VIDEO_FPS, 1), Format.MOV, Codec.PNG, null);
-            for (int i = 0; i < bufferedImages.size(); i++) {
-                System.out.println("encoding image " + i);
-                encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(bufferedImages.get(i)));
-            }
-            for (int i = 0; i < Settings.VIDEO_REPEAT_LAST_FRAME; i++) {
-                System.out.println("encoding image " + (bufferedImages.size() - 1));
-                encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(bufferedImages.get(bufferedImages.size() - 1)));
-            }
-            encoder.finish();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private List<BufferedImage> createImages() {
-        Ant ant = new Ant(Settings.RULE);
-        List<BufferedImage> result = new ArrayList<>();
-        int count = 0;
-
-        while (!ant.stopped) {
-            result.add(createBufferedImage(ant, count++));
-        }
-        return result;
-    }
-
-    private BufferedImage createBufferedImage(Ant ant, int count) {
-        System.out.println("creating image " + count);
-        ant.nextMoves();
-        BufferedImage bImg;
-        if (Settings.INFO_FOR_4_IMAGES)
-            bImg = new BufferedImage(Settings.SIZE_IN_PIXELS, Settings.SIZE_IN_PIXELS, BufferedImage.TYPE_INT_RGB);
-        else
-            bImg = new BufferedImage(Util.sizeDivisibleByTwo(Settings.SIZE_IN_PIXELS + Settings.SIZE_IN_PIXELS / 3),
-                    Settings.SIZE_IN_PIXELS,
-                    BufferedImage.TYPE_INT_RGB);
-        AntGraphic antGraphic = new AntGraphic(ant);
-        antGraphic.drawPresentation(bImg.createGraphics());
-        return bImg;
-    }
+    private Ant ant;
+    private AntVisualization antVisualization;
 
     /**
      * Generates *.mp4 for interesting rules which are passed as argument.
@@ -77,19 +35,58 @@ public class VideoGenerator {
         for (Rule rule : interesting) {
             System.out.println("working on " + rule.rule);
             rule.setVariables();
-            Ant ant = new Ant(Settings.RULE);
-            ant.allMoves();
+            this.ant = new Ant(Settings.RULE);
+            ant.allMoves(); // calculates number of moves in total
 
             Settings.SKIP = ant.steps / Settings.VIDEO_NUM_IMAGES;
             System.out.println("max steps: " + ant.steps + " skip: " + Settings.SKIP);
 
-            createMP4(createImages());
+            this.ant = new Ant(Settings.RULE);
+            antVisualization = new AntGraphic(ant);
+            createMP4();
         }
     }
 
+    public void generateExplanation() {
+        ant = new Ant(Settings.RULE);
+        antVisualization = new AntExplanation(ant);
+        createMP4();
+    }
+
+    private void createMP4() {
+        ImageIterator imageIterator = new ImageIterator(ant, antVisualization);
+        try {
+            SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File(Settings.VIDEO_BASE_PATH + Settings.RULE + ".mp4")),
+                    Rational.R(Settings.VIDEO_FPS, 1), Format.MOV, Codec.PNG, null);
+            while (imageIterator.hasNext()) {
+                encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(imageIterator.next()));
+            }
+            encoder.finish();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private List<BufferedImage> createImages() {
+        List<BufferedImage> result = new ArrayList<>();
+
+        while (!ant.stopped) {
+            antVisualization.createNextFrame();
+            result.add(createBufferedImage());
+        }
+        return result;
+    }
+
+    private BufferedImage createBufferedImage() {
+        BufferedImage bImg = new BufferedImage(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT, BufferedImage.TYPE_INT_RGB);
+        antVisualization.drawPresentation(bImg.createGraphics());
+        return bImg;
+    }
+
     /**
-     * Creates images of rule according to Settings and from these images creates gif.
+     * Obsolete *.mp4 is used. Creates images of rule according to Settings and from these images creates gif.
      */
+    @Deprecated
     public void createGif() {
         try (FileOutputStream outputStream = new FileOutputStream(Settings.VIDEO_BASE_PATH + Settings.RULE + ".gif")) {
             GifEncoder encoder = new GifEncoder(outputStream, Settings.GIF_WIDTH, Settings.GIF_HEIGHT, 1);
@@ -110,8 +107,9 @@ public class VideoGenerator {
     }
 
     /**
-     * Convert BufferedImage into RGB pixel array
+     * Obsolete *.mp4 is used. Convert BufferedImage into RGB pixel array
      */
+    @Deprecated
     private int[][] convertImageToArray(BufferedImage bufferedImage) {
         int[][] rgbArray = new int[bufferedImage.getHeight()][bufferedImage.getWidth()];
         for (int i = 0; i < bufferedImage.getHeight(); i++) {
@@ -122,6 +120,7 @@ public class VideoGenerator {
         return rgbArray;
     }
 
+    @Deprecated
     public void saveImages() {
         new File("gifs/" + Settings.RULE).mkdirs();
         List<BufferedImage> bufferedImages = createImages();

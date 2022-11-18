@@ -1,12 +1,16 @@
-import Logic.VideoGenerator;
+import Graphic.VideoGenerator;
+import Threads.ImageParallelWorker;
 import Utils.Rule;
 import Utils.Settings;
 import Windows.GridFrame;
 
 public class Main {
     public static void main(String[] args) {
-        Settings.showExplanationSecondPartSettings();
-        new GridFrame();  // Runs one rule based on setting realtime
+        Settings.showExplanationSettings();
+        VideoGenerator videoGenerator = new VideoGenerator();
+        videoGenerator.generateExplanation();
+
+//        new GridFrame();  // Runs one rule based on setting realtime
 
 //        ImageGenerator imageGenerator = new ImageGenerator();
 //        imageGenerator.drawAllRules();
@@ -15,7 +19,6 @@ public class Main {
 //        imageParallelWorker.drawAllRulesInParallel();
 
 //        VideoGenerator videoGenerator = new VideoGenerator();
-//        videoGenerator.generateInteresting(Rule.getDifferentRuleSamePatternRules());
-//        videoGenerator.createMP4();
+//        videoGenerator.generateInteresting(Rule.getDifferentTestRules());
     }
 }
