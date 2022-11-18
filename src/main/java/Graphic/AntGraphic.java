@@ -1,6 +1,5 @@
 package Graphic;
 
-import Graphic.AntVisualization;
 import Graphic.Visualization.Background;
 import Graphic.Visualization.Legend;
 import Logic.Ant;
@@ -66,7 +65,7 @@ public class AntGraphic implements AntVisualization {
                 int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
                 // part that makes zoom
                 if (Settings.ZOOMED)
-                    graphics.fillRect(column * Settings.SIZE_OF_SQUARE + Settings.GRAPHIC_SHIFT, row * Settings.SIZE_OF_SQUARE + Settings.GRAPHIC_SHIFT, sizeOfSquare, sizeOfSquare);
+                    graphics.fillRect(column * Settings.SIZE_OF_SQUARE + Settings.GRAPHIC_SHIFT_VERTICAL, row * Settings.SIZE_OF_SQUARE + Settings.GRAPHIC_SHIFT_VERTICAL, sizeOfSquare, sizeOfSquare);
                 else
                     graphics.fillRect(column * Settings.SIZE_OF_SQUARE, row * Settings.SIZE_OF_SQUARE, sizeOfSquare, sizeOfSquare);
             }

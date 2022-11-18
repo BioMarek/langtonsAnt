@@ -47,7 +47,9 @@ public class AntExplanation implements AntVisualization {
     @Override
     public void createNextFrame() {
         System.out.println("creating frame " + imageCount++);
-        if (++currentCycle % explanationFrames == 0) // we have time for ant move animation
+        if (++currentCycle % explanationFrames == 0
+                || ant.steps < 30 && Settings.ZOOMED && currentCycle % 5 == 0
+                || ant.steps >= 30 && currentCycle % 2 == 0) // we have time for ant move animation
             ant.nextMoves();
         if (currentCycle == explanationFrames)
             currentCycle = 0;
@@ -56,8 +58,9 @@ public class AntExplanation implements AntVisualization {
         if (ant.steps > Settings.ZOOM_STEPS) {
             Settings.ZOOMED = true;
             if (Settings.SIZE_OF_SQUARE > 10) {
-                Settings.SIZE_OF_SQUARE -= 2;
-                Settings.GRAPHIC_SHIFT += 12;
+                Settings.SIZE_OF_SQUARE -= 1;
+                Settings.GRAPHIC_SHIFT_VERTICAL += 10;
+                Settings.GRAPHIC_SHIFT_HORIZONTAL += 7;
             }
         }
     }
@@ -73,7 +76,8 @@ public class AntExplanation implements AntVisualization {
         background.setBackground(true);
         legend.drawLegend();
         draw();
-        drawExplanation();
+        if (!Settings.ZOOMED)
+            drawAntImage();
     }
 
 
@@ -88,21 +92,21 @@ public class AntExplanation implements AntVisualization {
                 int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
                 // part that makes zoom
                 if (Settings.ZOOMED)
-                    graphics.fillRect(column * Settings.SIZE_OF_SQUARE + Settings.GRAPHIC_SHIFT, row * Settings.SIZE_OF_SQUARE + Settings.GRAPHIC_SHIFT, sizeOfSquare, sizeOfSquare);
+                    graphics.fillRect(column * Settings.SIZE_OF_SQUARE + Settings.GRAPHIC_SHIFT_VERTICAL, row * Settings.SIZE_OF_SQUARE + Settings.GRAPHIC_SHIFT_HORIZONTAL, sizeOfSquare, sizeOfSquare);
                 else
                     graphics.fillRect(column * Settings.SIZE_OF_SQUARE, row * Settings.SIZE_OF_SQUARE, sizeOfSquare, sizeOfSquare);
             }
         }
     }
 
-    private void drawExplanation() {
+    private void drawAntImage() {
         double locationX = antImage.getWidth() / 2.0;
         double locationY = antImage.getHeight() / 2.0;
         AffineTransform tx = AffineTransform.getRotateInstance(currentAngle, locationX, locationY);
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 
         graphics.drawImage(antImage, op, (int) startX, (int) startY);
-        Position position = explanationAnimationPositions(ant.steps);
+        Position position = antImagePositions(ant.steps);
 
         if (currentCycle < explanationFrames / 2) {
             startX = startX + position.row * 2.0 / explanationFrames;
@@ -116,7 +120,7 @@ public class AntExplanation implements AntVisualization {
         }
     }
 
-    private Position explanationAnimationPositions(int i) {
+    private Position antImagePositions(int i) {
         List<Position> positions = new ArrayList<>();
 
         positions.add(new Position(0, 0, Direction.RIGHT));
