@@ -1,6 +1,7 @@
 package Graphic;
 
 import Graphic.Visualization.Background;
+import Graphic.Visualization.Cross;
 import Graphic.Visualization.Legend;
 import Logic.Ant;
 import Utils.Colors;
@@ -8,20 +9,19 @@ import Utils.Settings;
 
 import java.awt.Graphics2D;
 
-/**
- * Creates graphic for ant grid.
- */
-public class AntGraphic implements AntVisualization {
+public class AntGraphicFour implements AntVisualization {
     private Graphics2D graphics;
     private final Ant ant;
     private final Legend legend;
     private final Background background;
+    private final Cross cross;
     private int imageCount = 0;
 
-    public AntGraphic(Ant ant) {
+    public AntGraphicFour(Ant ant) {
         this.ant = ant;
         this.legend = new Legend(ant);
         this.background = new Background();
+        this.cross = new Cross();
     }
 
     /**
@@ -49,9 +49,11 @@ public class AntGraphic implements AntVisualization {
         this.graphics = graphics;
         legend.graphics = graphics;
         background.graphics = graphics;
+        cross.graphics = graphics;
         background.setBackground(true);
-        legend.drawLegend();
+        legend.drawInfoForForImages();
         draw();
+        cross.drawCross();
     }
 
     /**

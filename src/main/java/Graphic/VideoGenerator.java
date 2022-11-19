@@ -47,7 +47,7 @@ public class VideoGenerator {
             System.out.println("max steps: " + ant.steps + " skip: " + Settings.SKIP);
 
             this.ant = new Ant(Settings.RULE);
-            antVisualization = new AntGraphic(ant);
+            antVisualization = new AntGraphicSingle(ant);
             createMP4();
         }
     }
