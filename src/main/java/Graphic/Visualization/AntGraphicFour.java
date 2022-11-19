@@ -1,8 +1,9 @@
-package Graphic;
+package Graphic.Visualization;
 
-import Graphic.Visualization.Background;
-import Graphic.Visualization.Cross;
-import Graphic.Visualization.Legend;
+import Graphic.AntVisualization;
+import Graphic.Components.Background;
+import Graphic.Components.Cross;
+import Graphic.Components.Legend;
 import Logic.Ant;
 import Utils.Colors;
 import Utils.Settings;

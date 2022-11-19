@@ -1,6 +1,6 @@
 package Windows;
 
-import Graphic.AntGraphicFour;
+import Graphic.Visualization.AntGraphicFour;
 import Graphic.AntVisualization;
 import Logic.Ant;
 import Utils.Settings;

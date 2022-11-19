@@ -1,4 +1,4 @@
-package Graphic.Visualization;
+package Graphic.Components;
 
 import Utils.Colors;
 import Utils.Settings;

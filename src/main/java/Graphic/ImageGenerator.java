@@ -1,5 +1,6 @@
 package Graphic;
 
+import Graphic.Visualization.AntGraphicSingle;
 import Logic.Ant;
 import Logic.RulesGenerator;
 import Utils.Settings;

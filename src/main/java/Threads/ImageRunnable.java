@@ -1,6 +1,6 @@
 package Threads;
 
-import Graphic.AntGraphicSingle;
+import Graphic.Visualization.AntGraphicSingle;
 import Logic.Ant;
 import Utils.Settings;
 

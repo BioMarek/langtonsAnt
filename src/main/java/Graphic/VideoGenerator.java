@@ -1,5 +1,7 @@
 package Graphic;
 
+import Graphic.Visualization.AntExplanation;
+import Graphic.Visualization.AntGraphicSingle;
 import Logic.Ant;
 import Utils.Rule;
 import Utils.Settings;
