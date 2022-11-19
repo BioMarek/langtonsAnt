@@ -18,6 +18,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Used for explanation part of video where ant image is show and then grid is zoomed out. Explanations is from two
+ * parts. In first and image is shown and zoomed out from 80 to 10 pixels per square and runs to 100 steps. In second
+ * part ant runs 10 pixel squares. It would be hard to make zoom and use padding and to see ant to go to the edge.
+ */
 public class AntExplanation implements AntVisualization {
     private Graphics2D graphics;
     private final Ant ant;
@@ -46,10 +51,10 @@ public class AntExplanation implements AntVisualization {
 
     @Override
     public void createNextFrame() {
-        System.out.println("creating frame " + imageCount++);
+        System.out.println("creating frame " + imageCount++ + " " + ant.steps + "/" + Settings.MAX_MOVES);
         if (++currentCycle % explanationFrames == 0
-                || ant.steps < 30 && Settings.ZOOMED && currentCycle % 5 == 0
-                || ant.steps >= 30 && currentCycle % 2 == 0) // we have time for ant move animation
+                || ant.steps < 20 && Settings.ZOOMED && currentCycle % 5 == 0 // first speedup during zoom
+                || ant.steps >= 20) // second speedup after zoom
             ant.nextMoves();
         if (currentCycle == explanationFrames)
             currentCycle = 0;
@@ -59,8 +64,8 @@ public class AntExplanation implements AntVisualization {
             Settings.ZOOMED = true;
             if (Settings.SIZE_OF_SQUARE > 10) {
                 Settings.SIZE_OF_SQUARE -= 1;
-                Settings.GRAPHIC_SHIFT_VERTICAL += 10;
-                Settings.GRAPHIC_SHIFT_HORIZONTAL += 7;
+                Settings.GRAPHIC_SHIFT_COLUMN += 9.5;
+                Settings.GRAPHIC_SHIFT_ROW += 6.9;
             }
         }
     }
@@ -85,6 +90,12 @@ public class AntExplanation implements AntVisualization {
      * Converts grid of numbers to {@link Graphics2D}.
      */
     public void draw() {
+        // in order to connect first part of explanation video with second part which is regular ant without zoom we
+        // need to adjust where squares are rendered on the screen because just updating GRAPHIC_SHIFT_COLUMN and
+        // GRAPHIC_SHIFT_ROW is not precise.
+        int column_adjustment = -4;
+        int row_adjustment = -2;
+
         int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
         for (int row = 0; row < ant.gridRows - borderPadding; row++) {
             for (int column = 0; column < ant.gridColumns - borderPadding; column++) {
@@ -92,7 +103,8 @@ public class AntExplanation implements AntVisualization {
                 int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
                 // part that makes zoom
                 if (Settings.ZOOMED)
-                    graphics.fillRect(column * Settings.SIZE_OF_SQUARE + Settings.GRAPHIC_SHIFT_VERTICAL, row * Settings.SIZE_OF_SQUARE + Settings.GRAPHIC_SHIFT_HORIZONTAL, sizeOfSquare, sizeOfSquare);
+                    graphics.fillRect(column * Settings.SIZE_OF_SQUARE + (int) Settings.GRAPHIC_SHIFT_COLUMN + column_adjustment,
+                            row * Settings.SIZE_OF_SQUARE + (int) Settings.GRAPHIC_SHIFT_ROW + row_adjustment, sizeOfSquare, sizeOfSquare);
                 else
                     graphics.fillRect(column * Settings.SIZE_OF_SQUARE, row * Settings.SIZE_OF_SQUARE, sizeOfSquare, sizeOfSquare);
             }

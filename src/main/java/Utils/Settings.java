@@ -38,10 +38,10 @@ public class Settings {
     public static int FRAMES_BETWEEN_STEPS = 30; // for explanation animation frames
     public static int VIDEO_REPEAT_LAST_FRAME = 30; // how many times the last image should be repeated in video, 30 is one second
     public static boolean ZOOMED = false; // whether graphic has been zoomed in
-    public static int ZOOM_STEPS = 2; // number of ant steps after which there will be zoom
+    public static int ZOOM_STEPS = 8; // number of ant steps after which there will be zoom
     // TODO better explanation
-    public static int GRAPHIC_SHIFT_VERTICAL = 0; // during zoom how much is graphic column moved with respect to grid column
-    public static int GRAPHIC_SHIFT_HORIZONTAL = 0; // during zoom how much is graphic row moved with respect to grid row
+    public static double GRAPHIC_SHIFT_COLUMN = 0; // during zoom how much is graphic column moved with respect to grid column
+    public static double GRAPHIC_SHIFT_ROW = 0; // during zoom how much is graphic row moved with respect to grid row
 
     public static void showExplanationSettings() {
         Settings.SHOW_GRID = true;
@@ -55,11 +55,12 @@ public class Settings {
 
     public static void showExplanationSecondPartSettings() {
         Settings.SHOW_GRID = true;
-        Settings.SKIP = 20;
+        Settings.SKIP = 50;
         Settings.MAX_MOVES = 20000;
         Settings.SIZE_OF_SQUARE = 10;
-        Settings.EXPLANATION_ANIMATION = false;
-        Settings.DELAY = 20;
+        Settings.ZOOMED = true;
+        Settings.IMAGE_PADDING = 0;
+        Settings.VIDEO_REPEAT_LAST_FRAME = 30;
     }
 
     public static void generateHighwaysSettings() {
