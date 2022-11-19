@@ -25,6 +25,11 @@ import java.util.concurrent.TimeUnit;
 public class VideoGenerator {
     private Ant ant;
     private AntVisualization antVisualization;
+    private final BufferedImage bImg;
+
+    public VideoGenerator() {
+        bImg = new BufferedImage(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT, BufferedImage.TYPE_INT_RGB);
+    }
 
     /**
      * Generates *.mp4 for interesting rules which are passed as argument.
@@ -72,15 +77,10 @@ public class VideoGenerator {
 
         while (!ant.stopped) {
             antVisualization.createNextFrame();
-            result.add(createBufferedImage());
+            antVisualization.drawPresentation(bImg.createGraphics());
+            result.add(bImg);
         }
         return result;
-    }
-
-    private BufferedImage createBufferedImage() {
-        BufferedImage bImg = new BufferedImage(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT, BufferedImage.TYPE_INT_RGB);
-        antVisualization.drawPresentation(bImg.createGraphics());
-        return bImg;
     }
 
     /**

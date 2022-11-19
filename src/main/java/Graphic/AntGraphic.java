@@ -9,7 +9,7 @@ import Utils.Settings;
 import java.awt.Graphics2D;
 
 /**
- * Creates graphic for ant grid and handles legend.
+ * Creates graphic for ant grid.
  */
 public class AntGraphic implements AntVisualization {
     private Graphics2D graphics;
@@ -65,7 +65,7 @@ public class AntGraphic implements AntVisualization {
                 int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
                 // part that makes zoom
                 if (Settings.ZOOMED)
-                    graphics.fillRect(column * Settings.SIZE_OF_SQUARE + Settings.GRAPHIC_SHIFT_VERTICAL, row * Settings.SIZE_OF_SQUARE + Settings.GRAPHIC_SHIFT_VERTICAL, sizeOfSquare, sizeOfSquare);
+                    graphics.fillRect(column * Settings.SIZE_OF_SQUARE + (int) Settings.GRAPHIC_SHIFT_COLUMN, row * Settings.SIZE_OF_SQUARE + (int) Settings.GRAPHIC_SHIFT_COLUMN, sizeOfSquare, sizeOfSquare);
                 else
                     graphics.fillRect(column * Settings.SIZE_OF_SQUARE, row * Settings.SIZE_OF_SQUARE, sizeOfSquare, sizeOfSquare);
             }
