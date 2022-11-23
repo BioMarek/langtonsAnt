@@ -18,7 +18,7 @@ public class Ant {
 
     public Ant(String givenRule) {
         this.gridColumns = (Settings.GRID_WIDTH + Settings.IMAGE_PADDING) / Settings.SIZE_OF_SQUARE;
-        this.gridRows = (Settings.BACKGROUND_HEIGHT + Settings.IMAGE_PADDING) / Settings.SIZE_OF_SQUARE;
+        this.gridRows = (Settings.GRID_HEIGHT + Settings.IMAGE_PADDING) / Settings.SIZE_OF_SQUARE;
         this.grid = new int[gridRows][gridColumns];
 
         for (int i = 0; i < gridRows; i++) {

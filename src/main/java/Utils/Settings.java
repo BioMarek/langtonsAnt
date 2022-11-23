@@ -12,6 +12,7 @@ public class Settings {
     public static int SIZE_OF_SQUARE = 1; // size of square on ant board
     public static int LEGEND_START_X = 1500;
     public static int GRID_WIDTH = 1500;
+    public static int GRID_HEIGHT = 1080;
     public static int BACKGROUND_WIDTH = 1920;
     public static int BACKGROUND_HEIGHT = 1080;
 
@@ -89,5 +90,11 @@ public class Settings {
     public static void generateTestSettings() {
         Settings.VIDEO_NUM_IMAGES = 100;
         Settings.IMAGE_PADDING = 600;
+    }
+
+    public static void fourImagesPerScreenSettings(){
+        Settings.GRID_HEIGHT = 540;
+        Settings.GRID_WIDTH =  960;
+        Settings.IMAGE_PADDING = 0;
     }
 }

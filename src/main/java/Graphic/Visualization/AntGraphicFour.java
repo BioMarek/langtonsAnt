@@ -12,15 +12,21 @@ import java.awt.Graphics2D;
 
 public class AntGraphicFour implements AntVisualization {
     private Graphics2D graphics;
-    private final Ant ant;
+    private final Ant antTopLeft;
+    private final Ant antTopRight;
+    private final Ant antBottomLeft;
+    private final Ant antBottomRight;
     private final Legend legend;
     private final Background background;
     private final Cross cross;
     private int imageCount = 0;
 
-    public AntGraphicFour(Ant ant) {
-        this.ant = ant;
-        this.legend = new Legend(ant);
+    public AntGraphicFour(Ant antTopLeft, Ant antTopRight, Ant antBottomLeft, Ant antBottomRight) {
+        this.antTopLeft = antTopLeft;
+        this.antTopRight = antTopRight;
+        this.antBottomLeft = antBottomLeft;
+        this.antBottomRight = antBottomRight;
+        this.legend = new Legend(antTopLeft);
         this.background = new Background();
         this.cross = new Cross();
     }
@@ -39,7 +45,7 @@ public class AntGraphicFour implements AntVisualization {
     @Override
     public void createNextFrame() {
         System.out.println("creating frame " + imageCount++);
-        ant.nextMoves();
+        antTopLeft.nextMoves();
     }
 
     /**
@@ -57,20 +63,29 @@ public class AntGraphicFour implements AntVisualization {
         cross.drawCross();
     }
 
+    @Override
+    public void nextMoves() {
+        this.antTopLeft.nextMoves();
+        this.antTopRight.nextMoves();
+        this.antBottomLeft.nextMoves();
+        this.antBottomRight.nextMoves();
+    }
+
+    public void draw() {
+        drawAnt(antTopLeft, 0, 0);
+        drawAnt(antTopRight, 0, Settings.BACKGROUND_WIDTH / 2);
+        drawAnt(antBottomLeft, Settings.BACKGROUND_HEIGHT / 2, 0);
+        drawAnt(antBottomRight, Settings.BACKGROUND_HEIGHT / 2, Settings.BACKGROUND_WIDTH / 2);
+    }
+
     /**
      * Converts grid of numbers to {@link Graphics2D}.
      */
-    public void draw() {
-        int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
-        for (int row = 0; row < ant.gridRows - borderPadding; row++) {
-            for (int column = 0; column < ant.gridColumns - borderPadding; column++) {
-                Colors.setColor(graphics, ant.grid[row + borderPadding / 2][column + borderPadding / 2]);
-                int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
-                // part that makes zoom
-                if (Settings.ZOOMED)
-                    graphics.fillRect(column * Settings.SIZE_OF_SQUARE + (int) Settings.GRAPHIC_SHIFT_COLUMN, row * Settings.SIZE_OF_SQUARE + (int) Settings.GRAPHIC_SHIFT_COLUMN, sizeOfSquare, sizeOfSquare);
-                else
-                    graphics.fillRect(column * Settings.SIZE_OF_SQUARE, row * Settings.SIZE_OF_SQUARE, sizeOfSquare, sizeOfSquare);
+    public void drawAnt(Ant ant, int startRow, int startColumn) {
+        for (int row = 0; row < ant.gridRows; row++) {
+            for (int column = 0; column < ant.gridColumns; column++) {
+                Colors.setColor(graphics, ant.grid[row][column]);
+                graphics.fillRect((column + startColumn) * Settings.SIZE_OF_SQUARE, (row + startRow) * Settings.SIZE_OF_SQUARE, Settings.SIZE_OF_SQUARE, Settings.SIZE_OF_SQUARE);
             }
         }
     }

@@ -1,7 +1,7 @@
 package Windows;
 
-import Graphic.Visualization.AntGraphicFour;
 import Graphic.AntVisualization;
+import Graphic.Visualization.AntGraphicFour;
 import Logic.Ant;
 import Utils.Settings;
 
@@ -26,7 +26,14 @@ public class GridPanel extends JPanel implements ActionListener {
         this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
         this.setFocusable(true);
         this.ant = new Ant(Settings.RULE);
-        this.antVisualization = new AntGraphicFour(ant);
+        Settings.fourImagesPerScreenSettings();
+
+        Ant antTopLeft = new Ant("RL");
+        Ant antTopRight = new Ant("RLR");
+        Ant antBottomLeft = new Ant("RLRR");
+        Ant antBottomRight = new Ant("RLRRR");
+        this.antVisualization = new AntGraphicFour(antTopLeft, antTopRight, antBottomLeft, antBottomRight);
+
         startTimer();
     }
 
@@ -39,7 +46,7 @@ public class GridPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        ant.nextMoves();
+        antVisualization.nextMoves();
         repaint();
 
         if (ant.stopped) {
