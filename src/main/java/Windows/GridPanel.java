@@ -26,8 +26,8 @@ public class GridPanel extends JPanel implements ActionListener {
         this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
         this.setFocusable(true);
         this.ant = new Ant(Settings.RULE);
-        Settings.fourImagesPerScreenSettings();
 
+        Settings.fourImagesPerScreenSettings();
         Ant antTopLeft = new Ant("RL");
         Ant antTopRight = new Ant("RLR");
         Ant antBottomLeft = new Ant("RLRR");
@@ -46,7 +46,7 @@ public class GridPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        antVisualization.nextMoves();
+        antVisualization.createNextFrame();
         repaint();
 
         if (ant.stopped) {

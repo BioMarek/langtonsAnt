@@ -45,7 +45,10 @@ public class AntGraphicFour implements AntVisualization {
     @Override
     public void createNextFrame() {
         System.out.println("creating frame " + imageCount++);
-        antTopLeft.nextMoves();
+        this.antTopLeft.nextMoves();
+        this.antTopRight.nextMoves();
+        this.antBottomLeft.nextMoves();
+        this.antBottomRight.nextMoves();
     }
 
     /**
@@ -61,14 +64,6 @@ public class AntGraphicFour implements AntVisualization {
         legend.drawInfoForForImages();
         draw();
         cross.drawCross();
-    }
-
-    @Override
-    public void nextMoves() {
-        this.antTopLeft.nextMoves();
-        this.antTopRight.nextMoves();
-        this.antBottomLeft.nextMoves();
-        this.antBottomRight.nextMoves();
     }
 
     public void draw() {
