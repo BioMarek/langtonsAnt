@@ -86,6 +86,10 @@ public class AntExplanation implements AntVisualization {
             drawAntImage();
     }
 
+    @Override
+    public boolean stopped() {
+        return ant.stopped;
+    }
 
     /**
      * Converts grid of numbers to {@link Graphics2D}.

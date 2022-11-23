@@ -1,23 +1,20 @@
 package Graphic;
 
-import Logic.Ant;
 import Utils.Settings;
 
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
 
 public class ImageIterator implements Iterator<BufferedImage> {
-    private final Ant ant;
     private final AntVisualization antVisualization;
 
-    public ImageIterator(Ant ant, AntVisualization antVisualization) {
-        this.ant = ant;
+    public ImageIterator(AntVisualization antVisualization) {
         this.antVisualization = antVisualization;
     }
 
     @Override
     public boolean hasNext() {
-        return !ant.stopped;
+        return !antVisualization.stopped();
     }
 
     @Override

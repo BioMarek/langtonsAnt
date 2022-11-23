@@ -27,6 +27,7 @@ public class GridPanel extends JPanel implements ActionListener {
         this.setFocusable(true);
         this.ant = new Ant(Settings.RULE);
 
+        // TODO refactor
         Settings.fourImagesPerScreenSettings();
         Ant antTopLeft = new Ant("RL");
         Ant antTopRight = new Ant("RLR");

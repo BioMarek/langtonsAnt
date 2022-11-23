@@ -55,6 +55,11 @@ public class AntGraphicSingle implements AntVisualization {
         draw();
     }
 
+    @Override
+    public boolean stopped() {
+        return ant.stopped;
+    }
+
     /**
      * Converts grid of numbers to {@link Graphics2D}.
      */

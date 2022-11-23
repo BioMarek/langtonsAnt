@@ -1,6 +1,7 @@
 package Graphic;
 
 import Graphic.Visualization.AntExplanation;
+import Graphic.Visualization.AntGraphicFour;
 import Graphic.Visualization.AntGraphicSingle;
 import Logic.Ant;
 import Utils.Rule;
@@ -25,7 +26,6 @@ import java.util.concurrent.TimeUnit;
 
 
 public class VideoGenerator {
-    private Ant ant;
     private AntVisualization antVisualization;
     private final BufferedImage bImg;
 
@@ -42,26 +42,35 @@ public class VideoGenerator {
         for (Rule rule : interesting) {
             System.out.println("working on " + rule.rule);
             rule.setVariables();
-            this.ant = new Ant(Settings.RULE);
+            Ant ant = new Ant(Settings.RULE);
             ant.allMoves(); // calculates number of moves in total
 
             Settings.SKIP = ant.steps / Settings.VIDEO_NUM_IMAGES;
             System.out.println("max steps: " + ant.steps + " skip: " + Settings.SKIP);
 
-            this.ant = new Ant(Settings.RULE);
+            ant = new Ant(Settings.RULE);
             antVisualization = new AntGraphicSingle(ant);
             createMP4();
         }
     }
 
     public void generateExplanation() {
-        ant = new Ant(Settings.RULE);
+        Ant ant = new Ant(Settings.RULE);
         antVisualization = new AntExplanation(ant);
         createMP4();
     }
 
+    public void generateFourPerScreen() {
+        Ant antTopLeft = new Ant(Settings.RULE);
+        Ant antTopRight = new Ant(Settings.RULE);
+        Ant antBottomLeft = new Ant(Settings.RULE);
+        Ant antBottomRight = new Ant(Settings.RULE);
+        antVisualization = new AntGraphicFour(antTopLeft, antTopRight, antBottomLeft, antBottomRight);
+        createMP4();
+    }
+
     private void createMP4() {
-        ImageIterator imageIterator = new ImageIterator(ant, antVisualization);
+        ImageIterator imageIterator = new ImageIterator(antVisualization);
         try {
             SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File(Settings.VIDEO_BASE_PATH + Settings.RULE + ".mp4")),
                     Rational.R(Settings.VIDEO_FPS, 1), Format.MOV, Codec.PNG, null);
@@ -77,7 +86,7 @@ public class VideoGenerator {
     private List<BufferedImage> createImages() {
         List<BufferedImage> result = new ArrayList<>();
 
-        while (!ant.stopped) {
+        while (!antVisualization.stopped()) {
             antVisualization.createNextFrame();
             antVisualization.drawPresentation(bImg.createGraphics());
             result.add(bImg);
