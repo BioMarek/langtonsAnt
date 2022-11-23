@@ -85,7 +85,7 @@ public class AntGraphicFour implements AntVisualization {
         for (int row = 0; row < ant.gridRows; row++) {
             for (int column = 0; column < ant.gridColumns; column++) {
                 Colors.setColor(graphics, ant.grid[row][column]);
-                graphics.fillRect((column + startColumn) * Settings.SIZE_OF_SQUARE, (row + startRow) * Settings.SIZE_OF_SQUARE, Settings.SIZE_OF_SQUARE, Settings.SIZE_OF_SQUARE);
+                graphics.fillRect(startColumn + (column  * Settings.SIZE_OF_SQUARE), startRow + (row * Settings.SIZE_OF_SQUARE), Settings.SIZE_OF_SQUARE, Settings.SIZE_OF_SQUARE);
             }
         }
     }

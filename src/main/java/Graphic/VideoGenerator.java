@@ -61,10 +61,11 @@ public class VideoGenerator {
     }
 
     public void generateFourPerScreen() {
-        Ant antTopLeft = new Ant(Settings.RULE);
-        Ant antTopRight = new Ant(Settings.RULE);
-        Ant antBottomLeft = new Ant(Settings.RULE);
-        Ant antBottomRight = new Ant(Settings.RULE);
+        Ant antTopLeft = new Ant("LRRLLLRRRLLLL");
+        Ant antTopRight = new Ant("LRRLLLRRRLLLLL");
+        Ant antBottomLeft = new Ant("LRRLLLRRRLLLLLL");
+        Ant antBottomRight = new Ant("LRRLLLRRRLLLLLLL");
+        Settings.RULE = "four_test";
         antVisualization = new AntGraphicFour(antTopLeft, antTopRight, antBottomLeft, antBottomRight);
         createMP4();
     }

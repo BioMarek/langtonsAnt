@@ -96,5 +96,6 @@ public class Settings {
         Settings.GRID_HEIGHT = 540;
         Settings.GRID_WIDTH =  960;
         Settings.IMAGE_PADDING = 0;
+        Settings.SKIP = SKIP;
     }
 }
