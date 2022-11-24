@@ -6,4 +6,6 @@ public interface AntVisualization {
     void drawPresentation(Graphics2D graphics);
 
     void createNextFrame();
+
+    boolean stopped();
 }

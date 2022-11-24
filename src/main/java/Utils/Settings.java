@@ -12,6 +12,7 @@ public class Settings {
     public static int SIZE_OF_SQUARE = 1; // size of square on ant board
     public static int LEGEND_START_X = 1500;
     public static int GRID_WIDTH = 1500;
+    public static int GRID_HEIGHT = 1080;
     public static int BACKGROUND_WIDTH = 1920;
     public static int BACKGROUND_HEIGHT = 1080;
 
@@ -27,8 +28,7 @@ public class Settings {
     public static int VIDEO_NUM_IMAGES = 180; // number of images in video, we expect 30 images per second, 240 image, 180 highway
     public static int GIF_WIDTH = 1413; // determine size when 4 images
     public static int GIF_HEIGHT = 1080;
-    public static String VIDEO_BASE_PATH = "./gifs/";
-    public static boolean INFO_FOR_4_IMAGES = false; // image with only rule info, used when there is 4 images on screen TODO doesn't work currently
+    public static String VIDEO_BASE_PATH = "./movies/";
 
     // use to show only center of image and fill entire screen with even if some part already reached the border,
     public static int IMAGE_PADDING = 0; // use 500 for thumbnail image
@@ -72,22 +72,19 @@ public class Settings {
         Settings.IMAGE_PADDING = 200;
     }
 
-    public static void generateFourSettings() {
-        Settings.VIDEO_NUM_IMAGES = 240;
-        Settings.INFO_FOR_4_IMAGES = true;
-    }
-
     public static void generateRandomWithPatternSettings() {
         Settings.VIDEO_NUM_IMAGES = 180;
-    }
-
-    public static void generateDifferentRuleSamePatternSettings() {
-        Settings.VIDEO_NUM_IMAGES = 180;
-        Settings.INFO_FOR_4_IMAGES = true;
     }
 
     public static void generateTestSettings() {
         Settings.VIDEO_NUM_IMAGES = 100;
         Settings.IMAGE_PADDING = 600;
+    }
+
+    public static void fourImagesPerScreenSettings() {
+        Settings.VIDEO_NUM_IMAGES = 240;
+        Settings.GRID_HEIGHT = 540;
+        Settings.GRID_WIDTH = 960;
+        Settings.IMAGE_PADDING = 200;
     }
 }

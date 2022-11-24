@@ -1,6 +1,7 @@
 package Windows;
 
-import Graphic.AntGraphic;
+import Graphic.AntVisualization;
+import Graphic.Visualization.AntGraphicFour;
 import Logic.Ant;
 import Utils.Settings;
 
@@ -18,14 +19,22 @@ import java.io.IOException;
 
 public class GridPanel extends JPanel implements ActionListener {
     private final Ant ant;
-    private final AntGraphic antGraphic;
+    private final AntVisualization antVisualization;
     private Timer timer;
 
     public GridPanel() {
         this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
         this.setFocusable(true);
         this.ant = new Ant(Settings.RULE);
-        this.antGraphic = new AntGraphic(ant);
+
+        // TODO refactor
+        Settings.fourImagesPerScreenSettings();
+        Ant antTopLeft = new Ant("RL");
+        Ant antTopRight = new Ant("RLR");
+        Ant antBottomLeft = new Ant("RLRR");
+        Ant antBottomRight = new Ant("RLRRR");
+        this.antVisualization = new AntGraphicFour(antTopLeft, antTopRight, antBottomLeft, antBottomRight);
+
         startTimer();
     }
 
@@ -33,12 +42,12 @@ public class GridPanel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D graphics = (Graphics2D) g;
-        antGraphic.drawPresentation(graphics);
+        antVisualization.drawPresentation(graphics);
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        ant.nextMoves();
+        antVisualization.createNextFrame();
         repaint();
 
         if (ant.stopped) {

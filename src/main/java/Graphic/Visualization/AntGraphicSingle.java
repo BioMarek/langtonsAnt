@@ -1,7 +1,8 @@
-package Graphic;
+package Graphic.Visualization;
 
-import Graphic.Visualization.Background;
-import Graphic.Visualization.Legend;
+import Graphic.AntVisualization;
+import Graphic.Components.Background;
+import Graphic.Components.Legend;
 import Logic.Ant;
 import Utils.Colors;
 import Utils.Settings;
@@ -11,16 +12,16 @@ import java.awt.Graphics2D;
 /**
  * Creates graphic for ant grid.
  */
-public class AntGraphic implements AntVisualization {
+public class AntGraphicSingle implements AntVisualization {
     private Graphics2D graphics;
     private final Ant ant;
     private final Legend legend;
     private final Background background;
     private int imageCount = 0;
 
-    public AntGraphic(Ant ant) {
+    public AntGraphicSingle(Ant ant) {
         this.ant = ant;
-        this.legend = new Legend(ant);
+        this.legend = new Legend();
         this.background = new Background();
     }
 
@@ -29,10 +30,9 @@ public class AntGraphic implements AntVisualization {
      */
     public void drawImage(Graphics2D graphics) {
         this.graphics = graphics;
-        legend.graphics = graphics;
         background.graphics = graphics;
         background.setBackground(false);
-        draw();
+        drawGrid();
     }
 
     @Override
@@ -50,14 +50,19 @@ public class AntGraphic implements AntVisualization {
         legend.graphics = graphics;
         background.graphics = graphics;
         background.setBackground(true);
-        legend.drawLegend();
-        draw();
+        legend.drawLegend(ant);
+        drawGrid();
+    }
+
+    @Override
+    public boolean stopped() {
+        return ant.stopped;
     }
 
     /**
      * Converts grid of numbers to {@link Graphics2D}.
      */
-    public void draw() {
+    public void drawGrid() {
         int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
         for (int row = 0; row < ant.gridRows - borderPadding; row++) {
             for (int column = 0; column < ant.gridColumns - borderPadding; column++) {

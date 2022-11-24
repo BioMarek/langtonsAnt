@@ -1,5 +1,6 @@
 package Graphic;
 
+import Graphic.Visualization.AntGraphicSingle;
 import Logic.Ant;
 import Logic.RulesGenerator;
 import Utils.Settings;
@@ -33,8 +34,8 @@ public class ImageGenerator {
     private void saveImageWithoutPanel(String rule) {
         ant.allMoves();
         BufferedImage bImg = new BufferedImage(Settings.GRID_WIDTH, Settings.BACKGROUND_HEIGHT, BufferedImage.TYPE_INT_RGB);
-        AntGraphic antGraphic = new AntGraphic(ant);
-        antGraphic.drawImage(bImg.createGraphics());
+        AntGraphicSingle antGraphicSingle = new AntGraphicSingle(ant);
+        antGraphicSingle.drawImage(bImg.createGraphics());
 
         try {
             ImageIO.write(bImg, "png", new File(String.format(Settings.IMAGE_BASE_PATH + "/%d/%s.png", rule.length(), rule)));

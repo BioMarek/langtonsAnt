@@ -1,4 +1,4 @@
-package Graphic.Visualization;
+package Graphic.Components;
 
 import Logic.Ant;
 import Utils.Colors;
@@ -14,13 +14,10 @@ import java.awt.geom.RoundRectangle2D;
 
 public class Legend {
     public Graphics2D graphics;
-    private final Ant ant;
+    private Ant ant;
 
-    public Legend(Ant ant) {
+    public void drawLegend(Ant ant) {
         this.ant = ant;
-    }
-
-    public void drawLegend() {
         turnAntiAliasingOn(true);
         drawInfo();
         drawDiagram();
@@ -44,11 +41,14 @@ public class Legend {
     /**
      * Info is just name of rule written over grid in big font, used when there are 4 images per screen
      */
-    public void drawInfoForForImages() {
-        int fontUnit = Settings.SIZE_IN_PIXELS / 60;
+    public void drawInfoForForImages(Ant antTopLeft, Ant antTopRight, Ant antBottomLeft, Ant antBottomRight) {
+        int fontUnit = Settings.SIZE_IN_PIXELS / 90;
         graphics.setColor(Colors.TEXT.getColor());
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.5)));
-        graphics.drawString("Rule: " + new String(ant.rule), fontUnit * 2, fontUnit * 3);
+        graphics.drawString("Rule: " + new String(antTopLeft.rule), fontUnit * 2, fontUnit * 3);
+        graphics.drawString("Rule: " + new String(antTopRight.rule), fontUnit * 2 + Settings.BACKGROUND_WIDTH / 2, fontUnit * 3);
+        graphics.drawString("Rule: " + new String(antBottomLeft.rule), fontUnit * 2, fontUnit * 3 + Settings.BACKGROUND_HEIGHT / 2);
+        graphics.drawString("Rule: " + new String(antBottomRight.rule), fontUnit * 2 + Settings.BACKGROUND_WIDTH / 2, fontUnit * 3 + Settings.BACKGROUND_HEIGHT / 2);
     }
 
     /**

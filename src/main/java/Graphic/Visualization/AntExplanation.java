@@ -1,7 +1,8 @@
-package Graphic;
+package Graphic.Visualization;
 
-import Graphic.Visualization.Background;
-import Graphic.Visualization.Legend;
+import Graphic.AntVisualization;
+import Graphic.Components.Background;
+import Graphic.Components.Legend;
 import Logic.Ant;
 import Utils.Colors;
 import Utils.Direction;
@@ -39,11 +40,11 @@ public class AntExplanation implements AntVisualization {
 
     public AntExplanation(Ant ant) {
         this.ant = ant;
-        this.legend = new Legend(ant);
+        this.legend = new Legend();
         this.background = new Background();
 
         try {
-            File imageFile = new File("gifs/ant.png");
+            File imageFile = new File("ant.png");
             antImage = ImageIO.read(imageFile);
         } catch (IOException ignored) {
         }
@@ -79,17 +80,21 @@ public class AntExplanation implements AntVisualization {
         legend.graphics = graphics;
         background.graphics = graphics;
         background.setBackground(true);
-        legend.drawLegend();
-        draw();
+        legend.drawLegend(ant);
+        drawGrid();
         if (!Settings.ZOOMED)
             drawAntImage();
     }
 
+    @Override
+    public boolean stopped() {
+        return ant.stopped;
+    }
 
     /**
      * Converts grid of numbers to {@link Graphics2D}.
      */
-    public void draw() {
+    public void drawGrid() {
         // in order to connect first part of explanation video with second part which is regular ant without zoom we
         // need to adjust where squares are rendered on the screen because just updating GRAPHIC_SHIFT_COLUMN and
         // GRAPHIC_SHIFT_ROW is not precise.
