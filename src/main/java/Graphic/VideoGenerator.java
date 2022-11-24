@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
@@ -60,14 +61,32 @@ public class VideoGenerator {
         createMP4();
     }
 
-    public void generateFourPerScreen() {
-        Ant antTopLeft = new Ant("LRRLLLRRRLLLL");
-        Ant antTopRight = new Ant("LRRLLLRRRLLLLL");
-        Ant antBottomLeft = new Ant("LRRLLLRRRLLLLLL");
-        Ant antBottomRight = new Ant("LRRLLLRRRLLLLLLL");
-        Settings.RULE = "four_test";
-        antVisualization = new AntGraphicFour(antTopLeft, antTopRight, antBottomLeft, antBottomRight);
-        createMP4();
+    public void generateFourPerScreen(List<List<Rule>> interesting) {
+        for (List<Rule> rules : interesting) {
+            Ant ant = new Ant(rules.get(0).rule);
+            ant.allMoves(); // calculates number of moves in total
+            int ant0 = ant.steps / Settings.VIDEO_NUM_IMAGES;
+
+            ant = new Ant(rules.get(1).rule);
+            ant.allMoves();
+            int ant1 = ant.steps / Settings.VIDEO_NUM_IMAGES;
+
+            ant = new Ant(rules.get(1).rule);
+            ant.allMoves();
+            int ant2 = ant.steps / Settings.VIDEO_NUM_IMAGES;
+
+            ant = new Ant(rules.get(1).rule);
+            ant.allMoves();
+            int ant3 = ant.steps / Settings.VIDEO_NUM_IMAGES;
+
+            Settings.SKIP = Math.max(Math.max(ant0, ant1), Math.max(ant2, ant3));
+
+            System.out.println("max steps: " + ant.steps + " skip: " + Settings.SKIP);
+
+            Settings.RULE = rules.get(0).rule + "_" + rules.get(1).rule + "_" + rules.get(2).rule + "_" + rules.get(3).rule;
+            antVisualization = new AntGraphicFour(new Ant(rules.get(0).rule), new Ant(rules.get(1).rule), new Ant(rules.get(2).rule), new Ant(rules.get(3).rule));
+            createMP4();
+        }
     }
 
     private void createMP4() {
