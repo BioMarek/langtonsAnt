@@ -44,7 +44,7 @@ public class AntExplanation implements AntVisualization {
         this.background = new Background();
 
         try {
-            File imageFile = new File("gifs/ant.png");
+            File imageFile = new File("ant.png");
             antImage = ImageIO.read(imageFile);
         } catch (IOException ignored) {
         }
