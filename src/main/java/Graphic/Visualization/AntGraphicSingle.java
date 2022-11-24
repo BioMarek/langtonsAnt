@@ -21,7 +21,7 @@ public class AntGraphicSingle implements AntVisualization {
 
     public AntGraphicSingle(Ant ant) {
         this.ant = ant;
-        this.legend = new Legend(ant);
+        this.legend = new Legend();
         this.background = new Background();
     }
 
@@ -33,7 +33,7 @@ public class AntGraphicSingle implements AntVisualization {
         legend.graphics = graphics;
         background.graphics = graphics;
         background.setBackground(false);
-        draw();
+        drawGrid();
     }
 
     @Override
@@ -51,8 +51,8 @@ public class AntGraphicSingle implements AntVisualization {
         legend.graphics = graphics;
         background.graphics = graphics;
         background.setBackground(true);
-        legend.drawLegend();
-        draw();
+        legend.drawLegend(ant);
+        drawGrid();
     }
 
     @Override
@@ -63,7 +63,7 @@ public class AntGraphicSingle implements AntVisualization {
     /**
      * Converts grid of numbers to {@link Graphics2D}.
      */
-    public void draw() {
+    public void drawGrid() {
         int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
         for (int row = 0; row < ant.gridRows - borderPadding; row++) {
             for (int column = 0; column < ant.gridColumns - borderPadding; column++) {

@@ -26,7 +26,7 @@ public class AntGraphicFour implements AntVisualization {
         this.antTopRight = antTopRight;
         this.antBottomLeft = antBottomLeft;
         this.antBottomRight = antBottomRight;
-        this.legend = new Legend(antTopLeft);
+        this.legend = new Legend();
         this.background = new Background();
         this.cross = new Cross();
     }
@@ -39,7 +39,7 @@ public class AntGraphicFour implements AntVisualization {
         legend.graphics = graphics;
         background.graphics = graphics;
         background.setBackground(false);
-        draw();
+        drawGrid();
     }
 
     @Override
@@ -61,8 +61,8 @@ public class AntGraphicFour implements AntVisualization {
         background.graphics = graphics;
         cross.graphics = graphics;
         background.setBackground(true);
-        legend.drawInfoForForImages();
-        draw();
+        drawGrid();
+        legend.drawInfoForForImages(antTopLeft, antTopRight, antBottomLeft, antBottomRight);
         cross.drawCross();
     }
 
@@ -71,7 +71,7 @@ public class AntGraphicFour implements AntVisualization {
         return antTopLeft.stopped && antTopRight.stopped && antBottomLeft.stopped && antBottomRight.stopped;
     }
 
-    public void draw() {
+    public void drawGrid() {
         drawAnt(antTopLeft, 0, 0);
         drawAnt(antTopRight, 0, Settings.BACKGROUND_WIDTH / 2);
         drawAnt(antBottomLeft, Settings.BACKGROUND_HEIGHT / 2, 0);
