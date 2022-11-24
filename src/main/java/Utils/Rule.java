@@ -138,6 +138,13 @@ public class Rule {
 //        sixth.add(new Rule("LLRLRRLLLLLRLR", 0, 1, 2));
 //        interesting.add(sixth);
 
+        List<Rule> seventh = new ArrayList<>();
+        seventh.add(new Rule("RLRL", 0, 1, 5));
+        seventh.add(new Rule("RLRLRL", 0, 1, 5));
+        seventh.add(new Rule("RLRLRLRL", 0, 1, 5));
+        seventh.add(new Rule("RLRLRLRLRL", 0, 1, 5));
+        interesting.add(seventh);
+
         return interesting;
     }
 
@@ -162,20 +169,6 @@ public class Rule {
         interesting.add(new Rule("RRL", 0, 1, 10)); // add grid
         interesting.add(new Rule("RLRRRL", 0, 1, 1));
         interesting.add(new Rule("RRLLLRLLLLLLLLL", 0, 1, 1)); // padding 500
-
-        return interesting;
-    }
-
-    public static List<Rule> getDifferentRuleSamePatternRules() {
-        Settings.generateDifferentRuleSamePatternSettings();
-        List<Rule> interesting = new ArrayList<>();
-        interesting.add(new Rule("RLRL", 0, 1, 5));
-        interesting.add(new Rule("RLRLRL", 0, 1, 5));
-        interesting.add(new Rule("RLRLRLRL", 0, 1, 5));
-        interesting.add(new Rule("RLRLRLRLRL", 0, 1, 5));
-        interesting.add(new Rule("RLRLRLRLRLRL", 0, 1, 5));
-        interesting.add(new Rule("RLRLRLRLRLRLRL", 0, 1, 5));
-        interesting.add(new Rule("RLRLRLRLRLRLRLRL", 0, 1, 5));
 
         return interesting;
     }

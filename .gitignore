@@ -45,6 +45,6 @@ bin/
 ### Images ###
 /images
 /interesting
-*.gif
+*.movies
 *.png
 *.mp4

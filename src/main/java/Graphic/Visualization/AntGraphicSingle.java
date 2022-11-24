@@ -30,7 +30,6 @@ public class AntGraphicSingle implements AntVisualization {
      */
     public void drawImage(Graphics2D graphics) {
         this.graphics = graphics;
-        legend.graphics = graphics;
         background.graphics = graphics;
         background.setBackground(false);
         drawGrid();
