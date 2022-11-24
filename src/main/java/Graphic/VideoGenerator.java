@@ -55,6 +55,7 @@ public class VideoGenerator {
     }
 
     public void generateExplanation() {
+        Settings.showExplanationSettings();
         Ant ant = new Ant(Settings.RULE);
         antVisualization = new AntExplanation(ant);
         createMP4();
@@ -70,11 +71,11 @@ public class VideoGenerator {
             ant.allMoves();
             int ant1 = ant.steps / Settings.VIDEO_NUM_IMAGES;
 
-            ant = new Ant(rules.get(1).rule);
+            ant = new Ant(rules.get(2).rule);
             ant.allMoves();
             int ant2 = ant.steps / Settings.VIDEO_NUM_IMAGES;
 
-            ant = new Ant(rules.get(1).rule);
+            ant = new Ant(rules.get(3).rule);
             ant.allMoves();
             int ant3 = ant.steps / Settings.VIDEO_NUM_IMAGES;
 

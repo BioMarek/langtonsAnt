@@ -6,7 +6,6 @@ import Windows.GridFrame;
 
 public class Main {
     public static void main(String[] args) {
-//        Settings.showExplanationSettings();
 //        VideoGenerator videoGenerator = new VideoGenerator();
 //        videoGenerator.generateExplanation();
 
