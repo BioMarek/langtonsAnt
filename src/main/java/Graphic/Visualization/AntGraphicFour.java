@@ -82,10 +82,11 @@ public class AntGraphicFour implements AntVisualization {
      * Converts grid of numbers to {@link Graphics2D}.
      */
     public void drawAnt(Ant ant, int startRow, int startColumn) {
-        for (int row = 0; row < ant.gridRows; row++) {
-            for (int column = 0; column < ant.gridColumns; column++) {
-                Colors.setColor(graphics, ant.grid[row][column]);
-                graphics.fillRect(startColumn + (column  * Settings.SIZE_OF_SQUARE), startRow + (row * Settings.SIZE_OF_SQUARE), Settings.SIZE_OF_SQUARE, Settings.SIZE_OF_SQUARE);
+        int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
+        for (int row = 0; row < ant.gridRows - borderPadding; row++) {
+            for (int column = 0; column < ant.gridColumns - borderPadding; column++) {
+                Colors.setColor(graphics, ant.grid[row + borderPadding / 2][column + borderPadding / 2]);
+                graphics.fillRect(startColumn + (column * Settings.SIZE_OF_SQUARE), startRow + (row * Settings.SIZE_OF_SQUARE), Settings.SIZE_OF_SQUARE, Settings.SIZE_OF_SQUARE);
             }
         }
     }

@@ -93,7 +93,7 @@ public class Rule {
     }
 
     public static List<List<Rule>> getFour() {
-        Settings.generateFourSettings();
+        Settings.fourImagesPerScreenSettings();
         List<List<Rule>> interesting = new ArrayList<>();
 
         List<Rule> first = new ArrayList<>();
@@ -103,44 +103,40 @@ public class Rule {
         first.add(new Rule("LRRLLLRRRLLLLLLL", 0, 1, 1));
         interesting.add(first);
 
-        List<Rule> second = new ArrayList<>();
-        second.add(new Rule("LRRRRRLRRRRLLL", 0, 1, 1));
-        second.add(new Rule("LRRRRRLRRRRLLLL", 0, 1, 1));
-        second.add(new Rule("LRRRRRLRRRRLLLLL", 0, 1, 1));
-        second.add(new Rule("LRRRRRLRRRRLLLLLL", 0, 1, 1));
-        interesting.add(second);
+//        List<Rule> second = new ArrayList<>();
+//        second.add(new Rule("LRRRRRLRRRRLLL", 0, 1, 1));
+//        second.add(new Rule("LRRRRRLRRRRLLLL", 0, 1, 1));
+//        second.add(new Rule("LRRRRRLRRRRLLLLL", 0, 1, 1));
+//        second.add(new Rule("LRRRRRLRRRRLLLLLL", 0, 1, 1));
+//        interesting.add(second);
+//
+//        List<Rule> third = new ArrayList<>();
+//        third.add(new Rule("RRLLLRLLLRRRLLL", 0, 1, 1));
+//        third.add(new Rule("RRLLLRLLLRRRLRL", 0, 1, 1));
+//        third.add(new Rule("RRLLLRLLLRRRRL", 0, 1, 1));
+//        third.add(new Rule("RRLLLRLLLRRRRLL", 0, 1, 1));
+//        interesting.add(third);
+//
+//        List<Rule> four = new ArrayList<>();
+//        four.add(new Rule("RRLLLRRRLLLLLLL", 0, 1, 1));
+//        four.add(new Rule("RRLLLRRRLLLLLLLL", 0, 1, 1));
+//        four.add(new Rule("RRLLLRRRLLLLLLLLL", 0, 1, 1));
+//        four.add(new Rule("RRLLLRRRLLLLLLLLLL", 0, 1, 1));
+//        interesting.add(four);
+//
+//        List<Rule> fith = new ArrayList<>();
+//        fith.add(new Rule("RRLLRLLLLLLL", 0, 1, 1));
+//        fith.add(new Rule("RRLLRLLLLLLLL", 0, 1, 1));
+//        fith.add(new Rule("RRLLRLLLLLLLLL", 0, 1, 1));
+//        fith.add(new Rule("RRLLRLLLLLLLLLL", 0, 1, 1));
 
-        List<Rule> third = new ArrayList<>();
-        third.add(new Rule("RRLLLRLLLRRRLLL", 0, 1, 1));
-        third.add(new Rule("RRLLLRLLLRRRLRL", 0, 1, 1));
-        third.add(new Rule("RRLLLRLLLRRRRL", 0, 1, 1));
-        third.add(new Rule("RRLLLRLLLRRRRLL", 0, 1, 1));
-        interesting.add(third);
-
-        List<Rule> four = new ArrayList<>();
-        four.add(new Rule("RRLLLRRRLLLLLLL", 0, 1, 1));
-        four.add(new Rule("RRLLLRRRLLLLLLLL", 0, 1, 1));
-        four.add(new Rule("RRLLLRRRLLLLLLLLL", 0, 1, 1));
-        four.add(new Rule("RRLLLRRRLLLLLLLLLL", 0, 1, 1));
-        interesting.add(four);
-
-        List<Rule> fith = new ArrayList<>();
-        fith.add(new Rule("RRLLRLLLLLLL", 0, 1, 1));
-        fith.add(new Rule("RRLLRLLLLLLLL", 0, 1, 1));
-        fith.add(new Rule("RRLLRLLLLLLLLL", 0, 1, 1));
-        fith.add(new Rule("RRLLRLLLLLLLLLL", 0, 1, 1));
-        interesting.add(fith);
-
-        return interesting;
-    }
-
-    public static List<Rule> getSymmetricRules() {
-        Settings.generateFourSettings();
-        List<Rule> interesting = new ArrayList<>();
-        interesting.add(new Rule("RL", 0, 1, 10));
-        interesting.add(new Rule("LR", 0, 1, 10));
-        interesting.add(new Rule("RRLRLLRRRRRLRL", 0, 1, 2));
-        interesting.add(new Rule("LLRLRRLLLLLRLR", 0, 1, 2));
+        // Symetric rules
+//        List<Rule> sixth = new ArrayList<>();
+//        sixth.add(new Rule("RL", 0, 1, 10));
+//        sixth.add(new Rule("LR", 0, 1, 10));
+//        sixth.add(new Rule("RRLRLLRRRRRLRL", 0, 1, 2));
+//        sixth.add(new Rule("LLRLRRLLLLLRLR", 0, 1, 2));
+//        interesting.add(sixth);
 
         return interesting;
     }

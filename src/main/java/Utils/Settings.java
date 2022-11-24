@@ -73,11 +73,6 @@ public class Settings {
         Settings.IMAGE_PADDING = 200;
     }
 
-    public static void generateFourSettings() {
-        Settings.VIDEO_NUM_IMAGES = 240;
-        Settings.INFO_FOR_4_IMAGES = true;
-    }
-
     public static void generateRandomWithPatternSettings() {
         Settings.VIDEO_NUM_IMAGES = 180;
     }
@@ -92,9 +87,10 @@ public class Settings {
         Settings.IMAGE_PADDING = 600;
     }
 
-    public static void fourImagesPerScreenSettings(){
+    public static void fourImagesPerScreenSettings() {
+        Settings.VIDEO_NUM_IMAGES = 100; // 240 after testing
         Settings.GRID_HEIGHT = 540;
-        Settings.GRID_WIDTH =  960;
-        Settings.IMAGE_PADDING = 0;
+        Settings.GRID_WIDTH = 960;
+        Settings.IMAGE_PADDING = 100;
     }
 }

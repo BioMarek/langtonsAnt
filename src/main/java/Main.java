@@ -18,7 +18,6 @@ public class Main {
 //        VideoGenerator videoGenerator = new VideoGenerator();
 //        videoGenerator.generateInteresting(Rule.getDifferentTestRules());
 
-        Settings.fourImagesPerScreenSettings();
         VideoGenerator videoGenerator = new VideoGenerator();
         videoGenerator.generateFourPerScreen(Rule.getFour());
     }
