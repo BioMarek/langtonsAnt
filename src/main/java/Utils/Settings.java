@@ -82,9 +82,9 @@ public class Settings {
     }
 
     public static void fourImagesPerScreenSettings() {
-        Settings.VIDEO_NUM_IMAGES = 100; // 240 after testing
+        Settings.VIDEO_NUM_IMAGES = 240;
         Settings.GRID_HEIGHT = 540;
         Settings.GRID_WIDTH = 960;
-        Settings.IMAGE_PADDING = 100;
+        Settings.IMAGE_PADDING = 200;
     }
 }

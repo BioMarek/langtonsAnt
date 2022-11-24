@@ -22,7 +22,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
@@ -96,6 +95,9 @@ public class VideoGenerator {
                     Rational.R(Settings.VIDEO_FPS, 1), Format.MOV, Codec.PNG, null);
             while (imageIterator.hasNext()) {
                 encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(imageIterator.next()));
+            }
+            for (int i = 0; i < Settings.VIDEO_REPEAT_LAST_FRAME; i++) {
+                encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(imageIterator.last()));
             }
             encoder.finish();
         } catch (IOException e) {
