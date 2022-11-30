@@ -8,7 +8,6 @@ public class Settings {
     public static int DELAY = 100; // realtime animation delay between frames
     public static int SKIP = 100; // steps to skip between frames
     public static long MAX_MOVES = 50_000_000;
-    public static int SIZE_IN_PIXELS = 1080; // size of ant board
     public static int SIZE_OF_SQUARE = 1; // size of square on ant board
     public static int LEGEND_START_X = 1500;
     public static int GRID_WIDTH = 1500;
@@ -23,11 +22,8 @@ public class Settings {
     public static int THREADS = 6;
 
     // Settings for gif and mp4 generation
-    public static int GIF_DELAY = 35; // 35ms delay for video
     public static int VIDEO_FPS = 30; // frames per second for mp4
     public static int VIDEO_NUM_IMAGES = 180; // number of images in video, we expect 30 images per second, 240 image, 180 highway
-    public static int GIF_WIDTH = 1413; // determine size when 4 images
-    public static int GIF_HEIGHT = 1080;
     public static String VIDEO_BASE_PATH = "./movies/";
 
     // use to show only center of image and fill entire screen with even if some part already reached the border,
@@ -39,7 +35,6 @@ public class Settings {
     public static int VIDEO_REPEAT_LAST_FRAME = 30; // how many times the last image should be repeated in video, 30 is one second
     public static boolean ZOOMED = false; // whether graphic has been zoomed in
     public static int ZOOM_STEPS = 8; // number of ant steps after which there will be zoom
-    // TODO better explanation
     public static double GRAPHIC_SHIFT_COLUMN = 0; // during zoom how much is graphic column moved with respect to grid column
     public static double GRAPHIC_SHIFT_ROW = 0; // during zoom how much is graphic row moved with respect to grid row
 

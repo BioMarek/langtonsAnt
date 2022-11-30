@@ -15,7 +15,7 @@ public class AntTest {
     public void init() {
         Settings.MAX_MOVES = 1_000_000;
         Settings.IMAGE_PADDING = 0;
-        Settings.SIZE_IN_PIXELS = 2;
+        Settings.GRID_HEIGHT = 2;
         Settings.SIZE_OF_SQUARE = 1;
     }
 

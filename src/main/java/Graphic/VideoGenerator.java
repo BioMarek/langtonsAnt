@@ -124,9 +124,9 @@ public class VideoGenerator {
     @Deprecated
     public void createGif() {
         try (FileOutputStream outputStream = new FileOutputStream(Settings.VIDEO_BASE_PATH + Settings.RULE + ".gif")) {
-            GifEncoder encoder = new GifEncoder(outputStream, Settings.GIF_WIDTH, Settings.GIF_HEIGHT, 1);
+            GifEncoder encoder = new GifEncoder(outputStream, 1413, 1080, 1);
             ImageOptions options = new ImageOptions();
-            options.setDelay(Settings.GIF_DELAY, TimeUnit.MILLISECONDS);
+            options.setDelay(35, TimeUnit.MILLISECONDS);
 
             List<BufferedImage> bufferedImages = createImages();
 

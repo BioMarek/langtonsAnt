@@ -28,21 +28,21 @@ public class Legend {
      * Displays information about ant rule being animated and number of steps ant has made.
      */
     public void drawInfo() {
-        int fontUnit = Settings.SIZE_IN_PIXELS / 60;
+        int fontUnit = Settings.BACKGROUND_HEIGHT / 60;
         graphics.setColor(Colors.TEXT.getColor());
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.2)));
         graphics.drawString("Rule:   " + new String(ant.rule), Settings.LEGEND_START_X + fontUnit, fontUnit * 2);
         graphics.drawString("Steps: " + Util.numberFormatter(ant.steps), Settings.LEGEND_START_X + fontUnit, fontUnit * 4);
 
         graphics.setStroke(new BasicStroke(3f));
-        graphics.drawLine(Settings.LEGEND_START_X, 0, Settings.LEGEND_START_X, Settings.SIZE_IN_PIXELS);
+        graphics.drawLine(Settings.LEGEND_START_X, 0, Settings.LEGEND_START_X, Settings.BACKGROUND_HEIGHT);
     }
 
     /**
      * Info is just name of rule written over grid in big font, used when there are 4 images per screen
      */
     public void drawInfoForForImages(Ant antTopLeft, Ant antTopRight, Ant antBottomLeft, Ant antBottomRight) {
-        int fontUnit = Settings.SIZE_IN_PIXELS / 90;
+        int fontUnit = Settings.BACKGROUND_HEIGHT / 90;
         graphics.setColor(Colors.TEXT.getColor());
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.5)));
         graphics.drawString("Rule: " + new String(antTopLeft.rule), fontUnit * 2, fontUnit * 3);
@@ -55,7 +55,7 @@ public class Legend {
      * Draws legend on the right side of the window. works only for SIZE_IN_PIXELS = 1000 because arrows in legend.
      */
     public void drawDiagram() {
-        int squareSize = Settings.SIZE_IN_PIXELS / 25;
+        int squareSize = Settings.BACKGROUND_HEIGHT / 25;
         int topPadding = squareSize * 4;
         int gap = squareSize * 2;
         int ruleHalf = (ant.rule.length % 2 == 0) ? ant.rule.length / 2 : ant.rule.length / 2 + 1; // ensures left column is longer than right one
@@ -94,7 +94,7 @@ public class Legend {
     }
 
     private void drawFilledRect(int x, int y, int i) {
-        int squareSize = Settings.SIZE_IN_PIXELS / 25;
+        int squareSize = Settings.BACKGROUND_HEIGHT / 25;
         int fillSquareSize = squareSize - 1;
         graphics.drawRect(x, y, squareSize, squareSize);
         graphics.setColor(Colors.BACKGROUND.getColor()); // drawing background square over white rectangle with arrows
