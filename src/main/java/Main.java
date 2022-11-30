@@ -15,7 +15,7 @@ public class Main {
 //        imageParallelWorker.drawAllRulesInParallel();
 
 //        VideoGenerator videoGenerator = new VideoGenerator();
-//        videoGenerator.generateInteresting(Rule.getDifferentTestRules());
+//        videoGenerator.generateInteresting(Rule.getInteresting());
 
         VideoGenerator videoGenerator = new VideoGenerator();
         videoGenerator.generateFourPerScreen(Rule.getFour());

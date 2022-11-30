@@ -64,6 +64,7 @@ public class VideoGenerator {
     public void generateFourPerScreen(List<List<Rule>> interesting) {
         for (List<Rule> rules : interesting) {
             Ant ant = new Ant(rules.get(0).rule);
+            rules.get(0).setVariables();
             ant.allMoves(); // calculates number of moves in total
             int ant0 = ant.steps / Settings.VIDEO_NUM_IMAGES;
 

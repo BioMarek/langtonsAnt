@@ -43,17 +43,17 @@ public class Rule {
         interesting.add(new Rule("RLLLLLRRRLLLLRRL", 0, 1, 1));
         interesting.add(new Rule("RLLLLRRRLLL", 0, 1, 1));
         interesting.add(new Rule("RRLLLLRLRLRRLLL", 0, 1, 1));
-//        interesting.add(new Rule("RRLRLRRRRRLRRLL", 38_000_000, 0.1, 1)); // column moved by 250
-//        interesting.add(new Rule("RRRRRRRRLLLLLLLL", 0, 1, 2)); // 10 frames per sec, 150 images
+        interesting.add(new Rule("RRLRLRRRRRLRRLL", 38_000_000, 0.2, 1)); // column moved by +300 rows by + 150 padding 1000
+        interesting.add(new Rule("RRRRRRRRLLLLLLLL", 0, 1, 4)); // 10 frames per sec, 150 images
         interesting.add(new Rule("LLLLRRRRRLLRRRRL", 0, 1, 1));
         interesting.add(new Rule("LLLRRRRRRLLL", 0, 1, 1));
         interesting.add(new Rule("LLRLLLRRRRRRRLLL", 0, 1, 1));
         interesting.add(new Rule("LLRLRLRRRRRRL", 0, 1, 1));
         interesting.add(new Rule("LLRLRRLLLLLRLRL", 0, 1, 1));
         interesting.add(new Rule("LRLRLLRLLLRRLLLL", 0, 1, 1));
-//        interesting.add(new Rule("LRRLLLRLRLRRLLL", 0, 1, 1)); // 300 frames
+        interesting.add(new Rule("LRRLLLRLRLRRLLL", 0, 1, 1)); // 300 frames
         interesting.add(new Rule("LRRRRLLLRLRRRRL", 0, 1, 1));
-//        interesting.add(new Rule("LRRRRLRRLLRRRRRL", 0, 1, 1)); // IMAGE_PADDING 100
+        interesting.add(new Rule("LRRRRLRRLLRRRRRL", 0, 1, 1));
         interesting.add(new Rule("RLLLLLLLRRL", 0, 1, 1));
         interesting.add(new Rule("RRLLLLRLLLLRRLLL", 0, 1, 1));
         interesting.add(new Rule("RRLLLLRRLRLLLLLL", 0, 1, 1));
@@ -62,11 +62,12 @@ public class Rule {
         interesting.add(new Rule("RRLRLLLLRLLLLLLL", 0, 1, 1));
         interesting.add(new Rule("RRLRLLLRRRRRLL", 0, 1, 1));
         interesting.add(new Rule("RRRLRRLLRLRRRLL", 0, 1, 1));
-//        interesting.add(new Rule("LLRLLLRRRRRLLRLL", 0, 1, 1)); // IMAGE_PADDING 500
+        interesting.add(new Rule("LLRLLLRRRRRLLRLL", 0, 1, 1)); // IMAGE_PADDING 600
         interesting.add(new Rule("LLRRLLRRRRLLRRLL", 0, 1, 1));
         interesting.add(new Rule("LRRLLLRLRRRRRRL", 0, 1, 1));
         interesting.add(new Rule("LRRLLRRLLLRRRLLL", 0, 1, 1));
         interesting.add(new Rule("RRRLRRRRLLRRRRLL", 0, 1, 1));
+        interesting.add(new Rule("RLRRRL", 0, 1, 2));
 
         return interesting;
     }
@@ -96,6 +97,7 @@ public class Rule {
         Settings.fourImagesPerScreenSettings();
         List<List<Rule>> interesting = new ArrayList<>();
 
+        // only first rule variables are set
         List<Rule> first = new ArrayList<>();
         first.add(new Rule("LRRLLLRRRLLLL", 0, 1, 1));
         first.add(new Rule("LRRLLLRRRLLLLL", 0, 1, 1));
@@ -103,47 +105,65 @@ public class Rule {
         first.add(new Rule("LRRLLLRRRLLLLLLL", 0, 1, 1));
         interesting.add(first);
 
-//        List<Rule> second = new ArrayList<>();
-//        second.add(new Rule("LRRRRRLRRRRLLL", 0, 1, 1));
-//        second.add(new Rule("LRRRRRLRRRRLLLL", 0, 1, 1));
-//        second.add(new Rule("LRRRRRLRRRRLLLLL", 0, 1, 1));
-//        second.add(new Rule("LRRRRRLRRRRLLLLLL", 0, 1, 1));
-//        interesting.add(second);
-//
-//        List<Rule> third = new ArrayList<>();
-//        third.add(new Rule("RRLLLRLLLRRRLLL", 0, 1, 1));
-//        third.add(new Rule("RRLLLRLLLRRRLRL", 0, 1, 1));
-//        third.add(new Rule("RRLLLRLLLRRRRL", 0, 1, 1));
-//        third.add(new Rule("RRLLLRLLLRRRRLL", 0, 1, 1));
-//        interesting.add(third);
-//
-//        List<Rule> four = new ArrayList<>();
-//        four.add(new Rule("RRLLLRRRLLLLLLL", 0, 1, 1));
-//        four.add(new Rule("RRLLLRRRLLLLLLLL", 0, 1, 1));
-//        four.add(new Rule("RRLLLRRRLLLLLLLLL", 0, 1, 1));
-//        four.add(new Rule("RRLLLRRRLLLLLLLLLL", 0, 1, 1));
-//        interesting.add(four);
-//
-//        List<Rule> fith = new ArrayList<>();
-//        fith.add(new Rule("RRLLRLLLLLLL", 0, 1, 1));
-//        fith.add(new Rule("RRLLRLLLLLLLL", 0, 1, 1));
-//        fith.add(new Rule("RRLLRLLLLLLLLL", 0, 1, 1));
-//        fith.add(new Rule("RRLLRLLLLLLLLLL", 0, 1, 1));
+        List<Rule> second = new ArrayList<>();
+        second.add(new Rule("LRRRRRLRRRRLLL", 0, 1, 1));
+        second.add(new Rule("LRRRRRLRRRRLLLL", 0, 1, 1));
+        second.add(new Rule("LRRRRRLRRRRLLLLL", 0, 1, 1));
+        second.add(new Rule("LRRRRRLRRRRLLLLLL", 0, 1, 1));
+        interesting.add(second);
+
+        List<Rule> third = new ArrayList<>();
+        third.add(new Rule("RRLLLRLLLRRRLLL", 0, 1, 1));
+        third.add(new Rule("RRLLLRLLLRRRLRL", 0, 1, 1));
+        third.add(new Rule("RRLLLRLLLRRRRL", 0, 1, 1));
+        third.add(new Rule("RRLLLRLLLRRRRLL", 0, 1, 1));
+        interesting.add(third);
+
+        List<Rule> four = new ArrayList<>();
+        four.add(new Rule("RRLLLRRRLLLLLLL", 0, 1, 1));
+        four.add(new Rule("RRLLLRRRLLLLLLLL", 0, 1, 1));
+        four.add(new Rule("RRLLLRRRLLLLLLLLL", 0, 1, 1));
+        four.add(new Rule("RRLLLRRRLLLLLLLLLL", 0, 1, 1));
+        interesting.add(four);
+
+        List<Rule> fith = new ArrayList<>();
+        fith.add(new Rule("RRLLRLLLLLLL", 0, 1, 1));
+        fith.add(new Rule("RRLLRLLLLLLLL", 0, 1, 1));
+        fith.add(new Rule("RRLLRLLLLLLLLL", 0, 1, 1));
+        fith.add(new Rule("RRLLRLLLLLLLLLL", 0, 1, 1));
+        interesting.add(fith);
 
         // Symetric rules
-//        List<Rule> sixth = new ArrayList<>();
-//        sixth.add(new Rule("RL", 0, 1, 10));
-//        sixth.add(new Rule("LR", 0, 1, 10));
-//        sixth.add(new Rule("RRLRLLRRRRRLRL", 0, 1, 2));
-//        sixth.add(new Rule("LLRLRRLLLLLRLR", 0, 1, 2));
-//        interesting.add(sixth);
+        List<Rule> sixth = new ArrayList<>();
+        sixth.add(new Rule("RRLLLLLRLLLLLLLL", 0, 1, 1));
+        sixth.add(new Rule("LLRRRRRLRRRRRRRR", 0, 1, 1));
+        sixth.add(new Rule("RRLRLLRRRRRLRL", 0, 1, 2));
+        sixth.add(new Rule("LLRLRRLLLLLRLR", 0, 1, 2));
+        interesting.add(sixth);
 
+        // Different rule same image
         List<Rule> seventh = new ArrayList<>();
-        seventh.add(new Rule("RLRL", 0, 1, 5));
-        seventh.add(new Rule("RLRLRL", 0, 1, 5));
         seventh.add(new Rule("RLRLRLRL", 0, 1, 5));
         seventh.add(new Rule("RLRLRLRLRL", 0, 1, 5));
+        seventh.add(new Rule("RLRLRLRLRLRL", 0, 1, 5));
+        seventh.add(new Rule("RLRLRLRLRLRLRL", 0, 1, 5));
         interesting.add(seventh);
+
+        List<Rule> eight = new ArrayList<>();
+        eight.add(new Rule("RLLRRRLLLRRLRRRL", 0, 1, 1));
+        eight.add(new Rule("LRRLLLRRRLLRLLLR", 0, 1, 1));
+        eight.add(new Rule("LRRRRLLLRLRRRRL", 0, 1, 1));
+        eight.add(new Rule("RLLLLRRRLRLLLLR", 0, 1, 1));
+        interesting.add(eight);
+
+        // Random noise, padding 0
+        List<Rule> nine = new ArrayList<>();
+        nine.add(new Rule("LLLRLL", 0, 1, 2));
+        nine.add(new Rule("LRLLRL", 0, 1, 2));
+        nine.add(new Rule("RLLRRL", 0, 1, 2));
+        nine.add(new Rule("RLRLLL", 0, 1, 2));
+        interesting.add(nine);
+
 
         return interesting;
     }
