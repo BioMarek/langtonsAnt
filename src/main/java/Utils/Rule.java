@@ -143,10 +143,10 @@ public class Rule {
 
         // Different rule same image
         List<Rule> seventh = new ArrayList<>();
-        seventh.add(new Rule("RLRLRLRL", 0, 1, 5));
-        seventh.add(new Rule("RLRLRLRLRL", 0, 1, 5));
-        seventh.add(new Rule("RLRLRLRLRLRL", 0, 1, 5));
-        seventh.add(new Rule("RLRLRLRLRLRLRL", 0, 1, 5));
+        seventh.add(new Rule("LLRLLRRRRRRRRR", 0, 1, 5));
+        seventh.add(new Rule("LLRLLRRRRRRLLL", 0, 1, 5));
+        seventh.add(new Rule("LLRLLRRRRLLLLL", 0, 1, 5));
+        seventh.add(new Rule("LLRLLRLLLLLLLL", 0, 1, 5));
         interesting.add(seventh);
 
         List<Rule> eight = new ArrayList<>();
