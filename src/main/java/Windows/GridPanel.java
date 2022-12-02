@@ -28,7 +28,7 @@ public class GridPanel extends JPanel implements ActionListener {
         this.ant = new Ant(Settings.RULE);
 
         // TODO refactor
-        Settings.fourImagesPerScreenSettings();
+        Settings.generateFourImagesPerScreenSettings();
         Ant antTopLeft = new Ant("RL");
         Ant antTopRight = new Ant("RLR");
         Ant antBottomLeft = new Ant("RLRR");
@@ -60,7 +60,7 @@ public class GridPanel extends JPanel implements ActionListener {
      * Starts timer, delay says how often {@link Graphics2D} is repainted.
      */
     public void startTimer() {
-        timer = new Timer(Settings.DELAY, this);
+        timer = new Timer(Settings.TIMER_DELAY, this);
         timer.start();
     }
 

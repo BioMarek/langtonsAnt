@@ -1,7 +1,9 @@
 package Utils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Langton's ant rule and metadata. For highways we want to slow down animation when highway starts growing. Number of
@@ -93,9 +95,9 @@ public class Rule {
         return interesting;
     }
 
-    public static List<List<Rule>> getFour() {
-        Settings.fourImagesPerScreenSettings();
-        List<List<Rule>> interesting = new ArrayList<>();
+    public static Set<List<Rule>> getFour() {
+        Settings.generateFourImagesPerScreenSettings();
+        Set<List<Rule>> interesting = new HashSet<>();
 
         // only first rule variables are set
         List<Rule> first = new ArrayList<>();
@@ -119,21 +121,21 @@ public class Rule {
         third.add(new Rule("RRLLLRLLLRRRRLL", 0, 1, 1));
         interesting.add(third);
 
-        List<Rule> four = new ArrayList<>();
-        four.add(new Rule("RRLLLRRRLLLLLLL", 0, 1, 1));
-        four.add(new Rule("RRLLLRRRLLLLLLLL", 0, 1, 1));
-        four.add(new Rule("RRLLLRRRLLLLLLLLL", 0, 1, 1));
-        four.add(new Rule("RRLLLRRRLLLLLLLLLL", 0, 1, 1));
-        interesting.add(four);
+        List<Rule> fourth = new ArrayList<>();
+        fourth.add(new Rule("RRLLLRRRLLLLLLL", 0, 1, 1));
+        fourth.add(new Rule("RRLLLRRRLLLLLLLL", 0, 1, 1));
+        fourth.add(new Rule("RRLLLRRRLLLLLLLLL", 0, 1, 1));
+        fourth.add(new Rule("RRLLLRRRLLLLLLLLLL", 0, 1, 1));
+        interesting.add(fourth);
 
-        List<Rule> fith = new ArrayList<>();
-        fith.add(new Rule("RRLLRLLLLLLL", 0, 1, 1));
-        fith.add(new Rule("RRLLRLLLLLLLL", 0, 1, 1));
-        fith.add(new Rule("RRLLRLLLLLLLLL", 0, 1, 1));
-        fith.add(new Rule("RRLLRLLLLLLLLLL", 0, 1, 1));
-        interesting.add(fith);
+        List<Rule> fifth = new ArrayList<>();
+        fifth.add(new Rule("RRLLRLLLLLLL", 0, 1, 1));
+        fifth.add(new Rule("RRLLRLLLLLLLL", 0, 1, 1));
+        fifth.add(new Rule("RRLLRLLLLLLLLL", 0, 1, 1));
+        fifth.add(new Rule("RRLLRLLLLLLLLLL", 0, 1, 1));
+        interesting.add(fifth);
 
-        // Symetric rules
+        // Symmetric rules
         List<Rule> sixth = new ArrayList<>();
         sixth.add(new Rule("RRLLLLLRLLLLLLLL", 0, 1, 1));
         sixth.add(new Rule("LLRRRRRLRRRRRRRR", 0, 1, 1));
@@ -141,29 +143,28 @@ public class Rule {
         sixth.add(new Rule("LLRLRRLLLLLRLR", 0, 1, 2));
         interesting.add(sixth);
 
-        // Different rule same image
         List<Rule> seventh = new ArrayList<>();
-        seventh.add(new Rule("LLRLLRRRRRRRRR", 0, 1, 5));
-        seventh.add(new Rule("LLRLLRRRRRRLLL", 0, 1, 5));
-        seventh.add(new Rule("LLRLLRRRRLLLLL", 0, 1, 5));
-        seventh.add(new Rule("LLRLLRLLLLLLLL", 0, 1, 5));
+        seventh.add(new Rule("RLLRRRLLLRRLRRRL", 0, 1, 1));
+        seventh.add(new Rule("LRRLLLRRRLLRLLLR", 0, 1, 1));
+        seventh.add(new Rule("LRRRRLLLRLRRRRL", 0, 1, 1));
+        seventh.add(new Rule("RLLLLRRRLRLLLLR", 0, 1, 1));
         interesting.add(seventh);
 
-        List<Rule> eight = new ArrayList<>();
-        eight.add(new Rule("RLLRRRLLLRRLRRRL", 0, 1, 1));
-        eight.add(new Rule("LRRLLLRRRLLRLLLR", 0, 1, 1));
-        eight.add(new Rule("LRRRRLLLRLRRRRL", 0, 1, 1));
-        eight.add(new Rule("RLLLLRRRLRLLLLR", 0, 1, 1));
-        interesting.add(eight);
+        // Different rule same image
+        List<Rule> eighth = new ArrayList<>();
+        eighth.add(new Rule("LLRLLRRRRRRRRR", 0, 1, 5));
+        eighth.add(new Rule("LLRLLRRRRRRLLL", 0, 1, 5));
+        eighth.add(new Rule("LLRLLRRRRLLLLL", 0, 1, 5));
+        eighth.add(new Rule("LLRLLRLLLLLLLL", 0, 1, 5));
+        interesting.add(eighth);
 
         // Random noise, padding 0
-        List<Rule> nine = new ArrayList<>();
-        nine.add(new Rule("LLLRLL", 0, 1, 2));
-        nine.add(new Rule("LRLLRL", 0, 1, 2));
-        nine.add(new Rule("RLLRRL", 0, 1, 2));
-        nine.add(new Rule("RLRLLL", 0, 1, 2));
-        interesting.add(nine);
-
+        List<Rule> nineth = new ArrayList<>();
+        nineth.add(new Rule("LLLRLL", 0, 1, 2));
+        nineth.add(new Rule("LRLLRL", 0, 1, 2));
+        nineth.add(new Rule("RLLRRL", 0, 1, 2));
+        nineth.add(new Rule("RLRLLL", 0, 1, 2));
+        interesting.add(nineth);
 
         return interesting;
     }

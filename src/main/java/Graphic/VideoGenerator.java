@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 
@@ -54,14 +55,7 @@ public class VideoGenerator {
         }
     }
 
-    public void generateExplanation() {
-        Settings.showExplanationSettings();
-        Ant ant = new Ant(Settings.RULE);
-        antVisualization = new AntExplanation(ant);
-        createMP4();
-    }
-
-    public void generateFourPerScreen(List<List<Rule>> interesting) {
+    public void generateInteresting(Set<List<Rule>> interesting) {
         for (List<Rule> rules : interesting) {
             rules.get(0).setVariables();
             Ant ant = new Ant(rules.get(0).rule);
@@ -88,6 +82,13 @@ public class VideoGenerator {
             antVisualization = new AntGraphicFour(new Ant(rules.get(0).rule), new Ant(rules.get(1).rule), new Ant(rules.get(2).rule), new Ant(rules.get(3).rule));
             createMP4();
         }
+    }
+
+    public void generateExplanation() {
+        Settings.showExplanationFirstPartSettings();
+        Ant ant = new Ant(Settings.RULE);
+        antVisualization = new AntExplanation(ant);
+        createMP4();
     }
 
     private void createMP4() {
