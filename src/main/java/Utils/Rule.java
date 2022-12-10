@@ -166,6 +166,14 @@ public class Rule {
         nineth.add(new Rule("RLRLLL", 0, 1, 2));
         interesting.add(nineth);
 
+        // Highways
+        List<Rule> tenth = new ArrayList<>();
+        tenth.add(new Rule("LLRRRLRLRLLR", 0, 1, 2));
+        tenth.add(new Rule("LLRLRRLL", 0, 1, 1));
+        tenth.add(new Rule("LRLRRLRLLLRLRLRL", 0, 1, 1));
+        tenth.add(new Rule("LLLRRRL", 0, 1, 1));
+        interesting.add(tenth);
+
         return interesting;
     }
 
