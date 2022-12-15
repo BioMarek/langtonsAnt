@@ -15,6 +15,6 @@ public class Main {
 //        imageParallelWorker.drawAllRulesInParallel();
 
         VideoGenerator videoGenerator = new VideoGenerator();
-        videoGenerator.generateInteresting(Rule.getFour());
+        videoGenerator.generateInteresting(Rule.getHighways());
     }
 }

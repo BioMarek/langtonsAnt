@@ -71,6 +71,14 @@ public class Rule {
         interesting.add(new Rule("RRRLRRRRLLRRRRLL", 0, 1, 1));
         interesting.add(new Rule("RLRRRL", 0, 1, 2));
 
+        interesting.add(new Rule("LRRLLLLRLLRLL", 0, 1, 1));
+        interesting.add(new Rule("LRRRLLLRLLLLLLL", 0, 1, 1));
+        interesting.add(new Rule("RLLLLLLLLLRRL", 0, 1, 1));
+        interesting.add(new Rule("RLLLRRRLLLL", 0, 1, 1));
+        interesting.add(new Rule("RRLLLLRRRLLLLLLL", 0, 1, 1)); // IMAGE_PADDING 500
+        interesting.add(new Rule("RRRRLRRRLLRRRLL", 0, 1, 1)); // IMAGE_PADDING 500
+        interesting.add(new Rule("RLLLRLRRRRRLRL", 0, 1, 1));
+
         return interesting;
     }
 
@@ -91,6 +99,10 @@ public class Rule {
         interesting.add(new Rule("LLLLRLLLRRLRLLL", 16_000_000, 0.1, 1));
         interesting.add(new Rule("RRLLLRRLRRRRLLLL", 960_000, 0.2, 1));
         interesting.add(new Rule("RRLRLLRRRRLL", 0, 1, 1));
+
+        interesting.add(new Rule("RRLLLRRRRRLRLLL", 0, 1, 1));
+        interesting.add(new Rule("LLLLRRLRLLLL", 0, 1, 1));
+        interesting.add(new Rule("LLRLRRRLRRLLLL", 20_000_000, 0.3, 1));
 
         return interesting;
     }
