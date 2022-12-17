@@ -79,6 +79,32 @@ public class Rule {
         interesting.add(new Rule("RRRRLRRRLLRRRLL", 0, 1, 1)); // IMAGE_PADDING 500
         interesting.add(new Rule("RLLLRLRRRRRLRL", 0, 1, 1));
 
+        interesting.add(new Rule("LLLLLLRLLLLRRLL", 0, 1, 1));
+        interesting.add(new Rule("LLLLLRRLLLLRLLL", 0, 1, 1));
+        interesting.add(new Rule("LLLLRLLLRLLLLL", 0, 1, 1));
+        interesting.add(new Rule("LLLRRRRRRLLLLRRL", 0, 1, 1));
+        interesting.add(new Rule("LLRLRRLRLLRRLLL", 0, 1, 1));
+        interesting.add(new Rule("LLRRLLRRRRRLRL", 0, 1, 1));
+
+        interesting.add(new Rule("LRRLLLLRRLLRLLLL", 0, 1, 1));
+
+        interesting.add(new Rule("LRRLLLLRRRLLLRRL", 0, 1, 1));
+        interesting.add(new Rule("LRRLLLRRRLLLL", 0, 1, 1));
+        interesting.add(new Rule("LRRLLLRRRLLLLL", 0, 1, 1));
+        interesting.add(new Rule("LRRLLLRRRRRRRL", 0, 1, 1));
+
+        interesting.add(new Rule("LRRLLRRL", 0, 1, 1));
+        interesting.add(new Rule("LRRLLRRLLLLRLLLL", 0, 1, 1));
+        interesting.add(new Rule("LRRLLRRLLLRRRLLL", 0, 1, 1));
+        interesting.add(new Rule("LRRRLLLLLLLLRRL", 0, 1, 1));
+        interesting.add(new Rule("LRRRLLLLLLRRLL", 0, 1, 1));
+        interesting.add(new Rule("LRRRLLLLLLRRLLL", 0, 1, 1));
+
+        interesting.add(new Rule("LRRRLLRLRRRRRRRL", 0, 1, 1));
+        interesting.add(new Rule("LRRRRLLLRRRLRL", 0, 1, 1));
+        interesting.add(new Rule("LRRRRRLLRRLL", 0, 1, 1));
+        interesting.add(new Rule("RLLLRLLLLRRLLLLL", 0, 1, 1));
+
         return interesting;
     }
 
