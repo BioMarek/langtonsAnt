@@ -47,6 +47,12 @@ public class Settings {
     public static double GRAPHIC_SHIFT_COLUMN = 0; // during zoom how much is graphic column moved with respect to grid column
     public static double GRAPHIC_SHIFT_ROW = 0; // during zoom how much is graphic row moved with respect to grid row
 
+    /**
+     * Settings for hexagonal grid
+     *
+     */
+    public static int HEXAGON_SIZE = 10;
+
     public static void showExplanationFirstPartSettings() {
         Settings.SHOW_GRID = true;
         Settings.SKIP = 1;
@@ -90,5 +96,9 @@ public class Settings {
         Settings.GRID_HEIGHT = 540;
         Settings.GRID_WIDTH = 960;
         Settings.IMAGE_PADDING = 200;
+    }
+
+    public static void generateHexagonalGridSettings(){
+
     }
 }
