@@ -49,7 +49,6 @@ public class Settings {
 
     /**
      * Settings for hexagonal grid
-     *
      */
     public static int HEXAGON_SIZE = 10;
 

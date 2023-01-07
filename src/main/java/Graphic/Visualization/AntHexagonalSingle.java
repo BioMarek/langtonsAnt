@@ -60,13 +60,17 @@ public class AntHexagonalSingle implements AntVisualization {
      * Converts grid of numbers to {@link Graphics2D}.
      */
     public void drawGrid() {
-        int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
-        for (int row = 0; row < ant.gridRows - borderPadding; row++) {
-            for (int column = 0; column < ant.gridColumns - borderPadding; column++) {
-                if (ant.grid[row + borderPadding / 2][column + borderPadding / 2] == -1)
+        int halfRow = ant.gridRows / 2;
+        int halfColumn = ant.gridColumns / 2;
+//        int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
+        for (int row = 0; row < ant.gridRows; row++) {
+            for (int column = 0; column < ant.gridColumns; column++) {
+                if (ant.grid[row][column] == -1)
                     continue;
-                Colors.setColor(graphics, ant.grid[row + borderPadding / 2][column + borderPadding / 2]);
-                drawHexagon(column + 100, row + 100, 10);
+                Colors.setColor(graphics, ant.grid[row][column]);
+                System.out.println(column + " " + row);
+
+                drawHexagon((column - halfColumn) * 20, (row - halfRow)* 20, Settings.HEXAGON_SIZE);
             }
         }
     }

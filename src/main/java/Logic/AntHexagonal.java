@@ -16,9 +16,9 @@ public class AntHexagonal {
     public int steps = 0;
     public boolean usedTopColor = false;
 
-    public AntHexagonal(String givenRule) {
-        this.gridColumns = (Settings.GRID_WIDTH + Settings.IMAGE_PADDING) / Settings.SIZE_OF_SQUARE;
-        this.gridRows = (Settings.GRID_HEIGHT + Settings.IMAGE_PADDING) / Settings.SIZE_OF_SQUARE;
+    public AntHexagonal(String givenRule, int gridColumns, int gridRows) {
+        this.gridColumns = gridColumns;
+        this.gridRows = gridRows;
         this.grid = new int[gridRows][gridColumns];
 
         for (int i = 0; i < gridRows; i++) {
