@@ -50,7 +50,7 @@ public class Settings {
     /**
      * Settings for hexagonal grid
      */
-    public static int HEXAGON_SIZE = 10;
+    public static int HEXAGON_SIDE_LEN = 6;
 
     public static void showExplanationFirstPartSettings() {
         Settings.SHOW_GRID = true;
