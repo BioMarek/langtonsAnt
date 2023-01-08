@@ -39,7 +39,7 @@ public class GridPanel extends JPanel implements ActionListener {
 
         Settings.generateHexagonalGridSettings();
 
-        AntHexagonal ant = new AntHexagonal(Rule.hexagonalReferenceRule(), 300, 300);
+        AntHexagonal ant = new AntHexagonal(Settings.HEX_RULE, Settings.HEX_WIDTH, Settings.HEX_HEIGHT);
         this.antVisualization = new AntHexagonalSingle(ant);
 
         startTimer();

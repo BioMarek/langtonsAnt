@@ -26,13 +26,13 @@ public class PositionHexagonal {
     public PositionHexagonal() {
     }
 
-    public void move(RotationHexagonal rotationHexagonal) {
-        turn(rotationHexagonal);
+    public void move(HexMoves hexMoves) {
+        turn(hexMoves);
         moveForward();
     }
 
-    public void turn(RotationHexagonal rotationHexagonal) {
-        currentRotation += rotationHexagonal.degrees;
+    public void turn(HexMoves hexMoves) {
+        currentRotation += hexMoves.degrees;
         if (currentRotation > 360) // TODO can be done as modulo?
             currentRotation -= 360;
         if (currentRotation < 0)

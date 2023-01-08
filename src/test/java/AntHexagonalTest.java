@@ -1,5 +1,5 @@
 import Logic.AntHexagonal;
-import Utils.RotationHexagonal;
+import Utils.HexMoves;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public class AntHexagonalTest {
 
     @Test
     void rule_R1U_works() {
-        antHexagonal = new AntHexagonal(List.of(RotationHexagonal.R1, RotationHexagonal.U), 4, 4);
+        antHexagonal = new AntHexagonal(List.of(HexMoves.R1, HexMoves.U), 4, 4);
         antHexagonal.nextMove();
         assertThat(antHexagonal.grid[2][2], is(1));
         assertThat(antHexagonal.antPosition.row, is(3));
@@ -27,7 +27,7 @@ public class AntHexagonalTest {
 
     @Test
     void rule_L1L2N_works() {
-        antHexagonal = new AntHexagonal(List.of(RotationHexagonal.L1, RotationHexagonal.L2, RotationHexagonal.N), 4, 4);
+        antHexagonal = new AntHexagonal(List.of(HexMoves.L1, HexMoves.L2, HexMoves.N), 4, 4);
         antHexagonal.nextMove();
         assertThat(antHexagonal.grid[2][2], is(1));
         assertThat(antHexagonal.antPosition.row, is(1));
@@ -47,7 +47,7 @@ public class AntHexagonalTest {
     }
     @Test
     void rule_R2N_works() {
-        antHexagonal = new AntHexagonal(List.of(RotationHexagonal.R2, RotationHexagonal.N), 4, 4);
+        antHexagonal = new AntHexagonal(List.of(HexMoves.R2, HexMoves.N), 4, 4);
         antHexagonal.nextMove();
         assertThat(antHexagonal.grid[2][2], is(1));
         assertThat(antHexagonal.antPosition.row, is(3));

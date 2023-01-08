@@ -1,7 +1,7 @@
 package Logic;
 
 import Utils.PositionHexagonal;
-import Utils.RotationHexagonal;
+import Utils.HexMoves;
 import Utils.Settings;
 
 import java.util.Arrays;
@@ -11,13 +11,13 @@ public class AntHexagonal {
     public final int[][] grid;
     public final int gridColumns;
     public final int gridRows;
-    public List<RotationHexagonal> rule;
+    public List<HexMoves> rule;
     public PositionHexagonal antPosition = new PositionHexagonal();
     public boolean stopped = false;
     public int steps = 0;
     public boolean usedTopColor = false;
 
-    public AntHexagonal(List<RotationHexagonal> rule, int gridColumns, int gridRows) {
+    public AntHexagonal(List<HexMoves> rule, int gridColumns, int gridRows) {
         this.gridColumns = gridColumns;
         this.gridRows = gridRows;
         this.grid = new int[gridRows][gridColumns];
@@ -58,7 +58,7 @@ public class AntHexagonal {
         int currentColumn = antPosition.column;
         grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] == -1) ? 0 : grid[currentRow][currentColumn];
 
-        RotationHexagonal moveDirection = rule.get(grid[currentRow][currentColumn]);
+        HexMoves moveDirection = rule.get(grid[currentRow][currentColumn]);
         grid[currentRow][currentColumn]++;
         antPosition.move(moveDirection);
 

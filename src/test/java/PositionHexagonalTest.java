@@ -1,4 +1,4 @@
-import Utils.RotationHexagonal;
+import Utils.HexMoves;
 import Utils.PositionHexagonal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,18 +17,18 @@ public class PositionHexagonalTest {
     @Test
     void turn_isCorrect() {
         positionHexagonal = new PositionHexagonal(2, 2, 30);
-        positionHexagonal.turn(RotationHexagonal.N);
+        positionHexagonal.turn(HexMoves.N);
         assertThat(positionHexagonal.currentRotation, is(30));
 
-        positionHexagonal.turn(RotationHexagonal.U);
+        positionHexagonal.turn(HexMoves.U);
         assertThat(positionHexagonal.currentRotation, is(210));
 
         positionHexagonal = new PositionHexagonal(2, 2, 330);
-        positionHexagonal.turn(RotationHexagonal.R1);
+        positionHexagonal.turn(HexMoves.R1);
         assertThat(positionHexagonal.currentRotation, is(30));
 
         positionHexagonal = new PositionHexagonal(2, 2, 30);
-        positionHexagonal.turn(RotationHexagonal.L1);
+        positionHexagonal.turn(HexMoves.L1);
         assertThat(positionHexagonal.currentRotation, is(330));
     }
 
