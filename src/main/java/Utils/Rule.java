@@ -249,4 +249,12 @@ public class Rule {
 
         return interesting;
     }
+
+    public static List<List<HexMoves>> hexagonalReferenceRules() {
+        List<List<HexMoves>> result = new ArrayList<>();
+        result.add(List.of(HexMoves.R1, HexMoves.R2, HexMoves.N, HexMoves.U, HexMoves.R2, HexMoves.R1, HexMoves.L2));
+        result.add(List.of(HexMoves.L1, HexMoves.L2, HexMoves.N, HexMoves.U, HexMoves.L2, HexMoves.L1, HexMoves.R2));
+        result.add(List.of(HexMoves.L2, HexMoves.N, HexMoves.N, HexMoves.L1, HexMoves.L2, HexMoves.L1));
+        return result;
+    }
 }

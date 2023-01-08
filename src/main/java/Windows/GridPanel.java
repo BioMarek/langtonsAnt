@@ -1,8 +1,10 @@
 package Windows;
 
 import Graphic.AntVisualization;
-import Graphic.Visualization.AntGraphicFour;
+import Graphic.Visualization.AntHexagonalSingle;
 import Logic.Ant;
+import Logic.AntHexagonal;
+import Utils.Rule;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
@@ -22,18 +24,31 @@ public class GridPanel extends JPanel implements ActionListener {
     private final AntVisualization antVisualization;
     private Timer timer;
 
+//    public GridPanel() {
+//        this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
+//        this.setFocusable(true);
+//        this.ant = new Ant(Settings.RULE);
+//
+//        // TODO refactor
+//        Settings.generateFourImagesPerScreenSettings();
+//        Ant antTopLeft = new Ant("RL");
+//        Ant antTopRight = new Ant("RLR");
+//        Ant antBottomLeft = new Ant("RLRR");
+//        Ant antBottomRight = new Ant("RLRRR");
+//        this.antVisualization = new AntGraphicFour(antTopLeft, antTopRight, antBottomLeft, antBottomRight);
+//
+//        startTimer();
+//    }
+
     public GridPanel() {
         this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
         this.setFocusable(true);
         this.ant = new Ant(Settings.RULE);
 
-        // TODO refactor
-        Settings.generateFourImagesPerScreenSettings();
-        Ant antTopLeft = new Ant("RL");
-        Ant antTopRight = new Ant("RLR");
-        Ant antBottomLeft = new Ant("RLRR");
-        Ant antBottomRight = new Ant("RLRRR");
-        this.antVisualization = new AntGraphicFour(antTopLeft, antTopRight, antBottomLeft, antBottomRight);
+        Settings.generateHexagonalGridSettings();
+
+        AntHexagonal ant = new AntHexagonal(Settings.HEX_RULE, Settings.HEX_WIDTH, Settings.HEX_HEIGHT);
+        this.antVisualization = new AntHexagonalSingle(ant);
 
         startTimer();
     }

@@ -1,5 +1,8 @@
 package Utils;
 
+import javax.swing.plaf.PanelUI;
+import java.util.List;
+
 public class Settings {
     /**
      * General settings
@@ -47,6 +50,14 @@ public class Settings {
     public static double GRAPHIC_SHIFT_COLUMN = 0; // during zoom how much is graphic column moved with respect to grid column
     public static double GRAPHIC_SHIFT_ROW = 0; // during zoom how much is graphic row moved with respect to grid row
 
+    /**
+     * Settings for hexagonal grid
+     */
+    public static int HEX_SIDE_LEN = 6;
+    public static int HEX_WIDTH = 300;
+    public static int HEX_HEIGHT = 300;
+    public static List<HexMoves> HEX_RULE = Rule.hexagonalReferenceRules().get(2);
+
     public static void showExplanationFirstPartSettings() {
         Settings.SHOW_GRID = true;
         Settings.SKIP = 1;
@@ -90,5 +101,10 @@ public class Settings {
         Settings.GRID_HEIGHT = 540;
         Settings.GRID_WIDTH = 960;
         Settings.IMAGE_PADDING = 200;
+    }
+
+    public static void generateHexagonalGridSettings() {
+        Settings.MAX_MOVES = 200000;
+        Settings.SKIP = 50;
     }
 }
