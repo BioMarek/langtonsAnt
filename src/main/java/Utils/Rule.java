@@ -249,4 +249,8 @@ public class Rule {
 
         return interesting;
     }
+
+    public static List<RotationHexagonal> hexagonalReferenceRule() {
+        return List.of(RotationHexagonal.R1, RotationHexagonal.R2, RotationHexagonal.N, RotationHexagonal.U, RotationHexagonal.R2, RotationHexagonal.R1, RotationHexagonal.L2);
+    }
 }

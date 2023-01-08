@@ -61,6 +61,11 @@ public class AntHexagonal {
         RotationHexagonal moveDirection = rule.get(grid[currentRow][currentColumn]);
         grid[currentRow][currentColumn]++;
         antPosition.move(moveDirection);
+
+        grid[currentRow][currentColumn] = (grid[currentRow][currentColumn]) % rule.size();
+
+        steps++;
+        stopped = steps >= Settings.MAX_MOVES;
         checkBorderCollision();
     }
 

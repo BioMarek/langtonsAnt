@@ -62,20 +62,24 @@ public class AntHexagonalSingle implements AntVisualization {
     public void drawGrid() {
         int halfRow = ant.gridRows / 2;
         int halfColumn = ant.gridColumns / 2;
+        int hexagonWidth = 17; // 17 when hexagon is 10
+        int hexagonHeight = 15; // 15 when hexagon is 10
+        int HexagonPositionShift = 8; // 8 when hexagon is 10, odd row is shift by half of hexagon size
 //        int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
         for (int row = 0; row < ant.gridRows; row++) {
             for (int column = 0; column < ant.gridColumns; column++) {
                 if (ant.grid[row][column] == -1)
                     continue;
                 Colors.setColor(graphics, ant.grid[row][column]);
-                System.out.println(column + " " + row);
-
-                drawHexagon((column - halfColumn) * 20, (row - halfRow)* 20, Settings.HEXAGON_SIZE);
+                if (row % 2 == 0)
+                    drawHexagon((column - halfColumn) * hexagonWidth + 500, (row - halfRow) * hexagonHeight + 500, Settings.HEXAGON_SIZE);
+                else
+                    drawHexagon((column - halfColumn) * hexagonWidth + 500 + HexagonPositionShift, (row - halfRow) * hexagonHeight + 500, Settings.HEXAGON_SIZE);
             }
         }
     }
 
-    public void drawHexagon(int column, int row, int size){
+    public void drawHexagon(int column, int row, int size) {
         Polygon p = new Polygon();
         for (int i = 0; i < 6; i++)
             p.addPoint((int) (column + size * Math.sin(i * 2 * Math.PI / 6)),

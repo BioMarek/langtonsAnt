@@ -97,7 +97,8 @@ public class Settings {
         Settings.IMAGE_PADDING = 200;
     }
 
-    public static void generateHexagonalGridSettings(){
-
+    public static void generateHexagonalGridSettings() {
+        Settings.MAX_MOVES = 200000;
+        Settings.SKIP = 50;
     }
 }
