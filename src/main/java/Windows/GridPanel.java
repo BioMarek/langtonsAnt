@@ -24,18 +24,26 @@ public class GridPanel extends JPanel implements ActionListener {
     private final AntVisualization antVisualization;
     private Timer timer;
 
-    public GridPanel() {
-        this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
-        this.setFocusable(true);
-        this.ant = new Ant(Settings.RULE);
-
-        // TODO refactor
+//    public GridPanel() {
+//        this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
+//        this.setFocusable(true);
+//        this.ant = new Ant(Settings.RULE);
+//
+//        // TODO refactor
 //        Settings.generateFourImagesPerScreenSettings();
 //        Ant antTopLeft = new Ant("RL");
 //        Ant antTopRight = new Ant("RLR");
 //        Ant antBottomLeft = new Ant("RLRR");
 //        Ant antBottomRight = new Ant("RLRRR");
 //        this.antVisualization = new AntGraphicFour(antTopLeft, antTopRight, antBottomLeft, antBottomRight);
+//
+//        startTimer();
+//    }
+
+    public GridPanel() {
+        this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
+        this.setFocusable(true);
+        this.ant = new Ant(Settings.RULE);
 
         Settings.generateHexagonalGridSettings();
 
