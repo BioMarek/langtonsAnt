@@ -1,7 +1,7 @@
 package Logic;
 
-import Utils.Direction;
-import Utils.Position;
+import Utils.PositionHexagonal;
+import Utils.RotationHexagonal;
 import Utils.Settings;
 
 import java.util.Arrays;
@@ -11,13 +11,13 @@ public class AntHexagonal {
     public final int[][] grid;
     public final int gridColumns;
     public final int gridRows;
-    public List<String> rule;
-    public Position antPosition = new Position();
+    public List<RotationHexagonal> rule;
+    public PositionHexagonal antPosition = new PositionHexagonal();
     public boolean stopped = false;
     public int steps = 0;
     public boolean usedTopColor = false;
 
-    public AntHexagonal(List<String> rule, int gridColumns, int gridRows) {
+    public AntHexagonal(List<RotationHexagonal> rule, int gridColumns, int gridRows) {
         this.gridColumns = gridColumns;
         this.gridRows = gridRows;
         this.grid = new int[gridRows][gridColumns];
@@ -29,7 +29,7 @@ public class AntHexagonal {
         }
         antPosition.row = gridRows / 2;
         antPosition.column = gridColumns / 2;
-//        antPosition.direction = Direction.HARD_LEFT;
+        antPosition.currentRotation = 90;
     }
 
     public void allMoves() {
@@ -58,23 +58,10 @@ public class AntHexagonal {
         int currentColumn = antPosition.column;
         grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] == -1) ? 0 : grid[currentRow][currentColumn];
 
-        String move = rule.get(grid[currentRow][currentColumn]);
-
-        switch (move){
-//            case "N":
-            case "R1":
-
-
-
-        }
-    }
-
-
-    /**
-     * Moves ant to the left based on direction ant is facing.
-     */
-    public void moveLeft() {
-
+        RotationHexagonal moveDirection = rule.get(grid[currentRow][currentColumn]);
+        grid[currentRow][currentColumn]++;
+        antPosition.move(moveDirection);
+        checkBorderCollision();
     }
 
     /**
