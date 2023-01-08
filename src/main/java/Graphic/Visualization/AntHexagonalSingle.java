@@ -3,7 +3,7 @@ package Graphic.Visualization;
 import Graphic.AntVisualization;
 import Graphic.Components.Background;
 import Graphic.Components.Legend;
-import Logic.Ant;
+import Logic.AntHexagonal;
 import Utils.Colors;
 import Utils.Settings;
 
@@ -11,12 +11,12 @@ import java.awt.*;
 
 public class AntHexagonalSingle implements AntVisualization {
     private Graphics2D graphics;
-    private final Ant ant;
+    private final AntHexagonal ant;
     private final Legend legend;
     private final Background background;
     private int imageCount = 0;
 
-    public AntHexagonalSingle(Ant ant) {
+    public AntHexagonalSingle(AntHexagonal ant) {
         this.ant = ant;
         this.legend = new Legend();
         this.background = new Background();
@@ -47,7 +47,7 @@ public class AntHexagonalSingle implements AntVisualization {
         legend.graphics = graphics;
         background.graphics = graphics;
         background.setBackground(true);
-        legend.drawLegend(ant);
+//        legend.drawLegend(ant);
         drawGrid();
     }
 
@@ -78,8 +78,8 @@ public class AntHexagonalSingle implements AntVisualization {
     public void drawHexagon(int column, int row, int size){
         Polygon p = new Polygon();
         for (int i = 0; i < 6; i++)
-            p.addPoint((int) (column + size * Math.cos(i * 2 * Math.PI / 6)),
-                    (int) (row + size * Math.sin(i * 2 * Math.PI / 6)));
+            p.addPoint((int) (column + size * Math.sin(i * 2 * Math.PI / 6)),
+                    (int) (row + size * Math.cos(i * 2 * Math.PI / 6)));
         graphics.fillPolygon(p);
     }
 }
