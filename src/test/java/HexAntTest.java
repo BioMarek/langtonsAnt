@@ -21,7 +21,7 @@ public class HexAntTest {
 
         hexAnt.grid[3][3] = 1;
         hexAnt.nextMove();
-        assertThat(hexAnt.grid[3][3], is(2));
+        assertThat(hexAnt.grid[3][3], is(0));
         assertThat(hexAnt.antPosition.row, is(2));
         assertThat(hexAnt.antPosition.column, is(2));
     }
@@ -42,7 +42,7 @@ public class HexAntTest {
 
         hexAnt.grid[1][2] = 2;
         hexAnt.nextMove();
-        assertThat(hexAnt.grid[1][2], is(3));
+        assertThat(hexAnt.grid[1][2], is(0));
         assertThat(hexAnt.antPosition.row, is(1));
         assertThat(hexAnt.antPosition.column, is(1));
     }
