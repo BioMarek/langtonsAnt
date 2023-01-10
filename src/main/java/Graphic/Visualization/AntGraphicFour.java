@@ -61,7 +61,7 @@ public class AntGraphicFour implements AntVisualization {
         cross.graphics = graphics;
         background.setBackground(true);
         drawGrid();
-        legend.drawInfoForForImages(antTopLeft, antTopRight, antBottomLeft, antBottomRight);
+        legend.drawInfoForFourImages(antTopLeft, antTopRight, antBottomLeft, antBottomRight);
         cross.drawCross();
     }
 

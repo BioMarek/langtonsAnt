@@ -32,7 +32,7 @@ public class AntTest {
         ant.checkBorderCollision();
         assertThat(ant.stopped, is(true));
 
-        ant = new Ant(rule);
+        ant = new Ant(rule); // doesn't work because ant no longer accepts size of grid as parameter ant takes it from settings
         ant.antPosition.column = 2;
         ant.checkBorderCollision();
         assertThat(ant.stopped, is(true));

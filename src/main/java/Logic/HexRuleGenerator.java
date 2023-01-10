@@ -10,13 +10,13 @@ import java.util.List;
 /**
  * moves: N (no change), R1 (60° clockwise), R2 (120° clockwise), U (180°), L2 (120° counter-clockwise), L1 (60° counter-clockwise)
  */
-public class HexagonalRuleGenerator implements Iterator<List<HexMoves>> {
+public class HexRuleGenerator implements Iterator<List<HexMoves>> {
     private final int rulesLength;
     public int[] intArray;
     private int rulesReturned = 0;
     public final int totalNumOfRules;
 
-    public HexagonalRuleGenerator(int rulesLength) {
+    public HexRuleGenerator(int rulesLength) {
         if (rulesLength < 2) {
             throw new RuntimeException("Rule must be longer than 2");
         }

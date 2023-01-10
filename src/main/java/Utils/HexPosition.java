@@ -8,12 +8,12 @@ import java.util.List;
  * -90            90  |  270            90
  * ...-150    150     |      210    150
  */
-public class PositionHexagonal {
+public class HexPosition {
     public int row;
     public int column;
     public int currentRotation;
 
-    public PositionHexagonal(int row, int column, int currentRotation) {
+    public HexPosition(int row, int column, int currentRotation) {
         this.row = row;
         this.column = column;
         this.currentRotation = currentRotation;
@@ -23,7 +23,7 @@ public class PositionHexagonal {
             throw new RuntimeException("Rotation" + currentRotation + " is not allowed");
     }
 
-    public PositionHexagonal() {
+    public HexPosition() {
     }
 
     public void move(HexMoves hexMoves) {

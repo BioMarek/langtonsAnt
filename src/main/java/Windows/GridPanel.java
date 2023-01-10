@@ -3,8 +3,7 @@ package Windows;
 import Graphic.AntVisualization;
 import Graphic.Visualization.AntHexagonalSingle;
 import Logic.Ant;
-import Logic.AntHexagonal;
-import Utils.Rule;
+import Logic.HexAnt;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
@@ -47,7 +46,7 @@ public class GridPanel extends JPanel implements ActionListener {
 
         Settings.generateHexagonalGridSettings();
 
-        AntHexagonal ant = new AntHexagonal(Settings.HEX_RULE, Settings.HEX_WIDTH, Settings.HEX_HEIGHT);
+        HexAnt ant = new HexAnt(Settings.HEX_RULE, Settings.HEX_WIDTH, Settings.HEX_HEIGHT);
         this.antVisualization = new AntHexagonalSingle(ant);
 
         startTimer();
