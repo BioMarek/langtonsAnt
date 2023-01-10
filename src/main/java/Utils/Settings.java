@@ -1,8 +1,5 @@
 package Utils;
 
-import javax.swing.plaf.PanelUI;
-import java.util.List;
-
 public class Settings {
     /**
      * General settings
@@ -56,7 +53,7 @@ public class Settings {
     public static int HEX_SIDE_LEN = 6;
     public static int HEX_WIDTH = 300;
     public static int HEX_HEIGHT = 300;
-    public static List<HexMoves> HEX_RULE = Rule.hexagonalReferenceRules().get(2);
+    public static HexRule HEX_RULE = HexRule.hexagonalReferenceRules().get(1);
 
     public static void showExplanationFirstPartSettings() {
         Settings.SHOW_GRID = true;

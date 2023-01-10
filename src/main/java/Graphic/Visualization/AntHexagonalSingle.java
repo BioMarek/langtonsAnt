@@ -2,23 +2,24 @@ package Graphic.Visualization;
 
 import Graphic.AntVisualization;
 import Graphic.Components.Background;
-import Graphic.Components.Legend;
-import Logic.AntHexagonal;
+import Graphic.Components.HexLegend;
+import Logic.HexAnt;
 import Utils.Colors;
 import Utils.Settings;
 
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Polygon;
 
 public class AntHexagonalSingle implements AntVisualization {
     private Graphics2D graphics;
-    private final AntHexagonal ant;
-    private final Legend legend;
+    private final HexAnt ant;
+    private final HexLegend hexLegend;
     private final Background background;
     private int imageCount = 0;
 
-    public AntHexagonalSingle(AntHexagonal ant) {
+    public AntHexagonalSingle(HexAnt ant) {
         this.ant = ant;
-        this.legend = new Legend();
+        this.hexLegend = new HexLegend();
         this.background = new Background();
     }
 
@@ -44,10 +45,10 @@ public class AntHexagonalSingle implements AntVisualization {
     @Override
     public void drawPresentation(Graphics2D graphics) {
         this.graphics = graphics;
-        legend.graphics = graphics;
+        hexLegend.graphics = graphics;
         background.graphics = graphics;
         background.setBackground(true);
-//        legend.drawLegend(ant);
+        hexLegend.drawLegend(ant);
         drawGrid();
     }
 

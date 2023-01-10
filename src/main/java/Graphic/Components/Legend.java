@@ -41,7 +41,7 @@ public class Legend {
     /**
      * Info is just name of rule written over grid in big font, used when there are 4 images per screen
      */
-    public void drawInfoForForImages(Ant antTopLeft, Ant antTopRight, Ant antBottomLeft, Ant antBottomRight) {
+    public void drawInfoForFourImages(Ant antTopLeft, Ant antTopRight, Ant antBottomLeft, Ant antBottomRight) {
         int fontUnit = Settings.BACKGROUND_HEIGHT / 90;
         graphics.setColor(Colors.TEXT.getColor());
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.5)));

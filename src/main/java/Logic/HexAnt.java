@@ -1,27 +1,27 @@
 package Logic;
 
-import Utils.PositionHexagonal;
+import Utils.HexPosition;
 import Utils.HexMoves;
+import Utils.HexRule;
 import Utils.Settings;
 
 import java.util.Arrays;
-import java.util.List;
 
-public class AntHexagonal {
+public class HexAnt {
     public final int[][] grid;
     public final int gridColumns;
     public final int gridRows;
-    public List<HexMoves> rule;
-    public PositionHexagonal antPosition = new PositionHexagonal();
+    public HexRule hexRule;
+    public HexPosition antPosition = new HexPosition();
     public boolean stopped = false;
     public int steps = 0;
     public boolean usedTopColor = false;
 
-    public AntHexagonal(List<HexMoves> rule, int gridColumns, int gridRows) {
+    public HexAnt(HexRule hexRule, int gridColumns, int gridRows) {
         this.gridColumns = gridColumns;
         this.gridRows = gridRows;
         this.grid = new int[gridRows][gridColumns];
-        this.rule = rule;
+        this.hexRule = hexRule;
 
         for (int i = 0; i < gridRows; i++) {
             grid[i] = new int[gridColumns];
@@ -58,11 +58,11 @@ public class AntHexagonal {
         int currentColumn = antPosition.column;
         grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] == -1) ? 0 : grid[currentRow][currentColumn];
 
-        HexMoves moveDirection = rule.get(grid[currentRow][currentColumn]);
+        HexMoves moveDirection = hexRule.rule.get(grid[currentRow][currentColumn]);
         grid[currentRow][currentColumn]++;
         antPosition.move(moveDirection);
 
-        grid[currentRow][currentColumn] = (grid[currentRow][currentColumn]) % rule.size();
+        grid[currentRow][currentColumn] = (grid[currentRow][currentColumn]) % hexRule.rule.size();
 
         steps++;
         stopped = steps >= Settings.MAX_MOVES;
