@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HexRule {
+    // TODO unify HexRule nad Rule
     public List<HexMove> rule;
 
     public HexRule(List<HexMove> rule) {
