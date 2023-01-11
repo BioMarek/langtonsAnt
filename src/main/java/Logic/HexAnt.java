@@ -1,6 +1,6 @@
 package Logic;
 
-import Utils.HexMoves;
+import Utils.HexMove;
 import Utils.HexPosition;
 import Utils.HexRule;
 import Utils.Settings;
@@ -16,7 +16,7 @@ public class HexAnt {
     public HexPosition antPosition = new HexPosition();
     public boolean stopped = false;
     public int steps = 0;
-    public boolean usedTopColor = false;
+    public boolean usedTopColor = true; // TODO implement this
 
     public HexAnt(HexRule hexRule) {
         this.gridColumns = Settings.GRID_WIDTH / Util.getHexWidth();
@@ -59,7 +59,7 @@ public class HexAnt {
         int currentColumn = antPosition.column;
         grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] == -1) ? 0 : grid[currentRow][currentColumn];
 
-        HexMoves moveDirection = hexRule.rule.get(grid[currentRow][currentColumn]);
+        HexMove moveDirection = hexRule.rule.get(grid[currentRow][currentColumn]);
         grid[currentRow][currentColumn]++;
         antPosition.move(moveDirection);
 

@@ -1,4 +1,4 @@
-import Utils.HexMoves;
+import Utils.HexMove;
 import Utils.HexPosition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,18 +17,18 @@ public class HexPositionTest {
     @Test
     void turn_isCorrect() {
         hexPosition = new HexPosition(2, 2, 30);
-        hexPosition.turn(HexMoves.N);
+        hexPosition.turn(HexMove.N);
         assertThat(hexPosition.currentRotation, is(30));
 
-        hexPosition.turn(HexMoves.U);
+        hexPosition.turn(HexMove.U);
         assertThat(hexPosition.currentRotation, is(210));
 
         hexPosition = new HexPosition(2, 2, 330);
-        hexPosition.turn(HexMoves.R1);
+        hexPosition.turn(HexMove.R1);
         assertThat(hexPosition.currentRotation, is(30));
 
         hexPosition = new HexPosition(2, 2, 30);
-        hexPosition.turn(HexMoves.L1);
+        hexPosition.turn(HexMove.L1);
         assertThat(hexPosition.currentRotation, is(330));
     }
 

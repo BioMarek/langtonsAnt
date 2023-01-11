@@ -6,17 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HexRule {
-    public List<HexMoves> rule;
+    public List<HexMove> rule;
 
-    public HexRule(List<HexMoves> rule) {
+    public HexRule(List<HexMove> rule) {
         this.rule = rule;
     }
 
     public static List<HexRule> hexagonalReferenceRules() {
         List<HexRule> result = new ArrayList<>();
-        result.add(new HexRule(List.of(HexMoves.R1, HexMoves.R2, HexMoves.N, HexMoves.U, HexMoves.R2, HexMoves.R1, HexMoves.L2)));
-        result.add(new HexRule(List.of(HexMoves.L1, HexMoves.L2, HexMoves.N, HexMoves.U, HexMoves.L2, HexMoves.L1, HexMoves.R2)));
-        result.add(new HexRule(List.of(HexMoves.L2, HexMoves.N, HexMoves.N, HexMoves.L1, HexMoves.L2, HexMoves.L1)));
+        result.add(new HexRule(List.of(HexMove.R1, HexMove.R2, HexMove.N, HexMove.U, HexMove.R2, HexMove.R1, HexMove.L2)));
+        result.add(new HexRule(List.of(HexMove.L1, HexMove.L2, HexMove.N, HexMove.U, HexMove.L2, HexMove.L1, HexMove.R2)));
+        result.add(new HexRule(List.of(HexMove.L2, HexMove.N, HexMove.N, HexMove.L1, HexMove.L2, HexMove.L1)));
         return result;
     }
 
@@ -36,9 +36,17 @@ public class HexRule {
 
     public String translateRuleToString() {
         StringBuilder result = new StringBuilder();
-        for (HexMoves i : rule) {
+        for (HexMove i : rule) {
             result.append(i.toString());
         }
         return result.toString();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (HexMove hexMove : rule)
+            stringBuilder.append(hexMove.toString());
+        return stringBuilder.toString();
     }
 }

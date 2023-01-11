@@ -1,5 +1,5 @@
 import Logic.HexAnt;
-import Utils.HexMoves;
+import Utils.HexMove;
 import Utils.HexRule;
 import Utils.Settings;
 import Utils.Util;
@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -23,7 +22,7 @@ public class HexAntTest {
 
     @Test
     void rule_R1U_works() {
-        hexAnt = new HexAnt(new HexRule(List.of(HexMoves.R1, HexMoves.U)));
+        hexAnt = new HexAnt(new HexRule(List.of(HexMove.R1, HexMove.U)));
         hexAnt.nextMove();
         assertThat(hexAnt.grid[2][2], is(1));
         assertThat(hexAnt.antPosition.row, is(3));
@@ -38,7 +37,7 @@ public class HexAntTest {
 
     @Test
     void rule_L1L2N_works() {
-        hexAnt = new HexAnt(new HexRule(List.of(HexMoves.L1, HexMoves.L2, HexMoves.N)));
+        hexAnt = new HexAnt(new HexRule(List.of(HexMove.L1, HexMove.L2, HexMove.N)));
         hexAnt.nextMove();
         assertThat(hexAnt.grid[2][2], is(1));
         assertThat(hexAnt.antPosition.row, is(1));
@@ -58,7 +57,7 @@ public class HexAntTest {
     }
     @Test
     void rule_R2N_works() {
-        hexAnt = new HexAnt(new HexRule(List.of(HexMoves.R2, HexMoves.N)));
+        hexAnt = new HexAnt(new HexRule(List.of(HexMove.R2, HexMove.N)));
         hexAnt.nextMove();
         assertThat(hexAnt.grid[2][2], is(1));
         assertThat(hexAnt.antPosition.row, is(3));
