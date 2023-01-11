@@ -1,9 +1,10 @@
 package Logic;
 
-import Utils.HexPosition;
 import Utils.HexMoves;
+import Utils.HexPosition;
 import Utils.HexRule;
 import Utils.Settings;
+import Utils.Util;
 
 import java.util.Arrays;
 
@@ -17,9 +18,9 @@ public class HexAnt {
     public int steps = 0;
     public boolean usedTopColor = false;
 
-    public HexAnt(HexRule hexRule, int gridColumns, int gridRows) {
-        this.gridColumns = gridColumns;
-        this.gridRows = gridRows;
+    public HexAnt(HexRule hexRule) {
+        this.gridColumns = Settings.GRID_WIDTH / Util.getHexWidth();
+        this.gridRows = Settings.GRID_HEIGHT / Util.getHexHeight();
         this.grid = new int[gridRows][gridColumns];
         this.hexRule = hexRule;
 

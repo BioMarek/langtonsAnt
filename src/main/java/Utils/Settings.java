@@ -51,8 +51,6 @@ public class Settings {
      * Settings for hexagonal grid
      */
     public static int HEX_SIDE_LEN = 6;
-    public static int HEX_WIDTH = 300;
-    public static int HEX_HEIGHT = 300;
     public static HexRule HEX_RULE = HexRule.hexagonalReferenceRules().get(1);
 
     public static void showExplanationFirstPartSettings() {
@@ -101,7 +99,7 @@ public class Settings {
     }
 
     public static void generateHexagonalGridSettings() {
-        Settings.MAX_MOVES = 200000;
-        Settings.SKIP = 50;
+        Settings.MAX_MOVES = 2000000;
+        Settings.SKIP = 500;
     }
 }

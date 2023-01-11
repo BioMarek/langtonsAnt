@@ -10,6 +10,10 @@ import Utils.Settings;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 
+import static Utils.Util.getHexHeight;
+import static Utils.Util.getHexPositionShift;
+import static Utils.Util.getHexWidth;
+
 public class AntHexagonalSingle implements AntVisualization {
     private Graphics2D graphics;
     private final HexAnt ant;
@@ -61,11 +65,6 @@ public class AntHexagonalSingle implements AntVisualization {
      * Converts grid of numbers to {@link Graphics2D}.
      */
     public void drawGrid() {
-        int centeringRow = 90; //    if grid is 100:   0, 200: 45, 300: 90
-        int centeringColumn = 60; // if grid is 100: -40, 200: 10, 300: 80
-        int hexagonWidth = (int) (Settings.HEX_SIDE_LEN * 1.7); // 17 when hexagon is 10
-        int hexagonHeight = (int) (Settings.HEX_SIDE_LEN * 1.5); // 15 when hexagon is 10
-        int HexagonPositionShift = hexagonWidth / 2; // 8 when hexagon is 10, odd row is shift by half of hexagon size
 //        int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
         for (int row = 0; row < ant.gridRows; row++) {
             for (int column = 0; column < ant.gridColumns; column++) {
@@ -73,9 +72,9 @@ public class AntHexagonalSingle implements AntVisualization {
                     continue;
                 Colors.setColor(graphics, ant.grid[row][column]);
                 if (row % 2 == 0)
-                    drawHexagon((column - centeringColumn) * hexagonWidth, (row - centeringRow) * hexagonHeight, Settings.HEX_SIDE_LEN);
+                    drawHexagon(column * getHexWidth(), (row /*- centeringRow*/) * getHexHeight(), Settings.HEX_SIDE_LEN);
                 else
-                    drawHexagon((column - centeringColumn) * hexagonWidth + HexagonPositionShift, (row - centeringRow) * hexagonHeight, Settings.HEX_SIDE_LEN);
+                    drawHexagon(column * getHexWidth() + getHexPositionShift(), row * getHexHeight(), Settings.HEX_SIDE_LEN);
             }
         }
     }
