@@ -16,7 +16,7 @@ public class HexAnt {
     public HexPosition antPosition = new HexPosition();
     public boolean stopped = false;
     public int steps = 0;
-    public boolean usedTopColor = true; // TODO implement this
+    public boolean usedTopColor = false;
 
     public HexAnt(HexRule hexRule) {
         this.gridColumns = Settings.GRID_WIDTH / Util.getHexWidth();
@@ -62,6 +62,9 @@ public class HexAnt {
         HexMove moveDirection = hexRule.rule.get(grid[currentRow][currentColumn]);
         grid[currentRow][currentColumn]++;
         antPosition.move(moveDirection);
+
+        if (grid[currentRow][currentColumn] == hexRule.rule.size() - 1)
+            usedTopColor = true;
 
         grid[currentRow][currentColumn] = (grid[currentRow][currentColumn]) % hexRule.rule.size();
 
