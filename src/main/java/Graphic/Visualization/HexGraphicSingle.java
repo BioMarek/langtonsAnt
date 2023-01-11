@@ -14,14 +14,14 @@ import static Utils.Util.getHexHeight;
 import static Utils.Util.getHexPositionShift;
 import static Utils.Util.getHexWidth;
 
-public class AntHexagonalSingle implements AntVisualization {
+public class HexGraphicSingle implements AntVisualization {
     private Graphics2D graphics;
     private final HexAnt ant;
     private final HexLegend hexLegend;
     private final Background background;
     private int imageCount = 0;
 
-    public AntHexagonalSingle(HexAnt ant) {
+    public HexGraphicSingle(HexAnt ant) {
         this.ant = ant;
         this.hexLegend = new HexLegend();
         this.background = new Background();

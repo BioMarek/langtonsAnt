@@ -66,6 +66,8 @@ public class AntGraphicSingle implements AntVisualization {
         int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
         for (int row = 0; row < ant.gridRows - borderPadding; row++) {
             for (int column = 0; column < ant.gridColumns - borderPadding; column++) {
+                if (ant.grid[row][column] == -1)
+                    continue;
                 Colors.setColor(graphics, ant.grid[row + borderPadding / 2][column + borderPadding / 2]);
                 int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
                 // part that makes zoom
