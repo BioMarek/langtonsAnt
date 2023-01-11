@@ -6,7 +6,7 @@ import Utils.Settings;
 
 import java.util.Arrays;
 
-public class Ant {
+public class SquareAnt {
     public final int[][] grid;
     public final int gridColumns;
     public final int gridRows;
@@ -16,7 +16,7 @@ public class Ant {
     public int steps = 0;
     public boolean usedTopColor = false;
 
-    public Ant(String givenRule) {
+    public SquareAnt(String givenRule) {
         this.gridColumns = (Settings.GRID_WIDTH + Settings.IMAGE_PADDING) / Settings.SIZE_OF_SQUARE;
         this.gridRows = (Settings.GRID_HEIGHT + Settings.IMAGE_PADDING) / Settings.SIZE_OF_SQUARE;
         this.grid = new int[gridRows][gridColumns];

@@ -1,7 +1,7 @@
 package Threads;
 
 import Graphic.Visualization.AntGraphicSingle;
-import Logic.Ant;
+import Logic.SquareAnt;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
@@ -36,10 +36,10 @@ public class ImageRunnable implements Runnable {
     private void saveImage(String rule) {
         System.out.println(Thread.currentThread().getName() + " working on: " + rule);
 
-        Ant ant = new Ant(rule);
-        AntGraphicSingle antGraphicSingle = new AntGraphicSingle(ant);
-        ant.allMoves();
-        if (ant.usedTopColor) {
+        SquareAnt squareAnt = new SquareAnt(rule);
+        AntGraphicSingle antGraphicSingle = new AntGraphicSingle(squareAnt);
+        squareAnt.allMoves();
+        if (squareAnt.usedTopColor) {
             BufferedImage bImg = new BufferedImage(Settings.GRID_WIDTH, Settings.BACKGROUND_HEIGHT, BufferedImage.TYPE_INT_RGB);
             antGraphicSingle.drawImage(bImg.createGraphics());
 

@@ -1,7 +1,7 @@
 package Graphic;
 
 import Graphic.Visualization.AntGraphicSingle;
-import Logic.Ant;
+import Logic.SquareAnt;
 import Logic.RulesGenerator;
 import Utils.Settings;
 
@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImageGenerator {
-    private Ant ant;
+    private SquareAnt squareAnt;
 
     /**
      * Cycles through all rules of length Settings.RULES_LENGTH and saves images into file.
@@ -21,7 +21,7 @@ public class ImageGenerator {
         while (rulesGenerator.hasNext()) {
             String rule = rulesGenerator.next();
             System.out.println("working on: " + rule);
-            ant = new Ant(rule);
+            squareAnt = new SquareAnt(rule);
             saveImageWithoutPanel(rule);
         }
     }
@@ -32,9 +32,9 @@ public class ImageGenerator {
      * @param rule that ant is running
      */
     private void saveImageWithoutPanel(String rule) {
-        ant.allMoves();
+        squareAnt.allMoves();
         BufferedImage bImg = new BufferedImage(Settings.GRID_WIDTH, Settings.BACKGROUND_HEIGHT, BufferedImage.TYPE_INT_RGB);
-        AntGraphicSingle antGraphicSingle = new AntGraphicSingle(ant);
+        AntGraphicSingle antGraphicSingle = new AntGraphicSingle(squareAnt);
         antGraphicSingle.drawImage(bImg.createGraphics());
 
         try {

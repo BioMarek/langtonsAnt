@@ -3,7 +3,7 @@ package Graphic.Visualization;
 import Graphic.AntVisualization;
 import Graphic.Components.Background;
 import Graphic.Components.Legend;
-import Logic.Ant;
+import Logic.SquareAnt;
 import Utils.Colors;
 import Utils.Settings;
 
@@ -14,13 +14,13 @@ import java.awt.Graphics2D;
  */
 public class AntGraphicSingle implements AntVisualization {
     private Graphics2D graphics;
-    private final Ant ant;
+    private final SquareAnt squareAnt;
     private final Legend legend;
     private final Background background;
     private int imageCount = 0;
 
-    public AntGraphicSingle(Ant ant) {
-        this.ant = ant;
+    public AntGraphicSingle(SquareAnt squareAnt) {
+        this.squareAnt = squareAnt;
         this.legend = new Legend();
         this.background = new Background();
     }
@@ -38,7 +38,7 @@ public class AntGraphicSingle implements AntVisualization {
     @Override
     public void createNextFrame() {
         System.out.println("creating frame " + imageCount++);
-        ant.nextMoves();
+        squareAnt.nextMoves();
     }
 
     /**
@@ -50,13 +50,13 @@ public class AntGraphicSingle implements AntVisualization {
         legend.graphics = graphics;
         background.graphics = graphics;
         background.setBackground(true);
-        legend.drawLegend(ant);
+        legend.drawLegend(squareAnt);
         drawGrid();
     }
 
     @Override
     public boolean stopped() {
-        return ant.stopped;
+        return squareAnt.stopped;
     }
 
     /**
@@ -64,11 +64,11 @@ public class AntGraphicSingle implements AntVisualization {
      */
     public void drawGrid() {
         int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
-        for (int row = 0; row < ant.gridRows - borderPadding; row++) {
-            for (int column = 0; column < ant.gridColumns - borderPadding; column++) {
-                if (ant.grid[row][column] == -1)
+        for (int row = 0; row < squareAnt.gridRows - borderPadding; row++) {
+            for (int column = 0; column < squareAnt.gridColumns - borderPadding; column++) {
+                if (squareAnt.grid[row][column] == -1)
                     continue;
-                Colors.setColor(graphics, ant.grid[row + borderPadding / 2][column + borderPadding / 2]);
+                Colors.setColor(graphics, squareAnt.grid[row + borderPadding / 2][column + borderPadding / 2]);
                 int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
                 // part that makes zoom
                 if (Settings.ZOOMED)

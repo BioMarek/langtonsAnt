@@ -1,6 +1,6 @@
 package Graphic.Components;
 
-import Logic.Ant;
+import Logic.SquareAnt;
 import Utils.Colors;
 import Utils.Settings;
 import Utils.Util;
@@ -14,10 +14,10 @@ import java.awt.geom.RoundRectangle2D;
 
 public class Legend {
     public Graphics2D graphics;
-    private Ant ant;
+    private SquareAnt squareAnt;
 
-    public void drawLegend(Ant ant) {
-        this.ant = ant;
+    public void drawLegend(SquareAnt squareAnt) {
+        this.squareAnt = squareAnt;
         turnAntiAliasingOn(true);
         drawInfo();
         drawDiagram();
@@ -31,8 +31,8 @@ public class Legend {
         int fontUnit = Settings.BACKGROUND_HEIGHT / 60;
         graphics.setColor(Colors.TEXT.getColor());
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.2)));
-        graphics.drawString("Rule:   " + new String(ant.rule), Settings.LEGEND_START_X + fontUnit, fontUnit * 2);
-        graphics.drawString("Steps: " + Util.numberFormatter(ant.steps), Settings.LEGEND_START_X + fontUnit, fontUnit * 4);
+        graphics.drawString("Rule:   " + new String(squareAnt.rule), Settings.LEGEND_START_X + fontUnit, fontUnit * 2);
+        graphics.drawString("Steps: " + Util.numberFormatter(squareAnt.steps), Settings.LEGEND_START_X + fontUnit, fontUnit * 4);
 
         graphics.setStroke(new BasicStroke(3f));
         graphics.drawLine(Settings.LEGEND_START_X, 0, Settings.LEGEND_START_X, Settings.BACKGROUND_HEIGHT);
@@ -41,14 +41,14 @@ public class Legend {
     /**
      * Info is just name of rule written over grid in big font, used when there are 4 images per screen
      */
-    public void drawInfoForFourImages(Ant antTopLeft, Ant antTopRight, Ant antBottomLeft, Ant antBottomRight) {
+    public void drawInfoForFourImages(SquareAnt squareAntTopLeft, SquareAnt squareAntTopRight, SquareAnt squareAntBottomLeft, SquareAnt squareAntBottomRight) {
         int fontUnit = Settings.BACKGROUND_HEIGHT / 90;
         graphics.setColor(Colors.TEXT.getColor());
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.5)));
-        graphics.drawString("Rule: " + new String(antTopLeft.rule), fontUnit * 2, fontUnit * 3);
-        graphics.drawString("Rule: " + new String(antTopRight.rule), fontUnit * 2 + Settings.BACKGROUND_WIDTH / 2, fontUnit * 3);
-        graphics.drawString("Rule: " + new String(antBottomLeft.rule), fontUnit * 2, fontUnit * 3 + Settings.BACKGROUND_HEIGHT / 2);
-        graphics.drawString("Rule: " + new String(antBottomRight.rule), fontUnit * 2 + Settings.BACKGROUND_WIDTH / 2, fontUnit * 3 + Settings.BACKGROUND_HEIGHT / 2);
+        graphics.drawString("Rule: " + new String(squareAntTopLeft.rule), fontUnit * 2, fontUnit * 3);
+        graphics.drawString("Rule: " + new String(squareAntTopRight.rule), fontUnit * 2 + Settings.BACKGROUND_WIDTH / 2, fontUnit * 3);
+        graphics.drawString("Rule: " + new String(squareAntBottomLeft.rule), fontUnit * 2, fontUnit * 3 + Settings.BACKGROUND_HEIGHT / 2);
+        graphics.drawString("Rule: " + new String(squareAntBottomRight.rule), fontUnit * 2 + Settings.BACKGROUND_WIDTH / 2, fontUnit * 3 + Settings.BACKGROUND_HEIGHT / 2);
     }
 
     /**
@@ -58,7 +58,7 @@ public class Legend {
         int squareSize = Settings.BACKGROUND_HEIGHT / 25;
         int topPadding = squareSize * 4;
         int gap = squareSize * 2;
-        int ruleHalf = (ant.rule.length % 2 == 0) ? ant.rule.length / 2 : ant.rule.length / 2 + 1; // ensures left column is longer than right one
+        int ruleHalf = (squareAnt.rule.length % 2 == 0) ? squareAnt.rule.length / 2 : squareAnt.rule.length / 2 + 1; // ensures left column is longer than right one
 
         graphics.setColor(Colors.TEXT.getColor());
         graphics.draw(new RoundRectangle2D.Double(Settings.LEGEND_START_X + 3.5 * squareSize,
@@ -76,8 +76,8 @@ public class Legend {
             drawLegendInnerArrows(i, squareSize, 3.3, false);
         }
 
-        for (int i = ruleHalf; i < ant.rule.length; i++) {
-            if (i != ant.rule.length - 1)
+        for (int i = ruleHalf; i < squareAnt.rule.length; i++) {
+            if (i != squareAnt.rule.length - 1)
                 drawUpArrow(Settings.LEGEND_START_X + squareSize * 13 / 2, (i - ruleHalf) * gap + squareSize * 11 / 2);
             drawFilledRect(Settings.LEGEND_START_X + squareSize * 6, (i - ruleHalf) * gap + topPadding, i);
             drawLegendInnerArrows(i - ruleHalf, squareSize, 6.3, true);
@@ -86,7 +86,7 @@ public class Legend {
 
     private void drawLegendInnerArrows(int i, int squareSize, double xLegendColumnCoefficient, boolean reverse) {
         graphics.setColor(Colors.TEXT.getColor());
-        char ruleArrow = reverse ? ant.rule[ant.rule.length - i - 1] : ant.rule[i];
+        char ruleArrow = reverse ? squareAnt.rule[squareAnt.rule.length - i - 1] : squareAnt.rule[i];
         if (ruleArrow == 'L') {
             drawInnerLeftArrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
         } else

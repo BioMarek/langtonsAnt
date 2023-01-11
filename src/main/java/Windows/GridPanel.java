@@ -2,7 +2,7 @@ package Windows;
 
 import Graphic.AntVisualization;
 import Graphic.Visualization.HexGraphicSingle;
-import Logic.Ant;
+import Logic.SquareAnt;
 import Logic.HexAnt;
 import Utils.Settings;
 
@@ -19,7 +19,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class GridPanel extends JPanel implements ActionListener {
-    private final Ant ant;
+    private final SquareAnt squareAnt;
     private final AntVisualization antVisualization;
     private Timer timer;
 
@@ -42,7 +42,7 @@ public class GridPanel extends JPanel implements ActionListener {
     public GridPanel() {
         this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
         this.setFocusable(true);
-        this.ant = new Ant(Settings.RULE);
+        this.squareAnt = new SquareAnt(Settings.RULE);
 
         Settings.generateHexagonalGridSettings();
 
@@ -64,7 +64,7 @@ public class GridPanel extends JPanel implements ActionListener {
         antVisualization.createNextFrame();
         repaint();
 
-        if (ant.stopped) {
+        if (squareAnt.stopped) {
             timer.stop();
             saveImage();
         }

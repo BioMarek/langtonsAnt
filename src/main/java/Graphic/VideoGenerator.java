@@ -3,7 +3,7 @@ package Graphic;
 import Graphic.Visualization.AntExplanation;
 import Graphic.Visualization.AntGraphicFour;
 import Graphic.Visualization.AntGraphicSingle;
-import Logic.Ant;
+import Logic.SquareAnt;
 import Utils.Rule;
 import Utils.Settings;
 import com.squareup.gifencoder.GifEncoder;
@@ -43,14 +43,14 @@ public class VideoGenerator {
         for (Rule rule : interesting) {
             System.out.println("working on " + rule.rule);
             rule.setVariables();
-            Ant ant = new Ant(Settings.RULE);
-            ant.allMoves(); // calculates number of moves in total
+            SquareAnt squareAnt = new SquareAnt(Settings.RULE);
+            squareAnt.allMoves(); // calculates number of moves in total
 
-            Settings.SKIP = ant.steps / Settings.VIDEO_NUM_IMAGES;
-            System.out.println("max steps: " + ant.steps + " skip: " + Settings.SKIP);
+            Settings.SKIP = squareAnt.steps / Settings.VIDEO_NUM_IMAGES;
+            System.out.println("max steps: " + squareAnt.steps + " skip: " + Settings.SKIP);
 
-            ant = new Ant(Settings.RULE);
-            antVisualization = new AntGraphicSingle(ant);
+            squareAnt = new SquareAnt(Settings.RULE);
+            antVisualization = new AntGraphicSingle(squareAnt);
             createMP4();
         }
     }
@@ -58,36 +58,36 @@ public class VideoGenerator {
     public void generateInteresting(Set<List<Rule>> interesting) {
         for (List<Rule> rules : interesting) {
             rules.get(0).setVariables();
-            Ant ant = new Ant(rules.get(0).rule);
-            ant.allMoves(); // calculates number of moves in total
-            int ant0 = ant.steps / Settings.VIDEO_NUM_IMAGES;
+            SquareAnt squareAnt = new SquareAnt(rules.get(0).rule);
+            squareAnt.allMoves(); // calculates number of moves in total
+            int ant0 = squareAnt.steps / Settings.VIDEO_NUM_IMAGES;
 
-            ant = new Ant(rules.get(1).rule);
-            ant.allMoves();
-            int ant1 = ant.steps / Settings.VIDEO_NUM_IMAGES;
+            squareAnt = new SquareAnt(rules.get(1).rule);
+            squareAnt.allMoves();
+            int ant1 = squareAnt.steps / Settings.VIDEO_NUM_IMAGES;
 
-            ant = new Ant(rules.get(2).rule);
-            ant.allMoves();
-            int ant2 = ant.steps / Settings.VIDEO_NUM_IMAGES;
+            squareAnt = new SquareAnt(rules.get(2).rule);
+            squareAnt.allMoves();
+            int ant2 = squareAnt.steps / Settings.VIDEO_NUM_IMAGES;
 
-            ant = new Ant(rules.get(3).rule);
-            ant.allMoves();
-            int ant3 = ant.steps / Settings.VIDEO_NUM_IMAGES;
+            squareAnt = new SquareAnt(rules.get(3).rule);
+            squareAnt.allMoves();
+            int ant3 = squareAnt.steps / Settings.VIDEO_NUM_IMAGES;
 
             Settings.SKIP = Math.max(Math.max(ant0, ant1), Math.max(ant2, ant3));
 
-            System.out.println("max steps: " + ant.steps + " skip: " + Settings.SKIP);
+            System.out.println("max steps: " + squareAnt.steps + " skip: " + Settings.SKIP);
 
             Settings.RULE = rules.get(0).rule + "_" + rules.get(1).rule + "_" + rules.get(2).rule + "_" + rules.get(3).rule;
-            antVisualization = new AntGraphicFour(new Ant(rules.get(0).rule), new Ant(rules.get(1).rule), new Ant(rules.get(2).rule), new Ant(rules.get(3).rule));
+            antVisualization = new AntGraphicFour(new SquareAnt(rules.get(0).rule), new SquareAnt(rules.get(1).rule), new SquareAnt(rules.get(2).rule), new SquareAnt(rules.get(3).rule));
             createMP4();
         }
     }
 
     public void generateExplanation() {
         Settings.showExplanationFirstPartSettings();
-        Ant ant = new Ant(Settings.RULE);
-        antVisualization = new AntExplanation(ant);
+        SquareAnt squareAnt = new SquareAnt(Settings.RULE);
+        antVisualization = new AntExplanation(squareAnt);
         createMP4();
     }
 
