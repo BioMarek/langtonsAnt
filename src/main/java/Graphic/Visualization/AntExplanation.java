@@ -2,7 +2,7 @@ package Graphic.Visualization;
 
 import Graphic.AntVisualization;
 import Graphic.Components.Background;
-import Graphic.Components.Legend;
+import Graphic.Components.SquareLegend;
 import Logic.SquareAnt;
 import Utils.Colors;
 import Utils.Direction;
@@ -27,7 +27,7 @@ import java.util.List;
 public class AntExplanation implements AntVisualization {
     private Graphics2D graphics;
     private final SquareAnt squareAnt;
-    private final Legend legend;
+    private final SquareLegend squareLegend;
     private final Background background;
     private BufferedImage antImage = null;
     private double rotateAngle = Math.toRadians(3);
@@ -40,7 +40,7 @@ public class AntExplanation implements AntVisualization {
 
     public AntExplanation(SquareAnt squareAnt) {
         this.squareAnt = squareAnt;
-        this.legend = new Legend();
+        this.squareLegend = new SquareLegend();
         this.background = new Background();
 
         try {
@@ -77,10 +77,10 @@ public class AntExplanation implements AntVisualization {
     @Override
     public void drawPresentation(Graphics2D graphics) {
         this.graphics = graphics;
-        legend.graphics = graphics;
+        squareLegend.graphics = graphics;
         background.graphics = graphics;
         background.setBackground(true);
-        legend.drawLegend(squareAnt);
+        squareLegend.drawLegend(squareAnt);
         drawGrid();
         if (!Settings.ZOOMED)
             drawAntImage();

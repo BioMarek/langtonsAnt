@@ -2,9 +2,8 @@ package Graphic.Visualization;
 
 import Graphic.AntVisualization;
 import Graphic.Components.Background;
-import Graphic.Components.Legend;
+import Graphic.Components.SquareLegend;
 import Logic.Ant;
-import Logic.SquareAnt;
 import Utils.Colors;
 import Utils.Settings;
 
@@ -16,13 +15,13 @@ import java.awt.Graphics2D;
 public class AntGraphicSingle implements AntVisualization {
     private Graphics2D graphics;
     private final Ant squareAnt;
-    private final Legend legend;
+    private final SquareLegend squareLegend;
     private final Background background;
     private int imageCount = 0;
 
     public AntGraphicSingle(Ant squareAnt) {
         this.squareAnt = squareAnt;
-        this.legend = new Legend();
+        this.squareLegend = new SquareLegend();
         this.background = new Background();
     }
 
@@ -48,10 +47,10 @@ public class AntGraphicSingle implements AntVisualization {
     @Override
     public void drawPresentation(Graphics2D graphics) {
         this.graphics = graphics;
-        legend.graphics = graphics;
+        squareLegend.graphics = graphics;
         background.graphics = graphics;
         background.setBackground(true);
-        legend.drawLegend(squareAnt);
+        squareLegend.drawLegend(squareAnt);
         drawGrid();
     }
 

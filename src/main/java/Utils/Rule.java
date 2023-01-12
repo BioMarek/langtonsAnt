@@ -1,16 +1,30 @@
 package Utils;
 
-public interface Rule {
-    // TODO rule info for legend
-    int getSlowdownSteps();
-    double getSlowdownModifier();
-    int getSize();
-    String getElement(int position);
+import java.text.AttributedString;
+
+public abstract class Rule {
+    public int slowdownSteps;
+    public double slowdownModifier;
+    public int sizeOfSquare = Settings.SIZE_OF_SQUARE;
+
+    public int getSlowdownSteps() {
+        return slowdownSteps;
+    }
+
+    public double getSlowdownModifier() {
+        return slowdownModifier;
+    }
+
+    public abstract int getSize();
+
+    public abstract String getElement(int position);
 
     // TODO refactor
-    String getType();
+    public abstract String getType();
 
-    default String getSquareRule(){
+    public abstract AttributedString getAttributeString(int fontUnit);
+
+    public String getSquareRule() {
         return null;
-    };
+    }
 }

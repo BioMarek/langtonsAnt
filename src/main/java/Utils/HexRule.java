@@ -1,33 +1,18 @@
 package Utils;
 
-import com.sun.source.tree.BreakTree;
-
 import java.awt.font.TextAttribute;
 import java.text.AttributedString;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HexRule implements Rule {
+public class HexRule extends Rule {
     // TODO unify HexRule nad Rule
     public List<HexMove> rule;
-    public int slowdownSteps;
-    public double slowdownModifier;
-    public int sizeOfSquare = Settings.SIZE_OF_SQUARE;
 
     public HexRule(List<HexMove> rule, int slowdownSteps, double slowdownModifier) {
         this.rule = rule;
         this.slowdownSteps = slowdownSteps;
         this.slowdownModifier = slowdownModifier;
-    }
-
-    @Override
-    public int getSlowdownSteps() {
-        return slowdownSteps;
-    }
-
-    @Override
-    public double getSlowdownModifier() {
-        return slowdownModifier;
     }
 
     @Override
@@ -53,7 +38,7 @@ public class HexRule implements Rule {
         return result;
     }
 
-    public AttributedString hexRuleToAttributeString(int fontUnit) {
+    public AttributedString getAttributeString(int fontUnit) {
         String translatedRule = toString();
         AttributedString attributedString = new AttributedString(translatedRule);
         attributedString.addAttribute(TextAttribute.SIZE, fontUnit * 1.2);

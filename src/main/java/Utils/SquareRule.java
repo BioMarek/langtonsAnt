@@ -1,5 +1,7 @@
 package Utils;
 
+import java.awt.font.TextAttribute;
+import java.text.AttributedString;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,21 +12,8 @@ import java.util.Set;
  * steps when to slow down is slowdownSteps. How much to slow down is defined in slowdownModifier 1 is no slow down,
  * more than 1 is speed up.
  */
-public class SquareRule implements Rule {
+public class SquareRule extends Rule {
     public String rule;
-    public int slowdownSteps;
-    public double slowdownModifier;
-    public int sizeOfSquare;
-
-    @Override
-    public int getSlowdownSteps() {
-        return slowdownSteps;
-    }
-
-    @Override
-    public double getSlowdownModifier() {
-        return slowdownModifier;
-    }
 
     @Override
     public int getSize() {
@@ -44,6 +33,13 @@ public class SquareRule implements Rule {
     @Override
     public String getSquareRule() {
         return rule;
+    }
+
+    public AttributedString getAttributeString(int fontUnit){
+        AttributedString attributedString = new AttributedString(rule);
+        attributedString.addAttribute(TextAttribute.SIZE, fontUnit * 1.2);
+        attributedString.addAttribute(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD, 0, rule.length());
+        return attributedString;
     }
 
     public SquareRule(String rule, int slowdownSteps, double slowdownModifier, int sizeOfSquare) {

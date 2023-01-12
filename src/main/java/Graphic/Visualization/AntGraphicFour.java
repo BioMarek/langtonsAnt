@@ -3,7 +3,7 @@ package Graphic.Visualization;
 import Graphic.AntVisualization;
 import Graphic.Components.Background;
 import Graphic.Components.Cross;
-import Graphic.Components.Legend;
+import Graphic.Components.SquareLegend;
 import Logic.SquareAnt;
 import Utils.Colors;
 import Utils.Settings;
@@ -16,7 +16,7 @@ public class AntGraphicFour implements AntVisualization {
     private final SquareAnt squareAntTopRight;
     private final SquareAnt squareAntBottomLeft;
     private final SquareAnt squareAntBottomRight;
-    private final Legend legend;
+    private final SquareLegend squareLegend;
     private final Background background;
     private final Cross cross;
     private int imageCount = 0;
@@ -26,7 +26,7 @@ public class AntGraphicFour implements AntVisualization {
         this.squareAntTopRight = squareAntTopRight;
         this.squareAntBottomLeft = squareAntBottomLeft;
         this.squareAntBottomRight = squareAntBottomRight;
-        this.legend = new Legend();
+        this.squareLegend = new SquareLegend();
         this.background = new Background();
         this.cross = new Cross();
     }
@@ -56,12 +56,12 @@ public class AntGraphicFour implements AntVisualization {
     @Override
     public void drawPresentation(Graphics2D graphics) {
         this.graphics = graphics;
-        legend.graphics = graphics;
+        squareLegend.graphics = graphics;
         background.graphics = graphics;
         cross.graphics = graphics;
         background.setBackground(true);
         drawGrid();
-        legend.drawInfoForFourImages(squareAntTopLeft, squareAntTopRight, squareAntBottomLeft, squareAntBottomRight);
+        squareLegend.drawInfoForFourImages(squareAntTopLeft, squareAntTopRight, squareAntBottomLeft, squareAntBottomRight);
         cross.drawCross();
     }
 

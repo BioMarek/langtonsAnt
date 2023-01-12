@@ -31,8 +31,7 @@ public class HexLegend {
         graphics.setColor(Colors.TEXT.getColor());
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.2)));
         graphics.drawString("Rule:   ", Settings.LEGEND_START_X + fontUnit, fontUnit * 2);
-        // TODO rule info for legend
-//        graphics.drawString(hexAnt.hexRule.hexRuleToAttributeString(fontUnit).getIterator(), Settings.LEGEND_START_X + fontUnit * 5, fontUnit * 2);
+        graphics.drawString(hexAnt.rule.getAttributeString(fontUnit).getIterator(), Settings.LEGEND_START_X + fontUnit * 5, fontUnit * 2);
         graphics.drawString("Steps: " + Util.numberFormatter(hexAnt.steps), Settings.LEGEND_START_X + fontUnit, fontUnit * 4);
 
         graphics.setStroke(new BasicStroke(3f));
