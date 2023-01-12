@@ -1,9 +1,10 @@
 package Logic;
 
-import java.util.ArrayList;
+import Utils.Rule;
+import Utils.SquareRule;
+
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * Rules are saved as binary array of 'R's and 'L's which correspond to 1s and 0s in binary array. Array is returned
@@ -11,34 +12,27 @@ import java.util.List;
  * Also, only half of rules is generated as LRR is same as RLL but mirrored there is no need to generate complementary
  * rules.
  */
-public class RulesGenerator implements Iterator<String> {
-    private final int rulesLength;
+public class SquareRulesGenerator extends RuleGenerator implements Iterator<Rule> {
     public char[] charArray;
-    private int rulesReturned = 1;
-    private final int totalNumOfRules;
 
     /**
      * Generates all rules of given length without all L and all R rules.
      *
      * @param rulesLength number of Rs and Ls in total in rule
      */
-    public RulesGenerator(int rulesLength) {
+    public SquareRulesGenerator(int rulesLength) {
         this.rulesLength = rulesLength;
         this.totalNumOfRules = (int) Math.pow(2, rulesLength - 1);
         charArray = new char[rulesLength];
         Arrays.fill(charArray, 'L');
+        this.rulesReturned = 1;
     }
 
     @Override
-    public boolean hasNext() {
-        return rulesReturned < totalNumOfRules;
-    }
-
-    @Override
-    public String next() {
+    public SquareRule next() {
         increaseByOne();
         rulesReturned++;
-        return new String(charArray);
+        return new SquareRule(new String(charArray), 1, 1, 1);
     }
 
     public void increaseByOne() {
@@ -52,21 +46,5 @@ public class RulesGenerator implements Iterator<String> {
                 charArray[index] = 'L';
             index++;
         }
-    }
-
-    public List<List<String>> getAllRulesForThreads(int threads) {
-        List<List<String>> result = new ArrayList<>();
-        int forThread = totalNumOfRules / threads + 1;
-
-        for (int i = 0; i < threads; i++) {
-            List<String> sublist = new ArrayList<>();
-            int count = 0;
-            while (hasNext() && count < forThread) {
-                sublist.add(next());
-                count++;
-            }
-            result.add(sublist);
-        }
-        return result;
     }
 }

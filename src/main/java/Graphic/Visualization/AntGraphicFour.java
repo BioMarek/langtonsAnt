@@ -3,8 +3,8 @@ package Graphic.Visualization;
 import Graphic.AntVisualization;
 import Graphic.Components.Background;
 import Graphic.Components.Cross;
-import Graphic.Components.Legend;
-import Logic.Ant;
+import Graphic.Components.SquareLegend;
+import Logic.SquareAnt;
 import Utils.Colors;
 import Utils.Settings;
 
@@ -12,21 +12,21 @@ import java.awt.Graphics2D;
 
 public class AntGraphicFour implements AntVisualization {
     private Graphics2D graphics;
-    private final Ant antTopLeft;
-    private final Ant antTopRight;
-    private final Ant antBottomLeft;
-    private final Ant antBottomRight;
-    private final Legend legend;
+    private final SquareAnt squareAntTopLeft;
+    private final SquareAnt squareAntTopRight;
+    private final SquareAnt squareAntBottomLeft;
+    private final SquareAnt squareAntBottomRight;
+    private final SquareLegend squareLegend;
     private final Background background;
     private final Cross cross;
     private int imageCount = 0;
 
-    public AntGraphicFour(Ant antTopLeft, Ant antTopRight, Ant antBottomLeft, Ant antBottomRight) {
-        this.antTopLeft = antTopLeft;
-        this.antTopRight = antTopRight;
-        this.antBottomLeft = antBottomLeft;
-        this.antBottomRight = antBottomRight;
-        this.legend = new Legend();
+    public AntGraphicFour(SquareAnt squareAntTopLeft, SquareAnt squareAntTopRight, SquareAnt squareAntBottomLeft, SquareAnt squareAntBottomRight) {
+        this.squareAntTopLeft = squareAntTopLeft;
+        this.squareAntTopRight = squareAntTopRight;
+        this.squareAntBottomLeft = squareAntBottomLeft;
+        this.squareAntBottomRight = squareAntBottomRight;
+        this.squareLegend = new SquareLegend();
         this.background = new Background();
         this.cross = new Cross();
     }
@@ -44,10 +44,10 @@ public class AntGraphicFour implements AntVisualization {
     @Override
     public void createNextFrame() {
         System.out.println("creating frame " + imageCount++);
-        antTopLeft.nextMoves();
-        antTopRight.nextMoves();
-        antBottomLeft.nextMoves();
-        antBottomRight.nextMoves();
+        squareAntTopLeft.nextMoves();
+        squareAntTopRight.nextMoves();
+        squareAntBottomLeft.nextMoves();
+        squareAntBottomRight.nextMoves();
     }
 
     /**
@@ -56,35 +56,37 @@ public class AntGraphicFour implements AntVisualization {
     @Override
     public void drawPresentation(Graphics2D graphics) {
         this.graphics = graphics;
-        legend.graphics = graphics;
+        squareLegend.graphics = graphics;
         background.graphics = graphics;
         cross.graphics = graphics;
         background.setBackground(true);
         drawGrid();
-        legend.drawInfoForFourImages(antTopLeft, antTopRight, antBottomLeft, antBottomRight);
+        squareLegend.drawInfoForFourImages(squareAntTopLeft, squareAntTopRight, squareAntBottomLeft, squareAntBottomRight);
         cross.drawCross();
     }
 
     @Override
     public boolean stopped() {
-        return antTopLeft.stopped && antTopRight.stopped && antBottomLeft.stopped && antBottomRight.stopped;
+        return squareAntTopLeft.stopped && squareAntTopRight.stopped && squareAntBottomLeft.stopped && squareAntBottomRight.stopped;
     }
 
     public void drawGrid() {
-        drawAnt(antTopLeft, 0, 0);
-        drawAnt(antTopRight, 0, Settings.BACKGROUND_WIDTH / 2);
-        drawAnt(antBottomLeft, Settings.BACKGROUND_HEIGHT / 2, 0);
-        drawAnt(antBottomRight, Settings.BACKGROUND_HEIGHT / 2, Settings.BACKGROUND_WIDTH / 2);
+        drawAnt(squareAntTopLeft, 0, 0);
+        drawAnt(squareAntTopRight, 0, Settings.BACKGROUND_WIDTH / 2);
+        drawAnt(squareAntBottomLeft, Settings.BACKGROUND_HEIGHT / 2, 0);
+        drawAnt(squareAntBottomRight, Settings.BACKGROUND_HEIGHT / 2, Settings.BACKGROUND_WIDTH / 2);
     }
 
     /**
      * Converts grid of numbers to {@link Graphics2D}.
      */
-    public void drawAnt(Ant ant, int startRow, int startColumn) {
+    public void drawAnt(SquareAnt squareAnt, int startRow, int startColumn) {
         int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
-        for (int row = 0; row < ant.gridRows - borderPadding; row++) {
-            for (int column = 0; column < ant.gridColumns - borderPadding; column++) {
-                Colors.setColor(graphics, ant.grid[row + borderPadding / 2][column + borderPadding / 2]);
+        for (int row = 0; row < squareAnt.gridRows - borderPadding; row++) {
+            for (int column = 0; column < squareAnt.gridColumns - borderPadding; column++) {
+                if (squareAnt.grid[row][column] == -1)
+                    continue;
+                Colors.setColor(graphics, squareAnt.grid[row + borderPadding / 2][column + borderPadding / 2]);
                 graphics.fillRect(startColumn + (column * Settings.SIZE_OF_SQUARE), startRow + (row * Settings.SIZE_OF_SQUARE), Settings.SIZE_OF_SQUARE, Settings.SIZE_OF_SQUARE);
             }
         }

@@ -2,8 +2,8 @@ package Graphic.Visualization;
 
 import Graphic.AntVisualization;
 import Graphic.Components.Background;
-import Graphic.Components.Legend;
-import Logic.Ant;
+import Graphic.Components.SquareLegend;
+import Logic.SquareAnt;
 import Utils.Colors;
 import Utils.Direction;
 import Utils.Position;
@@ -26,8 +26,8 @@ import java.util.List;
  */
 public class AntExplanation implements AntVisualization {
     private Graphics2D graphics;
-    private final Ant ant;
-    private final Legend legend;
+    private final SquareAnt squareAnt;
+    private final SquareLegend squareLegend;
     private final Background background;
     private BufferedImage antImage = null;
     private double rotateAngle = Math.toRadians(3);
@@ -38,9 +38,9 @@ public class AntExplanation implements AntVisualization {
     private int imageCount = 0;
     private final int explanationFrames = Settings.FRAMES_BETWEEN_STEPS * 2;
 
-    public AntExplanation(Ant ant) {
-        this.ant = ant;
-        this.legend = new Legend();
+    public AntExplanation(SquareAnt squareAnt) {
+        this.squareAnt = squareAnt;
+        this.squareLegend = new SquareLegend();
         this.background = new Background();
 
         try {
@@ -52,16 +52,16 @@ public class AntExplanation implements AntVisualization {
 
     @Override
     public void createNextFrame() {
-        System.out.println("creating frame " + imageCount++ + " " + ant.steps + "/" + Settings.MAX_MOVES);
+        System.out.println("creating frame " + imageCount++ + " " + squareAnt.steps + "/" + Settings.MAX_MOVES);
         if (++currentCycle % explanationFrames == 0
-                || ant.steps < 20 && Settings.ZOOMED && currentCycle % 5 == 0 // first speedup during zoom
-                || ant.steps >= 20) // second speedup after zoom
-            ant.nextMoves();
+                || squareAnt.steps < 20 && Settings.ZOOMED && currentCycle % 5 == 0 // first speedup during zoom
+                || squareAnt.steps >= 20) // second speedup after zoom
+            squareAnt.nextMoves();
         if (currentCycle == explanationFrames)
             currentCycle = 0;
         //
         // part that makes zoom
-        if (ant.steps > Settings.ZOOM_STEPS) {
+        if (squareAnt.steps > Settings.ZOOM_STEPS) {
             Settings.ZOOMED = true;
             if (Settings.SIZE_OF_SQUARE > 10) {
                 Settings.SIZE_OF_SQUARE -= 1;
@@ -77,10 +77,10 @@ public class AntExplanation implements AntVisualization {
     @Override
     public void drawPresentation(Graphics2D graphics) {
         this.graphics = graphics;
-        legend.graphics = graphics;
+        squareLegend.graphics = graphics;
         background.graphics = graphics;
         background.setBackground(true);
-        legend.drawLegend(ant);
+        squareLegend.drawLegend(squareAnt);
         drawGrid();
         if (!Settings.ZOOMED)
             drawAntImage();
@@ -88,7 +88,7 @@ public class AntExplanation implements AntVisualization {
 
     @Override
     public boolean stopped() {
-        return ant.stopped;
+        return squareAnt.stopped;
     }
 
     /**
@@ -102,9 +102,9 @@ public class AntExplanation implements AntVisualization {
         int row_adjustment = -2;
 
         int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
-        for (int row = 0; row < ant.gridRows - borderPadding; row++) {
-            for (int column = 0; column < ant.gridColumns - borderPadding; column++) {
-                Colors.setColor(graphics, ant.grid[row + borderPadding / 2][column + borderPadding / 2]);
+        for (int row = 0; row < squareAnt.gridRows - borderPadding; row++) {
+            for (int column = 0; column < squareAnt.gridColumns - borderPadding; column++) {
+                Colors.setColor(graphics, squareAnt.grid[row + borderPadding / 2][column + borderPadding / 2]);
                 int sizeOfSquare = Settings.SHOW_GRID ? Settings.SIZE_OF_SQUARE - 1 : Settings.SIZE_OF_SQUARE;
                 // part that makes zoom
                 if (Settings.ZOOMED)
@@ -123,7 +123,7 @@ public class AntExplanation implements AntVisualization {
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 
         graphics.drawImage(antImage, op, (int) startX, (int) startY);
-        Position position = antImagePositions(ant.steps);
+        Position position = antImagePositions(squareAnt.steps);
 
         if (currentCycle < explanationFrames / 2) {
             startX = startX + position.row * 2.0 / explanationFrames;

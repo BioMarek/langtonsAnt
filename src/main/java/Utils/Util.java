@@ -41,4 +41,17 @@ public class Util {
     public static int sizeDivisibleByTwo(int originalSize) {
         return (originalSize % 2 == 0) ? originalSize : originalSize - 1;
     }
+
+    // TODO optimize
+    public static int getHexWidth() {
+        return (int) (Settings.HEX_SIDE_LEN * 1.7); // 17 when hexagon is 10
+    }
+
+    public static int getHexHeight() {
+        return (int) (Settings.HEX_SIDE_LEN * 1.5); // 15 when hexagon is 10
+    }
+
+    public static int getHexPositionShift() {
+        return getHexWidth() / 2; // 15 when hexagon is 10
+    }
 }

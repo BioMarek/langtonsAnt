@@ -1,30 +1,42 @@
 package Threads;
 
+import Graphic.AntVisualization;
 import Graphic.Visualization.AntGraphicSingle;
+import Graphic.Visualization.HexGraphicSingle;
 import Logic.Ant;
+import Logic.HexAnt;
+import Logic.SquareAnt;
+import Utils.Rule;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Evaluates rules supplied to constructor and saves result as image.
- */
 public class ImageRunnable implements Runnable {
-    private final List<String> rules;
+    private final List<Rule> rules;
+    private final AtomicInteger counter;
+    private final CountDownLatch latch;
 
-    public ImageRunnable(List<String> rules) {
+    public ImageRunnable(List<Rule> rules, AtomicInteger counter, CountDownLatch latch) {
         this.rules = rules;
+        this.counter = counter;
+        this.latch = latch;
     }
 
     @Override
     public void run() {
-        for (String rule : rules) {
+        for (Rule rule : rules) {
             saveImage(rule);
         }
+        latch.countDown();
     }
 
     /**
@@ -33,22 +45,36 @@ public class ImageRunnable implements Runnable {
      *
      * @param rule that ant is running
      */
-    private void saveImage(String rule) {
+    private void saveImage(Rule rule) {
         System.out.println(Thread.currentThread().getName() + " working on: " + rule);
+        Ant ant;
+        AntVisualization hexGraphicSingle;
 
-        Ant ant = new Ant(rule);
-        AntGraphicSingle antGraphicSingle = new AntGraphicSingle(ant);
+        if (Objects.equals(rule.getType(), "hex")){
+            ant = new HexAnt(rule);
+            hexGraphicSingle = new HexGraphicSingle(ant);
+        }
+
+        else{
+            ant = new SquareAnt(rule);
+            hexGraphicSingle = new AntGraphicSingle(ant);
+        }
+
         ant.allMoves();
         if (ant.usedTopColor) {
             BufferedImage bImg = new BufferedImage(Settings.GRID_WIDTH, Settings.BACKGROUND_HEIGHT, BufferedImage.TYPE_INT_RGB);
-            antGraphicSingle.drawImage(bImg.createGraphics());
+            hexGraphicSingle.drawImage(bImg.createGraphics());
 
             try {
-                ImageIO.write(bImg, "png", new File(String.format(Settings.IMAGE_BASE_PATH + "/%d/%s.png", rule.length(), rule)));
+                String path = String.format(Settings.IMAGE_BASE_PATH + "/%d/%s.png", rule.getSize(), rule);
+                Files.createDirectories(Paths.get(path));
+                ImageIO.write(bImg, "png", new File(path));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else
+        } else {
             System.out.println("--- not saving: " + rule);
+            counter.getAndIncrement();
+        }
     }
 }

@@ -1,4 +1,5 @@
-import Logic.RulesGenerator;
+import Logic.SquareRulesGenerator;
+import Utils.SquareRule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,34 +10,34 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class RulesGeneratorTest {
-    private RulesGenerator rulesGenerator;
+    private SquareRulesGenerator squareRulesGenerator;
 
     @BeforeEach
     void init() {
-        rulesGenerator = new RulesGenerator(2);
+        squareRulesGenerator = new SquareRulesGenerator(2);
     }
 
     @Test
     void increaseByOne() {
-        rulesGenerator.increaseByOne();
-        assertThat(rulesGenerator.charArray, is(new char[]{'R', 'L'}));
-        rulesGenerator.increaseByOne();
-        assertThat(rulesGenerator.charArray, is(new char[]{'L', 'R'}));
-        rulesGenerator.increaseByOne();
-        assertThat(rulesGenerator.charArray, is(new char[]{'R', 'R'}));
-        rulesGenerator.increaseByOne();
-        assertThat(rulesGenerator.charArray, is(new char[]{'L', 'L'}));
+        squareRulesGenerator.increaseByOne();
+        assertThat(squareRulesGenerator.charArray, is(new char[]{'R', 'L'}));
+        squareRulesGenerator.increaseByOne();
+        assertThat(squareRulesGenerator.charArray, is(new char[]{'L', 'R'}));
+        squareRulesGenerator.increaseByOne();
+        assertThat(squareRulesGenerator.charArray, is(new char[]{'R', 'R'}));
+        squareRulesGenerator.increaseByOne();
+        assertThat(squareRulesGenerator.charArray, is(new char[]{'L', 'L'}));
     }
 
     @Test
     void rulesGenerator_returnsCorrectRules() {
-        assertThat(rulesGenerator.next(), is("RL"));
-        assertThat(rulesGenerator.hasNext(), is(false));
-        rulesGenerator = new RulesGenerator(3);
-        assertThat(rulesGenerator.next(), is("RLL"));
-        assertThat(rulesGenerator.next(), is("LRL"));
-        assertThat(rulesGenerator.next(), is("RRL"));
-        assertThat(rulesGenerator.hasNext(), is(false));
+        assertThat(squareRulesGenerator.next().rule, is("RL"));
+        assertThat(squareRulesGenerator.hasNext(), is(false));
+        squareRulesGenerator = new SquareRulesGenerator(3);
+        assertThat(squareRulesGenerator.next().rule, is("RLL"));
+        assertThat(squareRulesGenerator.next().rule, is("LRL"));
+        assertThat(squareRulesGenerator.next().rule, is("RRL"));
+        assertThat(squareRulesGenerator.hasNext(), is(false));
     }
 
     @Test
@@ -47,10 +48,10 @@ public class RulesGeneratorTest {
     }
 
     private int getAllRules(int length) {
-        rulesGenerator = new RulesGenerator(length);
-        List<String> result = new ArrayList<>();
-        while (rulesGenerator.hasNext())
-            result.add(rulesGenerator.next());
+        squareRulesGenerator = new SquareRulesGenerator(length);
+        List<SquareRule> result = new ArrayList<>();
+        while (squareRulesGenerator.hasNext())
+            result.add(squareRulesGenerator.next());
         return result.size();
     }
 }

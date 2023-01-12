@@ -1,8 +1,8 @@
 package Windows;
 
 import Graphic.AntVisualization;
-import Graphic.Visualization.AntHexagonalSingle;
-import Logic.Ant;
+import Graphic.Visualization.HexGraphicSingle;
+import Logic.SquareAnt;
 import Logic.HexAnt;
 import Utils.Settings;
 
@@ -19,7 +19,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class GridPanel extends JPanel implements ActionListener {
-    private final Ant ant;
+    private final SquareAnt squareAnt;
     private final AntVisualization antVisualization;
     private Timer timer;
 
@@ -42,12 +42,12 @@ public class GridPanel extends JPanel implements ActionListener {
     public GridPanel() {
         this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
         this.setFocusable(true);
-        this.ant = new Ant(Settings.RULE);
+        this.squareAnt = new SquareAnt(Settings.SquareRULE);
 
         Settings.generateHexagonalGridSettings();
 
-        HexAnt ant = new HexAnt(Settings.HEX_RULE, Settings.HEX_WIDTH, Settings.HEX_HEIGHT);
-        this.antVisualization = new AntHexagonalSingle(ant);
+        HexAnt ant = new HexAnt(Settings.HEX_RULE);
+        this.antVisualization = new HexGraphicSingle(ant);
 
         startTimer();
     }
@@ -64,7 +64,7 @@ public class GridPanel extends JPanel implements ActionListener {
         antVisualization.createNextFrame();
         repaint();
 
-        if (ant.stopped) {
+        if (squareAnt.stopped) {
             timer.stop();
             saveImage();
         }
@@ -87,7 +87,7 @@ public class GridPanel extends JPanel implements ActionListener {
         this.paintAll(cg);
 
         try {
-            ImageIO.write(bImg, "png", new File("./images/panel_" + Settings.RULE + ".png"));
+            ImageIO.write(bImg, "png", new File("./images/panel_" + Settings.SquareRULE + ".png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

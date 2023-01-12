@@ -6,7 +6,7 @@ public class Settings {
      */
     public static int ALPHA = 200; // alpha of colors used in AntGraphic
     public static boolean SHOW_GRID = false;
-    public static String RULE = "RL";
+    public static SquareRule SquareRULE = new SquareRule("RL", 1, 1, 1);
     public static int TIMER_DELAY = 100; // realtime animation delay between frames
     public static int SKIP = 100; // steps to skip between frames
     public static long MAX_MOVES = 50_000_000;
@@ -20,7 +20,7 @@ public class Settings {
     /**
      * Settings for parallel threads image generation
      */
-    public static int RULES_LENGTH = 10;
+    public static int RULES_LENGTH = 3;
     public static String IMAGE_BASE_PATH = "./movies/";
     public static int THREADS = 6;
 
@@ -34,8 +34,6 @@ public class Settings {
 
     // use to show only center of image and fill entire screen with even if some part already reached the border,
     public static int IMAGE_PADDING = 0; // use 500 for thumbnail image
-    public static int SLOWDOWN_STEPS = 100_000_000;
-    public static double SLOWDOWN_MODIFIER = 1.0;
 
     /**
      * Settings for explanation
@@ -51,8 +49,6 @@ public class Settings {
      * Settings for hexagonal grid
      */
     public static int HEX_SIDE_LEN = 6;
-    public static int HEX_WIDTH = 300;
-    public static int HEX_HEIGHT = 300;
     public static HexRule HEX_RULE = HexRule.hexagonalReferenceRules().get(1);
 
     public static void showExplanationFirstPartSettings() {
@@ -101,7 +97,7 @@ public class Settings {
     }
 
     public static void generateHexagonalGridSettings() {
-        Settings.MAX_MOVES = 200000;
-        Settings.SKIP = 50;
+        Settings.MAX_MOVES = 2000000;
+        Settings.SKIP = 500;
     }
 }
