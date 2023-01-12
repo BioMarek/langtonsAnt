@@ -20,7 +20,7 @@ public class Settings {
     /**
      * Settings for parallel threads image generation
      */
-    public static int RULES_LENGTH = 4;
+    public static int RULES_LENGTH = 3;
     public static String IMAGE_BASE_PATH = "./movies/";
     public static int THREADS = 6;
 

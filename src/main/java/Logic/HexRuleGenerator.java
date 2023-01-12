@@ -12,11 +12,8 @@ import java.util.List;
 /**
  * moves: N (no change), R1 (60° clockwise), R2 (120° clockwise), U (180°), L2 (120° counter-clockwise), L1 (60° counter-clockwise)
  */
-public class HexRuleGenerator implements Iterator<Rule>, RuleGenerator {
-    private final int rulesLength;
+public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
     public int[] intArray;
-    private int rulesReturned = 0;
-    public final int totalNumOfRules;
 
     public HexRuleGenerator(int rulesLength) {
         if (rulesLength < 2) {
@@ -26,11 +23,7 @@ public class HexRuleGenerator implements Iterator<Rule>, RuleGenerator {
         this.totalNumOfRules = (int) Math.pow(6, rulesLength); // non-reduced number rules
         this.intArray = new int[rulesLength];
         Arrays.fill(intArray, 0);
-    }
-
-    @Override
-    public boolean hasNext() {
-        return rulesReturned < totalNumOfRules;
+        this.rulesReturned = 0;
     }
 
     @Override
@@ -67,20 +60,5 @@ public class HexRuleGenerator implements Iterator<Rule>, RuleGenerator {
             }
         }
         return new HexRule(result, 1, 1);
-    }
-    public List<List<Rule>> getAllRulesForThreads(int threads) {
-        List<List<Rule>> result = new ArrayList<>();
-        int forThread = totalNumOfRules / threads;
-
-        for (int i = 0; i < threads; i++) {
-            List<Rule> sublist = new ArrayList<>();
-            int count = 0;
-            while (hasNext() && count < forThread) {
-                sublist.add(next());
-                count++;
-            }
-            result.add(sublist);
-        }
-        return result;
     }
 }
