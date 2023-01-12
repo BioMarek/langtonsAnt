@@ -1,5 +1,6 @@
 package Graphic.Components;
 
+import Logic.Ant;
 import Logic.SquareAnt;
 import Utils.Colors;
 import Utils.Settings;
@@ -14,9 +15,9 @@ import java.awt.geom.RoundRectangle2D;
 
 public class Legend {
     public Graphics2D graphics;
-    private SquareAnt squareAnt;
+    private Ant squareAnt;
 
-    public void drawLegend(SquareAnt squareAnt) {
+    public void drawLegend(Ant squareAnt) {
         this.squareAnt = squareAnt;
         turnAntiAliasingOn(true);
         drawInfo();
@@ -31,7 +32,8 @@ public class Legend {
         int fontUnit = Settings.BACKGROUND_HEIGHT / 60;
         graphics.setColor(Colors.TEXT.getColor());
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.2)));
-        graphics.drawString("Rule:   " + new String(squareAnt.rule), Settings.LEGEND_START_X + fontUnit, fontUnit * 2);
+        // TODO fix drawing of rule
+//        graphics.drawString("Rule:   " + new String(squareAnt.rule), Settings.LEGEND_START_X + fontUnit, fontUnit * 2);
         graphics.drawString("Steps: " + Util.numberFormatter(squareAnt.steps), Settings.LEGEND_START_X + fontUnit, fontUnit * 4);
 
         graphics.setStroke(new BasicStroke(3f));
@@ -59,7 +61,7 @@ public class Legend {
         int squareSize = Settings.BACKGROUND_HEIGHT / 25;
         int topPadding = squareSize * 4;
         int gap = squareSize * 2;
-        int ruleHalf = (squareAnt.rule.length % 2 == 0) ? squareAnt.rule.length / 2 : squareAnt.rule.length / 2 + 1; // ensures left column is longer than right one
+        int ruleHalf = (squareAnt.ruleLength() % 2 == 0) ? squareAnt.ruleLength() / 2 : squareAnt.ruleLength() / 2 + 1; // ensures left column is longer than right one
 
         graphics.setColor(Colors.TEXT.getColor());
         graphics.draw(new RoundRectangle2D.Double(Settings.LEGEND_START_X + 3.5 * squareSize,
@@ -77,8 +79,8 @@ public class Legend {
             drawLegendInnerArrows(i, squareSize, 3.3, false);
         }
 
-        for (int i = ruleHalf; i < squareAnt.rule.length; i++) {
-            if (i != squareAnt.rule.length - 1)
+        for (int i = ruleHalf; i < squareAnt.ruleLength(); i++) {
+            if (i != squareAnt.ruleLength() - 1)
                 drawUpArrow(Settings.LEGEND_START_X + squareSize * 13 / 2, (i - ruleHalf) * gap + squareSize * 11 / 2);
             drawFilledRect(Settings.LEGEND_START_X + squareSize * 6, (i - ruleHalf) * gap + topPadding, i);
             drawLegendInnerArrows(i - ruleHalf, squareSize, 6.3, true);
@@ -86,12 +88,12 @@ public class Legend {
     }
 
     private void drawLegendInnerArrows(int i, int squareSize, double xLegendColumnCoefficient, boolean reverse) {
-        graphics.setColor(Colors.TEXT.getColor());
-        char ruleArrow = reverse ? squareAnt.rule[squareAnt.rule.length - i - 1] : squareAnt.rule[i];
-        if (ruleArrow == 'L') {
-            drawInnerLeftArrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
-        } else
-            drawInnerRightArrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
+//        graphics.setColor(Colors.TEXT.getColor());
+//        char ruleArrow = reverse ? squareAnt.rule[squareAnt.ruleLength() - i - 1] : squareAnt.rule[i];
+//        if (ruleArrow == 'L') {
+//            drawInnerLeftArrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
+//        } else
+//            drawInnerRightArrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
     }
 
     private void drawFilledRect(int x, int y, int i) {

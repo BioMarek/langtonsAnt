@@ -3,6 +3,7 @@ package Graphic.Visualization;
 import Graphic.AntVisualization;
 import Graphic.Components.Background;
 import Graphic.Components.HexLegend;
+import Logic.Ant;
 import Logic.HexAnt;
 import Utils.Colors;
 import Utils.Settings;
@@ -16,12 +17,12 @@ import static Utils.Util.getHexWidth;
 
 public class HexGraphicSingle implements AntVisualization {
     private Graphics2D graphics;
-    private final HexAnt ant;
+    private final Ant ant;
     private final HexLegend hexLegend;
     private final Background background;
     private int imageCount = 0;
 
-    public HexGraphicSingle(HexAnt ant) {
+    public HexGraphicSingle(Ant ant) {
         this.ant = ant;
         this.hexLegend = new HexLegend();
         this.background = new Background();

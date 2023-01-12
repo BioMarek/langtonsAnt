@@ -1,7 +1,9 @@
 package Threads;
 
 import Logic.HexRuleGenerator;
+import Logic.RuleGenerator;
 import Utils.HexRule;
+import Utils.Rule;
 import Utils.Settings;
 
 import java.io.File;
@@ -18,11 +20,10 @@ public class HexImageParallelWorker {
     private final AtomicInteger counter = new AtomicInteger();
     private final CountDownLatch latch = new CountDownLatch(Settings.THREADS);
 
-    public void drawAllRulesInParallel() {
+    public void drawAllRulesInParallel(RuleGenerator ruleGenerator) {
         deleteFilesInDirectory();
-        HexRuleGenerator hexRuleGenerator = new HexRuleGenerator(Settings.RULES_LENGTH);
-        List<List<HexRule>> rules = hexRuleGenerator.getAllRulesForThreads(Settings.THREADS);
-        for (List<HexRule> item : rules) {
+        List<List<Rule>> rules = ruleGenerator.getAllRulesForThreads(Settings.RULES_LENGTH);
+        for (List<Rule> item : rules) {
             Thread t = new Thread(new HexImageRunnable(item, counter, latch));
             t.start();
         }
@@ -35,9 +36,9 @@ public class HexImageParallelWorker {
         }
     }
 
-    private int totalElements(List<List<HexRule>> rules) {
+    private int totalElements(List<List<Rule>> rules) {
         int result = 0;
-        for (List<HexRule> ruleList : rules)
+        for (List<Rule> ruleList : rules)
             result += ruleList.size();
         return result;
     }

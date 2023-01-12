@@ -2,6 +2,7 @@ package Logic;
 
 import Utils.HexMove;
 import Utils.HexRule;
+import Utils.Rule;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * moves: N (no change), R1 (60° clockwise), R2 (120° clockwise), U (180°), L2 (120° counter-clockwise), L1 (60° counter-clockwise)
  */
-public class HexRuleGenerator implements Iterator<HexRule> {
+public class HexRuleGenerator implements Iterator<Rule>, RuleGenerator {
     private final int rulesLength;
     public int[] intArray;
     private int rulesReturned = 0;
@@ -67,12 +68,12 @@ public class HexRuleGenerator implements Iterator<HexRule> {
         }
         return new HexRule(result, 1, 1);
     }
-    public List<List<HexRule>> getAllRulesForThreads(int threads) {
-        List<List<HexRule>> result = new ArrayList<>();
-        int forThread = totalNumOfRules / threads + 1;
+    public List<List<Rule>> getAllRulesForThreads(int threads) {
+        List<List<Rule>> result = new ArrayList<>();
+        int forThread = totalNumOfRules / threads;
 
         for (int i = 0; i < threads; i++) {
-            List<HexRule> sublist = new ArrayList<>();
+            List<Rule> sublist = new ArrayList<>();
             int count = 0;
             while (hasNext() && count < forThread) {
                 sublist.add(next());

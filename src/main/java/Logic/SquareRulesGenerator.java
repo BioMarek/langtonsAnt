@@ -1,5 +1,6 @@
 package Logic;
 
+import Utils.Rule;
 import Utils.SquareRule;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.List;
  * Also, only half of rules is generated as LRR is same as RLL but mirrored there is no need to generate complementary
  * rules.
  */
-public class RulesGenerator implements Iterator<SquareRule> {
+public class SquareRulesGenerator implements Iterator<Rule>, RuleGenerator {
     private final int rulesLength;
     public char[] charArray;
     private int rulesReturned = 1;
@@ -24,7 +25,7 @@ public class RulesGenerator implements Iterator<SquareRule> {
      *
      * @param rulesLength number of Rs and Ls in total in rule
      */
-    public RulesGenerator(int rulesLength) {
+    public SquareRulesGenerator(int rulesLength) {
         this.rulesLength = rulesLength;
         this.totalNumOfRules = (int) Math.pow(2, rulesLength - 1);
         charArray = new char[rulesLength];
@@ -56,12 +57,12 @@ public class RulesGenerator implements Iterator<SquareRule> {
         }
     }
 
-    public List<List<SquareRule>> getAllRulesForThreads(int threads) {
-        List<List<SquareRule>> result = new ArrayList<>();
-        int forThread = totalNumOfRules / threads + 1;
+    public List<List<Rule>> getAllRulesForThreads(int threads) {
+        List<List<Rule>> result = new ArrayList<>();
+        int forThread = totalNumOfRules / threads;
 
         for (int i = 0; i < threads; i++) {
-            List<SquareRule> sublist = new ArrayList<>();
+            List<Rule> sublist = new ArrayList<>();
             int count = 0;
             while (hasNext() && count < forThread) {
                 sublist.add(next());

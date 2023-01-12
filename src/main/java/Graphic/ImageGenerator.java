@@ -2,7 +2,7 @@ package Graphic;
 
 import Graphic.Visualization.AntGraphicSingle;
 import Logic.SquareAnt;
-import Logic.RulesGenerator;
+import Logic.SquareRulesGenerator;
 import Utils.SquareRule;
 import Utils.Settings;
 
@@ -18,9 +18,9 @@ public class ImageGenerator {
      * Cycles through all rules of length Settings.RULES_LENGTH and saves images into file.
      */
     public void drawAllRules() {
-        RulesGenerator rulesGenerator = new RulesGenerator(Settings.RULES_LENGTH);
-        while (rulesGenerator.hasNext()) {
-            SquareRule squareRule = rulesGenerator.next();
+        SquareRulesGenerator squareRulesGenerator = new SquareRulesGenerator(Settings.RULES_LENGTH);
+        while (squareRulesGenerator.hasNext()) {
+            SquareRule squareRule = squareRulesGenerator.next();
             System.out.println("working on: " + squareRule);
             squareAnt = new SquareAnt(squareRule);
             saveImageWithoutPanel(squareRule);

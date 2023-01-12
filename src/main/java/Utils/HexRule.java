@@ -1,11 +1,13 @@
 package Utils;
 
+import com.sun.source.tree.BreakTree;
+
 import java.awt.font.TextAttribute;
 import java.text.AttributedString;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HexRule {
+public class HexRule implements Rule {
     // TODO unify HexRule nad Rule
     public List<HexMove> rule;
     public int slowdownSteps;
@@ -16,6 +18,31 @@ public class HexRule {
         this.rule = rule;
         this.slowdownSteps = slowdownSteps;
         this.slowdownModifier = slowdownModifier;
+    }
+
+    @Override
+    public int getSlowdownSteps() {
+        return slowdownSteps;
+    }
+
+    @Override
+    public double getSlowdownModifier() {
+        return slowdownModifier;
+    }
+
+    @Override
+    public int getSize() {
+        return rule.size();
+    }
+
+    @Override
+    public String getElement(int position) {
+        return rule.get(position).toString();
+    }
+
+    @Override
+    public String getType() {
+        return "hex";
     }
 
     public static List<HexRule> hexagonalReferenceRules() {

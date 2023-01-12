@@ -3,6 +3,7 @@ package Graphic.Visualization;
 import Graphic.AntVisualization;
 import Graphic.Components.Background;
 import Graphic.Components.Legend;
+import Logic.Ant;
 import Logic.SquareAnt;
 import Utils.Colors;
 import Utils.Settings;
@@ -14,12 +15,12 @@ import java.awt.Graphics2D;
  */
 public class AntGraphicSingle implements AntVisualization {
     private Graphics2D graphics;
-    private final SquareAnt squareAnt;
+    private final Ant squareAnt;
     private final Legend legend;
     private final Background background;
     private int imageCount = 0;
 
-    public AntGraphicSingle(SquareAnt squareAnt) {
+    public AntGraphicSingle(Ant squareAnt) {
         this.squareAnt = squareAnt;
         this.legend = new Legend();
         this.background = new Background();

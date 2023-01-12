@@ -3,22 +3,20 @@ package Logic;
 import Utils.HexMove;
 import Utils.HexPosition;
 import Utils.HexRule;
+import Utils.Rule;
 import Utils.Settings;
 import Utils.Util;
 
 import java.util.Arrays;
 
-public class HexAnt {
-    public final int[][] grid;
-    public final int gridColumns;
-    public final int gridRows;
-    public HexRule hexRule;
-    public HexPosition antPosition = new HexPosition();
-    public boolean stopped = false;
-    public int steps = 0;
-    public boolean usedTopColor = false;
+public class HexAnt extends Ant{
 
-    public HexAnt(HexRule hexRule) {
+    public Rule hexRule;
+    public HexPosition antPosition = new HexPosition();
+
+
+
+    public HexAnt(Rule hexRule) {
         this.gridColumns = Settings.GRID_WIDTH / Util.getHexWidth();
         this.gridRows = Settings.GRID_HEIGHT / Util.getHexHeight();
         this.grid = new int[gridRows][gridColumns];
@@ -43,8 +41,8 @@ public class HexAnt {
 
     public void nextMoves() {
         int countDown = Settings.SKIP;
-        if (steps > hexRule.slowdownSteps)
-            countDown = (int) (countDown * hexRule.slowdownModifier);
+        if (steps > hexRule.getSlowdownSteps())
+            countDown = (int) (countDown * hexRule.getSlowdownModifier());
         while (countDown > 0 && !stopped) {
             nextMove();
             countDown--;
@@ -59,14 +57,14 @@ public class HexAnt {
         int currentColumn = antPosition.column;
         grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] == -1) ? 0 : grid[currentRow][currentColumn];
 
-        HexMove moveDirection = hexRule.rule.get(grid[currentRow][currentColumn]);
+        HexMove moveDirection = HexMove.stringToHexMove(hexRule.getElement(grid[currentRow][currentColumn]));
         grid[currentRow][currentColumn]++;
         antPosition.move(moveDirection);
 
-        if (grid[currentRow][currentColumn] == hexRule.rule.size() - 1)
+        if (grid[currentRow][currentColumn] == hexRule.getSize() - 1)
             usedTopColor = true;
 
-        grid[currentRow][currentColumn] = (grid[currentRow][currentColumn]) % hexRule.rule.size();
+        grid[currentRow][currentColumn] = (grid[currentRow][currentColumn]) % hexRule.getSize();
 
         steps++;
         stopped = steps >= Settings.MAX_MOVES;
@@ -79,5 +77,10 @@ public class HexAnt {
     public void checkBorderCollision() {
         if (antPosition.row < 0 || antPosition.column < 0 || antPosition.row == gridRows || antPosition.column == gridColumns)
             stopped = true;
+    }
+
+    @Override
+    public int ruleLength() {
+        return hexRule.getSize();
     }
 }

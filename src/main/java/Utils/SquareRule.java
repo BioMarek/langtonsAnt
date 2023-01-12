@@ -10,11 +10,41 @@ import java.util.Set;
  * steps when to slow down is slowdownSteps. How much to slow down is defined in slowdownModifier 1 is no slow down,
  * more than 1 is speed up.
  */
-public class SquareRule {
+public class SquareRule implements Rule {
     public String rule;
     public int slowdownSteps;
     public double slowdownModifier;
     public int sizeOfSquare;
+
+    @Override
+    public int getSlowdownSteps() {
+        return slowdownSteps;
+    }
+
+    @Override
+    public double getSlowdownModifier() {
+        return slowdownModifier;
+    }
+
+    @Override
+    public int getSize() {
+        return rule.length();
+    }
+
+    @Override
+    public String getElement(int position) {
+        return String.valueOf(rule.charAt(position));
+    }
+
+    @Override
+    public String getType() {
+        return "square";
+    }
+
+    @Override
+    public String getSquareRule() {
+        return rule;
+    }
 
     public SquareRule(String rule, int slowdownSteps, double slowdownModifier, int sizeOfSquare) {
         this.rule = rule;

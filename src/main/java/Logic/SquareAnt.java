@@ -2,23 +2,20 @@ package Logic;
 
 import Utils.Direction;
 import Utils.Position;
+import Utils.Rule;
 import Utils.SquareRule;
 import Utils.Settings;
 
 import java.util.Arrays;
 
-public class SquareAnt {
-    public final int[][] grid;
-    public final int gridColumns;
-    public final int gridRows;
+public class SquareAnt extends Ant {
     public char[] rule;
-    public SquareRule givenSquareRule;
+    public Rule givenSquareRule;
     public Position antPosition = new Position();
-    public boolean stopped = false;
-    public int steps = 0;
-    public boolean usedTopColor = false;
 
-    public SquareAnt(SquareRule givenSquareRule) {
+
+
+    public SquareAnt(Rule givenSquareRule) {
         this.gridColumns = (Settings.GRID_WIDTH + Settings.IMAGE_PADDING) / Settings.SIZE_OF_SQUARE;
         this.gridRows = (Settings.GRID_HEIGHT + Settings.IMAGE_PADDING) / Settings.SIZE_OF_SQUARE;
         this.grid = new int[gridRows][gridColumns];
@@ -32,7 +29,7 @@ public class SquareAnt {
         antPosition.direction = Direction.NORTH;
 
         this.givenSquareRule = givenSquareRule;
-        parseRule(givenSquareRule.rule);
+        parseRule(givenSquareRule.getSquareRule());
     }
 
     /**
@@ -56,8 +53,8 @@ public class SquareAnt {
 
     public void nextMoves() {
         int countDown = Settings.SKIP;
-        if (steps > givenSquareRule.slowdownSteps)
-            countDown = (int) (countDown * givenSquareRule.slowdownModifier);
+        if (steps > givenSquareRule.getSlowdownSteps())
+            countDown = (int) (countDown * givenSquareRule.getSlowdownModifier());
         while (countDown > 0 && !stopped) {
             nextMove();
             countDown--;
@@ -140,5 +137,10 @@ public class SquareAnt {
     public void checkBorderCollision() {
         if (antPosition.row < 0 || antPosition.column < 0 || antPosition.row == gridRows || antPosition.column == gridColumns)
             stopped = true;
+    }
+
+    @Override
+    public int ruleLength() {
+        return rule.length;
     }
 }
