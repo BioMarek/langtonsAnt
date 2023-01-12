@@ -18,7 +18,7 @@ public class ImageParallelWorker {
 
     public void drawAllRulesInParallel(RuleGenerator ruleGenerator) {
         deleteFilesInDirectory();
-        List<List<Rule>> rules = ruleGenerator.getAllRulesForThreads(Settings.RULES_LENGTH);
+        List<List<Rule>> rules = ruleGenerator.getAllRulesForThreads(Settings.THREADS);
         CountDownLatch latch = new CountDownLatch(rules.size());
 
         for (List<Rule> item : rules) {

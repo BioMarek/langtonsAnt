@@ -18,7 +18,7 @@ public abstract class RuleGenerator implements Iterator<Rule> {
 
     public List<List<Rule>> getAllRulesForThreads(int threads) {
         List<List<Rule>> result = new ArrayList<>();
-        int forThread = totalNumOfRules / threads;
+        int forThread = (totalNumOfRules / threads) + 1;
 
         for (int i = 0; i < threads; i++) {
             List<Rule> sublist = new ArrayList<>();
