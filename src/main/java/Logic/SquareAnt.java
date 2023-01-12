@@ -3,19 +3,15 @@ package Logic;
 import Utils.Direction;
 import Utils.Position;
 import Utils.Rule;
-import Utils.SquareRule;
 import Utils.Settings;
 
 import java.util.Arrays;
 
 public class SquareAnt extends Ant {
-    public char[] rule;
-    public Rule givenSquareRule;
+    public char[] charRule;
     public Position antPosition = new Position();
 
-
-
-    public SquareAnt(Rule givenSquareRule) {
+    public SquareAnt(Rule rule) {
         this.gridColumns = (Settings.GRID_WIDTH + Settings.IMAGE_PADDING) / Settings.SIZE_OF_SQUARE;
         this.gridRows = (Settings.GRID_HEIGHT + Settings.IMAGE_PADDING) / Settings.SIZE_OF_SQUARE;
         this.grid = new int[gridRows][gridColumns];
@@ -28,8 +24,8 @@ public class SquareAnt extends Ant {
         antPosition.column = gridColumns / 2;
         antPosition.direction = Direction.NORTH;
 
-        this.givenSquareRule = givenSquareRule;
-        parseRule(givenSquareRule.getSquareRule());
+        this.rule = rule;
+        parseRule(rule.getSquareRule());
     }
 
     /**
@@ -37,27 +33,9 @@ public class SquareAnt extends Ant {
      * processing Rule is parsed as array of chars rather than call charAt(i) multiple times.
      */
     public void parseRule(String givenRule) {
-        rule = new char[givenRule.length()];
+        charRule = new char[givenRule.length()];
         for (int i = 0; i < givenRule.length(); i++) {
-            rule[i] = givenRule.charAt(i);
-        }
-    }
-
-    public void allMoves() {
-        long countDown = Settings.MAX_MOVES;
-        while (countDown >= 0 && !stopped) {
-            nextMove();
-            countDown--;
-        }
-    }
-
-    public void nextMoves() {
-        int countDown = Settings.SKIP;
-        if (steps > givenSquareRule.getSlowdownSteps())
-            countDown = (int) (countDown * givenSquareRule.getSlowdownModifier());
-        while (countDown > 0 && !stopped) {
-            nextMove();
-            countDown--;
+            charRule[i] = givenRule.charAt(i);
         }
     }
 
@@ -69,14 +47,14 @@ public class SquareAnt extends Ant {
         int currentColumn = antPosition.column;
         grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] == -1) ? 0 : grid[currentRow][currentColumn];
 
-        if (rule[grid[currentRow][currentColumn]] == 'L')
+        if (charRule[grid[currentRow][currentColumn]] == 'L')
             moveLeft();
-        if (rule[grid[currentRow][currentColumn]] == 'R')
+        if (charRule[grid[currentRow][currentColumn]] == 'R')
             moveRight();
 
-        if (grid[currentRow][currentColumn] == rule.length - 1)
+        if (grid[currentRow][currentColumn] == charRule.length - 1)
             usedTopColor = true;
-        grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] + 1) % rule.length;
+        grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] + 1) % charRule.length;
 
         steps++;
         stopped = steps >= Settings.MAX_MOVES;
@@ -141,6 +119,6 @@ public class SquareAnt extends Ant {
 
     @Override
     public int ruleLength() {
-        return rule.length;
+        return charRule.length;
     }
 }

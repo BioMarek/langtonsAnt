@@ -48,10 +48,10 @@ public class Legend {
         int fontUnit = Settings.BACKGROUND_HEIGHT / 90;
         graphics.setColor(Colors.TEXT.getColor());
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.5)));
-        graphics.drawString("Rule: " + new String(squareAntTopLeft.rule), fontUnit * 2, fontUnit * 3);
-        graphics.drawString("Rule: " + new String(squareAntTopRight.rule), fontUnit * 2 + Settings.BACKGROUND_WIDTH / 2, fontUnit * 3);
-        graphics.drawString("Rule: " + new String(squareAntBottomLeft.rule), fontUnit * 2, fontUnit * 3 + Settings.BACKGROUND_HEIGHT / 2);
-        graphics.drawString("Rule: " + new String(squareAntBottomRight.rule), fontUnit * 2 + Settings.BACKGROUND_WIDTH / 2, fontUnit * 3 + Settings.BACKGROUND_HEIGHT / 2);
+        graphics.drawString("Rule: " + new String(squareAntTopLeft.charRule), fontUnit * 2, fontUnit * 3);
+        graphics.drawString("Rule: " + new String(squareAntTopRight.charRule), fontUnit * 2 + Settings.BACKGROUND_WIDTH / 2, fontUnit * 3);
+        graphics.drawString("Rule: " + new String(squareAntBottomLeft.charRule), fontUnit * 2, fontUnit * 3 + Settings.BACKGROUND_HEIGHT / 2);
+        graphics.drawString("Rule: " + new String(squareAntBottomRight.charRule), fontUnit * 2 + Settings.BACKGROUND_WIDTH / 2, fontUnit * 3 + Settings.BACKGROUND_HEIGHT / 2);
     }
 
     /**
@@ -88,6 +88,7 @@ public class Legend {
     }
 
     private void drawLegendInnerArrows(int i, int squareSize, double xLegendColumnCoefficient, boolean reverse) {
+        // TODO fix this
 //        graphics.setColor(Colors.TEXT.getColor());
 //        char ruleArrow = reverse ? squareAnt.rule[squareAnt.ruleLength() - i - 1] : squareAnt.rule[i];
 //        if (ruleArrow == 'L') {

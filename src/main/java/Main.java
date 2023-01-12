@@ -1,8 +1,7 @@
 import Logic.HexRuleGenerator;
 import Logic.SquareRulesGenerator;
-import Threads.HexImageParallelWorker;
+import Threads.ImageParallelWorker;
 import Utils.Settings;
-//import Threads.ImageParallelWorker;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,15 +10,12 @@ public class Main {
 
 //        new GridFrame();  // Runs one rule based on setting realtime
 
-        HexImageParallelWorker imageParallelWorker = new HexImageParallelWorker();
+        ImageParallelWorker imageParallelWorker = new ImageParallelWorker();
         SquareRulesGenerator squareRulesGenerator = new SquareRulesGenerator(Settings.RULES_LENGTH);
         HexRuleGenerator hexRuleGenerator = new HexRuleGenerator(Settings.RULES_LENGTH);
-        imageParallelWorker.drawAllRulesInParallel(hexRuleGenerator);
+        imageParallelWorker.drawAllRulesInParallel(squareRulesGenerator);
 
 //        VideoGenerator videoGenerator = new VideoGenerator();
 //        videoGenerator.generateInteresting(Rule.getHighways());
-
-//        HexImageParallelWorker hexImageParallelWorker = new HexImageParallelWorker();
-//        hexImageParallelWorker.drawAllRulesInParallel();
     }
 }

@@ -23,7 +23,7 @@ public class SquareAntTest {
     @Test
     void parseRuleTest() {
         squareAnt = new SquareAnt(squareRule);
-        assertThat(squareAnt.rule, is(new char[]{'R', 'L'}));
+        assertThat(squareAnt.charRule, is(new char[]{'R', 'L'}));
     }
 
 //    @Test
