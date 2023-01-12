@@ -4,7 +4,7 @@ import Graphic.Visualization.AntExplanation;
 import Graphic.Visualization.AntGraphicFour;
 import Graphic.Visualization.AntGraphicSingle;
 import Logic.SquareAnt;
-import Utils.Rule;
+import Utils.SquareRule;
 import Utils.Settings;
 import com.squareup.gifencoder.GifEncoder;
 import com.squareup.gifencoder.ImageOptions;
@@ -37,40 +37,40 @@ public class VideoGenerator {
     /**
      * Generates *.mp4 for interesting rules which are passed as argument.
      *
-     * @param interesting list of {@link Rule} for which we want to create videos
+     * @param interesting list of {@link SquareRule} for which we want to create videos
      */
-    public void generateInteresting(List<Rule> interesting) {
-        for (Rule rule : interesting) {
-            System.out.println("working on " + rule.rule);
-            rule.setVariables();
-            SquareAnt squareAnt = new SquareAnt(Settings.RULE);
+    public void generateInteresting(List<SquareRule> interesting) {
+        for (SquareRule squareRule : interesting) {
+            System.out.println("working on " + squareRule.rule);
+            squareRule.setVariables();
+            SquareAnt squareAnt = new SquareAnt(Settings.SquareRULE);
             squareAnt.allMoves(); // calculates number of moves in total
 
             Settings.SKIP = squareAnt.steps / Settings.VIDEO_NUM_IMAGES;
             System.out.println("max steps: " + squareAnt.steps + " skip: " + Settings.SKIP);
 
-            squareAnt = new SquareAnt(Settings.RULE);
+            squareAnt = new SquareAnt(Settings.SquareRULE);
             antVisualization = new AntGraphicSingle(squareAnt);
             createMP4();
         }
     }
 
-    public void generateInteresting(Set<List<Rule>> interesting) {
-        for (List<Rule> rules : interesting) {
-            rules.get(0).setVariables();
-            SquareAnt squareAnt = new SquareAnt(rules.get(0).rule);
+    public void generateInteresting(Set<List<SquareRule>> interesting) {
+        for (List<SquareRule> squareRules : interesting) {
+            squareRules.get(0).setVariables();
+            SquareAnt squareAnt = new SquareAnt(squareRules.get(0));
             squareAnt.allMoves(); // calculates number of moves in total
             int ant0 = squareAnt.steps / Settings.VIDEO_NUM_IMAGES;
 
-            squareAnt = new SquareAnt(rules.get(1).rule);
+            squareAnt = new SquareAnt(squareRules.get(1));
             squareAnt.allMoves();
             int ant1 = squareAnt.steps / Settings.VIDEO_NUM_IMAGES;
 
-            squareAnt = new SquareAnt(rules.get(2).rule);
+            squareAnt = new SquareAnt(squareRules.get(2));
             squareAnt.allMoves();
             int ant2 = squareAnt.steps / Settings.VIDEO_NUM_IMAGES;
 
-            squareAnt = new SquareAnt(rules.get(3).rule);
+            squareAnt = new SquareAnt(squareRules.get(3));
             squareAnt.allMoves();
             int ant3 = squareAnt.steps / Settings.VIDEO_NUM_IMAGES;
 
@@ -78,15 +78,14 @@ public class VideoGenerator {
 
             System.out.println("max steps: " + squareAnt.steps + " skip: " + Settings.SKIP);
 
-            Settings.RULE = rules.get(0).rule + "_" + rules.get(1).rule + "_" + rules.get(2).rule + "_" + rules.get(3).rule;
-            antVisualization = new AntGraphicFour(new SquareAnt(rules.get(0).rule), new SquareAnt(rules.get(1).rule), new SquareAnt(rules.get(2).rule), new SquareAnt(rules.get(3).rule));
+            antVisualization = new AntGraphicFour(new SquareAnt(squareRules.get(0)), new SquareAnt(squareRules.get(1)), new SquareAnt(squareRules.get(2)), new SquareAnt(squareRules.get(3)));
             createMP4();
         }
     }
 
     public void generateExplanation() {
         Settings.showExplanationFirstPartSettings();
-        SquareAnt squareAnt = new SquareAnt(Settings.RULE);
+        SquareAnt squareAnt = new SquareAnt(Settings.SquareRULE);
         antVisualization = new AntExplanation(squareAnt);
         createMP4();
     }
@@ -94,7 +93,7 @@ public class VideoGenerator {
     private void createMP4() {
         ImageIterator imageIterator = new ImageIterator(antVisualization);
         try {
-            SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File(Settings.VIDEO_BASE_PATH + Settings.RULE + ".mp4")),
+            SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File(Settings.VIDEO_BASE_PATH + Settings.SquareRULE + ".mp4")),
                     Rational.R(Settings.VIDEO_FPS, 1), Format.MOV, Codec.PNG, null);
             while (imageIterator.hasNext()) {
                 encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(imageIterator.next()));
@@ -124,7 +123,7 @@ public class VideoGenerator {
      */
     @Deprecated
     public void createGif() {
-        try (FileOutputStream outputStream = new FileOutputStream(Settings.VIDEO_BASE_PATH + Settings.RULE + ".gif")) {
+        try (FileOutputStream outputStream = new FileOutputStream(Settings.VIDEO_BASE_PATH + Settings.SquareRULE + ".gif")) {
             GifEncoder encoder = new GifEncoder(outputStream, 1413, 1080, 1);
             ImageOptions options = new ImageOptions();
             options.setDelay(35, TimeUnit.MILLISECONDS);
@@ -158,12 +157,12 @@ public class VideoGenerator {
 
     @Deprecated
     public void saveImages() {
-        new File("gifs/" + Settings.RULE).mkdirs();
+        new File("gifs/" + Settings.SquareRULE).mkdirs();
         List<BufferedImage> bufferedImages = createImages();
 
         for (int i = 0; i < bufferedImages.size(); i++) {
             try {
-                ImageIO.write(bufferedImages.get(i), "png", new File("gifs/" + Settings.RULE + "/" + String.format("%03d", i) + "_" + Settings.RULE + ".png"));
+                ImageIO.write(bufferedImages.get(i), "png", new File("gifs/" + Settings.SquareRULE + "/" + String.format("%03d", i) + "_" + Settings.SquareRULE + ".png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }

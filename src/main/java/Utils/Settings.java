@@ -6,7 +6,7 @@ public class Settings {
      */
     public static int ALPHA = 200; // alpha of colors used in AntGraphic
     public static boolean SHOW_GRID = false;
-    public static String RULE = "RL";
+    public static SquareRule SquareRULE = new SquareRule("RL", 1, 1, 1);
     public static int TIMER_DELAY = 100; // realtime animation delay between frames
     public static int SKIP = 100; // steps to skip between frames
     public static long MAX_MOVES = 50_000_000;
@@ -34,8 +34,6 @@ public class Settings {
 
     // use to show only center of image and fill entire screen with even if some part already reached the border,
     public static int IMAGE_PADDING = 0; // use 500 for thumbnail image
-    public static int SLOWDOWN_STEPS = 100_000_000;
-    public static double SLOWDOWN_MODIFIER = 1.0;
 
     /**
      * Settings for explanation

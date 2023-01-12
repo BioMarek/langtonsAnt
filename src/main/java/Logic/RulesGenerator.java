@@ -1,5 +1,7 @@
 package Logic;
 
+import Utils.SquareRule;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -11,7 +13,7 @@ import java.util.List;
  * Also, only half of rules is generated as LRR is same as RLL but mirrored there is no need to generate complementary
  * rules.
  */
-public class RulesGenerator implements Iterator<String> {
+public class RulesGenerator implements Iterator<SquareRule> {
     private final int rulesLength;
     public char[] charArray;
     private int rulesReturned = 1;
@@ -35,10 +37,10 @@ public class RulesGenerator implements Iterator<String> {
     }
 
     @Override
-    public String next() {
+    public SquareRule next() {
         increaseByOne();
         rulesReturned++;
-        return new String(charArray);
+        return new SquareRule(new String(charArray), 1, 1, 1);
     }
 
     public void increaseByOne() {
@@ -54,12 +56,12 @@ public class RulesGenerator implements Iterator<String> {
         }
     }
 
-    public List<List<String>> getAllRulesForThreads(int threads) {
-        List<List<String>> result = new ArrayList<>();
+    public List<List<SquareRule>> getAllRulesForThreads(int threads) {
+        List<List<SquareRule>> result = new ArrayList<>();
         int forThread = totalNumOfRules / threads + 1;
 
         for (int i = 0; i < threads; i++) {
-            List<String> sublist = new ArrayList<>();
+            List<SquareRule> sublist = new ArrayList<>();
             int count = 0;
             while (hasNext() && count < forThread) {
                 sublist.add(next());

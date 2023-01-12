@@ -1,4 +1,5 @@
 import Logic.RulesGenerator;
+import Utils.SquareRule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,12 +31,12 @@ public class RulesGeneratorTest {
 
     @Test
     void rulesGenerator_returnsCorrectRules() {
-        assertThat(rulesGenerator.next(), is("RL"));
+        assertThat(rulesGenerator.next().rule, is("RL"));
         assertThat(rulesGenerator.hasNext(), is(false));
         rulesGenerator = new RulesGenerator(3);
-        assertThat(rulesGenerator.next(), is("RLL"));
-        assertThat(rulesGenerator.next(), is("LRL"));
-        assertThat(rulesGenerator.next(), is("RRL"));
+        assertThat(rulesGenerator.next().rule, is("RLL"));
+        assertThat(rulesGenerator.next().rule, is("LRL"));
+        assertThat(rulesGenerator.next().rule, is("RRL"));
         assertThat(rulesGenerator.hasNext(), is(false));
     }
 
@@ -48,7 +49,7 @@ public class RulesGeneratorTest {
 
     private int getAllRules(int length) {
         rulesGenerator = new RulesGenerator(length);
-        List<String> result = new ArrayList<>();
+        List<SquareRule> result = new ArrayList<>();
         while (rulesGenerator.hasNext())
             result.add(rulesGenerator.next());
         return result.size();

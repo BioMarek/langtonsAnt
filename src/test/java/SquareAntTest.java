@@ -1,4 +1,5 @@
 import Logic.SquareAnt;
+import Utils.SquareRule;
 import Utils.Settings;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import static org.hamcrest.Matchers.is;
 public class SquareAntTest {
     private final int SIZE = 2;
     private SquareAnt squareAnt;
-    private final String rule = "RL";
+    private final SquareRule squareRule = new SquareRule("RL", 1, 1, 1);
 
     @BeforeEach
     public void init() {
@@ -21,7 +22,7 @@ public class SquareAntTest {
 
     @Test
     void parseRuleTest() {
-        squareAnt = new SquareAnt(rule);
+        squareAnt = new SquareAnt(squareRule);
         assertThat(squareAnt.rule, is(new char[]{'R', 'L'}));
     }
 

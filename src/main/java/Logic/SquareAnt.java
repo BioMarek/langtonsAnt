@@ -2,6 +2,7 @@ package Logic;
 
 import Utils.Direction;
 import Utils.Position;
+import Utils.SquareRule;
 import Utils.Settings;
 
 import java.util.Arrays;
@@ -11,12 +12,13 @@ public class SquareAnt {
     public final int gridColumns;
     public final int gridRows;
     public char[] rule;
+    public SquareRule givenSquareRule;
     public Position antPosition = new Position();
     public boolean stopped = false;
     public int steps = 0;
     public boolean usedTopColor = false;
 
-    public SquareAnt(String givenRule) {
+    public SquareAnt(SquareRule givenSquareRule) {
         this.gridColumns = (Settings.GRID_WIDTH + Settings.IMAGE_PADDING) / Settings.SIZE_OF_SQUARE;
         this.gridRows = (Settings.GRID_HEIGHT + Settings.IMAGE_PADDING) / Settings.SIZE_OF_SQUARE;
         this.grid = new int[gridRows][gridColumns];
@@ -29,7 +31,8 @@ public class SquareAnt {
         antPosition.column = gridColumns / 2;
         antPosition.direction = Direction.NORTH;
 
-        parseRule(givenRule);
+        this.givenSquareRule = givenSquareRule;
+        parseRule(givenSquareRule.rule);
     }
 
     /**
@@ -53,8 +56,8 @@ public class SquareAnt {
 
     public void nextMoves() {
         int countDown = Settings.SKIP;
-        if (steps > Settings.SLOWDOWN_STEPS)
-            countDown = (int) (countDown * Settings.SLOWDOWN_MODIFIER);
+        if (steps > givenSquareRule.slowdownSteps)
+            countDown = (int) (countDown * givenSquareRule.slowdownModifier);
         while (countDown > 0 && !stopped) {
             nextMove();
             countDown--;

@@ -65,7 +65,7 @@ public class HexRuleGenerator implements Iterator<HexRule> {
                 case 5 -> result.add(HexMove.L1);
             }
         }
-        return new HexRule(result);
+        return new HexRule(result, 1, 1);
     }
     public List<List<HexRule>> getAllRulesForThreads(int threads) {
         List<List<HexRule>> result = new ArrayList<>();
