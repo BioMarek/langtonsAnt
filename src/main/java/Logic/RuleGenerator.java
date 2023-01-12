@@ -1,6 +1,7 @@
 package Logic;
 
 import Utils.Rule;
+import Utils.Settings;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,11 +17,11 @@ public abstract class RuleGenerator implements Iterator<Rule> {
         return rulesReturned < totalNumOfRules;
     }
 
-    public List<List<Rule>> getAllRulesForThreads(int threads) {
+    public List<List<Rule>> getAllRulesForThreads() {
         List<List<Rule>> result = new ArrayList<>();
-        int forThread = (totalNumOfRules / threads) + 1;
+        int forThread = (totalNumOfRules / Settings.THREADS) + 1;
 
-        for (int i = 0; i < threads; i++) {
+        for (int i = 0; i < Settings.THREADS; i++) {
             List<Rule> sublist = new ArrayList<>();
             int count = 0;
             while (hasNext() && count < forThread) {

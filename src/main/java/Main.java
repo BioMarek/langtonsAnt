@@ -16,7 +16,7 @@ public class Main {
         ImageParallelWorker imageParallelWorker = new ImageParallelWorker();
         SquareRulesGenerator squareRulesGenerator = new SquareRulesGenerator(Settings.RULES_LENGTH);
         HexRuleGenerator hexRuleGenerator = new HexRuleGenerator(Settings.RULES_LENGTH);
-        imageParallelWorker.drawAllRulesInParallel(squareRulesGenerator);
+        imageParallelWorker.drawAllRulesInParallel(hexRuleGenerator);
 
 //        VideoGenerator videoGenerator = new VideoGenerator();
 //        videoGenerator.generateInteresting(SquareRule.getHighways());
