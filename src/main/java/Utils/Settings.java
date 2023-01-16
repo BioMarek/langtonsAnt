@@ -20,7 +20,7 @@ public class Settings {
     /**
      * Settings for parallel threads image generation
      */
-    public static int RULES_LENGTH = 3;
+    public static int RULES_LENGTH = 4;
     public static String IMAGE_BASE_PATH = "./movies/";
     public static int THREADS = 6;
 
@@ -50,6 +50,7 @@ public class Settings {
      */
     public static int HEX_SIDE_LEN = 6;
     public static HexRule HEX_RULE = HexRule.hexagonalReferenceRules().get(1);
+    public static int HEXES_USED = 10;
 
     public static void showExplanationFirstPartSettings() {
         Settings.SHOW_GRID = true;
@@ -99,5 +100,10 @@ public class Settings {
     public static void generateHexagonalGridSettings() {
         Settings.MAX_MOVES = 2000000;
         Settings.SKIP = 500;
+    }
+    public static void generateHexagonalGridSettingsImages() {
+        Settings.GRID_WIDTH = 6000;
+        Settings.GRID_HEIGHT = 4320;
+        Settings.BACKGROUND_HEIGHT = 4320;
     }
 }

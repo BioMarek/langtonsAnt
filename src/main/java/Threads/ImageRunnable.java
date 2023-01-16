@@ -61,7 +61,7 @@ public class ImageRunnable implements Runnable {
         }
 
         ant.allMoves();
-        if (ant.usedTopColor) {
+        if (ant.shouldBeSaved()) {
             BufferedImage bImg = new BufferedImage(Settings.GRID_WIDTH, Settings.BACKGROUND_HEIGHT, BufferedImage.TYPE_INT_RGB);
             hexGraphicSingle.drawImage(bImg.createGraphics());
 

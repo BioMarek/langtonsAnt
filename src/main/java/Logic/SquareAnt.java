@@ -121,4 +121,9 @@ public class SquareAnt extends Ant {
     public int ruleLength() {
         return charRule.length;
     }
+
+    @Override
+    public boolean shouldBeSaved() {
+        return usedTopColor;
+    }
 }

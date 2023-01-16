@@ -60,4 +60,23 @@ public class HexAnt extends Ant {
     public int ruleLength() {
         return rule.getSize();
     }
+
+    @Override
+    public boolean shouldBeSaved() {
+        return usedTopColor && filledEnoughHexes();
+    }
+
+    /**
+     * There are images that have filled only fex hexes, these should not be saved. This function will disqualify them.
+     */
+    public boolean filledEnoughHexes() {
+        int filled = 0;
+        for (int[] row : grid) {
+            for (int column = 0; column < grid.length; column++) {
+                if (row[column] != -1)
+                    filled++;
+            }
+        }
+        return filled > Settings.HEXES_USED;
+    }
 }

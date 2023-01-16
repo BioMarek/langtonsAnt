@@ -33,4 +33,6 @@ public abstract class Ant {
     public abstract void nextMove();
 
     public abstract int ruleLength();
+
+    public abstract boolean shouldBeSaved();
 }
