@@ -98,20 +98,21 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
         return result;
     }
 
-    private String getMirroredString() {
+    public String getMirroredString() {
         StringBuilder result = new StringBuilder();
         for (int i : intArray) {
-            if (i == 1)
-                result.append("5");
-            else if (i == 2)
-                result.append("4");
-            else
-                result.append(i);
+            switch (i) {
+                case 1 -> result.append("5");
+                case 2 -> result.append("4");
+                case 4 -> result.append("2");
+                case 5 -> result.append("1");
+                default -> result.append(i);
+            }
         }
         return result.toString();
     }
 
-    private String getRuleString() {
+    public String getRuleString() {
         StringBuilder result = new StringBuilder();
         for (int i : intArray) {
             result.append(i);
