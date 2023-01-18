@@ -1,7 +1,7 @@
 package Threads;
 
-import Logic.RuleGenerator;
-import Utils.Rule;
+import Logic.RuleGenerator.RuleGenerator;
+import Logic.Rule.Rule;
 import Utils.Settings;
 
 import java.io.File;

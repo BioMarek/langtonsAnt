@@ -1,7 +1,6 @@
 package Graphic.Components;
 
-import Logic.Ant;
-import Logic.HexAnt;
+import Logic.Ant.Ant;
 import Utils.Colors;
 import Utils.Settings;
 import Utils.Util;

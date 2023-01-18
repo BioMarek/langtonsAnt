@@ -1,8 +1,8 @@
-package Logic;
+package Logic.Ant;
 
-import Utils.HexMove;
-import Utils.HexPosition;
-import Utils.Rule;
+import Logic.HexMove;
+import Logic.HexPosition;
+import Logic.Rule.Rule;
 import Utils.Settings;
 import Utils.Util;
 

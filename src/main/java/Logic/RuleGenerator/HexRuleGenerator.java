@@ -1,8 +1,8 @@
-package Logic;
+package Logic.RuleGenerator;
 
-import Utils.HexMove;
-import Utils.HexRule;
-import Utils.Rule;
+import Logic.HexMove;
+import Logic.Rule.HexRule;
+import Logic.Rule.Rule;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,6 +1,6 @@
-package Logic;
+package Logic.Ant;
 
-import Utils.Rule;
+import Logic.Rule.Rule;
 import Utils.Settings;
 
 public abstract class Ant {

@@ -3,8 +3,7 @@ package Graphic.Visualization;
 import Graphic.AntVisualization;
 import Graphic.Components.Background;
 import Graphic.Components.HexLegend;
-import Logic.Ant;
-import Logic.HexAnt;
+import Logic.Ant.Ant;
 import Utils.Colors;
 import Utils.Settings;
 

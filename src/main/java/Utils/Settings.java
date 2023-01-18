@@ -1,5 +1,8 @@
 package Utils;
 
+import Logic.Rule.HexRule;
+import Logic.Rule.SquareRule;
+
 public class Settings {
     /**
      * General settings
@@ -20,7 +23,7 @@ public class Settings {
     /**
      * Settings for parallel threads image generation
      */
-    public static int RULES_LENGTH = 4;
+    public static int RULES_LENGTH = 6;
     public static String IMAGE_BASE_PATH = "./movies/";
     public static int THREADS = 6;
 
@@ -102,8 +105,8 @@ public class Settings {
         Settings.SKIP = 500;
     }
     public static void generateHexagonalGridSettingsImages() {
-        Settings.GRID_WIDTH = 6000;
-        Settings.GRID_HEIGHT = 4320;
-        Settings.BACKGROUND_HEIGHT = 4320;
+        Settings.GRID_WIDTH = 3000;
+        Settings.GRID_HEIGHT = 2160;
+        Settings.BACKGROUND_HEIGHT = 2160;
     }
 }

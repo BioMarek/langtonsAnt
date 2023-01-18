@@ -3,10 +3,10 @@ package Threads;
 import Graphic.AntVisualization;
 import Graphic.Visualization.AntGraphicSingle;
 import Graphic.Visualization.HexGraphicSingle;
-import Logic.Ant;
-import Logic.HexAnt;
-import Logic.SquareAnt;
-import Utils.Rule;
+import Logic.Ant.Ant;
+import Logic.Ant.HexAnt;
+import Logic.Ant.SquareAnt;
+import Logic.Rule.Rule;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;

@@ -1,5 +1,5 @@
-import Logic.HexRuleGenerator;
-import Utils.HexMove;
+import Logic.RuleGenerator.HexRuleGenerator;
+import Logic.HexMove;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

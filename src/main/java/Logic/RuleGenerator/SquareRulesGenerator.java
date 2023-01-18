@@ -1,7 +1,7 @@
-package Logic;
+package Logic.RuleGenerator;
 
-import Utils.Rule;
-import Utils.SquareRule;
+import Logic.Rule.Rule;
+import Logic.Rule.SquareRule;
 
 import java.util.Arrays;
 import java.util.Iterator;

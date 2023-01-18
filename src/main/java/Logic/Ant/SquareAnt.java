@@ -1,8 +1,8 @@
-package Logic;
+package Logic.Ant;
 
-import Utils.Direction;
-import Utils.Position;
-import Utils.Rule;
+import Logic.Direction;
+import Logic.Position;
+import Logic.Rule.Rule;
 import Utils.Settings;
 
 import java.util.Arrays;

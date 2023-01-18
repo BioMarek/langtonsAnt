@@ -1,4 +1,6 @@
-package Utils;
+package Logic.Rule;
+
+import Utils.Settings;
 
 import java.text.AttributedString;
 

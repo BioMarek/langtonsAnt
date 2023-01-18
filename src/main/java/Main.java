@@ -1,10 +1,7 @@
-import Graphic.VideoGenerator;
-import Logic.HexRuleGenerator;
-import Logic.SquareRulesGenerator;
+import Logic.RuleGenerator.HexRuleGenerator;
+import Logic.RuleGenerator.SquareRulesGenerator;
 import Threads.ImageParallelWorker;
 import Utils.Settings;
-import Utils.SquareRule;
-import Windows.GridFrame;
 
 public class Main {
     public static void main(String[] args) {
