@@ -1,7 +1,7 @@
 package Threads;
 
-import Logic.RuleGenerator.RuleGenerator;
 import Logic.Rule.Rule;
+import Logic.RuleGenerator.RuleGenerator;
 import Utils.Settings;
 
 import java.io.File;
@@ -13,10 +13,13 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static Utils.Util.formatTime;
+
 public class ImageParallelWorker {
     private final AtomicInteger counter = new AtomicInteger();
 
     public void drawAllRulesInParallel(RuleGenerator ruleGenerator) {
+        long start = System.currentTimeMillis();
         deleteFilesInDirectory();
         List<List<Rule>> rules = ruleGenerator.getAllRulesForThreads();
         CountDownLatch latch = new CountDownLatch(rules.size());
@@ -27,10 +30,12 @@ public class ImageParallelWorker {
         }
         try {
             latch.await();
+            long stop = System.currentTimeMillis();
             System.out.println("\nThere is: " + (int) Math.pow(6, Settings.RULES_LENGTH) + " rules total");
             System.out.println("There is: " + totalElements(rules) + " rules generated");
             System.out.println("Skipped:  " + counter);
             System.out.println("Saved:    " + (totalElements(rules) - counter.get()));
+            System.out.println("It took:  " + formatTime(stop - start));
         } catch (InterruptedException ignored) {
         }
     }

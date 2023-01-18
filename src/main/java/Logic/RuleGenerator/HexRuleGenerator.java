@@ -67,6 +67,7 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
         return new HexRule(result, 1, 1);
     }
 
+    // TODO test this, there seems to be few rules missing or some are not eliminated even when they should be
     @Override
     public List<List<Rule>> getAllRulesForThreads() {
         List<List<Rule>> result = new ArrayList<>();
