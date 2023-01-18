@@ -27,7 +27,8 @@ public class ImageParallelWorker {
         }
         try {
             latch.await();
-            System.out.println("\nThere is: " + totalElements(rules) + " rules total");
+            System.out.println("\nThere is: " + (int) Math.pow(6, Settings.RULES_LENGTH) + " rules total");
+            System.out.println("There is: " + totalElements(rules) + " rules generated");
             System.out.println("Skipped:  " + counter);
             System.out.println("Saved:    " + (totalElements(rules) - counter.get()));
         } catch (InterruptedException ignored) {
