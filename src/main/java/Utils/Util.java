@@ -51,7 +51,6 @@ public class Util {
         return String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
     }
 
-    // TODO optimize
     public static int getHexWidth() {
         return (int) (Settings.HEX_SIDE_LEN * 1.7); // 17 when hexagon is 10
     }

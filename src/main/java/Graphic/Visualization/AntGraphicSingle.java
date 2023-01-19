@@ -14,13 +14,12 @@ import java.awt.Graphics2D;
  */
 public class AntGraphicSingle implements AntVisualization {
     private Graphics2D graphics;
-    private final Ant squareAnt;
+    public Ant squareAnt;
     private final SquareLegend squareLegend;
     private final Background background;
     private int imageCount = 0;
 
-    public AntGraphicSingle(Ant squareAnt) {
-        this.squareAnt = squareAnt;
+    public AntGraphicSingle() {
         this.squareLegend = new SquareLegend();
         this.background = new Background();
     }

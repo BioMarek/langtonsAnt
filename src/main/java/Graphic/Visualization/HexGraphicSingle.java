@@ -6,6 +6,7 @@ import Graphic.Components.HexLegend;
 import Logic.Ant.Ant;
 import Utils.Colors;
 import Utils.Settings;
+import Utils.Util;
 
 import java.awt.Graphics2D;
 import java.awt.Polygon;
@@ -16,15 +17,21 @@ import static Utils.Util.getHexWidth;
 
 public class HexGraphicSingle implements AntVisualization {
     private Graphics2D graphics;
-    private final Ant ant;
+    public Ant ant;
     private final HexLegend hexLegend;
     private final Background background;
     private int imageCount = 0;
+    private int hexWidth;
+    private int hexHeight;
+    private int hexPositionShift;
 
-    public HexGraphicSingle(Ant ant) {
-        this.ant = ant;
+    public HexGraphicSingle() {
         this.hexLegend = new HexLegend();
         this.background = new Background();
+
+        hexWidth= Util.getHexWidth();
+        hexHeight = Util.getHexHeight();
+        hexPositionShift = Util.getHexPositionShift();
     }
 
     /**
@@ -72,9 +79,9 @@ public class HexGraphicSingle implements AntVisualization {
                     continue;
                 Colors.setColor(graphics, ant.grid[row][column]);
                 if (row % 2 == 0)
-                    drawHexagon(column * getHexWidth(), (row /*- centeringRow*/) * getHexHeight(), Settings.HEX_SIDE_LEN);
+                    drawHexagon(column * hexWidth, row * hexHeight, Settings.HEX_SIDE_LEN);
                 else
-                    drawHexagon(column * getHexWidth() + getHexPositionShift(), row * getHexHeight(), Settings.HEX_SIDE_LEN);
+                    drawHexagon(column * hexWidth + hexPositionShift, row * hexHeight, Settings.HEX_SIDE_LEN);
             }
         }
     }

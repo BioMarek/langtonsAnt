@@ -50,7 +50,8 @@ public class VideoGenerator {
             System.out.println("max steps: " + squareAnt.steps + " skip: " + Settings.SKIP);
 
             squareAnt = new SquareAnt(Settings.SquareRULE);
-            antVisualization = new AntGraphicSingle(squareAnt);
+            antVisualization = new AntGraphicSingle();
+            ((AntGraphicSingle) antVisualization).squareAnt = squareAnt;
             createMP4();
         }
     }

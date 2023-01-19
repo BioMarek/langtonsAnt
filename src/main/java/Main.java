@@ -1,3 +1,5 @@
+import Graphic.VideoGenerator;
+import Logic.Rule.SquareRule;
 import Logic.RuleGenerator.HexRuleGenerator;
 import Logic.RuleGenerator.SquareRulesGenerator;
 import Threads.ImageParallelWorker;
@@ -17,6 +19,6 @@ public class Main {
         imageParallelWorker.drawAllRulesInParallel(hexRuleGenerator);
 
 //        VideoGenerator videoGenerator = new VideoGenerator();
-//        videoGenerator.generateInteresting(SquareRule.getHighways());
+//        videoGenerator.generateInteresting(SquareRule.getFour());
     }
 }

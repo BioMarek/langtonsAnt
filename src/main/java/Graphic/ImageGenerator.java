@@ -35,7 +35,7 @@ public class ImageGenerator {
     private void saveImageWithoutPanel(SquareRule squareRule) {
         squareAnt.allMoves();
         BufferedImage bImg = new BufferedImage(Settings.GRID_WIDTH, Settings.BACKGROUND_HEIGHT, BufferedImage.TYPE_INT_RGB);
-        AntGraphicSingle antGraphicSingle = new AntGraphicSingle(squareAnt);
+        AntGraphicSingle antGraphicSingle = new AntGraphicSingle();
         antGraphicSingle.drawImage(bImg.createGraphics());
 
         try {

@@ -1,6 +1,5 @@
 package Threads;
 
-import Graphic.AntVisualization;
 import Graphic.Visualization.AntGraphicSingle;
 import Graphic.Visualization.HexGraphicSingle;
 import Logic.Ant.Ant;
@@ -24,6 +23,8 @@ public class ImageRunnable implements Runnable {
     private final List<Rule> rules;
     private final AtomicInteger counter;
     private final CountDownLatch latch;
+    private final HexGraphicSingle hexGraphicSingle = new HexGraphicSingle();
+    private final AntGraphicSingle antGraphicSingle = new AntGraphicSingle();
 
     public ImageRunnable(List<Rule> rules, AtomicInteger counter, CountDownLatch latch) {
         this.rules = rules;
@@ -48,16 +49,13 @@ public class ImageRunnable implements Runnable {
     private void saveImage(Rule rule) {
         System.out.println(Thread.currentThread().getName() + " working on: " + rule);
         Ant ant;
-        AntVisualization hexGraphicSingle;
 
-        if (Objects.equals(rule.getType(), "hex")){
+        if (Objects.equals(rule.getType(), "hex")) {
             ant = new HexAnt(rule);
-            hexGraphicSingle = new HexGraphicSingle(ant);
-        }
-
-        else{
+            hexGraphicSingle.ant = ant;
+        } else {
             ant = new SquareAnt(rule);
-            hexGraphicSingle = new AntGraphicSingle(ant);
+            antGraphicSingle.squareAnt = ant;
         }
 
         ant.allMoves();
