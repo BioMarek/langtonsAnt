@@ -34,5 +34,10 @@ public abstract class Ant {
 
     public abstract int ruleLength();
 
+    /**
+     * Determines whether rule that Ant just run should be saved as image. Only unique images should be saved.
+     *
+     * @return true if image is unique, false otherwise
+     */
     public abstract boolean shouldBeSaved();
 }

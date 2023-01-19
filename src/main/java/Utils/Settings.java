@@ -53,7 +53,7 @@ public class Settings {
      */
     public static int HEX_SIDE_LEN = 6;
     public static HexRule HEX_RULE = HexRule.hexagonalReferenceRules().get(1);
-    public static int HEXES_USED = 10;
+    public static int HEXES_USED = 100;
 
     public static void showExplanationFirstPartSettings() {
         Settings.SHOW_GRID = true;
@@ -108,5 +108,6 @@ public class Settings {
         Settings.GRID_WIDTH = 3000;
         Settings.GRID_HEIGHT = 2160;
         Settings.BACKGROUND_HEIGHT = 2160;
+        Settings.HEXES_USED = 700;
     }
 }

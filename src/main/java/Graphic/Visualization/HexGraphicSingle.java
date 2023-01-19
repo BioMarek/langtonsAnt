@@ -21,9 +21,9 @@ public class HexGraphicSingle implements AntVisualization {
     private final HexLegend hexLegend;
     private final Background background;
     private int imageCount = 0;
-    private int hexWidth;
-    private int hexHeight;
-    private int hexPositionShift;
+    private final int hexWidth;
+    private final int hexHeight;
+    private final int hexPositionShift;
 
     public HexGraphicSingle() {
         this.hexLegend = new HexLegend();
@@ -72,7 +72,6 @@ public class HexGraphicSingle implements AntVisualization {
      * Converts grid of numbers to {@link Graphics2D}.
      */
     public void drawGrid() {
-//        int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
         for (int row = 0; row < ant.gridRows; row++) {
             for (int column = 0; column < ant.gridColumns; column++) {
                 if (ant.grid[row][column] == -1)
