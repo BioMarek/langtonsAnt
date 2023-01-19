@@ -26,6 +26,9 @@ public class ImageRunnable implements Runnable {
     private final HexGraphicSingle hexGraphicSingle = new HexGraphicSingle();
     private final AntGraphicSingle antGraphicSingle = new AntGraphicSingle();
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+
     public ImageRunnable(List<Rule> rules, AtomicInteger counter, CountDownLatch latch) {
         this.rules = rules;
         this.counter = counter;
@@ -34,8 +37,10 @@ public class ImageRunnable implements Runnable {
 
     @Override
     public void run() {
-        for (Rule rule : rules) {
-            saveImage(rule);
+        for (int i = 0; i < rules.size(); i++) {
+            if (i % 100 == 0)
+                System.out.println(ANSI_RED + "--- " + i + " out of " + rules.size() + " done" + ANSI_RESET);
+            saveImage(rules.get(i));
         }
         latch.countDown();
     }
