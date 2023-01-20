@@ -3,10 +3,10 @@ package Graphic.Visualization;
 import Graphic.AntVisualization;
 import Graphic.Components.Background;
 import Graphic.Components.HexLegend;
-import Logic.Ant;
-import Logic.HexAnt;
+import Logic.Ant.Ant;
 import Utils.Colors;
 import Utils.Settings;
+import Utils.Util;
 
 import java.awt.Graphics2D;
 import java.awt.Polygon;
@@ -17,15 +17,21 @@ import static Utils.Util.getHexWidth;
 
 public class HexGraphicSingle implements AntVisualization {
     private Graphics2D graphics;
-    private final Ant ant;
+    public Ant ant;
     private final HexLegend hexLegend;
     private final Background background;
     private int imageCount = 0;
+    private final int hexWidth;
+    private final int hexHeight;
+    private final int hexPositionShift;
 
-    public HexGraphicSingle(Ant ant) {
-        this.ant = ant;
+    public HexGraphicSingle() {
         this.hexLegend = new HexLegend();
         this.background = new Background();
+
+        hexWidth= Util.getHexWidth();
+        hexHeight = Util.getHexHeight();
+        hexPositionShift = Util.getHexPositionShift();
     }
 
     /**
@@ -66,16 +72,15 @@ public class HexGraphicSingle implements AntVisualization {
      * Converts grid of numbers to {@link Graphics2D}.
      */
     public void drawGrid() {
-//        int borderPadding = Settings.IMAGE_PADDING / Settings.SIZE_OF_SQUARE;
         for (int row = 0; row < ant.gridRows; row++) {
             for (int column = 0; column < ant.gridColumns; column++) {
                 if (ant.grid[row][column] == -1)
                     continue;
                 Colors.setColor(graphics, ant.grid[row][column]);
                 if (row % 2 == 0)
-                    drawHexagon(column * getHexWidth(), (row /*- centeringRow*/) * getHexHeight(), Settings.HEX_SIDE_LEN);
+                    drawHexagon(column * hexWidth, row * hexHeight, Settings.HEX_SIDE_LEN);
                 else
-                    drawHexagon(column * getHexWidth() + getHexPositionShift(), row * getHexHeight(), Settings.HEX_SIDE_LEN);
+                    drawHexagon(column * hexWidth + hexPositionShift, row * hexHeight, Settings.HEX_SIDE_LEN);
             }
         }
     }

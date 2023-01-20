@@ -1,4 +1,4 @@
-package Utils;
+package Logic;
 
 public class Position {
     public int row;

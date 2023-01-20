@@ -1,5 +1,5 @@
-import Logic.SquareRulesGenerator;
-import Utils.SquareRule;
+import Logic.RuleGenerator.SquareRulesGenerator;
+import Logic.Rule.SquareRule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

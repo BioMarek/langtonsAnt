@@ -1,7 +1,7 @@
 package Graphic.Components;
 
-import Logic.Ant;
-import Logic.SquareAnt;
+import Logic.Ant.Ant;
+import Logic.Ant.SquareAnt;
 import Utils.Colors;
 import Utils.Settings;
 import Utils.Util;

@@ -4,7 +4,7 @@ import Graphic.AntVisualization;
 import Graphic.Components.Background;
 import Graphic.Components.Cross;
 import Graphic.Components.SquareLegend;
-import Logic.SquareAnt;
+import Logic.Ant.SquareAnt;
 import Utils.Colors;
 import Utils.Settings;
 

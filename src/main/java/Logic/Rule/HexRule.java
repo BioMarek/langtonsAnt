@@ -1,4 +1,6 @@
-package Utils;
+package Logic.Rule;
+
+import Logic.HexMove;
 
 import java.awt.font.TextAttribute;
 import java.text.AttributedString;

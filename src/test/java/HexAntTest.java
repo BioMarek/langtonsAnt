@@ -1,6 +1,6 @@
-import Logic.HexAnt;
-import Utils.HexMove;
-import Utils.HexRule;
+import Logic.Ant.HexAnt;
+import Logic.HexMove;
+import Logic.Rule.HexRule;
 import Utils.Settings;
 import Utils.Util;
 import org.junit.jupiter.api.BeforeEach;

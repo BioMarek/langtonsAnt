@@ -3,10 +3,10 @@ package Graphic.Visualization;
 import Graphic.AntVisualization;
 import Graphic.Components.Background;
 import Graphic.Components.SquareLegend;
-import Logic.SquareAnt;
+import Logic.Ant.SquareAnt;
 import Utils.Colors;
-import Utils.Direction;
-import Utils.Position;
+import Logic.Direction;
+import Logic.Position;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;

@@ -1,5 +1,5 @@
-import Logic.SquareAnt;
-import Utils.SquareRule;
+import Logic.Ant.SquareAnt;
+import Logic.Rule.SquareRule;
 import Utils.Settings;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

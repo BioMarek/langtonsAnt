@@ -1,5 +1,5 @@
-import Logic.HexRuleGenerator;
-import Utils.HexMove;
+import Logic.HexMove;
+import Logic.RuleGenerator.HexRuleGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -45,8 +45,8 @@ public class HexRuleGeneratorTest {
 
     @Test
     void generateRule_worksCorrectly() {
-        hexRuleGenerator.intArray[0]=1;
-        hexRuleGenerator.intArray[1]=5;
+        hexRuleGenerator.intArray[0] = 1;
+        hexRuleGenerator.intArray[1] = 5;
         assertThat(hexRuleGenerator.next().rule, is(List.of(HexMove.R2, HexMove.L1)));
 
         hexRuleGenerator = new HexRuleGenerator(2);

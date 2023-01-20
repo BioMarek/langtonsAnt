@@ -1,6 +1,6 @@
-package Logic;
+package Logic.RuleGenerator;
 
-import Utils.Rule;
+import Logic.Rule.Rule;
 import Utils.Settings;
 
 import java.util.ArrayList;

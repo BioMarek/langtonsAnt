@@ -1,4 +1,4 @@
-package Utils;
+package Logic;
 
 public enum HexMove {
     N(0), R1(60), R2(120), U(180), L2(-120), L1(-60);

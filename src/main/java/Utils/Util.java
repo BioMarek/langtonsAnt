@@ -42,7 +42,15 @@ public class Util {
         return (originalSize % 2 == 0) ? originalSize : originalSize - 1;
     }
 
-    // TODO optimize
+    public static String formatTime(long durationInMillis) {
+        long millis = durationInMillis % 1000;
+        long second = (durationInMillis / 1000) % 60;
+        long minute = (durationInMillis / (1000 * 60)) % 60;
+        long hour = (durationInMillis / (1000 * 60 * 60)) % 24;
+
+        return String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
+    }
+
     public static int getHexWidth() {
         return (int) (Settings.HEX_SIDE_LEN * 1.7); // 17 when hexagon is 10
     }

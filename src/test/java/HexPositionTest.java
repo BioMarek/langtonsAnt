@@ -1,5 +1,5 @@
-import Utils.HexMove;
-import Utils.HexPosition;
+import Logic.HexMove;
+import Logic.HexPosition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

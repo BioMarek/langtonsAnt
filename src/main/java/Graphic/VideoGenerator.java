@@ -3,8 +3,8 @@ package Graphic;
 import Graphic.Visualization.AntExplanation;
 import Graphic.Visualization.AntGraphicFour;
 import Graphic.Visualization.AntGraphicSingle;
-import Logic.SquareAnt;
-import Utils.SquareRule;
+import Logic.Ant.SquareAnt;
+import Logic.Rule.SquareRule;
 import Utils.Settings;
 import com.squareup.gifencoder.GifEncoder;
 import com.squareup.gifencoder.ImageOptions;
@@ -50,7 +50,8 @@ public class VideoGenerator {
             System.out.println("max steps: " + squareAnt.steps + " skip: " + Settings.SKIP);
 
             squareAnt = new SquareAnt(Settings.SquareRULE);
-            antVisualization = new AntGraphicSingle(squareAnt);
+            antVisualization = new AntGraphicSingle();
+            ((AntGraphicSingle) antVisualization).squareAnt = squareAnt;
             createMP4();
         }
     }

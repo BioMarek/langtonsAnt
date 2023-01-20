@@ -1,6 +1,6 @@
-package Logic;
+package Logic.Ant;
 
-import Utils.Rule;
+import Logic.Rule.Rule;
 import Utils.Settings;
 
 public abstract class Ant {
@@ -33,4 +33,11 @@ public abstract class Ant {
     public abstract void nextMove();
 
     public abstract int ruleLength();
+
+    /**
+     * Determines whether rule that Ant just run should be saved as image. Only unique images should be saved.
+     *
+     * @return true if image is unique, false otherwise
+     */
+    public abstract boolean shouldBeSaved();
 }
