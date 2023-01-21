@@ -11,10 +11,6 @@ import Utils.Util;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 
-import static Utils.Util.getHexHeight;
-import static Utils.Util.getHexPositionShift;
-import static Utils.Util.getHexWidth;
-
 public class HexGraphicSingle implements AntVisualization {
     private Graphics2D graphics;
     public Ant ant;
@@ -29,7 +25,7 @@ public class HexGraphicSingle implements AntVisualization {
         this.hexLegend = new HexLegend();
         this.background = new Background();
 
-        hexWidth= Util.getHexWidth();
+        hexWidth = Util.getHexWidth();
         hexHeight = Util.getHexHeight();
         hexPositionShift = Util.getHexPositionShift();
     }

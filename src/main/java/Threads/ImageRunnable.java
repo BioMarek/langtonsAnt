@@ -76,7 +76,6 @@ public class ImageRunnable implements Runnable {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("--- not saving: " + rule);
             counter.getAndIncrement();
         }
     }
