@@ -66,7 +66,7 @@ public class HexAnt extends Ant {
 
     @Override
     public boolean shouldBeSaved() {
-        return usedTopColor && filledEnoughHexes() && calculateStandardDeviation(normalize(getDistribution())) > 0.09;
+        return usedTopColor && filledEnoughHexes() && calculateStandardDeviation(normalize(getDistribution())) > Settings.STD_LIMIT;
     }
 
     /**

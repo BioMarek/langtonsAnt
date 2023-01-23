@@ -23,7 +23,7 @@ public class Settings {
     /**
      * Settings for parallel threads image generation
      */
-    public static int RULES_LENGTH = 5;
+    public static int RULES_LENGTH = 9;
     public static String IMAGE_BASE_PATH = "./movies/";
     public static int THREADS = 6;
 
@@ -53,7 +53,8 @@ public class Settings {
      */
     public static int HEX_SIDE_LEN = 6;
     public static HexRule HEX_RULE = HexRule.hexagonalReferenceRules().get(1);
-    public static int HEXES_USED = 100;
+    public static int HEXES_USED = 700;
+    public static double STD_LIMIT = 0.09;
 
     public static void showExplanationFirstPartSettings() {
         Settings.SHOW_GRID = true;
@@ -108,6 +109,7 @@ public class Settings {
         Settings.GRID_WIDTH = 3000;
         Settings.GRID_HEIGHT = 2160;
         Settings.BACKGROUND_HEIGHT = 2160;
-        Settings.HEXES_USED = 700;
+        Settings.HEXES_USED = 1200;
+        Settings.STD_LIMIT = 0.1;
     }
 }

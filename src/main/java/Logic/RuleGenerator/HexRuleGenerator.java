@@ -7,6 +7,7 @@ import Utils.Settings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -83,6 +84,9 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
             }
             currentRuleString = getRuleString();
         }
+
+        // for longer rules we will calculate just few random rules, as interesting ones could be at the end of list partition
+        Collections.shuffle(generatedRules);
 
         if (rulesReturned > 12) {
             int forThread = (rulesReturned / Settings.THREADS) + 1;
