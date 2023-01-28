@@ -42,7 +42,7 @@ public class GridPanel extends JPanel implements ActionListener {
     public GridPanel() {
         this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
         this.setFocusable(true);
-        this.squareAnt = new SquareAnt(Settings.SquareRULE);
+        this.squareAnt = new SquareAnt(Settings.SQUARE_RULE);
 
         Settings.generateHexagonalGridSettings();
 
@@ -87,7 +87,7 @@ public class GridPanel extends JPanel implements ActionListener {
         this.paintAll(cg);
 
         try {
-            ImageIO.write(bImg, "png", new File("./images/panel_" + Settings.SquareRULE + ".png"));
+            ImageIO.write(bImg, "png", new File("./images/panel_" + Settings.SQUARE_RULE + ".png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

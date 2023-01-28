@@ -9,7 +9,7 @@ public class Settings {
      */
     public static int ALPHA = 200; // alpha of colors used in AntGraphic
     public static boolean SHOW_GRID = false;
-    public static SquareRule SquareRULE = new SquareRule("RL", 1, 1, 1);
+    public static SquareRule SQUARE_RULE = new SquareRule("RL", 1, 1, 1);
     public static int TIMER_DELAY = 100; // realtime animation delay between frames
     public static int SKIP = 100; // steps to skip between frames
     public static long MAX_MOVES = 50_000_000;
@@ -23,7 +23,7 @@ public class Settings {
     /**
      * Settings for parallel threads image generation
      */
-    public static int RULES_LENGTH = 18;
+    public static int RULES_LENGTH = 16;
     public static String IMAGE_BASE_PATH = "./movies/";
     public static int THREADS = 6;
 
@@ -55,7 +55,7 @@ public class Settings {
     public static HexRule HEX_RULE = HexRule.hexagonalReferenceRules().get(1);
     public static int HEXES_USED = 700;
     public static double STD_LIMIT = 0.09;
-    public static int RANDOM_RULES_LIMIT = 10000;
+    public static int RANDOM_RULES_LIMIT = 20000;
     public static boolean RANDOM_RULES = false;
 
     public static void showExplanationFirstPartSettings() {

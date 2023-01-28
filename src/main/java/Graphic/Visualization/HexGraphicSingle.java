@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 
 public class HexGraphicSingle implements AntVisualization {
+    private static final double HEXAGON_PI = 2 * Math.PI / 6;
     private Graphics2D graphics;
     public Ant ant;
     private final HexLegend hexLegend;
@@ -84,8 +85,8 @@ public class HexGraphicSingle implements AntVisualization {
     public void drawHexagon(int column, int row, int size) {
         Polygon p = new Polygon();
         for (int i = 0; i < 6; i++)
-            p.addPoint((int) (column + size * Math.sin(i * 2 * Math.PI / 6)),
-                    (int) (row + size * Math.cos(i * 2 * Math.PI / 6)));
+            p.addPoint((int) (column + size * Math.sin(i * HEXAGON_PI)),
+                    (int) (row + size * Math.cos(i * HEXAGON_PI)));
         graphics.fillPolygon(p);
     }
 }

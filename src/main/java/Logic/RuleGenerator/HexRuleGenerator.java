@@ -71,7 +71,6 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
         return new HexRule(result, 1, 1);
     }
 
-    // TODO test this, there seems to be few rules missing or some are not eliminated even when they should be
     @Override
     public List<List<Rule>> getAllRulesForThreads() {
         List<List<Rule>> result = new ArrayList<>();
@@ -89,9 +88,6 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
             }
         }
 
-        // for longer rules we will calculate just few random rules, as interesting ones could be at the end of list partition
-        Collections.shuffle(generatedRules);
-
         if (rulesReturned > 12) {
             int forThread = (rulesReturned / Settings.THREADS) + 1;
             int start = 0;
@@ -99,8 +95,7 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
             for (int i = 0; i < Settings.THREADS; i++) {
                 result.add(generatedRules.subList(start, end));
                 start += forThread;
-                end += forThread;
-                end = Math.min(end, rulesReturned);
+                end = Math.min(end + forThread, rulesReturned);
             }
         } else result.add(generatedRules);
 
