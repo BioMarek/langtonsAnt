@@ -43,13 +43,13 @@ public class VideoGenerator {
         for (SquareRule squareRule : interesting) {
             System.out.println("working on " + squareRule.rule);
             squareRule.setVariables();
-            SquareAnt squareAnt = new SquareAnt(Settings.SquareRULE);
+            SquareAnt squareAnt = new SquareAnt(Settings.SQUARE_RULE);
             squareAnt.allMoves(); // calculates number of moves in total
 
             Settings.SKIP = squareAnt.steps / Settings.VIDEO_NUM_IMAGES;
             System.out.println("max steps: " + squareAnt.steps + " skip: " + Settings.SKIP);
 
-            squareAnt = new SquareAnt(Settings.SquareRULE);
+            squareAnt = new SquareAnt(Settings.SQUARE_RULE);
             antVisualization = new AntGraphicSingle();
             ((AntGraphicSingle) antVisualization).squareAnt = squareAnt;
             createMP4();
@@ -86,7 +86,7 @@ public class VideoGenerator {
 
     public void generateExplanation() {
         Settings.showExplanationFirstPartSettings();
-        SquareAnt squareAnt = new SquareAnt(Settings.SquareRULE);
+        SquareAnt squareAnt = new SquareAnt(Settings.SQUARE_RULE);
         antVisualization = new AntExplanation(squareAnt);
         createMP4();
     }
@@ -94,7 +94,7 @@ public class VideoGenerator {
     private void createMP4() {
         ImageIterator imageIterator = new ImageIterator(antVisualization);
         try {
-            SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File(Settings.VIDEO_BASE_PATH + Settings.SquareRULE + ".mp4")),
+            SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File(Settings.VIDEO_BASE_PATH + Settings.SQUARE_RULE + ".mp4")),
                     Rational.R(Settings.VIDEO_FPS, 1), Format.MOV, Codec.PNG, null);
             while (imageIterator.hasNext()) {
                 encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(imageIterator.next()));
@@ -124,7 +124,7 @@ public class VideoGenerator {
      */
     @Deprecated
     public void createGif() {
-        try (FileOutputStream outputStream = new FileOutputStream(Settings.VIDEO_BASE_PATH + Settings.SquareRULE + ".gif")) {
+        try (FileOutputStream outputStream = new FileOutputStream(Settings.VIDEO_BASE_PATH + Settings.SQUARE_RULE + ".gif")) {
             GifEncoder encoder = new GifEncoder(outputStream, 1413, 1080, 1);
             ImageOptions options = new ImageOptions();
             options.setDelay(35, TimeUnit.MILLISECONDS);
@@ -158,12 +158,12 @@ public class VideoGenerator {
 
     @Deprecated
     public void saveImages() {
-        new File("gifs/" + Settings.SquareRULE).mkdirs();
+        new File("gifs/" + Settings.SQUARE_RULE).mkdirs();
         List<BufferedImage> bufferedImages = createImages();
 
         for (int i = 0; i < bufferedImages.size(); i++) {
             try {
-                ImageIO.write(bufferedImages.get(i), "png", new File("gifs/" + Settings.SquareRULE + "/" + String.format("%03d", i) + "_" + Settings.SquareRULE + ".png"));
+                ImageIO.write(bufferedImages.get(i), "png", new File("gifs/" + Settings.SQUARE_RULE + "/" + String.format("%03d", i) + "_" + Settings.SQUARE_RULE + ".png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }

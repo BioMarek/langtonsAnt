@@ -52,7 +52,7 @@ public class SquareRule extends Rule {
     }
 
     public void setVariables() {
-        Settings.SquareRULE = this;
+        Settings.SQUARE_RULE = this;
         Settings.SIZE_OF_SQUARE = sizeOfSquare;
     }
 

@@ -6,6 +6,9 @@ import Logic.Rule.Rule;
 import Utils.Settings;
 import Utils.Util;
 
+import static Utils.Util.calculateStandardDeviation;
+import static Utils.Util.normalize;
+
 import java.util.Arrays;
 
 public class HexAnt extends Ant {
@@ -63,7 +66,7 @@ public class HexAnt extends Ant {
 
     @Override
     public boolean shouldBeSaved() {
-        return usedTopColor && filledEnoughHexes();
+        return usedTopColor && filledEnoughHexes() && calculateStandardDeviation(normalize(getDistribution())) > Settings.STD_LIMIT;
     }
 
     /**
@@ -78,5 +81,16 @@ public class HexAnt extends Ant {
             }
         }
         return filled > Settings.HEXES_USED;
+    }
+
+    public int[] getDistribution() {
+        int[] result = new int[Settings.RULES_LENGTH];
+        for (int[] row : grid) {
+            for (int column = 0; column < grid.length; column++) {
+                if (row[column] != -1)
+                    result[row[column]]++;
+            }
+        }
+        return result;
     }
 }

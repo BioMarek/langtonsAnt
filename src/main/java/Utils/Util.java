@@ -1,5 +1,7 @@
 package Utils;
 
+import java.util.Arrays;
+
 public class Util {
 
     /**
@@ -61,5 +63,31 @@ public class Util {
 
     public static int getHexPositionShift() {
         return getHexWidth() / 2; // 15 when hexagon is 10
+    }
+
+    public static double calculateStandardDeviation(double[] array) {
+        double sum = 0.0;
+        for (double i : array) {
+            sum += i;
+        }
+
+        int length = array.length;
+        double mean = sum / length;
+
+        double standardDeviation = 0.0;
+        for (double num : array) {
+            standardDeviation += Math.pow(num - mean, 2);
+        }
+
+        return Math.sqrt(standardDeviation / length);
+    }
+
+    public static double[] normalize(int[] array) {
+        double[] result = new double[Settings.RULES_LENGTH];
+        double max = Arrays.stream(array).max().getAsInt();
+        for (int i = 0; i < array.length; i++)
+            result[i] = array[i] / max;
+
+        return result;
     }
 }
