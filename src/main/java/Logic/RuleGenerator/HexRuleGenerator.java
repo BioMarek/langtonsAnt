@@ -11,15 +11,18 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 /**
  * moves: N (no change), R1 (60° clockwise), R2 (120° clockwise), U (180°), L2 (120° counter-clockwise), L1 (60° counter-clockwise)
  */
 public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
+    private static final Random random = new Random();
+    private final Set<String> mirroredRules = new HashSet<>();
+    private final String lastRule;
+    private String currentRuleString;
     public int[] intArray;
-    public Set<String> mirroredRules = new HashSet<>();
-    public String lastRule;
 
     public HexRuleGenerator(int rulesLength) {
         if (rulesLength < 2) {
@@ -73,16 +76,17 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
     public List<List<Rule>> getAllRulesForThreads() {
         List<List<Rule>> result = new ArrayList<>();
         List<Rule> generatedRules = new ArrayList<>();
-        String currentRuleString = getRuleString();
 
-        while (!currentRuleString.equals(lastRule)) {
-            increaseByOne();
-            if (!mirroredRules.contains(currentRuleString)) {
-                mirroredRules.add(getMirroredString());
-                generatedRules.add(generateRule());
-                rulesReturned++;
+        if (Settings.RANDOM_RULES) {
+            for (int i = 0; i < Settings.RANDOM_RULES_LIMIT; i++) {
+                generateRandomRule();
+                updateSets(generatedRules);
             }
-            currentRuleString = getRuleString();
+        } else {
+            while (!currentRuleString.equals(lastRule)) {
+                increaseByOne();
+                updateSets(generatedRules);
+            }
         }
 
         // for longer rules we will calculate just few random rules, as interesting ones could be at the end of list partition
@@ -103,7 +107,16 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
         return result;
     }
 
-    public String getMirroredString() {
+    private void updateSets(List<Rule> generatedRules) {
+        if (!mirroredRules.contains(currentRuleString)) {
+            mirroredRules.add(getMirroredString());
+            generatedRules.add(generateRule());
+            rulesReturned++;
+        }
+        currentRuleString = getRuleString();
+    }
+
+    private String getMirroredString() {
         StringBuilder result = new StringBuilder();
         for (int i : intArray) {
             switch (i) {
@@ -117,11 +130,17 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
         return result.toString();
     }
 
-    public String getRuleString() {
+    private String getRuleString() {
         StringBuilder result = new StringBuilder();
         for (int i : intArray) {
             result.append(i);
         }
         return result.toString();
+    }
+
+    private void generateRandomRule() {
+        for (int i = 0; i < Settings.RULES_LENGTH; i++) {
+            intArray[i] = random.nextInt(6);
+        }
     }
 }
