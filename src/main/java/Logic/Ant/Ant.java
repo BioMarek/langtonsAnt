@@ -4,6 +4,7 @@ import Logic.Rule.Rule;
 import Utils.Settings;
 
 public abstract class Ant {
+    public String ruleName;
     public Rule rule;
     public int[][] grid;
     public int gridColumns;

@@ -37,7 +37,7 @@ public class HexGraphicSingle implements AntVisualization {
     public void drawImage(Graphics2D graphics) {
         this.graphics = graphics;
         background.graphics = graphics;
-        background.setBackground(false);
+        background.setBackground(true);
         drawGrid();
     }
 

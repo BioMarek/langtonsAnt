@@ -111,9 +111,38 @@ public class Settings {
     public static void generateHexagonalGridSettingsImages() {
         Settings.GRID_WIDTH = 3000;
         Settings.GRID_HEIGHT = 2160;
+        Settings.BACKGROUND_WIDTH = 3000;
         Settings.BACKGROUND_HEIGHT = 2160;
         Settings.HEXES_USED = 1500;
         Settings.STD_LIMIT = 0.2;
         Settings.RANDOM_RULES = true;
+    }
+
+    public static void generateHexInterestingSettings() {
+        int multiplier = 4;
+        Settings.HEX_SIDE_LEN = 4;
+        Settings.GRID_WIDTH = 1500 * multiplier;
+        Settings.GRID_HEIGHT = 1080 * multiplier;
+        Settings.BACKGROUND_WIDTH = 1920 * multiplier;
+        Settings.BACKGROUND_HEIGHT = 1080 * multiplier;
+        Settings.HEXES_USED = 0;
+        Settings.STD_LIMIT = 0;
+
+        Settings.VIDEO_NUM_IMAGES = 240;
+        Settings.LEGEND_START_X = 1500 * multiplier;
+    }
+
+    public static void generateHexHighwaysSettings() {
+        int multiplier = 3;
+        Settings.HEX_SIDE_LEN = 4;
+        Settings.GRID_WIDTH = 1500 * multiplier;
+        Settings.GRID_HEIGHT = 1080 * multiplier;
+        Settings.BACKGROUND_WIDTH = 1920 * multiplier;
+        Settings.BACKGROUND_HEIGHT = 1080 * multiplier;
+        Settings.HEXES_USED = 0;
+        Settings.STD_LIMIT = 0;
+
+        Settings.VIDEO_NUM_IMAGES = 180;
+        Settings.LEGEND_START_X = 1500 * multiplier;
     }
 }

@@ -1,6 +1,7 @@
 package Logic.Rule;
 
 import Logic.HexMove;
+import Utils.Settings;
 
 import java.awt.font.TextAttribute;
 import java.text.AttributedString;
@@ -15,6 +16,12 @@ public class HexRule extends Rule {
         this.rule = rule;
         this.slowdownSteps = slowdownSteps;
         this.slowdownModifier = slowdownModifier;
+    }
+
+    public HexRule(String rule) {
+        this.rule = stringToMoves(rule);
+        this.slowdownSteps = 1;
+        this.slowdownModifier = 1;
     }
 
     @Override
@@ -55,10 +62,130 @@ public class HexRule extends Rule {
     }
 
     @Override
+    public void setVariables() {
+        Settings.HEX_RULE = this;
+    }
+
+    @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (HexMove hexMove : rule)
             stringBuilder.append(hexMove.toString());
         return stringBuilder.toString();
+    }
+
+    private List<HexMove> stringToMoves(String rule) {
+        List<HexMove> result = new ArrayList<>();
+        while (rule.length() > 0) {
+            String shortMove = rule.substring(0, 1);
+            String longMove = rule.substring(0, Math.min(2, rule.length()));
+            if (substringToMove(shortMove) != null) {
+                result.add((substringToMove(shortMove)));
+                rule = rule.substring(1);
+            } else {
+                result.add((substringToMove(longMove)));
+                rule = rule.substring(2);
+            }
+        }
+
+        return result;
+    }
+
+    private HexMove substringToMove(String substring) {
+        switch (substring) {
+            case "N" -> {
+                return HexMove.N;
+            }
+            case "R1" -> {
+                return HexMove.R1;
+            }
+            case "R2" -> {
+                return HexMove.R2;
+            }
+            case "U" -> {
+                return HexMove.U;
+            }
+            case "L2" -> {
+                return HexMove.L2;
+            }
+            case "L1" -> {
+                return HexMove.L1;
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
+
+    public static List<HexRule> getInteresting() {
+        Settings.generateHexInterestingSettings();
+        List<HexRule> interesting = new ArrayList<>();
+        interesting.add(new HexRule("L1R2L1L2L1R1NUL2L1L1R2R1R1UR2"));
+
+
+        return interesting;
+    }
+
+    public static List<HexRule> getToHighRes() {
+        Settings.generateHexInterestingSettings();
+        List<HexRule> interesting = new ArrayList<>();
+        interesting.add(new HexRule("L1L2NL2L1L1R2"));
+        interesting.add(new HexRule("L1L2NL2L1UR2"));
+        interesting.add(new HexRule("L1L2R1NUL2R1"));
+        interesting.add(new HexRule("L1R2L1L2L1R1NUL2L1L1R2R1R1UR2"));
+        interesting.add(new HexRule("L1R2L1R2L1L2UL1R1L2R1L1L2NR2L2L2"));
+        interesting.add(new HexRule("L1R2NL2UUR2UR2NL2L2NR2L1UN"));
+        interesting.add(new HexRule("L1R2UUUUUU"));
+        interesting.add(new HexRule("L1UL2L2R1NUR1"));
+        interesting.add(new HexRule("L1UL2UL1UL1R1"));
+        interesting.add(new HexRule("L1UUL2R2NR2"));
+        interesting.add(new HexRule("L2L1UL2L2R1NU"));
+        interesting.add(new HexRule("L2L2L2NUL1"));
+        interesting.add(new HexRule("L2NNL1L2L1"));
+        interesting.add(new HexRule("L2R2R1UUR1L2R2"));
+        interesting.add(new HexRule("L2R2R2L2UL2R2UR2"));
+        interesting.add(new HexRule("R1L1UR2R2UU"));
+        interesting.add(new HexRule("R1L2R1L1UR2R1R2"));
+        interesting.add(new HexRule("R1L2R1R2R2NL2R2"));
+        interesting.add(new HexRule("R1R1NR1R2N"));
+        interesting.add(new HexRule("R1R1NR2R1N"));
+        interesting.add(new HexRule("R1R2L1R1NU"));
+        interesting.add(new HexRule("R1UR2L2L2R1NU"));
+        interesting.add(new HexRule("R2L2R2L1R2UU"));
+        interesting.add(new HexRule("R2NNR1R2R1"));
+        interesting.add(new HexRule("R2R1L2R2R1UR2"));
+        interesting.add(new HexRule("R2R1UNR1R1R1R2"));
+        interesting.add(new HexRule("R2R2R2NUR1"));
+        interesting.add(new HexRule("R2R2UL2R2"));
+
+        return interesting;
+    }
+
+    public static List<HexRule> getHighways() {
+        Settings.generateHexInterestingSettings();
+        List<HexRule> interesting = new ArrayList<>();
+        interesting.add(new HexRule("L1R2L1R2NR2UR1"));
+        interesting.add(new HexRule("L2L2L2UUL1R1"));
+        interesting.add(new HexRule("L2UR1L2UR1R2R2"));
+        interesting.add(new HexRule("R1NR2R2R1L1NR2"));
+        interesting.add(new HexRule("UR2R2R1L2R2UR2"));
+        interesting.add(new HexRule("L1L2L2L2UNL1R1"));
+        interesting.add(new HexRule("L1R2UUNL2R1L1L1L1R1NL2NL1"));
+        interesting.add(new HexRule("L2L2UL2R1L2L1R1"));
+        interesting.add(new HexRule("L2R2R2UR1L2UR1"));
+        interesting.add(new HexRule("L2UR2L2UL2R1U"));
+        interesting.add(new HexRule("R1L2UR2UR2NR1R2L2NUR2L1R2NR2"));
+        interesting.add(new HexRule("R1UR2NL2R1UR2R2"));
+        interesting.add(new HexRule("R2L1L2R1R1UR1"));
+        interesting.add(new HexRule("R2R2R2UL2UR2U"));
+        interesting.add(new HexRule("R2UUNNR2NR1"));
+        interesting.add(new HexRule("UL1UL1UR2L1L2R2"));
+        interesting.add(new HexRule("L1R1UUUUR2R2NL1U"));
+        interesting.add(new HexRule("L2R2UNL2R2R2"));
+        interesting.add(new HexRule("R1L1R1UL1R1UU"));
+        interesting.add(new HexRule("R1R2R2R1L1L2R2R1R2"));
+        interesting.add(new HexRule("R2L2UL2R2"));
+
+        return interesting;
     }
 }
