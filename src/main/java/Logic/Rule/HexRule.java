@@ -1,6 +1,7 @@
 package Logic.Rule;
 
 import Logic.HexMove;
+import Utils.Settings;
 
 import java.awt.font.TextAttribute;
 import java.text.AttributedString;
@@ -55,10 +56,23 @@ public class HexRule extends Rule {
     }
 
     @Override
+    public void setVariables() {
+        Settings.HEX_RULE = this;
+    }
+
+    @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (HexMove hexMove : rule)
             stringBuilder.append(hexMove.toString());
         return stringBuilder.toString();
+    }
+
+    public static List<HexRule> getInteresting() {
+        Settings.generateHexInterestingSettings();
+        List<HexRule> interesting = new ArrayList<>();
+        interesting.add(new HexRule(List.of(HexMove.L1, HexMove.L2, HexMove.N, HexMove.U, HexMove.U, HexMove.R2, HexMove.U, HexMove.U), 1, 1));
+
+        return interesting;
     }
 }

@@ -1,4 +1,5 @@
 import Graphic.VideoGenerator;
+import Logic.Rule.HexRule;
 import Logic.Rule.SquareRule;
 import Logic.RuleGenerator.HexRuleGenerator;
 import Logic.RuleGenerator.SquareRulesGenerator;
@@ -12,13 +13,13 @@ public class Main {
 
 //        new GridFrame();  // Runs one rule based on setting realtime
 
-        Settings.generateHexagonalGridSettingsImages();
-        ImageParallelWorker imageParallelWorker = new ImageParallelWorker();
-        SquareRulesGenerator squareRulesGenerator = new SquareRulesGenerator(Settings.RULES_LENGTH);
-        HexRuleGenerator hexRuleGenerator = new HexRuleGenerator(Settings.RULES_LENGTH);
-        imageParallelWorker.drawAllRulesInParallel(hexRuleGenerator);
+//        Settings.generateHexagonalGridSettingsImages();
+//        ImageParallelWorker imageParallelWorker = new ImageParallelWorker();
+//        SquareRulesGenerator squareRulesGenerator = new SquareRulesGenerator(Settings.RULES_LENGTH);
+//        HexRuleGenerator hexRuleGenerator = new HexRuleGenerator(Settings.RULES_LENGTH);
+//        imageParallelWorker.drawAllRulesInParallel(hexRuleGenerator);
 
-//        VideoGenerator videoGenerator = new VideoGenerator();
-//        videoGenerator.generateInteresting(SquareRule.getFour());
+        VideoGenerator videoGenerator = new VideoGenerator();
+        videoGenerator.generateInterestingHex(HexRule.getInteresting());
     }
 }

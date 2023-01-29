@@ -3,7 +3,11 @@ package Graphic;
 import Graphic.Visualization.AntExplanation;
 import Graphic.Visualization.AntGraphicFour;
 import Graphic.Visualization.AntGraphicSingle;
+import Graphic.Visualization.HexGraphicSingle;
+import Logic.Ant.HexAnt;
 import Logic.Ant.SquareAnt;
+import Logic.Rule.HexRule;
+import Logic.Rule.Rule;
 import Logic.Rule.SquareRule;
 import Utils.Settings;
 import com.squareup.gifencoder.GifEncoder;
@@ -29,6 +33,7 @@ import java.util.concurrent.TimeUnit;
 public class VideoGenerator {
     private AntVisualization antVisualization;
     private final BufferedImage bImg;
+    private String ruleName;
 
     public VideoGenerator() {
         bImg = new BufferedImage(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -52,6 +57,30 @@ public class VideoGenerator {
             squareAnt = new SquareAnt(Settings.SQUARE_RULE);
             antVisualization = new AntGraphicSingle();
             ((AntGraphicSingle) antVisualization).squareAnt = squareAnt;
+            createMP4();
+        }
+    }
+
+    /**
+     * Works but cannot be played in VLC unless reencoded.
+     *
+     * @param interesting {@link Rule} from which videos will be encoded
+     */
+    public void generateInterestingHex(List<HexRule> interesting) {
+        for (HexRule hexRule : interesting) {
+            System.out.println("working on " + hexRule.rule);
+            hexRule.setVariables();
+
+            HexAnt hexAnt = new HexAnt(hexRule);
+            hexAnt.allMoves(); // calculates number of moves in total
+
+            Settings.SKIP = hexAnt.steps / Settings.VIDEO_NUM_IMAGES;
+            System.out.println("max steps: " + hexAnt.steps + " skip: " + Settings.SKIP);
+
+            hexAnt = new HexAnt(hexRule);
+            antVisualization = new HexGraphicSingle();
+            ((HexGraphicSingle) antVisualization).ant = hexAnt;
+            ruleName = hexAnt.rule.toString();
             createMP4();
         }
     }
@@ -94,7 +123,7 @@ public class VideoGenerator {
     private void createMP4() {
         ImageIterator imageIterator = new ImageIterator(antVisualization);
         try {
-            SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File(Settings.VIDEO_BASE_PATH + Settings.SQUARE_RULE + ".mp4")),
+            SequenceEncoder encoder = new SequenceEncoder(NIOUtils.writableChannel(new File(Settings.VIDEO_BASE_PATH + ruleName + ".mp4")),
                     Rational.R(Settings.VIDEO_FPS, 1), Format.MOV, Codec.PNG, null);
             while (imageIterator.hasNext()) {
                 encoder.encodeNativeFrame(AWTUtil.fromBufferedImageRGB(imageIterator.next()));
@@ -124,7 +153,7 @@ public class VideoGenerator {
      */
     @Deprecated
     public void createGif() {
-        try (FileOutputStream outputStream = new FileOutputStream(Settings.VIDEO_BASE_PATH + Settings.SQUARE_RULE + ".gif")) {
+        try (FileOutputStream outputStream = new FileOutputStream(Settings.VIDEO_BASE_PATH + ruleName + ".gif")) {
             GifEncoder encoder = new GifEncoder(outputStream, 1413, 1080, 1);
             ImageOptions options = new ImageOptions();
             options.setDelay(35, TimeUnit.MILLISECONDS);
@@ -163,7 +192,7 @@ public class VideoGenerator {
 
         for (int i = 0; i < bufferedImages.size(); i++) {
             try {
-                ImageIO.write(bufferedImages.get(i), "png", new File("gifs/" + Settings.SQUARE_RULE + "/" + String.format("%03d", i) + "_" + Settings.SQUARE_RULE + ".png"));
+                ImageIO.write(bufferedImages.get(i), "png", new File("movies/" + Settings.SQUARE_RULE + "/" + String.format("%03d", i) + "_" + Settings.SQUARE_RULE + ".png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
