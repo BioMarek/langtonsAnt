@@ -119,8 +119,8 @@ public class Settings {
     }
 
     public static void generateHexInterestingSettings() {
-        int multiplier = 6;
-        Settings.HEX_SIDE_LEN = 8;
+        int multiplier = 4;
+        Settings.HEX_SIDE_LEN = 4;
         Settings.GRID_WIDTH = 1500 * multiplier;
         Settings.GRID_HEIGHT = 1080 * multiplier;
         Settings.BACKGROUND_WIDTH = 1920 * multiplier;

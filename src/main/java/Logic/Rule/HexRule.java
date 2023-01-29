@@ -7,6 +7,7 @@ import java.awt.font.TextAttribute;
 import java.text.AttributedString;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class HexRule extends Rule {
     // TODO unify HexRule nad Rule
@@ -16,6 +17,12 @@ public class HexRule extends Rule {
         this.rule = rule;
         this.slowdownSteps = slowdownSteps;
         this.slowdownModifier = slowdownModifier;
+    }
+
+    public HexRule(String rule) {
+        this.rule = stringToMoves(rule);
+        this.slowdownSteps = 1;
+        this.slowdownModifier = 1;
     }
 
     @Override
@@ -68,10 +75,54 @@ public class HexRule extends Rule {
         return stringBuilder.toString();
     }
 
+    private List<HexMove> stringToMoves(String rule) {
+        List<HexMove> result = new ArrayList<>();
+        while (rule.length() > 0) {
+            String shortMove = rule.substring(0, 1);
+            String longMove = rule.substring(0, Math.min(2, rule.length()));
+            if (substringToMove(shortMove) != null) {
+                result.add((substringToMove(shortMove)));
+                rule = rule.substring(1);
+            } else {
+                result.add((substringToMove(longMove)));
+                rule = rule.substring(2);
+            }
+        }
+
+        return result;
+    }
+
+    private HexMove substringToMove(String substring) {
+        switch (substring) {
+            case "N" -> {
+                return HexMove.N;
+            }
+            case "R1" -> {
+                return HexMove.R1;
+            }
+            case "R2" -> {
+                return HexMove.R2;
+            }
+            case "U" -> {
+                return HexMove.U;
+            }
+            case "L2" -> {
+                return HexMove.L2;
+            }
+            case "L1" -> {
+                return HexMove.L1;
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
+
     public static List<HexRule> getInteresting() {
         Settings.generateHexInterestingSettings();
         List<HexRule> interesting = new ArrayList<>();
-        interesting.add(new HexRule(List.of(HexMove.L1, HexMove.L2, HexMove.N, HexMove.U, HexMove.U, HexMove.R2, HexMove.U, HexMove.U), 1, 1));
+//        interesting.add(new HexRule(List.of(HexMove.L1, HexMove.L2, HexMove.N, HexMove.U, HexMove.U, HexMove.R2, HexMove.U, HexMove.U), 1, 1));
+        interesting.add(new HexRule("R1R1UR1R2NU"));
 
         return interesting;
     }
