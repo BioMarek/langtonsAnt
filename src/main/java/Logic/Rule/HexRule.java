@@ -162,7 +162,7 @@ public class HexRule extends Rule {
     }
 
     public static List<HexRule> getHighways() {
-        Settings.generateHexInterestingSettings();
+        Settings.generateHexHighwaysSettings();
         List<HexRule> interesting = new ArrayList<>();
         interesting.add(new HexRule("L1R2L1R2NR2UR1"));
         interesting.add(new HexRule("L2L2L2UUL1R1"));

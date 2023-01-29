@@ -133,7 +133,7 @@ public class Settings {
     }
 
     public static void generateHexHighwaysSettings() {
-        int multiplier = 3;
+        int multiplier = 2;
         Settings.HEX_SIDE_LEN = 4;
         Settings.GRID_WIDTH = 1500 * multiplier;
         Settings.GRID_HEIGHT = 1080 * multiplier;
