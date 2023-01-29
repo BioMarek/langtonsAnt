@@ -131,4 +131,18 @@ public class Settings {
         Settings.VIDEO_NUM_IMAGES = 240;
         Settings.LEGEND_START_X = 1500 * multiplier;
     }
+
+    public static void generateHexHighwaysSettings() {
+        int multiplier = 3;
+        Settings.HEX_SIDE_LEN = 4;
+        Settings.GRID_WIDTH = 1500 * multiplier;
+        Settings.GRID_HEIGHT = 1080 * multiplier;
+        Settings.BACKGROUND_WIDTH = 1920 * multiplier;
+        Settings.BACKGROUND_HEIGHT = 1080 * multiplier;
+        Settings.HEXES_USED = 0;
+        Settings.STD_LIMIT = 0;
+
+        Settings.VIDEO_NUM_IMAGES = 180;
+        Settings.LEGEND_START_X = 1500 * multiplier;
+    }
 }
