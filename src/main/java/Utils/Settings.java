@@ -52,7 +52,7 @@ public class Settings {
      * Settings for hexagonal grid
      */
     public static int HEX_SIDE_LEN = 6;
-    public static HexRule HEX_RULE = HexRule.hexagonalReferenceRules().get(1);
+    public static HexRule HEX_RULE = new HexRule("R1L2NR2UL1UR1R1UNNL1R1UL2L2R2");
     public static int HEXES_USED = 700;
     public static double STD_LIMIT = 0.09;
     public static int RANDOM_RULES_LIMIT = 20000;

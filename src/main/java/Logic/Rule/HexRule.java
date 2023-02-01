@@ -50,7 +50,7 @@ public class HexRule extends Rule {
     public AttributedString getAttributeString(int fontUnit) {
         String translatedRule = toString();
         AttributedString attributedString = new AttributedString(translatedRule);
-        attributedString.addAttribute(TextAttribute.SIZE, fontUnit * 1.2);
+        attributedString.addAttribute(TextAttribute.SIZE, fontUnit * 1.1);
         attributedString.addAttribute(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD, 0, translatedRule.length());
 
         for (int i = 0; i < translatedRule.length(); i++) {
