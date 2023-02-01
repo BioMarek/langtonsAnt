@@ -112,24 +112,24 @@ public class HexLegend {
 
     private void drawDownArrow(int x, int y) {
         graphics.setColor(Colors.TEXT.getColor());
-        graphics.drawLine(x, y + 15, x - 10, y);
-        graphics.drawLine(x, y + 15, x + 10, y);
+        graphics.drawLine(x, y + 15 * Settings.HEX_MULTIPLIER, x - 10 * Settings.HEX_MULTIPLIER, y);
+        graphics.drawLine(x, y + 15 * Settings.HEX_MULTIPLIER, x + 10 * Settings.HEX_MULTIPLIER, y);
     }
 
     private void drawUpArrow(int x, int y) {
         graphics.setColor(Colors.TEXT.getColor());
-        graphics.drawLine(x, y - 15, x - 10, y);
-        graphics.drawLine(x, y - 15, x + 10, y);
+        graphics.drawLine(x, y - 15 * Settings.HEX_MULTIPLIER, x - 10 * Settings.HEX_MULTIPLIER, y);
+        graphics.drawLine(x, y - 15 * Settings.HEX_MULTIPLIER, x + 10 * Settings.HEX_MULTIPLIER, y);
     }
 
     private void drawRightArrow(int x, int y) {
-        graphics.drawLine(x + 20, y, x, y + 10);
-        graphics.drawLine(x + 20, y, x, y - 10);
+        graphics.drawLine(x + 20 * Settings.HEX_MULTIPLIER, y, x, y + 10 * Settings.HEX_MULTIPLIER);
+        graphics.drawLine(x + 20 * Settings.HEX_MULTIPLIER, y, x, y - 10 * Settings.HEX_MULTIPLIER);
     }
 
     private void drawLeftArrow(int x, int y) {
-        graphics.drawLine(x, y, x + 20, y + 10);
-        graphics.drawLine(x, y, x + 20, y - 10);
+        graphics.drawLine(x, y, x + 20 * Settings.HEX_MULTIPLIER, y + 10 * Settings.HEX_MULTIPLIER);
+        graphics.drawLine(x, y, x + 20 * Settings.HEX_MULTIPLIER, y - 10 * Settings.HEX_MULTIPLIER);
     }
 
     private void drawInnerLeftArrow(int x, int y) {
