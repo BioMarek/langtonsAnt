@@ -36,7 +36,8 @@ public class HexLegend {
         graphics.drawString(hexAnt.rule.getAttributeString(fontUnit).getIterator(), Settings.LEGEND_START_X + (int) (fontUnit * 4.5), fontUnit * 2);
         graphics.drawString("Steps: " + Util.numberFormatter(hexAnt.steps), Settings.LEGEND_START_X + fontUnit, fontUnit * 4);
 
-        graphics.setStroke(new BasicStroke(3f));
+
+        graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
         graphics.drawLine(Settings.LEGEND_START_X, 0, Settings.LEGEND_START_X, Settings.BACKGROUND_HEIGHT);
     }
 
@@ -83,10 +84,8 @@ public class HexLegend {
     }
 
     private void drawFillHex(int x, int y, int i) {
-
         int squareSize = Settings.BACKGROUND_HEIGHT / 35;
         int fillSquareSize =  (int) (squareSize * 0.875);
-//        x = x + 20;
 
         // text background for outline
         Polygon hexagon = getHexagon(x, y, squareSize);
