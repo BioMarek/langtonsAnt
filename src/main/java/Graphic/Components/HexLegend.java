@@ -61,14 +61,14 @@ public class HexLegend {
         for (int i = 0; i < ruleHalf; i++) {
             if (i != ruleHalf - 1)
                 drawDownArrow(Settings.LEGEND_START_X + squareSize * 7 / 2, i * gap + squareSize * 10 / 2);
-            drawFillHex(Settings.LEGEND_START_X + squareSize * 3, i * gap + topPadding, i);
+            drawFillHex((int) (Settings.LEGEND_START_X + squareSize * 3.5), i * gap + topPadding, i);
             drawLegendInnerArrows(i, squareSize, 3.3, false);
         }
 
         for (int i = ruleHalf; i < hexAnt.ruleLength(); i++) {
             if (i != hexAnt.ruleLength() - 1)
                 drawUpArrow(Settings.LEGEND_START_X + squareSize * 13 / 2, (i - ruleHalf) * gap + squareSize * 10 / 2);
-            drawFillHex(Settings.LEGEND_START_X + squareSize * 6, (i - ruleHalf) * gap + topPadding, i);
+            drawFillHex((int) (Settings.LEGEND_START_X + squareSize * 6.5), (i - ruleHalf) * gap + topPadding, i);
             drawLegendInnerArrows(i - ruleHalf, squareSize, 6.3, true);
         }
     }
@@ -83,9 +83,10 @@ public class HexLegend {
     }
 
     private void drawFillHex(int x, int y, int i) {
-        x = x + 20;
+
         int squareSize = Settings.BACKGROUND_HEIGHT / 35;
-        int fillSquareSize = squareSize - 4;
+        int fillSquareSize =  (int) (squareSize * 0.875);
+//        x = x + 20;
 
         // text background for outline
         Polygon hexagon = getHexagon(x, y, squareSize);
