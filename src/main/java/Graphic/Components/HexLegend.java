@@ -82,6 +82,10 @@ public class HexLegend {
                     drawInnerR1Arrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 3.9));
             case "L1" ->
                     drawInnerL1Arrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 3.9));
+            case "N" ->
+                    drawInnerNArrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 3.9));
+            case "U" ->
+                    drawInnerUArrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 3.9));
         }
     }
 
@@ -157,12 +161,22 @@ public class HexLegend {
         graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
     }
 
-    private void drawInnerRightArrow(int x, int y) {
-        graphics.setStroke(new BasicStroke(2f));
-        graphics.draw(new Arc2D.Double(x, y, 20, 20, 45, 225, Arc2D.OPEN));
-        graphics.drawLine(x + 19, y + 1, x + 10, y - 6);
-        graphics.drawLine(x + 18, y + 1, x + 9, y + 6);
-        graphics.setStroke(new BasicStroke(3f));
+    private void drawInnerNArrow(int x, int y) {
+        graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
+        graphics.drawLine(x - 2, y + 5, x + 21, y + 5);
+        graphics.drawLine(x + 9, y + 11, x + 21, y + 5);
+        graphics.drawLine(x + 9, y - 1, x + 21, y + 5);
+        graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
+    }
+
+    private void drawInnerUArrow(int x, int y) {
+        graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
+        graphics.drawLine(x, y, x + 8, y);
+        graphics.drawLine(x, y + 15, x + 8, y + 15);
+        graphics.draw(new Arc2D.Double(x, y, 20, 15, -90, 180, Arc2D.OPEN));
+        graphics.drawLine(x, y, x + 12, y - 6);
+        graphics.drawLine(x, y, x + 12, y + 6);
+        graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
     }
 
     public Polygon getHexagon(int column, int row, int size) {
