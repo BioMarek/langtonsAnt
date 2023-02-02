@@ -149,19 +149,21 @@ public class HexLegend {
 
     private void drawInnerR1Arrow(int x, int y) {
         graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
-        graphics.drawLine(x - 2, y + 5, x + 8, y + 5);
-        graphics.draw(new Arc2D.Double(x - 2, y + 5, 20, 20, 0, 80, Arc2D.OPEN));
-        graphics.drawLine(x + 19, y + 16, x + 21, y + 5);
-        graphics.drawLine(x + 19, y + 16, x + 7, y + 11);
+        graphics.drawLine(x - 2, y - 5, x + 7, y - 5);
+        graphics.draw(new Arc2D.Double(x - 3, y - 5, 20, 15, 90, -80, Arc2D.OPEN));
+        graphics.drawLine(x + 16, y + 2, x + 16, y + 13);
+        graphics.drawLine(x + 16, y + 12, x + 22, y - 1);
+        graphics.drawLine(x + 16, y + 12, x + 9, y + 1);
         graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
     }
 
     private void drawInnerL1Arrow(int x, int y) {
         graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
-        graphics.drawLine(x - 2, y + 5, x + 8, y + 5);
-        graphics.draw(new Arc2D.Double(x - 2, y - 14, 20, 20, 0, -80, Arc2D.OPEN));
-        graphics.drawLine(x + 21, y + 6, x + 19, y - 6);
-        graphics.drawLine(x + 9, y - 1, x + 19, y - 6);
+        graphics.drawLine(x - 2, y + 15, x + 7, y + 15);
+        graphics.draw(new Arc2D.Double(x - 3, y + 1, 20, 15, 0, -80, Arc2D.OPEN));
+        graphics.drawLine(x + 18, y + 7, x + 19, y-3);
+        graphics.drawLine(x + 24, y + 11, x + 19, y-3);
+        graphics.drawLine(x + 11, y + 9, x + 19, y -3);
         graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
     }
 
