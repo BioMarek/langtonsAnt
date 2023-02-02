@@ -82,6 +82,10 @@ public class HexLegend {
                     drawInnerR1Arrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 3.9));
             case "L1" ->
                     drawInnerL1Arrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 3.9));
+            case "L2" ->
+                    drawInnerL2Arrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 3.9));
+            case "R2" ->
+                    drawInnerR2Arrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 3.9));
             case "N" ->
                     drawInnerNArrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 3.9));
             case "U" ->
@@ -161,6 +165,26 @@ public class HexLegend {
         graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
     }
 
+    private void drawInnerR2Arrow(int x, int y) {
+        graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
+        graphics.drawLine(x, y - 5, x + 9, y - 5);
+        graphics.draw(new Arc2D.Double(x, y - 5, 20, 15, 90, -120, Arc2D.OPEN));
+        graphics.drawLine(x + 5, y + 14, x + 17, y + 7);
+        graphics.drawLine(x + 5, y + 14, x + 19, y + 14);
+        graphics.drawLine(x + 5, y + 14, x + 12, y + 2);
+        graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
+    }
+
+    private void drawInnerL2Arrow(int x, int y) {
+        graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
+        graphics.drawLine(x, y + 15, x + 9, y + 15);
+        graphics.draw(new Arc2D.Double(x, y, 20, 15, -90, 120, Arc2D.OPEN));
+        graphics.drawLine(x + 4, y - 6, x + 17, y + 2);
+        graphics.drawLine(x + 4, y - 6, x + 19, y - 5);
+        graphics.drawLine(x + 4, y - 6, x + 12, y + 8);
+        graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
+    }
+
     private void drawInnerNArrow(int x, int y) {
         graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
         graphics.drawLine(x - 2, y + 5, x + 21, y + 5);
@@ -171,8 +195,8 @@ public class HexLegend {
 
     private void drawInnerUArrow(int x, int y) {
         graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
-        graphics.drawLine(x, y, x + 8, y);
-        graphics.drawLine(x, y + 15, x + 8, y + 15);
+        graphics.drawLine(x, y, x + 9, y);
+        graphics.drawLine(x, y + 15, x + 9, y + 15);
         graphics.draw(new Arc2D.Double(x, y, 20, 15, -90, 180, Arc2D.OPEN));
         graphics.drawLine(x, y, x + 12, y - 6);
         graphics.drawLine(x, y, x + 12, y + 6);
