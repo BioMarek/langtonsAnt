@@ -75,12 +75,14 @@ public class HexLegend {
     }
 
     private void drawLegendInnerArrows(int i, int squareSize, double xLegendColumnCoefficient, boolean reverse) {
-//        graphics.setColor(Colors.TEXT.getColor());
-//        char ruleArrow = reverse ? hexAnt.charRule[hexAnt.ruleLength() - i - 1] : hexAnt.charRule[i];
-//        if (ruleArrow == 'L') {
-//            drawInnerLeftArrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
-//        } else
-//            drawInnerRightArrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 4.3));
+        graphics.setColor(Colors.TEXT.getColor());
+        String ruleArrow = reverse ? hexAnt.rule.getElement(hexAnt.ruleLength() - i - 1) : hexAnt.rule.getElement(i);
+        switch (ruleArrow) {
+            case "R1" ->
+                    drawInnerR1Arrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 3.9));
+            case "L1" ->
+                    drawInnerL1Arrow((int) (Settings.LEGEND_START_X + squareSize * xLegendColumnCoefficient), (int) (i * squareSize * 2 + squareSize * 3.9));
+        }
     }
 
     private void drawFillHex(int x, int y, int i) {
@@ -137,12 +139,22 @@ public class HexLegend {
         graphics.drawLine(x, y, x + 20 * Settings.HEX_MULTIPLIER, y - 10 * Settings.HEX_MULTIPLIER);
     }
 
-    private void drawInnerLeftArrow(int x, int y) {
-        graphics.setStroke(new BasicStroke(2f));
-        graphics.draw(new Arc2D.Double(x, y, 20, 20, -90, 225, Arc2D.OPEN));
-        graphics.drawLine(x + 1, y + 1, x + 7, y - 6);
-        graphics.drawLine(x + 1, y + 2, x + 9, y + 6);
-        graphics.setStroke(new BasicStroke(3f));
+    private void drawInnerR1Arrow(int x, int y) {
+        graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
+        graphics.drawLine(x - 2, y + 5, x + 8, y + 5);
+        graphics.draw(new Arc2D.Double(x - 2, y + 5, 20, 20, 0, 80, Arc2D.OPEN));
+        graphics.drawLine(x + 19, y + 16, x + 21, y + 5);
+        graphics.drawLine(x + 19, y + 16, x + 7, y + 11);
+        graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
+    }
+
+    private void drawInnerL1Arrow(int x, int y) {
+        graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
+        graphics.drawLine(x - 2, y + 5, x + 8, y + 5);
+        graphics.draw(new Arc2D.Double(x - 2, y - 14, 20, 20, 0, -80, Arc2D.OPEN));
+        graphics.drawLine(x + 21, y + 6, x + 19, y - 6);
+        graphics.drawLine(x + 9, y - 1, x + 19, y - 6);
+        graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
     }
 
     private void drawInnerRightArrow(int x, int y) {
