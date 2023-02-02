@@ -85,7 +85,7 @@ public class HexLegend {
 
     private void drawFillHex(int x, int y, int i) {
         int squareSize = Settings.BACKGROUND_HEIGHT / 35;
-        int fillSquareSize =  (int) (squareSize * 0.875);
+        int fillSquareSize = (int) (squareSize * 0.875);
 
         // text background for outline
         Polygon hexagon = getHexagon(x, y, squareSize);
@@ -103,11 +103,16 @@ public class HexLegend {
         graphics.fillPolygon(hexagon);
 
         // first hexagon should be half background half first color
-//        if (i != 0)
-//            graphics.fillRect(x + 1, y + 1, fillSquareSize, fillSquareSize);
-//        else {
-//            graphics.fillPolygon(new int[]{x + 1, x - 1 + squareSize, x + 1}, new int[]{y + 1, y + 1, y - 1 + squareSize}, 3);
-//        }
+        if (i == 0) {
+            graphics.setColor(Colors.BACKGROUND.getColor());
+            int[] xCoordinates = new int[4];
+            int[] yCoordinates = new int[4];
+            for (int j = 2; j < 6; j++) {
+                xCoordinates[j - 2] = (int) (x + fillSquareSize * Math.sin(j * 2 * Math.PI / 6));
+                yCoordinates[j - 2] = (int) (y + fillSquareSize * Math.cos(j * 2 * Math.PI / 6));
+            }
+            graphics.fillPolygon(xCoordinates, yCoordinates, 4);
+        }
     }
 
     private void drawDownArrow(int x, int y) {
