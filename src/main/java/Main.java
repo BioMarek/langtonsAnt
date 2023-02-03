@@ -12,7 +12,7 @@ public class Main {
 //        VideoGenerator videoGenerator = new VideoGenerator();
 //        videoGenerator.generateExplanation();
 
-        new GridFrame();  // Runs one rule based on setting realtime
+//        new GridFrame();  // Runs one rule based on setting realtime
 
 //        Settings.generateHexagonalGridSettingsImages();
 //        ImageParallelWorker imageParallelWorker = new ImageParallelWorker();
@@ -20,7 +20,7 @@ public class Main {
 //        HexRuleGenerator hexRuleGenerator = new HexRuleGenerator(Settings.RULES_LENGTH);
 //        imageParallelWorker.drawAllRulesInParallel(hexRuleGenerator);
 
-//        VideoGenerator videoGenerator = new VideoGenerator();
-//        videoGenerator.generateInterestingHex(HexRule.getHighways());
+        VideoGenerator videoGenerator = new VideoGenerator();
+        videoGenerator.generateInterestingHex(HexRule.getHighways());
     }
 }

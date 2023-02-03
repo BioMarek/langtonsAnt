@@ -149,59 +149,59 @@ public class HexLegend {
 
     private void drawInnerR1Arrow(int x, int y) {
         graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
-        graphics.drawLine(x - 2, y - 5, x + 7, y - 5);
-        graphics.draw(new Arc2D.Double(x - 3, y - 5, 20, 15, 90, -80, Arc2D.OPEN));
-        graphics.drawLine(x + 16, y + 2, x + 16, y + 13);
-        graphics.drawLine(x + 16, y + 12, x + 22, y - 1);
-        graphics.drawLine(x + 16, y + 12, x + 9, y + 1);
+        graphics.drawLine(x - adj(2), y - adj(5), x + adj(7), y - adj(5));
+        graphics.draw(new Arc2D.Double(x - adj(3), y - adj(5), adj(20), adj(15), 90, -80, Arc2D.OPEN));
+        graphics.drawLine(x + adj(16), y + adj(2), x + adj(16), y + adj(13));
+        graphics.drawLine(x + adj(16), y + adj(12), x + adj(22), y - adj(1));
+        graphics.drawLine(x + adj(16), y + adj(12), x + adj(9), y + adj(1));
         graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
     }
 
     private void drawInnerL1Arrow(int x, int y) {
         graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
-        graphics.drawLine(x - 2, y + 15, x + 7, y + 15);
-        graphics.draw(new Arc2D.Double(x - 3, y + 1, 20, 15, 0, -80, Arc2D.OPEN));
-        graphics.drawLine(x + 18, y + 7, x + 19, y-3);
-        graphics.drawLine(x + 24, y + 11, x + 19, y-3);
-        graphics.drawLine(x + 11, y + 9, x + 19, y -3);
+        graphics.drawLine(x - adj(2), y + adj(15), x + adj(7), y + adj(15));
+        graphics.draw(new Arc2D.Double(x - adj(3), y + adj(1), adj(20), adj(15), 0, -80, Arc2D.OPEN));
+        graphics.drawLine(x + adj(18), y + adj(7), x + adj(19), y - adj(3));
+        graphics.drawLine(x + adj(24), y + adj(11), x + adj(19), y - adj(3));
+        graphics.drawLine(x + adj(11), y + adj(9), x + adj(19), y - adj(3));
         graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
     }
 
     private void drawInnerR2Arrow(int x, int y) {
         graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
-        graphics.drawLine(x, y - 5, x + 9, y - 5);
-        graphics.draw(new Arc2D.Double(x, y - 5, 20, 15, 90, -120, Arc2D.OPEN));
-        graphics.drawLine(x + 5, y + 14, x + 17, y + 7);
-        graphics.drawLine(x + 5, y + 14, x + 19, y + 14);
-        graphics.drawLine(x + 5, y + 14, x + 12, y + 2);
+        graphics.drawLine(x, y - adj(5), x + adj(9), y - adj(5));
+        graphics.draw(new Arc2D.Double(x, y - adj(5), adj(20), adj(15), 90, -120, Arc2D.OPEN));
+        graphics.drawLine(x + adj(5), y + adj(14), x + adj(17), y + adj(7));
+        graphics.drawLine(x + adj(5), y + adj(14), x + adj(19), y + adj(14));
+        graphics.drawLine(x + adj(5), y + adj(14), x + adj(12), y + adj(2));
         graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
     }
 
     private void drawInnerL2Arrow(int x, int y) {
         graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
-        graphics.drawLine(x, y + 15, x + 9, y + 15);
-        graphics.draw(new Arc2D.Double(x, y, 20, 15, -90, 120, Arc2D.OPEN));
-        graphics.drawLine(x + 4, y - 6, x + 17, y + 2);
-        graphics.drawLine(x + 4, y - 6, x + 19, y - 5);
-        graphics.drawLine(x + 4, y - 6, x + 12, y + 8);
+        graphics.drawLine(x, y + adj(15), x + adj(9), y + adj(15));
+        graphics.draw(new Arc2D.Double(x, y, adj(20), adj(15), -90, 120, Arc2D.OPEN));
+        graphics.drawLine(x + adj(4), y - adj(6), x + adj(17), y + adj(2));
+        graphics.drawLine(x + adj(4), y - adj(6), x + adj(19), y - adj(5));
+        graphics.drawLine(x + adj(4), y - adj(6), x + adj(12), y + adj(8));
         graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
     }
 
     private void drawInnerNArrow(int x, int y) {
         graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
-        graphics.drawLine(x - 2, y + 5, x + 21, y + 5);
-        graphics.drawLine(x + 9, y + 11, x + 21, y + 5);
-        graphics.drawLine(x + 9, y - 1, x + 21, y + 5);
+        graphics.drawLine(x - adj(2), y + adj(5), x + adj(21), y + adj(5));
+        graphics.drawLine(x + adj(9), y + adj(11), x + adj(21), y + adj(5));
+        graphics.drawLine(x + adj(9), y - adj(1), x + adj(21), y + adj(5));
         graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
     }
 
     private void drawInnerUArrow(int x, int y) {
         graphics.setStroke(new BasicStroke(2f * Settings.HEX_MULTIPLIER));
-        graphics.drawLine(x, y, x + 9, y);
-        graphics.drawLine(x, y + 15, x + 9, y + 15);
-        graphics.draw(new Arc2D.Double(x, y, 20, 15, -90, 180, Arc2D.OPEN));
-        graphics.drawLine(x, y, x + 12, y - 6);
-        graphics.drawLine(x, y, x + 12, y + 6);
+        graphics.drawLine(x, y, x + adj(9), y);
+        graphics.drawLine(x, y + adj(15), x + adj(9), y + adj(15));
+        graphics.draw(new Arc2D.Double(x, y, adj(20), adj(15), -90, 180, Arc2D.OPEN));
+        graphics.drawLine(x, y, x + adj(12), y - adj(6));
+        graphics.drawLine(x, y, x + adj(12), y + adj(6));
         graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
     }
 
@@ -222,5 +222,9 @@ public class HexLegend {
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
             graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
         }
+    }
+
+    private int adj(int num) {
+        return num * Settings.HEX_MULTIPLIER;
     }
 }
