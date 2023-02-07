@@ -42,7 +42,7 @@ public class HexLegend {
     }
 
     /**
-     * Draws legend on the right side of the window. works only for SIZE_IN_PIXELS = 1000 because arrows in legend.
+     * Draws legend on the right side of the window. Works for all resolutions thanks to adj().
      */
     public void drawDiagram() {
         int squareSize = Settings.BACKGROUND_HEIGHT / 25;
@@ -62,14 +62,14 @@ public class HexLegend {
         for (int i = 0; i < ruleHalf; i++) {
             if (i != ruleHalf - 1)
                 drawDownArrow(Settings.LEGEND_START_X + squareSize * 7 / 2, i * gap + squareSize * 10 / 2);
-            drawFillHex((int) (Settings.LEGEND_START_X + squareSize * 3.5), i * gap + topPadding, i);
+            drawFilledHexagon((int) (Settings.LEGEND_START_X + squareSize * 3.5), i * gap + topPadding, i);
             drawLegendInnerArrows(i, squareSize, 3.3, false);
         }
 
         for (int i = ruleHalf; i < hexAnt.ruleLength(); i++) {
             if (i != hexAnt.ruleLength() - 1)
                 drawUpArrow(Settings.LEGEND_START_X + squareSize * 13 / 2, (i - ruleHalf) * gap + squareSize * 10 / 2);
-            drawFillHex((int) (Settings.LEGEND_START_X + squareSize * 6.5), (i - ruleHalf) * gap + topPadding, i);
+            drawFilledHexagon((int) (Settings.LEGEND_START_X + squareSize * 6.5), (i - ruleHalf) * gap + topPadding, i);
             drawLegendInnerArrows(i - ruleHalf, squareSize, 6.3, true);
         }
     }
@@ -93,7 +93,7 @@ public class HexLegend {
         }
     }
 
-    private void drawFillHex(int x, int y, int i) {
+    private void drawFilledHexagon(int x, int y, int position) {
         int squareSize = Settings.BACKGROUND_HEIGHT / 35;
         int fillSquareSize = (int) (squareSize * 0.875);
 
@@ -108,12 +108,12 @@ public class HexLegend {
         graphics.fillPolygon(hexagon);
 
         // fill
-        graphics.setColor(Colors.getColor(i));
+        graphics.setColor(Colors.getColor(position));
         hexagon = getHexagon(x, y, fillSquareSize);
         graphics.fillPolygon(hexagon);
 
         // first hexagon should be half background half first color
-        if (i == 0) {
+        if (position == 0) {
             graphics.setColor(Colors.BACKGROUND.getColor());
             int[] xCoordinates = new int[4];
             int[] yCoordinates = new int[4];
@@ -224,6 +224,12 @@ public class HexLegend {
         }
     }
 
+    /**
+     * Adjusts pixel position based on HEX_MULTIPLIER
+     *
+     * @param num number to adjust
+     * @return adjust number
+     */
     private int adj(int num) {
         return num * Settings.HEX_MULTIPLIER;
     }
