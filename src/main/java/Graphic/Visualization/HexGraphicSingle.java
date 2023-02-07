@@ -4,6 +4,7 @@ import Graphic.AntVisualization;
 import Graphic.Components.Background;
 import Graphic.Components.HexLegend;
 import Logic.Ant.Ant;
+import Logic.Ant.HexAnt;
 import Utils.Colors;
 import Utils.Settings;
 import Utils.Util;
@@ -25,6 +26,7 @@ public class HexGraphicSingle implements AntVisualization {
     public HexGraphicSingle() {
         this.hexLegend = new HexLegend();
         this.background = new Background();
+        this.ant = new HexAnt(Settings.HEX_RULE);
 
         hexWidth = Util.getHexWidth();
         hexHeight = Util.getHexHeight();
