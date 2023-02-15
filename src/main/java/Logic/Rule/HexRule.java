@@ -129,34 +129,15 @@ public class HexRule extends Rule {
     public static List<HexRule> getToHighRes() {
         Settings.generateHexInterestingSettings();
         List<HexRule> interesting = new ArrayList<>();
-        interesting.add(new HexRule("L1L2NL2L1L1R2"));
-        interesting.add(new HexRule("L1L2NL2L1UR2"));
-        interesting.add(new HexRule("L1L2R1NUL2R1"));
-        interesting.add(new HexRule("L1R2L1L2L1R1NUL2L1L1R2R1R1UR2"));
-        interesting.add(new HexRule("L1R2L1R2L1L2UL1R1L2R1L1L2NR2L2L2"));
-        interesting.add(new HexRule("L1R2NL2UUR2UR2NL2L2NR2L1UN"));
-        interesting.add(new HexRule("L1R2UUUUUU"));
-        interesting.add(new HexRule("L1UL2L2R1NUR1"));
-        interesting.add(new HexRule("L1UL2UL1UL1R1"));
-        interesting.add(new HexRule("L1UUL2R2NR2"));
-        interesting.add(new HexRule("L2L1UL2L2R1NU"));
-        interesting.add(new HexRule("L2L2L2NUL1"));
-        interesting.add(new HexRule("L2NNL1L2L1"));
-        interesting.add(new HexRule("L2R2R1UUR1L2R2"));
-        interesting.add(new HexRule("L2R2R2L2UL2R2UR2"));
-        interesting.add(new HexRule("R1L1UR2R2UU"));
-        interesting.add(new HexRule("R1L2R1L1UR2R1R2"));
-        interesting.add(new HexRule("R1L2R1R2R2NL2R2"));
-        interesting.add(new HexRule("R1R1NR1R2N"));
-        interesting.add(new HexRule("R1R1NR2R1N"));
-        interesting.add(new HexRule("R1R2L1R1NU"));
-        interesting.add(new HexRule("R1UR2L2L2R1NU"));
-        interesting.add(new HexRule("R2L2R2L1R2UU"));
-        interesting.add(new HexRule("R2NNR1R2R1"));
-        interesting.add(new HexRule("R2R1L2R2R1UR2"));
-        interesting.add(new HexRule("R2R1UNR1R1R1R2"));
-        interesting.add(new HexRule("R2R2R2NUR1"));
-        interesting.add(new HexRule("R2R2UL2R2"));
+        interesting.add(new HexRule("L1R2L1L2L1R1NUL2L1L1R2R1R1UR2")); // move left and up
+        interesting.add(new HexRule("L1R2UUUUUU")); // smaller scale
+        interesting.add(new HexRule("L2L2L2NUL1")); // 1
+        interesting.add(new HexRule("L2NNL1L2L1")); // 2
+        interesting.add(new HexRule("R1UR2L2L2R1NU")); // 0
+        interesting.add(new HexRule("R2L2R2L1R2UU")); // 0
+        interesting.add(new HexRule("R2NNR1R2R1")); // 1
+
+        interesting.add(new HexRule("R2R1UNR1R1R1R2")); // 1
 
         return interesting;
     }
@@ -164,27 +145,23 @@ public class HexRule extends Rule {
     public static List<HexRule> getHighways() {
         Settings.generateHexHighwaysSettings();
         List<HexRule> interesting = new ArrayList<>();
-        interesting.add(new HexRule("L1R2L1R2NR2UR1"));
-        interesting.add(new HexRule("L2L2L2UUL1R1"));
-        interesting.add(new HexRule("L2UR1L2UR1R2R2"));
-        interesting.add(new HexRule("R1NR2R2R1L1NR2"));
-        interesting.add(new HexRule("UR2R2R1L2R2UR2"));
-        interesting.add(new HexRule("L1L2L2L2UNL1R1"));
-        interesting.add(new HexRule("L1R2UUNL2R1L1L1L1R1NL2NL1"));
-        interesting.add(new HexRule("L2L2UL2R1L2L1R1"));
-        interesting.add(new HexRule("L2R2R2UR1L2UR1"));
-        interesting.add(new HexRule("L2UR2L2UL2R1U"));
-        interesting.add(new HexRule("R1L2UR2UR2NR1R2L2NUR2L1R2NR2"));
-        interesting.add(new HexRule("R1UR2NL2R1UR2R2"));
-        interesting.add(new HexRule("R2L1L2R1R1UR1"));
-        interesting.add(new HexRule("R2R2R2UL2UR2U"));
-        interesting.add(new HexRule("R2UUNNR2NR1"));
-        interesting.add(new HexRule("UL1UL1UR2L1L2R2"));
-        interesting.add(new HexRule("L1R1UUUUR2R2NL1U"));
-        interesting.add(new HexRule("L2R2UNL2R2R2"));
-        interesting.add(new HexRule("R1L1R1UL1R1UU"));
-        interesting.add(new HexRule("R1R2R2R1L1L2R2R1R2"));
-        interesting.add(new HexRule("R2L2UL2R2"));
+        interesting.add(new HexRule("L1R2L1R2NR2UR1")); // 0
+        interesting.add(new HexRule("L2L2L2UUL1R1")); // 0
+        interesting.add(new HexRule("L2UR1L2UR1R2R2")); // 0 move left and down
+        interesting.add(new HexRule("UR2R2R1L2R2UR2")); // 0 bigger scale
+        interesting.add(new HexRule("L1L2L2L2UNL1R1")); // 1 move left
+        interesting.add(new HexRule("L1R2UUNL2R1L1L1L1R1NL2NL1")); // 1
+        interesting.add(new HexRule("L2UR2L2UL2R1U")); // 1 bigger scale
+        interesting.add(new HexRule("R1L2UR2UR2NR1R2L2NUR2L1R2NR2")); // 1
+        interesting.add(new HexRule("R1UR2NL2R1UR2R2")); // 1
+        interesting.add(new HexRule("R2L1L2R1R1UR1")); // 1 bigger scale
+        interesting.add(new HexRule("R2R2R2UL2UR2U")); // 0
+        interesting.add(new HexRule("R2UUNNR2NR1")); // 1
+        interesting.add(new HexRule("L1R1UUUUR2R2NL1U")); // 1 bigger scale
+        interesting.add(new HexRule("L2R2UNL2R2R2")); // 2
+        interesting.add(new HexRule("R1L1R1UL1R1UU")); // 0
+        interesting.add(new HexRule("R1R2R2R1L1L2R2R1R2")); // 1
+        interesting.add(new HexRule("R2L2UL2R2")); // 0
 
         return interesting;
     }

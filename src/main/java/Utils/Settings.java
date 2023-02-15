@@ -120,8 +120,8 @@ public class Settings {
     }
 
     public static void generateHexInterestingSettings() {
-        Settings.HEX_MULTIPLIER = 4;
-        Settings.HEX_SIDE_LEN = 4;
+        Settings.HEX_MULTIPLIER = 1;
+        Settings.HEX_SIDE_LEN = HEX_MULTIPLIER;
         Settings.GRID_WIDTH = 1500 * HEX_MULTIPLIER;
         Settings.GRID_HEIGHT = 1080 * HEX_MULTIPLIER;
         Settings.BACKGROUND_WIDTH = 1920 * HEX_MULTIPLIER;
@@ -134,8 +134,8 @@ public class Settings {
     }
 
     public static void generateHexHighwaysSettings() {
-        Settings.HEX_MULTIPLIER = 2;
-        Settings.HEX_SIDE_LEN = 8;
+        Settings.HEX_MULTIPLIER = 1;
+        Settings.HEX_SIDE_LEN = 4 * HEX_MULTIPLIER;
         Settings.GRID_WIDTH = 1500 * HEX_MULTIPLIER;
         Settings.GRID_HEIGHT = 1080 * HEX_MULTIPLIER;
         Settings.BACKGROUND_WIDTH = 1920 * HEX_MULTIPLIER;
