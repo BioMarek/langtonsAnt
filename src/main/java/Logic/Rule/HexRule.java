@@ -1,5 +1,6 @@
 package Logic.Rule;
 
+import Logic.Ant.HexAnt;
 import Logic.HexMove;
 import Utils.Settings;
 
@@ -12,6 +13,8 @@ public class HexRule extends Rule {
     // TODO unify HexRule nad Rule
     public List<HexMove> rule;
     private final double hexSizeMultiplier;
+    private int rowShift = 0;
+    private int columnShift = 0;
 
     public HexRule(List<HexMove> rule, int slowdownSteps, double slowdownModifier) {
         this.rule = rule;
@@ -32,6 +35,15 @@ public class HexRule extends Rule {
         this.slowdownSteps = 1;
         this.slowdownModifier = 1;
         this.hexSizeMultiplier = hexSizeMultiplier;
+    }
+
+    public HexRule(String rule, double hexSizeMultiplier, int rowShift, int columnShift) {
+        this.rule = stringToMoves(rule);
+        this.slowdownSteps = 1;
+        this.slowdownModifier = 1;
+        this.hexSizeMultiplier = hexSizeMultiplier;
+        this.rowShift = rowShift;
+        this.columnShift = columnShift;
     }
 
     @Override
@@ -75,6 +87,11 @@ public class HexRule extends Rule {
     public void setVariables() {
         Settings.HEX_RULE = this;
         Settings.HEX_SIDE_LEN *= hexSizeMultiplier;
+    }
+
+    public void setShifts(HexAnt hexAnt) {
+        hexAnt.antPosition.row += rowShift;
+        hexAnt.antPosition.column += columnShift;
     }
 
     @Override
@@ -140,14 +157,12 @@ public class HexRule extends Rule {
     public static List<HexRule> getToHighRes() {
         Settings.generateHexInterestingSettings();
         List<HexRule> interesting = new ArrayList<>();
-        interesting.add(new HexRule("L1R2L1L2L1R1NUL2L1L1R2R1R1UR2")); // move left and up
-        interesting.add(new HexRule("L1R2UUUUUU")); // smaller scale
+        interesting.add(new HexRule("L1R2UUUUUU", 1.75)); // smaller scale
         interesting.add(new HexRule("L2L2L2NUL1")); // 1
         interesting.add(new HexRule("L2NNL1L2L1")); // 2
         interesting.add(new HexRule("R1UR2L2L2R1NU")); // 0
         interesting.add(new HexRule("R2L2R2L1R2UU")); // 0
         interesting.add(new HexRule("R2NNR1R2R1")); // 1
-
         interesting.add(new HexRule("R2R1UNR1R1R1R2")); // 1
 
         return interesting;
@@ -158,17 +173,17 @@ public class HexRule extends Rule {
         List<HexRule> interesting = new ArrayList<>();
         interesting.add(new HexRule("L1R2L1R2NR2UR1")); // 0
         interesting.add(new HexRule("L2L2L2UUL1R1")); // 0
-        interesting.add(new HexRule("L2UR1L2UR1R2R2")); // 0 move left and down
-        interesting.add(new HexRule("UR2R2R1L2R2UR2", 0.5)); // 0 move left
-        interesting.add(new HexRule("L1L2L2L2UNL1R1")); // 1 move left
+        interesting.add(new HexRule("L2UR1L2UR1R2R2", 1, 40, -40)); // 0
+        interesting.add(new HexRule("UR2R2R1L2R2UR2", 0.5, -100, -100)); // 0
+        interesting.add(new HexRule("L1L2L2L2UNL1R1", 1, 0, -50)); // 1
         interesting.add(new HexRule("L1R2UUNL2R1L1L1L1R1NL2NL1")); // 1
-        interesting.add(new HexRule("L2UR2L2UL2R1U", 0.5)); // 1 move up
+        interesting.add(new HexRule("L2UR2L2UL2R1U", 0.5, -100, 0)); // 1
         interesting.add(new HexRule("R1L2UR2UR2NR1R2L2NUR2L1R2NR2")); // 1
         interesting.add(new HexRule("R1UR2NL2R1UR2R2")); // 1
         interesting.add(new HexRule("R2L1L2R1R1UR1", 0.75)); // 1
         interesting.add(new HexRule("R2R2R2UL2UR2U")); // 0
         interesting.add(new HexRule("R2UUNNR2NR1")); // 1
-        interesting.add(new HexRule("L1R1UUUUR2R2NL1U")); // 1 move left
+        interesting.add(new HexRule("L1R1UUUUR2R2NL1U", 1, 0, 50)); // 1
         interesting.add(new HexRule("L2R2UNL2R2R2")); // 2
         interesting.add(new HexRule("R1L1R1UL1R1UU")); // 0
         interesting.add(new HexRule("R1R2R2R1L1L2R2R1R2")); // 1
