@@ -148,7 +148,6 @@ public class HexRule extends Rule {
     public static List<HexRule> getInteresting() {
         Settings.generateHexInterestingSettings();
         List<HexRule> interesting = new ArrayList<>();
-        interesting.add(new HexRule("L1R2L1L2L1R1NUL2L1L1R2R1R1UR2"));
         interesting.add(new HexRule("L1L1R2R2L1L1"));
         interesting.add(new HexRule("L1L2NUL2L1R2"));
         interesting.add(new HexRule("L1R1R1UUUU"));

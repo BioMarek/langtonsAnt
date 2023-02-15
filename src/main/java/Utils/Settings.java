@@ -129,7 +129,7 @@ public class Settings {
         Settings.HEXES_USED = 0;
         Settings.STD_LIMIT = 0;
 
-        Settings.VIDEO_NUM_IMAGES = 240;
+        Settings.VIDEO_NUM_IMAGES = 180;
         Settings.LEGEND_START_X = 1500 * HEX_MULTIPLIER;
     }
 
@@ -143,7 +143,7 @@ public class Settings {
         Settings.HEXES_USED = 0;
         Settings.STD_LIMIT = 0;
 
-        Settings.VIDEO_NUM_IMAGES = 180;
+        Settings.VIDEO_NUM_IMAGES = 150;
         Settings.LEGEND_START_X = 1500 * HEX_MULTIPLIER;
     }
 }
