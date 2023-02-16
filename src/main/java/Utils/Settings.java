@@ -36,7 +36,7 @@ public class Settings {
     public static int VIDEO_REPEAT_LAST_FRAME = 30; // how many times the last image should be repeated in video, 30 is one second
 
     // use to show only center of image and fill entire screen with even if some part already reached the border,
-    public static int IMAGE_PADDING = 0; // use 500 for thumbnail image
+    public static int IMAGE_PADDING = 100; // use 500 for thumbnail image
 
     /**
      * Settings for explanation
@@ -120,6 +120,7 @@ public class Settings {
     }
 
     public static void generateHexInterestingSettings() {
+        Settings.IMAGE_PADDING = 300;
         Settings.HEX_MULTIPLIER = 1;
         Settings.HEX_SIDE_LEN = HEX_MULTIPLIER;
         Settings.GRID_WIDTH = 1500 * HEX_MULTIPLIER;
@@ -134,6 +135,7 @@ public class Settings {
     }
 
     public static void generateHexHighwaysSettings() {
+        Settings.IMAGE_PADDING = 100;
         Settings.HEX_MULTIPLIER = 1;
         Settings.HEX_SIDE_LEN = 4 * HEX_MULTIPLIER;
         Settings.GRID_WIDTH = 1500 * HEX_MULTIPLIER;

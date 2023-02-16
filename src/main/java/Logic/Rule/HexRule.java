@@ -204,23 +204,23 @@ public class HexRule extends Rule {
     public static List<HexRule> getHighways() {
         Settings.generateHexHighwaysSettings();
         List<HexRule> interesting = new ArrayList<>();
-        interesting.add(new HexRule("L1R2L1R2NR2UR1")); // 0
-        interesting.add(new HexRule("L2L2L2UUL1R1")); // 0
+        interesting.add(new HexRule("L1R2L1R2NR2UR1", 2)); // 0
+        interesting.add(new HexRule("L2L2L2UUL1R1", 2)); // 0
         interesting.add(new HexRule("L2UR1L2UR1R2R2", 4, 40, -40)); // 0
-        interesting.add(new HexRule("UR2R2R1L2R2UR2", 2, -100, -100)); // 0
+        interesting.add(new HexRule("UR2R2R1L2R2UR2", 2, -70, -100)); // 0
         interesting.add(new HexRule("L1L2L2L2UNL1R1", 4, 0, -50)); // 1
-        interesting.add(new HexRule("L1R2UUNL2R1L1L1L1R1NL2NL1")); // 1
+        interesting.add(new HexRule("L1R2UUNL2R1L1L1L1R1NL2NL1", 2)); // 1
         interesting.add(new HexRule("L2UR2L2UL2R1U", 2, -100, 0)); // 1
-        interesting.add(new HexRule("R1L2UR2UR2NR1R2L2NUR2L1R2NR2")); // 1
-        interesting.add(new HexRule("R1UR2NL2R1UR2R2")); // 1
+        interesting.add(new HexRule("R1L2UR2UR2NR1R2L2NUR2L1R2NR2", 2)); // 1
+        interesting.add(new HexRule("R1UR2NL2R1UR2R2", 4)); // 1
         interesting.add(new HexRule("R2L1L2R1R1UR1", 2)); // 1
-        interesting.add(new HexRule("R2R2R2UL2UR2U")); // 0
-        interesting.add(new HexRule("R2UUNNR2NR1")); // 1
-        interesting.add(new HexRule("L1R1UUUUR2R2NL1U", 1, 0, 50)); // 1
-        interesting.add(new HexRule("L2R2UNL2R2R2")); // 2
-        interesting.add(new HexRule("R1L1R1UL1R1UU")); // 0
-        interesting.add(new HexRule("R1R2R2R1L1L2R2R1R2")); // 1
-        interesting.add(new HexRule("R2L2UL2R2")); // 0
+        interesting.add(new HexRule("R2R2R2UL2UR2U", 2)); // 0
+        interesting.add(new HexRule("R2UUNNR2NR1", 2)); // 1
+        interesting.add(new HexRule("L1R1UUUUR2R2NL1U", 2, 0, 50)); // 1
+        interesting.add(new HexRule("L2R2UNL2R2R2", 4, 40, -40)); // 2
+        interesting.add(new HexRule("R1L1R1UL1R1UU", 4, 50, 0)); // 0
+        interesting.add(new HexRule("R1R2R2R1L1L2R2R1R2", 2)); // 1
+        interesting.add(new HexRule("R2L2UL2R2", 4, -30, 30)); // 0
 
         return interesting;
     }

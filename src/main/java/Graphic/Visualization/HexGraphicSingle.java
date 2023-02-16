@@ -71,11 +71,12 @@ public class HexGraphicSingle implements AntVisualization {
      * Converts grid of numbers to {@link Graphics2D}.
      */
     public void drawGrid() {
-        for (int row = 0; row < ant.gridRows; row++) {
-            for (int column = 0; column < ant.gridColumns; column++) {
-                if (ant.grid[row][column] == -1)
+        int padding = Settings.IMAGE_PADDING / Util.getHexHeight();
+        for (int row = 0; row < ant.gridRows - padding; row++) {
+            for (int column = 0; column < ant.gridColumns - padding; column++) {
+                if (ant.grid[row + padding / 2][column + padding / 2] == -1)
                     continue;
-                Colors.setColor(graphics, ant.grid[row][column]);
+                Colors.setColor(graphics, ant.grid[row + padding / 2][column + padding / 2]);
                 if (row % 2 == 0)
                     drawHexagon(column * hexWidth, row * hexHeight, Settings.HEX_SIDE_LEN);
                 else
