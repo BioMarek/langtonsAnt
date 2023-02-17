@@ -21,6 +21,6 @@ public class Main {
 //        imageParallelWorker.drawAllRulesInParallel(hexRuleGenerator);
 
         VideoGenerator videoGenerator = new VideoGenerator();
-        videoGenerator.generateInterestingHex(HexRule.getHighways());
+        videoGenerator.generateInterestingHex(HexRule.getInteresting());
     }
 }
