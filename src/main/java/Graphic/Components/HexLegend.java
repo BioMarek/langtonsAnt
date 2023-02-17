@@ -108,7 +108,10 @@ public class HexLegend {
         graphics.fillPolygon(hexagon);
 
         // fill
-        graphics.setColor(Colors.getColor(position));
+        if (Settings.HEX_GRADIENT_COLOR)
+            graphics.setColor(Colors.getAlphaColor(2, position, hexAnt.ruleLength()));
+        else
+            graphics.setColor(Colors.getColor(position));
         hexagon = getHexagon(x, y, fillSquareSize);
         graphics.fillPolygon(hexagon);
 

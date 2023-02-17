@@ -63,10 +63,10 @@ public enum Colors {
     }
 
     public static Color getAlphaColor(int color, int ordinal, int colors) {
-        int colorStep = 255 / colors;
+        int colorStep = 255 / (colors + 1);
         return switch (color) {
             case 1 -> new Color(255 - colorStep / 2 * ordinal, colorStep * ordinal, 0, 255);
-            case 2 -> new Color(127 - colorStep * ordinal / 2, 0, 255 - colorStep * ordinal, 255 - colorStep * ordinal / 4 * 3);
+            case 2 -> new Color(127 - colorStep * ordinal / 2, 0, 255 - colorStep * ordinal, 255);
             default -> throw new RuntimeException("Wrong number supplied");
         };
     }
