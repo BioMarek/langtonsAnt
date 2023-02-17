@@ -149,9 +149,9 @@ public class HexRule extends Rule {
         Settings.generateHexInterestingSettings();
         List<HexRule> interesting = new ArrayList<>();
         interesting.add(new HexRule("L1L1R2R2L1L1"));
-        interesting.add(new HexRule("L1L2NUL2L1R2", 4));
+        interesting.add(new HexRule("L1L2NUL2L1R2", 6));
         interesting.add(new HexRule("L1R1R1UUUU"));
-        interesting.add(new HexRule("L1R2NL2UR1R1U", 4));
+        interesting.add(new HexRule("L1R2NL2UR1R1U", 6));
         interesting.add(new HexRule("L1R2UR1R2L2L2R1", 2));
         interesting.add(new HexRule("L2NR2R2R2R2R2R2"));
         interesting.add(new HexRule("L2R1L2R1L2UL1R1", 2));

@@ -76,7 +76,10 @@ public class HexGraphicSingle implements AntVisualization {
             for (int column = 0; column < ant.gridColumns - padding; column++) {
                 if (ant.grid[row + padding / 2][column + padding / 2] == -1)
                     continue;
-                Colors.setColor(graphics, ant.grid[row + padding / 2][column + padding / 2]);
+                if (Settings.HEX_GRADIENT_COLOR)
+                    graphics.setColor(Colors.getAlphaColor(2, ant.grid[row + padding / 2][column + padding / 2], ant.ruleLength()));
+                else
+                    Colors.setColor(graphics, ant.grid[row + padding / 2][column + padding / 2]);
                 if (row % 2 == 0)
                     drawHexagon(column * hexWidth, row * hexHeight, Settings.HEX_SIDE_LEN);
                 else

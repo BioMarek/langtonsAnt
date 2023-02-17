@@ -62,6 +62,15 @@ public enum Colors {
         };
     }
 
+    public static Color getAlphaColor(int color, int ordinal, int colors) {
+        int colorStep = 255 / colors;
+        return switch (color) {
+            case 1 -> new Color(255 - colorStep / 2 * ordinal, colorStep * ordinal, 0, 255);
+            case 2 -> new Color(127 - colorStep * ordinal / 2, 0, 255 - colorStep * ordinal, 255 - colorStep * ordinal / 4 * 3);
+            default -> throw new RuntimeException("Wrong number supplied");
+        };
+    }
+
     public static void setColor(Graphics2D graphics, int color) {
         graphics.setColor(getColor(color));
     }
