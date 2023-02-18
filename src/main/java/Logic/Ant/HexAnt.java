@@ -15,8 +15,8 @@ public class HexAnt extends Ant {
     public HexPosition antPosition = new HexPosition();
 
     public HexAnt(Rule rule) {
-        this.gridColumns = Settings.GRID_WIDTH / Util.getHexWidth();
-        this.gridRows = Settings.GRID_HEIGHT / Util.getHexHeight();
+        this.gridColumns = (Settings.GRID_WIDTH + Settings.IMAGE_PADDING)/ Util.getHexWidth();
+        this.gridRows = (Settings.GRID_HEIGHT + Settings.IMAGE_PADDING) / Util.getHexHeight();
         this.grid = new int[gridRows][gridColumns];
         this.rule = rule;
 

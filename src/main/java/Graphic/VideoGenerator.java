@@ -72,12 +72,14 @@ public class VideoGenerator {
             hexRule.setVariables();
 
             HexAnt hexAnt = new HexAnt(hexRule);
+            hexRule.setShifts(hexAnt);
             hexAnt.allMoves(); // calculates number of moves in total
 
             Settings.SKIP = hexAnt.steps / Settings.VIDEO_NUM_IMAGES;
             System.out.println("max steps: " + hexAnt.steps + " skip: " + Settings.SKIP);
 
             hexAnt = new HexAnt(hexRule);
+            hexRule.setShifts(hexAnt);
             antVisualization = new HexGraphicSingle();
             ((HexGraphicSingle) antVisualization).ant = hexAnt;
             ruleName = hexAnt.rule.toString();

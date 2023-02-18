@@ -36,7 +36,7 @@ public class Settings {
     public static int VIDEO_REPEAT_LAST_FRAME = 30; // how many times the last image should be repeated in video, 30 is one second
 
     // use to show only center of image and fill entire screen with even if some part already reached the border,
-    public static int IMAGE_PADDING = 0; // use 500 for thumbnail image
+    public static int IMAGE_PADDING = 100; // use 500 for thumbnail image
 
     /**
      * Settings for explanation
@@ -58,6 +58,7 @@ public class Settings {
     public static int RANDOM_RULES_LIMIT = 20000;
     public static boolean RANDOM_RULES = false;
     public static int HEX_MULTIPLIER = 1;
+    public static boolean HEX_ALTERNATIVE_COLOR = true;
 
     public static void showExplanationFirstPartSettings() {
         Settings.SHOW_GRID = true;
@@ -120,6 +121,7 @@ public class Settings {
     }
 
     public static void generateHexInterestingSettings() {
+        Settings.IMAGE_PADDING = 300;
         Settings.HEX_MULTIPLIER = 1;
         Settings.HEX_SIDE_LEN = HEX_MULTIPLIER;
         Settings.GRID_WIDTH = 1500 * HEX_MULTIPLIER;
@@ -129,11 +131,12 @@ public class Settings {
         Settings.HEXES_USED = 0;
         Settings.STD_LIMIT = 0;
 
-        Settings.VIDEO_NUM_IMAGES = 240;
+        Settings.VIDEO_NUM_IMAGES = 180;
         Settings.LEGEND_START_X = 1500 * HEX_MULTIPLIER;
     }
 
     public static void generateHexHighwaysSettings() {
+        Settings.IMAGE_PADDING = 100;
         Settings.HEX_MULTIPLIER = 1;
         Settings.HEX_SIDE_LEN = 4 * HEX_MULTIPLIER;
         Settings.GRID_WIDTH = 1500 * HEX_MULTIPLIER;
@@ -143,7 +146,7 @@ public class Settings {
         Settings.HEXES_USED = 0;
         Settings.STD_LIMIT = 0;
 
-        Settings.VIDEO_NUM_IMAGES = 180;
+        Settings.VIDEO_NUM_IMAGES = 150;
         Settings.LEGEND_START_X = 1500 * HEX_MULTIPLIER;
     }
 }
