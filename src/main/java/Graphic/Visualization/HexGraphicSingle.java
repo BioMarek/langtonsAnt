@@ -76,8 +76,8 @@ public class HexGraphicSingle implements AntVisualization {
             for (int column = 0; column < ant.gridColumns - padding; column++) {
                 if (ant.grid[row + padding / 2][column + padding / 2] == -1)
                     continue;
-                if (Settings.HEX_GRADIENT_COLOR)
-                    graphics.setColor(Colors.getAlphaColor(2, ant.grid[row + padding / 2][column + padding / 2], ant.ruleLength()));
+                if (Settings.HEX_ALTERNATIVE_COLOR)
+                    graphics.setColor(Colors.getVioletAlternativeColor( ant.grid[row + padding / 2][column + padding / 2]));
                 else
                     Colors.setColor(graphics, ant.grid[row + padding / 2][column + padding / 2]);
                 if (row % 2 == 0)

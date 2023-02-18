@@ -62,11 +62,38 @@ public enum Colors {
         };
     }
 
-    public static Color getAlphaColor(int color, int ordinal, int colors) {
-        int colorStep = 255 / (colors + 1);
-        return switch (color) {
-            case 1 -> new Color(255 - colorStep / 2 * ordinal, colorStep * ordinal, 0, 255);
-            case 2 -> new Color(127 - colorStep * ordinal / 2, 0, 255 - colorStep * ordinal, 255);
+    public static Color getVioletAlternativeColor(int ordinal) {
+        return switch (ordinal) {
+            case 0 -> LIGHT_GREY.getColor();
+            case 1 -> new Color(127, 100, 255, 255);
+            case 2 -> new Color(127, 0, 255, 255);
+            case 3 -> new Color(127, 0, 255, 150);
+            case 4 -> new Color(127, 0, 255, 50);
+            case 5 -> new Color(0, 0, 255, 255);
+            case 6 -> new Color(0, 0, 255, 150);
+            case 7 -> new Color(0, 0, 255, 50);
+            case 8 -> new Color(0, 255, 255, 255);
+            case 9 -> new Color(0, 255, 255, 150);
+            case 10 -> new Color(0, 255, 255, 50);
+            case -1 -> BACKGROUND.getColor();
+            default -> throw new RuntimeException("Wrong number supplied");
+        };
+    }
+
+    public static Color getRedAlternativeColor(int ordinal) {
+        return switch (ordinal) {
+            case 0 -> LIGHT_GREY.getColor();
+            case 1 -> new Color(255, 0, 0, 255);
+            case 2 -> new Color(255, 0, 0, 150);
+            case 3 -> new Color(255, 100, 0, 255);
+            case 4 -> new Color(255, 150, 0, 255);
+            case 5 -> new Color(255, 150, 0, 150);
+            case 6 -> new Color(255, 175, 150, 255);
+            case 7 -> new Color(255, 255, 0, 255);
+            case 8 -> new Color(255, 255, 0, 150);
+            case 9 -> new Color(139, 69, 19, 255);
+            case 10 -> new Color(139, 69, 19, 100);
+            case -1 -> BACKGROUND.getColor();
             default -> throw new RuntimeException("Wrong number supplied");
         };
     }

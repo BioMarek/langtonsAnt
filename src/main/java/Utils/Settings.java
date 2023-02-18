@@ -58,7 +58,7 @@ public class Settings {
     public static int RANDOM_RULES_LIMIT = 20000;
     public static boolean RANDOM_RULES = false;
     public static int HEX_MULTIPLIER = 1;
-    public static boolean HEX_GRADIENT_COLOR = true;
+    public static boolean HEX_ALTERNATIVE_COLOR = true;
 
     public static void showExplanationFirstPartSettings() {
         Settings.SHOW_GRID = true;
