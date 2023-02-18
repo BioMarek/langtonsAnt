@@ -1,6 +1,7 @@
 package Windows;
 
 import Graphic.AntVisualization;
+import Graphic.Visualization.HexExplanation;
 import Graphic.Visualization.HexGraphicSingle;
 import Logic.Ant.SquareAnt;
 import Logic.Ant.HexAnt;
@@ -38,7 +39,24 @@ public class GridPanel extends JPanel implements ActionListener {
 //
 //        startTimer();
 //    }
+    /**
+     * Hexagonal visualization
+     */
+//    public GridPanel() {
+//        this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
+//        this.setFocusable(true);
+//        this.squareAnt = new SquareAnt(Settings.SQUARE_RULE);
+//
+//        Settings.generateHexagonalGridSettings();
+//
+//        this.antVisualization = new HexGraphicSingle();
+//
+//        startTimer();
+//    }
 
+    /**
+     * Hexagonal explanation
+     */
     public GridPanel() {
         this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
         this.setFocusable(true);
@@ -46,8 +64,7 @@ public class GridPanel extends JPanel implements ActionListener {
 
         Settings.generateHexagonalGridSettings();
 
-        HexAnt ant = new HexAnt(Settings.HEX_RULE);
-        this.antVisualization = new HexGraphicSingle();
+        this.antVisualization = new HexExplanation();
 
         startTimer();
     }
