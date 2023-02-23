@@ -54,26 +54,7 @@ public class HexExplanation implements AntVisualization {
         drawSquareGrid(400, 500);
         drawHexGrid(1350, 500);
 
-        if (currentCycle < 60) {
-            drawSquareAntMoveLeft();
-        }
-        if (currentCycle == 60) {
-            alpha = 1f;
-            currentAngle = Math.toRadians(90);
-            startX = 470;
-            startY = 500;
-        }
-        if (currentCycle > 60)
-            drawDirectionInfo("L", 485, 470);
-        if (currentCycle > 60 && currentCycle < 120) {
-            drawSquareAntMoveRight(60);
-        }
-        if (currentCycle == 120) {
-            alpha = 1f;
-        }
-        if (currentCycle > 120) {
-            drawDirectionInfo("R", 485, 665);
-        }
+        squareExplanationGraphicSequence();
     }
 
     @Override
@@ -84,6 +65,29 @@ public class HexExplanation implements AntVisualization {
     @Override
     public boolean stopped() {
         return false;
+    }
+
+    public void squareExplanationGraphicSequence() {
+        if (currentCycle < 60) {
+            drawSquareAntMove(0, -7, -2);
+        }
+        if (currentCycle == 60) {
+            alpha = 1f;
+            currentAngle = Math.toRadians(90);
+            startX = 470;
+            startY = 500;
+        }
+        if (currentCycle > 60)
+            drawDirectionInfo("L", 485, 470);
+        if (currentCycle > 60 && currentCycle < 120) {
+            drawSquareAntMove(60, 7, 2);
+        }
+        if (currentCycle == 120) {
+            alpha = 1f;
+        }
+        if (currentCycle > 120) {
+            drawDirectionInfo("R", 485, 670);
+        }
     }
 
     public void drawSquareGrid(int x, int y) {
@@ -155,30 +159,7 @@ public class HexExplanation implements AntVisualization {
         return point;
     }
 
-    private void drawSquareAntMoveLeft() {
-        double locationX = antImage.getWidth() / 2.0;
-        double locationY = antImage.getHeight() / 2.0;
-
-        AffineTransform tx = AffineTransform.getRotateInstance(currentAngle, locationX, locationY);
-        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
-
-        graphics.setComposite(ac);
-        graphics.drawImage(antImage, op, (int) startX, (int) startY);
-
-        if (currentCycle <= 15) {
-            currentAngle -= rotateAngle * 2;
-        }
-        if (currentCycle > 15 && currentCycle < 30) {
-            startY -= 7;
-        }
-        if (currentCycle > 30 && currentCycle < 60) {
-            alpha -= 0.05f;
-            alpha = Math.max(alpha, 0);
-        }
-    }
-
-    private void drawSquareAntMoveRight(int startCycle) {
+    private void drawSquareAntMove(int startCycle, int YAxisShift, int rotationShift) {
         double locationX = antImage.getWidth() / 2.0;
         double locationY = antImage.getHeight() / 2.0;
 
@@ -190,10 +171,10 @@ public class HexExplanation implements AntVisualization {
         graphics.drawImage(antImage, op, (int) startX, (int) startY);
 
         if (currentCycle <= 15 + startCycle) {
-            currentAngle += rotateAngle * 2;
+            currentAngle += (rotateAngle * rotationShift);
         }
         if (currentCycle > 15 + startCycle && currentCycle < 30 + startCycle) {
-            startY += 7;
+            startY += YAxisShift;
         }
         if (currentCycle > 30 + startCycle && currentCycle < 60 + startCycle) {
             alpha -= 0.05f;
