@@ -1,5 +1,6 @@
 package Utils;
 
+import java.awt.Polygon;
 import java.util.Arrays;
 
 public class Util {
@@ -89,5 +90,13 @@ public class Util {
             result[i] = array[i] / max;
 
         return result;
+    }
+
+    public static Polygon hexagonalPolygon(int column, int row, int size) {
+        Polygon polygon = new Polygon();
+        for (int i = 0; i < 6; i++)
+            polygon.addPoint((int) (column + size * Math.sin(i * 2 * Math.PI / 6)),
+                    (int) (row + size * Math.cos(i * 2 * Math.PI / 6)));
+        return polygon;
     }
 }

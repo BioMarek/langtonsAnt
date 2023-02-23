@@ -10,7 +10,8 @@ import Utils.Settings;
 import Utils.Util;
 
 import java.awt.Graphics2D;
-import java.awt.Polygon;
+
+import static Utils.Util.hexagonalPolygon;
 
 public class HexGraphicSingle implements AntVisualization {
     private static final double HEXAGON_PI = 2 * Math.PI / 6;
@@ -77,7 +78,7 @@ public class HexGraphicSingle implements AntVisualization {
                 if (ant.grid[row + padding / 2][column + padding / 2] == -1)
                     continue;
                 if (Settings.HEX_ALTERNATIVE_COLOR)
-                    graphics.setColor(Colors.getVioletAlternativeColor( ant.grid[row + padding / 2][column + padding / 2]));
+                    graphics.setColor(Colors.getVioletAlternativeColor(ant.grid[row + padding / 2][column + padding / 2]));
                 else
                     Colors.setColor(graphics, ant.grid[row + padding / 2][column + padding / 2]);
                 if (row % 2 == 0)
@@ -89,10 +90,6 @@ public class HexGraphicSingle implements AntVisualization {
     }
 
     public void drawHexagon(int column, int row, int size) {
-        Polygon p = new Polygon();
-        for (int i = 0; i < 6; i++)
-            p.addPoint((int) (column + size * Math.sin(i * HEXAGON_PI)),
-                    (int) (row + size * Math.cos(i * HEXAGON_PI)));
-        graphics.fillPolygon(p);
+        graphics.fillPolygon(hexagonalPolygon(column, row, size));
     }
 }

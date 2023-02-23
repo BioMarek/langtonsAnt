@@ -9,7 +9,6 @@ import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.font.TextAttribute;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -17,6 +16,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.text.AttributedString;
+
+import static Utils.Util.hexagonalPolygon;
 
 public class HexExplanation implements AntVisualization {
     private static final int HEXAGON_SIZE = 60;
@@ -145,11 +146,7 @@ public class HexExplanation implements AntVisualization {
     }
 
     public void drawHexagon(int column, int row, int size) {
-        Polygon p = new Polygon();
-        for (int i = 0; i < 6; i++)
-            p.addPoint((int) (column + size * Math.sin(i * 2 * Math.PI / 6)),
-                    (int) (row + size * Math.cos(i * 2 * Math.PI / 6)));
-        graphics.drawPolygon(p);
+        graphics.drawPolygon(hexagonalPolygon(column, row, size));
     }
 
     public Point getPoint(int i, int column, int row, int size) {
