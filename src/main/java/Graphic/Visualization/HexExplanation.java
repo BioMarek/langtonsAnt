@@ -55,7 +55,8 @@ public class HexExplanation implements AntVisualization {
         drawSquareGrid(400, 500);
         drawHexGrid(1350, 500);
 
-        squareExplanationGraphicSequence();
+//        squareExplanationGraphicSequence();
+        hexExplanationGraphicSequence();
     }
 
     @Override
@@ -88,6 +89,26 @@ public class HexExplanation implements AntVisualization {
         }
         if (currentCycle > 120) {
             drawDirectionInfo("R", 485, 670);
+        }
+    }
+
+    public void hexExplanationGraphicSequence() {
+        hexAntMoveReset(0);
+        if (currentCycle > 0 && currentCycle <= 45) {
+            drawHexAntMove(0, 7, 0, 0);
+        }
+
+        hexAntMoveReset(45);
+        if (currentCycle > 45 && currentCycle <= 90) {
+            drawHexAntMove(45, -7, 0, 4);
+        }
+    }
+
+    public void hexAntMoveReset(int cycle) {
+        if (currentCycle == cycle + 1) {
+            startX = 1320;
+            startY = 500;
+            alpha = 1f;
         }
     }
 
@@ -177,6 +198,31 @@ public class HexExplanation implements AntVisualization {
             alpha -= 0.05f;
             alpha = Math.max(alpha, 0);
         }
+    }
+
+    private void drawHexAntMove(int startCycle, int xAxisShift, int yAxisShift, int rotationShift) {
+        double locationX = antImage.getWidth() / 2.0;
+        double locationY = antImage.getHeight() / 2.0;
+
+        AffineTransform tx = AffineTransform.getRotateInstance(currentAngle, locationX, locationY);
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+
+        graphics.setComposite(ac);
+        graphics.drawImage(antImage, op, (int) startX, (int) startY);
+
+        if (currentCycle <= 15 + startCycle) {
+            currentAngle += (rotateAngle * rotationShift);
+        }
+        if (currentCycle > 15 + startCycle && currentCycle <= 30 + startCycle) {
+            startX += xAxisShift;
+            startY += yAxisShift;
+        }
+        if (currentCycle > 30 + startCycle && currentCycle <= 45 + startCycle) {
+            alpha -= 0.05f;
+            alpha = Math.max(alpha, 0);
+        }
+        System.out.println(currentCycle + " " + startX);
     }
 
     public void drawDirectionInfo(String direction, int x, int y) {
