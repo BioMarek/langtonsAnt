@@ -93,15 +93,30 @@ public class HexExplanation implements AntVisualization {
     }
 
     public void hexExplanationGraphicSequence() {
+        // N
         hexAntMoveReset(0);
         if (currentCycle > 0 && currentCycle <= 45) {
-            drawHexAntMove(0, 7, 0, 0);
+            drawHexAntMove(0, 7, 0, 0f);
         }
+        drawDirectionInfo("N", 1437, 568);
 
+        // U
         hexAntMoveReset(45);
         if (currentCycle > 45 && currentCycle <= 90) {
-            drawHexAntMove(45, -7, 0, 4);
+            drawHexAntMove(45, -7, 0, 4f);
         }
+        drawDirectionInfo("U", 1229, 568);
+
+        // R1
+        hexAntMoveReset(90);
+        if (currentCycle > 90 && currentCycle <= 135) {
+            drawHexAntMove(90, 3, 6, 1.2f);
+        }
+        drawDirectionInfo("R1", 1385, 653);
+        drawDirectionInfo("R2", 1282, 653);
+
+        drawDirectionInfo("L1", 1385, 475);
+        drawDirectionInfo("L2", 1282, 475);
     }
 
     public void hexAntMoveReset(int cycle) {
@@ -109,6 +124,7 @@ public class HexExplanation implements AntVisualization {
             startX = 1320;
             startY = 500;
             alpha = 1f;
+            currentAngle = Math.toRadians(90);
         }
     }
 
@@ -200,7 +216,7 @@ public class HexExplanation implements AntVisualization {
         }
     }
 
-    private void drawHexAntMove(int startCycle, int xAxisShift, int yAxisShift, int rotationShift) {
+    private void drawHexAntMove(int startCycle, int xAxisShift, int yAxisShift, double rotationShift) {
         double locationX = antImage.getWidth() / 2.0;
         double locationY = antImage.getHeight() / 2.0;
 
