@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.font.TextAttribute;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -21,10 +20,10 @@ import static Utils.Util.hexagonalPolygon;
 
 public class HexExplanation implements AntVisualization {
     private static final int HEXAGON_SIZE = 60;
-    private static final double rotateAngle = Math.toRadians(3);
+    private static final double ROTATE_ANGLE = Math.toRadians(3);
+    private final Background background;
     private Graphics2D graphics;
     private BufferedImage antImage = null;
-    private final Background background;
     private int currentCycle = 0;
     private double currentAngle = Math.toRadians(90);
     private double startX = 470;
@@ -69,7 +68,7 @@ public class HexExplanation implements AntVisualization {
         return false;
     }
 
-    public void squareExplanationGraphicSequence() {
+    private void squareExplanationGraphicSequence() {
         if (currentCycle < 60)
             drawSquareAntMove(0, -7, -2);
         if (currentCycle == 60) {
@@ -88,16 +87,24 @@ public class HexExplanation implements AntVisualization {
             drawDirectionInfo("R", 485, 670);
     }
 
-    public void hexExplanationGraphicSequence() {
-        hexMoveWrapper(150, 7, 0, 0f, "N", 1437, 568);
-        hexMoveWrapper(195, -7, 0, 4f, "U", 1229, 568);
-        hexMoveWrapper(240, 3, 6, 1.2f, "R1", 1385, 653);
-        hexMoveWrapper(285, -3, 6, 2.7f, "R2", 1282, 653);
-        hexMoveWrapper(330, 3, -6, -1.2f, "L1", 1385, 475);
-        hexMoveWrapper(375, -3, -6, -2.7f, "L2", 1282, 475);
+    private void hexExplanationGraphicSequence() {
+        hexSingleAntMove(150, 3, -6, -1.2d, "L1", 1385, 475);
+        hexSingleAntMove(195, -3, -6, -2.7d, "L2", 1282, 475);
+        hexSingleAntMove(240, 3, 6, 1.2d, "R1", 1385, 653);
+        hexSingleAntMove(285, -3, 6, 2.7d, "R2", 1282, 653);
+        hexSingleAntMove(330, 7, 0, 0d, "N", 1437, 568);
+        hexSingleAntMove(375, -7, 0, 4d, "U", 1229, 568);
     }
 
-    public void hexAntMoveReset(int cycle) {
+    private void hexSingleAntMove(int cycle, int xAxisShift, int yAxisShift, double rotationalShift, String letter, int letterX, int letterY) {
+        hexAntMoveReset(cycle);
+        if (currentCycle > cycle && currentCycle <= cycle + 45)
+            drawHexAntMove(cycle, xAxisShift, yAxisShift, rotationalShift);
+        if (currentCycle > cycle + 45)
+            drawDirectionInfo(letter, letterX, letterY);
+    }
+
+    private void hexAntMoveReset(int cycle) {
         if (currentCycle == cycle + 1) {
             startX = 1320;
             startY = 500;
@@ -106,15 +113,7 @@ public class HexExplanation implements AntVisualization {
         }
     }
 
-    public void hexMoveWrapper(int cycle, int xAxisShift, int yAxisShift, float rotationalShift, String letter, int letterX, int letterY) {
-        hexAntMoveReset(cycle);
-        if (currentCycle > cycle && currentCycle <= cycle + 45)
-            drawHexAntMove(cycle, xAxisShift, yAxisShift, rotationalShift);
-        if (currentCycle > cycle + 45)
-            drawDirectionInfo(letter, letterX, letterY);
-    }
-
-    public void drawSquareGrid(int x, int y) {
+    private void drawSquareGrid(int x, int y) {
         graphics.setColor(Colors.TEXT.getColor());
         graphics.drawLine(x - 50, y - 100, x + 250, y - 100);
         graphics.drawLine(x - 50, y, x + 250, y);
@@ -125,15 +124,15 @@ public class HexExplanation implements AntVisualization {
         graphics.drawLine(x + 150, y - 200, x + 150, y + 300);
     }
 
-    public void drawHexGrid(int x, int y) {
+    private void drawHexGrid(int x, int y) {
         graphics.setColor(Colors.TEXT.getColor());
-        drawHexagon(x, y + 50, HEXAGON_SIZE);
-        drawHexagon(x + 103, y + 50, HEXAGON_SIZE);
-        drawHexagon(x - 103, y + 50, HEXAGON_SIZE);
-        drawHexagon(x + 51, y + 140, HEXAGON_SIZE);
-        drawHexagon(x - 52, y + 140, HEXAGON_SIZE);
-        drawHexagon(x + 51, y - 40, HEXAGON_SIZE);
-        drawHexagon(x - 52, y - 40, HEXAGON_SIZE);
+        drawHexagon(x, y + 50);
+        drawHexagon(x + 103, y + 50);
+        drawHexagon(x - 103, y + 50);
+        drawHexagon(x + 51, y + 140);
+        drawHexagon(x - 52, y + 140);
+        drawHexagon(x + 51, y - 40);
+        drawHexagon(x - 52, y - 40);
 
         // top lines
         graphics.drawLine(x + 51, y - 100, x + 51, y - 150);
@@ -160,27 +159,21 @@ public class HexExplanation implements AntVisualization {
         diagonalHexagonLine(1, x + 101, y + 170);
     }
 
-    public void diagonalHexagonLine(int i, int x, int y) {
-        Point p = getPoint(i, x, y, HEXAGON_SIZE);
-        graphics.drawLine(x, y, p.x, p.y);
+    private void diagonalHexagonLine(int i, int x, int y) {
+        graphics.drawLine(x, y,
+                (int) (x + HEXAGON_SIZE * Math.sin(i * 2 * Math.PI / 6)),
+                (int) (y + HEXAGON_SIZE * Math.cos(i * 2 * Math.PI / 6)));
     }
 
-    public void drawHexagon(int column, int row, int size) {
-        graphics.drawPolygon(hexagonalPolygon(column, row, size));
-    }
-
-    public Point getPoint(int i, int column, int row, int size) {
-        Point point = new Point();
-        point.x = (int) (column + size * Math.sin(i * 2 * Math.PI / 6));
-        point.y = (int) (row + size * Math.cos(i * 2 * Math.PI / 6));
-        return point;
+    private void drawHexagon(int column, int row) {
+        graphics.drawPolygon(hexagonalPolygon(column, row, HEXAGON_SIZE));
     }
 
     private void drawSquareAntMove(int startCycle, int YAxisShift, int rotationShift) {
         drawAntMoveSetup();
 
         if (currentCycle <= 15 + startCycle) {
-            currentAngle += (rotateAngle * rotationShift);
+            currentAngle += (ROTATE_ANGLE * rotationShift);
         }
         if (currentCycle > 15 + startCycle && currentCycle < 30 + startCycle) {
             startY += YAxisShift;
@@ -195,7 +188,7 @@ public class HexExplanation implements AntVisualization {
         drawAntMoveSetup();
 
         if (currentCycle <= 15 + startCycle) {
-            currentAngle += (rotateAngle * rotationShift);
+            currentAngle += (ROTATE_ANGLE * rotationShift);
         }
         if (currentCycle > 15 + startCycle && currentCycle <= 30 + startCycle) {
             startX += xAxisShift;
@@ -207,7 +200,7 @@ public class HexExplanation implements AntVisualization {
         }
     }
 
-    public void drawAntMoveSetup() {
+    private void drawAntMoveSetup() {
         double locationX = antImage.getWidth() / 2.0;
         double locationY = antImage.getHeight() / 2.0;
 
@@ -219,7 +212,7 @@ public class HexExplanation implements AntVisualization {
         graphics.drawImage(antImage, op, (int) startX, (int) startY);
     }
 
-    public void drawDirectionInfo(String direction, int x, int y) {
+    private void drawDirectionInfo(String direction, int x, int y) {
         graphics.setColor(Colors.TEXT.getColor());
         graphics.drawString(getAttributedString(direction).getIterator(), x, y);
     }
