@@ -10,7 +10,7 @@ public class Settings {
     public static int ALPHA = 200; // alpha of colors used in AntGraphic
     public static boolean SHOW_GRID = false;
     public static SquareRule SQUARE_RULE = new SquareRule("RL", 1, 1, 1);
-    public static int TIMER_DELAY = 100; // realtime animation delay between frames
+    public static int TIMER_DELAY = 33; // realtime animation delay between frames
     public static int SKIP = 100; // steps to skip between frames
     public static long MAX_MOVES = 50_000_000;
     public static int SIZE_OF_SQUARE = 1; // size of square on ant board
@@ -58,7 +58,7 @@ public class Settings {
     public static int RANDOM_RULES_LIMIT = 20000;
     public static boolean RANDOM_RULES = false;
     public static int HEX_MULTIPLIER = 1;
-    public static boolean HEX_ALTERNATIVE_COLOR = true;
+    public static boolean HEX_ALTERNATIVE_COLOR = false;
 
     public static void showExplanationFirstPartSettings() {
         Settings.SHOW_GRID = true;

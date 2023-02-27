@@ -13,6 +13,8 @@ import java.awt.RenderingHints;
 import java.awt.geom.Arc2D;
 import java.awt.geom.RoundRectangle2D;
 
+import static Utils.Util.hexagonalPolygon;
+
 public class HexLegend {
     public Graphics2D graphics;
     private Ant hexAnt;
@@ -98,12 +100,12 @@ public class HexLegend {
         int fillSquareSize = (int) (squareSize * 0.875);
 
         // text background for outline
-        Polygon hexagon = getHexagon(x, y, squareSize);
+        Polygon hexagon = hexagonalPolygon(x, y, squareSize);
         graphics.setColor(Colors.TEXT.getColor());
         graphics.fillPolygon(hexagon);
 
         // background of fill
-        hexagon = getHexagon(x, y, fillSquareSize);
+        hexagon = hexagonalPolygon(x, y, fillSquareSize);
         graphics.setColor(Colors.BACKGROUND.getColor());
         graphics.fillPolygon(hexagon);
 
@@ -112,7 +114,7 @@ public class HexLegend {
             graphics.setColor(Colors.getVioletAlternativeColor(position));
         else
             graphics.setColor(Colors.getColor(position));
-        hexagon = getHexagon(x, y, fillSquareSize);
+        hexagon = hexagonalPolygon(x, y, fillSquareSize);
         graphics.fillPolygon(hexagon);
 
         // first hexagon should be half background half first color
@@ -207,15 +209,6 @@ public class HexLegend {
         graphics.drawLine(x, y, x + adj(12), y + adj(6));
         graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
     }
-
-    public Polygon getHexagon(int column, int row, int size) {
-        Polygon p = new Polygon();
-        for (int i = 0; i < 6; i++)
-            p.addPoint((int) (column + size * Math.sin(i * 2 * Math.PI / 6)),
-                    (int) (row + size * Math.cos(i * 2 * Math.PI / 6)));
-        return p;
-    }
-
 
     private void turnAntiAliasingOn(boolean isOn) {
         if (isOn) {

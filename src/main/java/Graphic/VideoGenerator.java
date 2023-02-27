@@ -3,6 +3,7 @@ package Graphic;
 import Graphic.Visualization.AntExplanation;
 import Graphic.Visualization.AntGraphicFour;
 import Graphic.Visualization.AntGraphicSingle;
+import Graphic.Visualization.HexExplanation;
 import Graphic.Visualization.HexGraphicSingle;
 import Logic.Ant.HexAnt;
 import Logic.Ant.SquareAnt;
@@ -115,10 +116,15 @@ public class VideoGenerator {
         }
     }
 
-    public void generateExplanation() {
+    public void generateSquareAntExplanation() {
         Settings.showExplanationFirstPartSettings();
         SquareAnt squareAnt = new SquareAnt(Settings.SQUARE_RULE);
         antVisualization = new AntExplanation(squareAnt);
+        createMP4();
+    }
+
+    public void generateHexAntExplanation() {
+        antVisualization = new HexExplanation();
         createMP4();
     }
 
