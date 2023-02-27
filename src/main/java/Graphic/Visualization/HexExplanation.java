@@ -98,25 +98,48 @@ public class HexExplanation implements AntVisualization {
         if (currentCycle > 0 && currentCycle <= 45) {
             drawHexAntMove(0, 7, 0, 0f);
         }
-        drawDirectionInfo("N", 1437, 568);
+        if (currentCycle > 45)
+            drawDirectionInfo("N", 1437, 568);
 
         // U
         hexAntMoveReset(45);
         if (currentCycle > 45 && currentCycle <= 90) {
             drawHexAntMove(45, -7, 0, 4f);
         }
-        drawDirectionInfo("U", 1229, 568);
+        if (currentCycle > 90)
+            drawDirectionInfo("U", 1229, 568);
 
         // R1
         hexAntMoveReset(90);
         if (currentCycle > 90 && currentCycle <= 135) {
             drawHexAntMove(90, 3, 6, 1.2f);
         }
-        drawDirectionInfo("R1", 1385, 653);
-        drawDirectionInfo("R2", 1282, 653);
+        if (currentCycle > 135)
+            drawDirectionInfo("R1", 1385, 653);
 
-        drawDirectionInfo("L1", 1385, 475);
-        drawDirectionInfo("L2", 1282, 475);
+        // R2
+        hexAntMoveReset(135);
+        if (currentCycle > 135 && currentCycle <= 180) {
+            drawHexAntMove(135, -3, 6, 2.7f);
+        }
+        if (currentCycle > 180)
+            drawDirectionInfo("R2", 1282, 653);
+
+        // L1
+        hexAntMoveReset(180);
+        if (currentCycle > 180 && currentCycle <= 225) {
+            drawHexAntMove(180, 3, -6, -1.2f);
+        }
+        if (currentCycle > 225)
+            drawDirectionInfo("L1", 1385, 475);
+
+        // L2
+        hexAntMoveReset(225);
+        if (currentCycle > 225 && currentCycle <= 270) {
+            drawHexAntMove(225, -3, -6, -2.7f);
+        }
+        if (currentCycle > 270)
+            drawDirectionInfo("L2", 1282, 475);
     }
 
     public void hexAntMoveReset(int cycle) {
