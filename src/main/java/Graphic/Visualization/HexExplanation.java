@@ -69,45 +69,31 @@ public class HexExplanation implements AntVisualization {
     }
 
     private void squareExplanationGraphicSequence() {
-        if (currentCycle < 60)
-            drawSquareAntMove(0, -7, -2);
-        if (currentCycle == 60) {
-            alpha = 1f;
-            currentAngle = Math.toRadians(90);
-            startX = 470;
-            startY = 500;
-        }
-        if (currentCycle > 60)
-            drawDirectionInfo("L", 485, 470);
-        if (currentCycle > 60 && currentCycle < 120)
-            drawSquareAntMove(60, 7, 2);
-        if (currentCycle == 120)
-            alpha = 1f;
-        if (currentCycle > 120)
-            drawDirectionInfo("R", 485, 670);
+        singleAntMove(0, 470, 500, 0, -7, -2, "L", 485, 470);
+        singleAntMove(45, 470, 500, 0, 7, 2, "R", 485, 670);
     }
 
     private void hexExplanationGraphicSequence() {
-        hexSingleAntMove(150, 3, -6, -1.2d, "L1", 1385, 475);
-        hexSingleAntMove(195, -3, -6, -2.7d, "L2", 1282, 475);
-        hexSingleAntMove(240, 3, 6, 1.2d, "R1", 1385, 653);
-        hexSingleAntMove(285, -3, 6, 2.7d, "R2", 1282, 653);
-        hexSingleAntMove(330, 7, 0, 0d, "N", 1437, 568);
-        hexSingleAntMove(375, -7, 0, 4d, "U", 1229, 568);
+        singleAntMove(150, 1320, 500, 3, -6, -1.2d, "L1", 1385, 475);
+        singleAntMove(195, 1320, 500, -3, -6, -2.7d, "L2", 1282, 475);
+        singleAntMove(240, 1320, 500, 3, 6, 1.2d, "R1", 1385, 653);
+        singleAntMove(285, 1320, 500, -3, 6, 2.7d, "R2", 1282, 653);
+        singleAntMove(330, 1320, 500, 7, 0, 0d, "N", 1437, 568);
+        singleAntMove(375, 1320, 500, -7, 0, 4d, "U", 1229, 568);
     }
 
-    private void hexSingleAntMove(int cycle, int xAxisShift, int yAxisShift, double rotationalShift, String letter, int letterX, int letterY) {
-        hexAntMoveReset(cycle);
+    private void singleAntMove(int cycle, int xReset, int yReset, int xAxisShift, int yAxisShift, double rotationalShift, String letter, int letterX, int letterY) {
+        antMoveReset(cycle, xReset, yReset);
         if (currentCycle > cycle && currentCycle <= cycle + 45)
             drawHexAntMove(cycle, xAxisShift, yAxisShift, rotationalShift);
         if (currentCycle > cycle + 45)
             drawDirectionInfo(letter, letterX, letterY);
     }
 
-    private void hexAntMoveReset(int cycle) {
+    private void antMoveReset(int cycle, int xReset, int yReset) {
         if (currentCycle == cycle + 1) {
-            startX = 1320;
-            startY = 500;
+            startX = xReset;
+            startY = yReset;
             alpha = 1f;
             currentAngle = Math.toRadians(90);
         }
@@ -169,21 +155,6 @@ public class HexExplanation implements AntVisualization {
         graphics.drawPolygon(hexagonalPolygon(column, row, HEXAGON_SIZE));
     }
 
-    private void drawSquareAntMove(int startCycle, int YAxisShift, int rotationShift) {
-        drawAntMoveSetup();
-
-        if (currentCycle <= 15 + startCycle) {
-            currentAngle += (ROTATE_ANGLE * rotationShift);
-        }
-        if (currentCycle > 15 + startCycle && currentCycle < 30 + startCycle) {
-            startY += YAxisShift;
-        }
-        if (currentCycle > 30 + startCycle && currentCycle < 60 + startCycle) {
-            alpha -= 0.05f;
-            alpha = Math.max(alpha, 0);
-        }
-    }
-
     private void drawHexAntMove(int startCycle, int xAxisShift, int yAxisShift, double rotationShift) {
         drawAntMoveSetup();
 
@@ -201,10 +172,7 @@ public class HexExplanation implements AntVisualization {
     }
 
     private void drawAntMoveSetup() {
-        double locationX = antImage.getWidth() / 2.0;
-        double locationY = antImage.getHeight() / 2.0;
-
-        AffineTransform tx = AffineTransform.getRotateInstance(currentAngle, locationX, locationY);
+        AffineTransform tx = AffineTransform.getRotateInstance(currentAngle, antImage.getWidth() / 2.0, antImage.getHeight() / 2.0);
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
         AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
 
