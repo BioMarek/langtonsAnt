@@ -9,10 +9,16 @@ import Windows.GridFrame;
 
 public class Main {
     public static void main(String[] args) {
-//        VideoGenerator videoGenerator = new VideoGenerator();
-//        videoGenerator.generateExplanation();
+        // generates explanation of HexAnt
+        VideoGenerator videoGenerator = new VideoGenerator();
+        videoGenerator.generateHexAntExplanation();
 
-        new GridFrame();  // Runs one rule based on setting realtime
+        // generates explanation of HexAnt
+//        VideoGenerator videoGenerator = new VideoGenerator();
+//        videoGenerator.generateSquareAntExplanation();
+
+//        // Runs one rule based on setting realtime
+//        new GridFrame();
 
 //        Settings.generateHexagonalGridSettingsImages();
 //        ImageParallelWorker imageParallelWorker = new ImageParallelWorker();

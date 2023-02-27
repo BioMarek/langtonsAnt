@@ -29,6 +29,8 @@ public class HexExplanation implements AntVisualization {
     private double startX = 470;
     private double startY = 500;
     private float alpha = 1f;
+    private boolean sopped = false;
+    private int imageCount = 0;
 
     public HexExplanation() {
         this.background = new Background();
@@ -60,12 +62,14 @@ public class HexExplanation implements AntVisualization {
 
     @Override
     public void createNextFrame() {
-        currentCycle++;
+        System.out.println("creating frame " + imageCount++);
+        if (currentCycle++ > 420)
+            sopped = true;
     }
 
     @Override
     public boolean stopped() {
-        return false;
+        return sopped;
     }
 
     private void squareExplanationGraphicSequence() {
