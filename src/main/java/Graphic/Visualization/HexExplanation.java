@@ -93,53 +93,12 @@ public class HexExplanation implements AntVisualization {
     }
 
     public void hexExplanationGraphicSequence() {
-        // N
-        hexAntMoveReset(0);
-        if (currentCycle > 0 && currentCycle <= 45) {
-            drawHexAntMove(0, 7, 0, 0f);
-        }
-        if (currentCycle > 45)
-            drawDirectionInfo("N", 1437, 568);
-
-        // U
-        hexAntMoveReset(45);
-        if (currentCycle > 45 && currentCycle <= 90) {
-            drawHexAntMove(45, -7, 0, 4f);
-        }
-        if (currentCycle > 90)
-            drawDirectionInfo("U", 1229, 568);
-
-        // R1
-        hexAntMoveReset(90);
-        if (currentCycle > 90 && currentCycle <= 135) {
-            drawHexAntMove(90, 3, 6, 1.2f);
-        }
-        if (currentCycle > 135)
-            drawDirectionInfo("R1", 1385, 653);
-
-        // R2
-        hexAntMoveReset(135);
-        if (currentCycle > 135 && currentCycle <= 180) {
-            drawHexAntMove(135, -3, 6, 2.7f);
-        }
-        if (currentCycle > 180)
-            drawDirectionInfo("R2", 1282, 653);
-
-        // L1
-        hexAntMoveReset(180);
-        if (currentCycle > 180 && currentCycle <= 225) {
-            drawHexAntMove(180, 3, -6, -1.2f);
-        }
-        if (currentCycle > 225)
-            drawDirectionInfo("L1", 1385, 475);
-
-        // L2
-        hexAntMoveReset(225);
-        if (currentCycle > 225 && currentCycle <= 270) {
-            drawHexAntMove(225, -3, -6, -2.7f);
-        }
-        if (currentCycle > 270)
-            drawDirectionInfo("L2", 1282, 475);
+        hexMoveWrapper(0, 7, 0, 0f, "N", 1437, 568);
+        hexMoveWrapper(45, -7, 0, 4f, "U", 1229, 568);
+        hexMoveWrapper(90, 3, 6, 1.2f, "R1", 1385, 653);
+        hexMoveWrapper(135, -3, 6, 2.7f, "R2", 1282, 653);
+        hexMoveWrapper(180, 3, -6, -1.2f, "L1", 1385, 475);
+        hexMoveWrapper(225, -3, -6, -2.7f, "L2", 1282, 475);
     }
 
     public void hexAntMoveReset(int cycle) {
@@ -149,6 +108,15 @@ public class HexExplanation implements AntVisualization {
             alpha = 1f;
             currentAngle = Math.toRadians(90);
         }
+    }
+
+    public void hexMoveWrapper(int cycle, int xAxisShift, int yAxisShift, float rotationalShift, String letter, int letterX, int letterY) {
+        hexAntMoveReset(cycle);
+        if (currentCycle > cycle && currentCycle <= cycle + 45) {
+            drawHexAntMove(cycle, xAxisShift, yAxisShift, rotationalShift);
+        }
+        if (currentCycle > cycle + 45)
+            drawDirectionInfo(letter, letterX, letterY);
     }
 
     public void drawSquareGrid(int x, int y) {
