@@ -85,7 +85,7 @@ public class HexExplanation implements AntVisualization {
     private void singleAntMove(int cycle, int xReset, int yReset, int xAxisShift, int yAxisShift, double rotationalShift, String letter, int letterX, int letterY) {
         antMoveReset(cycle, xReset, yReset);
         if (currentCycle > cycle && currentCycle <= cycle + 45)
-            drawHexAntMove(cycle, xAxisShift, yAxisShift, rotationalShift);
+            drawAntMove(cycle, xAxisShift, yAxisShift, rotationalShift);
         if (currentCycle > cycle + 45)
             drawDirectionInfo(letter, letterX, letterY);
     }
@@ -145,17 +145,17 @@ public class HexExplanation implements AntVisualization {
         diagonalHexagonLine(1, x + 101, y + 170);
     }
 
-    private void diagonalHexagonLine(int i, int x, int y) {
+    private void diagonalHexagonLine(int hexagonVertex, int x, int y) {
         graphics.drawLine(x, y,
-                (int) (x + HEXAGON_SIZE * Math.sin(i * 2 * Math.PI / 6)),
-                (int) (y + HEXAGON_SIZE * Math.cos(i * 2 * Math.PI / 6)));
+                (int) (x + HEXAGON_SIZE * Math.sin(hexagonVertex * 2 * Math.PI / 6)),
+                (int) (y + HEXAGON_SIZE * Math.cos(hexagonVertex * 2 * Math.PI / 6)));
     }
 
     private void drawHexagon(int column, int row) {
         graphics.drawPolygon(hexagonalPolygon(column, row, HEXAGON_SIZE));
     }
 
-    private void drawHexAntMove(int startCycle, int xAxisShift, int yAxisShift, double rotationShift) {
+    private void drawAntMove(int startCycle, int xAxisShift, int yAxisShift, double rotationShift) {
         drawAntMoveSetup();
 
         if (currentCycle <= 15 + startCycle) {
