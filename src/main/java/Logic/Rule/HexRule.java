@@ -63,9 +63,9 @@ public class HexRule extends Rule {
 
     public static List<HexRule> hexagonalReferenceRules() {
         List<HexRule> result = new ArrayList<>();
-        result.add(new HexRule(List.of(HexMove.R1, HexMove.R2, HexMove.N, HexMove.U, HexMove.R2, HexMove.R1, HexMove.L2), 1, 1));
-        result.add(new HexRule(List.of(HexMove.L1, HexMove.L2, HexMove.N, HexMove.U, HexMove.L2, HexMove.L1, HexMove.R2), 1, 1));
-        result.add(new HexRule(List.of(HexMove.L2, HexMove.N, HexMove.N, HexMove.L1, HexMove.L2, HexMove.L1), 1, 1));
+        result.add(new HexRule("R1R2NUR2R1L2"));
+        result.add(new HexRule("L1L2NUL2L1R2"));
+        result.add(new HexRule("L2NNL1L2L1"));
         return result;
     }
 

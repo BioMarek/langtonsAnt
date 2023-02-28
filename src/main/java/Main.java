@@ -10,15 +10,15 @@ import Windows.GridFrame;
 public class Main {
     public static void main(String[] args) {
         // generates explanation of HexAnt
-//        VideoGenerator videoGenerator = new VideoGenerator();
-//        videoGenerator.generateHexAntExplanation();
+        VideoGenerator videoGenerator = new VideoGenerator();
+        videoGenerator.generateHexAntExplanation();
 
         // generates explanation of HexAnt
 //        VideoGenerator videoGenerator = new VideoGenerator();
 //        videoGenerator.generateSquareAntExplanation();
 
 //        // Runs one rule based on setting realtime
-        new GridFrame();
+//        new GridFrame();
 
 //        Settings.generateHexagonalGridSettingsImages();
 //        ImageParallelWorker imageParallelWorker = new ImageParallelWorker();

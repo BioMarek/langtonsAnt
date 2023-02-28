@@ -45,6 +45,12 @@ public class Util {
         return (originalSize % 2 == 0) ? originalSize : originalSize - 1;
     }
 
+    /**
+     * Formats number representing milliseconds into human-readable format.
+     *
+     * @param durationInMillis number of milliseconds
+     * @return formatted time as String
+     */
     public static String formatTime(long durationInMillis) {
         long millis = durationInMillis % 1000;
         long second = (durationInMillis / 1000) % 60;
@@ -66,6 +72,9 @@ public class Util {
         return getHexWidth() / 2; // 15 when hexagon is 10
     }
 
+    /**
+     * Calculates standard deviation of array.
+     */
     public static double calculateStandardDeviation(double[] array) {
         double sum = 0.0;
         for (double i : array) {
@@ -83,8 +92,14 @@ public class Util {
         return Math.sqrt(standardDeviation / length);
     }
 
+    /**
+     * Normalize scale of number in array, all numbers will be in interval [0, 1]
+     *
+     * @param array to normalize
+     * @return normalized array
+     */
     public static double[] normalize(int[] array) {
-        double[] result = new double[Settings.RULES_LENGTH];
+        double[] result = new double[array.length];
         double max = Arrays.stream(array).max().getAsInt();
         for (int i = 0; i < array.length; i++)
             result[i] = array[i] / max;
@@ -92,11 +107,19 @@ public class Util {
         return result;
     }
 
-    public static Polygon hexagonalPolygon(int column, int row, int size) {
+    /**
+     * Generates {@link Polygon} composed of {@link java.awt.Point}s of hexagon
+     *
+     * @param y        y-axis of hexagon first point
+     * @param x        x-axis of hexagon first point
+     * @param edgeSize length of hexagon edge
+     * @return polygon with hexagon points
+     */
+    public static Polygon hexagonalPolygon(int y, int x, int edgeSize) {
         Polygon polygon = new Polygon();
         for (int i = 0; i < 6; i++)
-            polygon.addPoint((int) (column + size * Math.sin(i * 2 * Math.PI / 6)),
-                    (int) (row + size * Math.cos(i * 2 * Math.PI / 6)));
+            polygon.addPoint((int) (y + edgeSize * Math.sin(i * 2 * Math.PI / 6)),
+                    (int) (x + edgeSize * Math.cos(i * 2 * Math.PI / 6)));
         return polygon;
     }
 }
