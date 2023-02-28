@@ -54,7 +54,8 @@ public class HexExplanation implements AntVisualization {
         background.setBackground(true);
         this.graphics.setStroke(new BasicStroke(2f));
         drawSquareGrid(400, 500);
-        drawHexGrid(1350, 500);
+        if (currentCycle > 150)
+            drawHexGrid(1350, 500);
 
         squareExplanationGraphicSequence();
         hexExplanationGraphicSequence();
@@ -63,7 +64,7 @@ public class HexExplanation implements AntVisualization {
     @Override
     public void createNextFrame() {
         System.out.println("creating frame " + imageCount++);
-        if (currentCycle++ > 420)
+        if (currentCycle++ > 480)
             sopped = true;
     }
 
@@ -75,15 +76,20 @@ public class HexExplanation implements AntVisualization {
     private void squareExplanationGraphicSequence() {
         singleAntMove(0, 470, 500, 0, -7, -2, "L", 485, 470);
         singleAntMove(45, 470, 500, 0, 7, 2, "R", 485, 670);
+
+        if (currentCycle > 120) {
+            drawRedCross(360, 510);
+            drawRedCross(560, 510);
+        }
     }
 
     private void hexExplanationGraphicSequence() {
-        singleAntMove(150, 1320, 500, 3, -6, -1.2d, "L1", 1385, 475);
-        singleAntMove(195, 1320, 500, -3, -6, -2.7d, "L2", 1282, 475);
-        singleAntMove(240, 1320, 500, 3, 6, 1.2d, "R1", 1385, 653);
-        singleAntMove(285, 1320, 500, -3, 6, 2.7d, "R2", 1282, 653);
-        singleAntMove(330, 1320, 500, 7, 0, 0d, "N", 1437, 568);
-        singleAntMove(375, 1320, 500, -7, 0, 4d, "U", 1229, 568);
+        singleAntMove(180, 1320, 500, 3, -6, -1.2d, "L1", 1385, 475);
+        singleAntMove(225, 1320, 500, -3, -6, -2.7d, "L2", 1282, 475);
+        singleAntMove(270, 1320, 500, 3, 6, 1.2d, "R1", 1385, 653);
+        singleAntMove(315, 1320, 500, -3, 6, 2.7d, "R2", 1282, 653);
+        singleAntMove(360, 1320, 500, 7, 0, 0d, "N", 1437, 568);
+        singleAntMove(405, 1320, 500, -7, 0, 4d, "U", 1229, 568);
     }
 
     private void singleAntMove(int cycle, int xReset, int yReset, int xAxisShift, int yAxisShift, double rotationalShift, String letter, int letterX, int letterY) {
@@ -147,6 +153,12 @@ public class HexExplanation implements AntVisualization {
         // bottom right lines
         diagonalHexagonLine(1, x + 155, y + 80);
         diagonalHexagonLine(1, x + 101, y + 170);
+    }
+
+    private void drawRedCross(int x, int y) {
+        graphics.setColor(Colors.RED.getColor());
+        graphics.drawLine(x, y, x + 80, y + 80);
+        graphics.drawLine(x, y + 80, x + 80, y);
     }
 
     private void diagonalHexagonLine(int hexagonVertex, int x, int y) {
