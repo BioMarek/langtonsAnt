@@ -243,6 +243,22 @@ public class SquareRule extends Rule {
         tenth.add(new SquareRule("LLLRRRL", 0, 1, 1));
         interesting.add(tenth);
 
+        // Highways for hex video
+        List<SquareRule> eleventh = new ArrayList<>();
+        eleventh.add(new SquareRule("LRRRRRLRRRRLLLL", 0, 1, 1));
+        eleventh.add(new SquareRule("LLLLLLLRRLLRLLL", 0, 1, 1));
+        eleventh.add(new SquareRule("RRLRLLRRRRLL", 0, 1, 1));
+        eleventh.add(new SquareRule("LLLRLRRLRLRRLLLL", 0, 1, 1));
+        interesting.add(eleventh);
+
+        // Fills for hex video
+        List<SquareRule> twelfth = new ArrayList<>();
+        twelfth.add(new SquareRule("RLLLLRRRLLLRRLL", 0, 1, 1));
+        twelfth.add(new SquareRule("LLLRRLRLLLLLLRRL", 0, 1, 1));
+        twelfth.add(new SquareRule("LLRLL", 0, 1, 1));
+        twelfth.add(new SquareRule("RLLLRLLLLRRLLLLL", 0, 1, 1));
+        interesting.add(twelfth);
+
         return interesting;
     }
 
