@@ -10,8 +10,8 @@ import Windows.GridFrame;
 public class Main {
     public static void main(String[] args) {
         // generates explanation of HexAnt
-        VideoGenerator videoGenerator = new VideoGenerator();
-        videoGenerator.generateHexAntExplanation();
+//        VideoGenerator videoGenerator = new VideoGenerator();
+//        videoGenerator.generateHexAntExplanation();
 
         // generates explanation of HexAnt
 //        VideoGenerator videoGenerator = new VideoGenerator();
@@ -26,7 +26,7 @@ public class Main {
 //        HexRuleGenerator hexRuleGenerator = new HexRuleGenerator(Settings.RULES_LENGTH);
 //        imageParallelWorker.drawAllRulesInParallel(hexRuleGenerator);
 
-//        VideoGenerator videoGenerator = new VideoGenerator();
-//        videoGenerator.generateInterestingHex(HexRule.getInteresting());
+        VideoGenerator videoGenerator = new VideoGenerator();
+        videoGenerator.generateInterestingHex(HexRule.getInteresting());
     }
 }

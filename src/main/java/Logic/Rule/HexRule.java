@@ -183,6 +183,8 @@ public class HexRule extends Rule {
         interesting.add(new HexRule("R1UUUL2L2R1N", 2));
         interesting.add(new HexRule("R2R2R1R2R2", 2, 0, -50));
         interesting.add(new HexRule("UL1R1L1UUR2U"));
+        interesting.add(new HexRule("R1R2R2R2R2", 2));
+        interesting.add(new HexRule("UL1R2R2UR2R2R1R2R1R1NUNR1L2U", 2));
 
         return interesting;
     }
