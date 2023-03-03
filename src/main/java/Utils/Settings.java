@@ -23,7 +23,7 @@ public class Settings {
     /**
      * Settings for parallel threads image generation
      */
-    public static int RULES_LENGTH = 5; // length of rules for which images will be generated
+    public static int RULES_LENGTH = 6; // length of rules for which images will be generated
     public static String IMAGE_BASE_PATH = "./movies/"; // folder where to save generated images
     public static int THREADS = 6; // number of threads used to generate images
 

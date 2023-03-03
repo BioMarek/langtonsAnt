@@ -10,7 +10,7 @@ public class Cross {
     public Graphics2D graphics;
 
     /**
-     * Draws white cross to divide four ant images.
+     * Draws TEXT Color cross to divide four ant images.
      */
     public void drawCross() {
         graphics.setColor(Colors.TEXT.getColor());

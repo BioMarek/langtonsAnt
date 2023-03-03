@@ -9,11 +9,11 @@ import java.awt.BasicStroke;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
-import java.awt.RenderingHints;
 import java.awt.geom.Arc2D;
 import java.awt.geom.RoundRectangle2D;
 
 import static Utils.Util.hexagonalPolygon;
+import static Utils.Util.switchAntiAliasing;
 
 public class HexLegend {
     public Graphics2D graphics;
@@ -22,14 +22,14 @@ public class HexLegend {
 
     public void drawLegend(Ant hexAnt) {
         this.hexAnt = hexAnt;
-        turnAntiAliasingOn(true);
+        switchAntiAliasing(graphics, true);
         drawInfo();
         drawDiagram();
-        turnAntiAliasingOn(false);
+        switchAntiAliasing(graphics, false);
     }
 
     /**
-     * Displays information about ant rule being animated and number of steps ant has made.
+     * Displays information about ant rule being animated and the number of steps the ant has made.
      */
     public void drawInfo() {
         graphics.setColor(Colors.TEXT.getColor());
@@ -210,18 +210,8 @@ public class HexLegend {
         graphics.setStroke(new BasicStroke(3f * Settings.HEX_MULTIPLIER));
     }
 
-    private void turnAntiAliasingOn(boolean isOn) {
-        if (isOn) {
-            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        } else {
-            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
-            graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
-        }
-    }
-
     /**
-     * Adjusts pixel position based on HEX_MULTIPLIER
+     * Adjusts pixel position based on Settings.HEX_MULTIPLIER
      *
      * @param num number to adjust
      * @return adjust number
