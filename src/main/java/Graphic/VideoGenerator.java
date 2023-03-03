@@ -41,11 +41,11 @@ public class VideoGenerator {
     }
 
     /**
-     * Generates *.mp4 for interesting rules which are passed as argument.
+     * Generates *.mp4 for interesting {@link SquareRule} which are passed as argument.
      *
      * @param interesting list of {@link SquareRule} for which we want to create videos
      */
-    public void generateInteresting(List<SquareRule> interesting) {
+    public void generateInterestingSquare(List<SquareRule> interesting) {
         for (SquareRule squareRule : interesting) {
             System.out.println("working on " + squareRule.rule);
             squareRule.setVariables();
@@ -63,7 +63,7 @@ public class VideoGenerator {
     }
 
     /**
-     * Works but cannot be played in VLC unless reencoded.
+     * Generates *.mp4 for interesting {@link HexRule}s which are passed as argument.
      *
      * @param interesting {@link Rule} from which videos will be encoded
      */
@@ -128,6 +128,9 @@ public class VideoGenerator {
         createMP4();
     }
 
+    /**
+     * Generates *.mp4 from current {@link AntVisualization}.
+     */
     private void createMP4() {
         ImageIterator imageIterator = new ImageIterator(antVisualization);
         try {
@@ -145,7 +148,12 @@ public class VideoGenerator {
         }
     }
 
-    private List<BufferedImage> createImages() {
+    /**
+     * Generates single frames of video used for gifs or debugging.
+     *
+     * @return list of frames as {@link BufferedImage}s
+     */
+    private List<BufferedImage> createFrames() {
         List<BufferedImage> result = new ArrayList<>();
 
         while (!antVisualization.stopped()) {
@@ -166,7 +174,7 @@ public class VideoGenerator {
             ImageOptions options = new ImageOptions();
             options.setDelay(35, TimeUnit.MILLISECONDS);
 
-            List<BufferedImage> bufferedImages = createImages();
+            List<BufferedImage> bufferedImages = createFrames();
 
             for (int i = 0; i < bufferedImages.size(); i++) {
                 System.out.println("rendering image " + i);
@@ -196,7 +204,7 @@ public class VideoGenerator {
     @Deprecated
     public void saveImages() {
         new File("gifs/" + Settings.SQUARE_RULE).mkdirs();
-        List<BufferedImage> bufferedImages = createImages();
+        List<BufferedImage> bufferedImages = createFrames();
 
         for (int i = 0; i < bufferedImages.size(); i++) {
             try {

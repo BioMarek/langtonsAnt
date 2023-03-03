@@ -1,9 +1,12 @@
 package Utils;
 
+import java.awt.Color;
 import java.awt.Polygon;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Util {
+    private static final Random random = new Random();
 
     /**
      * Prints grid, used for debugging purposes.
@@ -121,5 +124,9 @@ public class Util {
             polygon.addPoint((int) (y + edgeSize * Math.sin(i * 2 * Math.PI / 6)),
                     (int) (x + edgeSize * Math.cos(i * 2 * Math.PI / 6)));
         return polygon;
+    }
+
+    public static Color randomColor() {
+        return new Color(random.nextInt(0, 255), random.nextInt(0, 255), random.nextInt(0, 255));
     }
 }

@@ -20,13 +20,14 @@ public class Main {
 //        // Runs one rule based on setting realtime
 //        new GridFrame();
 
-//        Settings.generateHexagonalGridSettingsImages();
-//        ImageParallelWorker imageParallelWorker = new ImageParallelWorker();
+        Settings.generateHexagonalGridSettingsImages();
+        ImageParallelWorker imageParallelWorker = new ImageParallelWorker();
 //        SquareRulesGenerator squareRulesGenerator = new SquareRulesGenerator(Settings.RULES_LENGTH);
-//        HexRuleGenerator hexRuleGenerator = new HexRuleGenerator(Settings.RULES_LENGTH);
-//        imageParallelWorker.drawAllRulesInParallel(hexRuleGenerator);
+        HexRuleGenerator hexRuleGenerator = new HexRuleGenerator(Settings.RULES_LENGTH);
+        imageParallelWorker.drawAllRulesInParallel(hexRuleGenerator);
 
-        VideoGenerator videoGenerator = new VideoGenerator();
-        videoGenerator.generateInterestingHex(HexRule.getInteresting());
+        // generates videos
+//        VideoGenerator videoGenerator = new VideoGenerator();
+//        videoGenerator.generateInterestingHex(HexRule.getInteresting());
     }
 }

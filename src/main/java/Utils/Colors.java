@@ -3,6 +3,11 @@ package Utils;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import static Utils.Util.randomColor;
+
+/**
+ * Preset colors
+ */
 public enum Colors {
     LIGHT_GREY(new Color(210, 210, 210, Settings.ALPHA)),
     RED(new Color(255, 0, 0, Settings.ALPHA)),
@@ -58,7 +63,7 @@ public enum Colors {
             case 16 -> CORAL.getColor();
             case 17 -> KHAKI.getColor();
             case -1 -> BACKGROUND.getColor();
-            default -> throw new RuntimeException("Wrong number supplied");
+            default -> randomColor();
         };
     }
 
@@ -76,7 +81,7 @@ public enum Colors {
             case 9 -> new Color(0, 255, 255, 150);
             case 10 -> new Color(0, 255, 255, 50);
             case -1 -> BACKGROUND.getColor();
-            default -> throw new RuntimeException("Wrong number supplied");
+            default -> randomColor();
         };
     }
 
@@ -94,7 +99,7 @@ public enum Colors {
             case 9 -> new Color(139, 69, 19, 255);
             case 10 -> new Color(139, 69, 19, 100);
             case -1 -> BACKGROUND.getColor();
-            default -> throw new RuntimeException("Wrong number supplied");
+            default -> randomColor();
         };
     }
 
