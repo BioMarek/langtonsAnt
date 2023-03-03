@@ -7,7 +7,6 @@ import Utils.Settings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -33,6 +32,7 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
         Arrays.fill(intArray, 0);
         this.rulesReturned = 0;
         this.lastRule = "5".repeat(rulesLength);
+        this.currentRuleString = getRuleString();
     }
 
     @Override
