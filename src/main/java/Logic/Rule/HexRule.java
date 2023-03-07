@@ -192,11 +192,11 @@ public class HexRule extends Rule {
     public static List<HexRule> getToHighRes() {
         Settings.generateHexInterestingSettings();
         List<HexRule> interesting = new ArrayList<>();
-        interesting.add(new HexRule("L1R2UUUUUU", 2)); // smaller scale
+        interesting.add(new HexRule("L1R2UUUUUU", 2));
         interesting.add(new HexRule("L2L2L2NUL1")); // 1
         interesting.add(new HexRule("L2NNL1L2L1")); // 2
         interesting.add(new HexRule("R1UR2L2L2R1NU")); // 0
-        interesting.add(new HexRule("R2L2R2L1R2UU")); // 0
+        interesting.add(new HexRule("R2L2R2L1R2UU", 2)); // 0
         interesting.add(new HexRule("R2NNR1R2R1")); // 1
         interesting.add(new HexRule("R2R1UNR1R1R1R2")); // 1
 
