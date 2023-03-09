@@ -28,6 +28,6 @@ public class Main {
 
         // generates videos
         VideoGenerator videoGenerator = new VideoGenerator();
-        videoGenerator.generateInterestingHex(HexRule.getInteresting());
+        videoGenerator.generateInterestingHex(HexRule.getHighways());
     }
 }

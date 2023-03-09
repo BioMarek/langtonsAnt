@@ -32,10 +32,11 @@ public class HexLegend {
      * Displays information about ant rule being animated and the number of steps the ant has made.
      */
     public void drawInfo() {
+        int ruleTextSize = hexAnt.ruleLength() > 17 ? (int) (fontUnit * 0.9) : fontUnit;
         graphics.setColor(Colors.TEXT.getColor());
         graphics.setFont(new Font("Arial", Font.BOLD, (int) (fontUnit * 1.1)));
         graphics.drawString("Rule: ", Settings.LEGEND_START_X + fontUnit, fontUnit * 2);
-        graphics.drawString(hexAnt.rule.getAttributeString(fontUnit).getIterator(), Settings.LEGEND_START_X + (int) (fontUnit * 4.5), fontUnit * 2);
+        graphics.drawString(hexAnt.rule.getAttributeString(ruleTextSize).getIterator(), Settings.LEGEND_START_X + (int) (fontUnit * 4.5), fontUnit * 2);
         graphics.drawString("Steps: " + Util.numberFormatter(hexAnt.steps), Settings.LEGEND_START_X + fontUnit, fontUnit * 4);
 
 
