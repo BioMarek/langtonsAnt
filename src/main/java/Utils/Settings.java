@@ -52,7 +52,7 @@ public class Settings {
      * Settings for hexagonal grid
      */
     public static int HEX_SIDE_LEN = 6; // length of hexagon side
-    public static HexRule HEX_RULE = new HexRule("R1L2NR2UL1UR1R1UNNL1R1UL2L2R2");
+    public static HexRule HEX_RULE = new HexRule("L1L1L1L1R1UUUU");
     public static int HEXES_USED = 700; // smallest number of colored hexes required to save image, eliminates small highways
     public static double STD_LIMIT = 0.09; // normalized standard deviation limit
     public static int RANDOM_RULES_LIMIT = 100000; // try not to set to number that is higher than all rules of given length

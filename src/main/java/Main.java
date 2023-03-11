@@ -17,7 +17,7 @@ public class Main {
 //        VideoGenerator videoGenerator = new VideoGenerator();
 //        videoGenerator.generateSquareAntExplanation();
 
-//        // Runs one rule based on setting realtime
+        // Runs one rule based on setting realtime
 //        new GridFrame();
 
 //        Settings.generateHexagonalGridSettingsImages();
@@ -28,6 +28,6 @@ public class Main {
 
         // generates videos
         VideoGenerator videoGenerator = new VideoGenerator();
-        videoGenerator.generateInterestingHex(HexRule.getNew());
+        videoGenerator.generateInterestingHex(HexRule.getInteresting());
     }
 }
