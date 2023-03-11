@@ -44,6 +44,13 @@ public class SquareRule extends Rule {
         return attributedString;
     }
 
+    /**
+     * For highways it is good to slowdown animation when highway emerges so that it won't reach end of screen too fast.
+     *
+     * @param rule             {@link SquareRule}
+     * @param slowdownSteps    after what step slowdown should occur
+     * @param slowdownModifier how much to slowdown/speedup
+     */
     public SquareRule(String rule, int slowdownSteps, double slowdownModifier, int sizeOfSquare) {
         this.rule = rule;
         this.slowdownSteps = slowdownSteps;

@@ -26,21 +26,35 @@ public class HexPosition {
     public HexPosition() {
     }
 
+    /**
+     * Moves {@link Logic.Ant.HexAnt} based on its current orientation and color of square it is standing on.
+     *
+     * @param hexMove
+     */
     public void move(HexMove hexMove) {
         turn(hexMove);
         moveForward();
     }
 
+    /**
+     * Calculates where {@link Logic.Ant.HexAnt} is going to be facing after one move. It depends on color of hexagon
+     * the ant is standing on.
+     *
+     * @param hexMove
+     */
     public void turn(HexMove hexMove) {
         currentRotation += hexMove.degrees;
-        if (currentRotation > 360) // TODO can be done as modulo?
+        if (currentRotation > 360)
             currentRotation -= 360;
         if (currentRotation < 0)
             currentRotation += 360;
     }
 
+    /**
+     * Calculates where {@link Logic.Ant.HexAnt} is going to be after move forward. It depends on current ant position
+     * and orientation.
+     */
     public void moveForward() {
-        // TODO refactor
         if (row % 2 == 0)
             switch (currentRotation) {
                 case 30 -> {

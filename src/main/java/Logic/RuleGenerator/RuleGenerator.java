@@ -17,6 +17,12 @@ public abstract class RuleGenerator implements Iterator<Rule> {
         return rulesReturned < totalNumOfRules;
     }
 
+    /**
+     * Generates all rules of length specified in {@link Settings} divides them into lists of equal size. Each list will
+     * be processed by one thread. Number of threads is again specified in {@link Settings}.
+     *
+     * @return List of rules
+     */
     public List<List<Rule>> getAllRulesForThreads() {
         List<List<Rule>> result = new ArrayList<>();
         int forThread = (totalNumOfRules / Settings.THREADS) + 1;

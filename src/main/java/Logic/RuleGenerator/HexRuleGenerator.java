@@ -56,6 +56,9 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
         }
     }
 
+    /**
+     * @return {@link HexRule} corresponding to current intArray.
+     */
     private HexRule generateRule() {
         List<HexMove> result = new ArrayList<>();
         for (int move : intArray) {
@@ -111,6 +114,9 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
         currentRuleString = getRuleString();
     }
 
+    /**
+     * @return String representing mirrored rule of current intArray. L1 -> R1, L2 -> R2, ...
+     */
     private String getMirroredString() {
         StringBuilder result = new StringBuilder();
         for (int i : intArray) {
@@ -125,6 +131,11 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
         return result.toString();
     }
 
+    /**
+     * String as key in set is faster and easier to use than array. This function converts array to string.
+     *
+     * @return String corresponding to current state of intArray
+     */
     private String getRuleString() {
         StringBuilder result = new StringBuilder();
         for (int i : intArray) {

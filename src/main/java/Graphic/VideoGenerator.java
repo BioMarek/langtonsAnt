@@ -88,6 +88,11 @@ public class VideoGenerator {
         }
     }
 
+    /**
+     * Generates *.mp4 for interesting {@link SquareRule}s containing four ants which are passed as argument.
+     *
+     * @param interesting {@link Rule} from which videos will be encoded
+     */
     public void generateInteresting(Set<List<SquareRule>> interesting) {
         for (List<SquareRule> squareRules : interesting) {
             squareRules.get(0).setVariables();
@@ -110,12 +115,14 @@ public class VideoGenerator {
             Settings.SKIP = Math.max(Math.max(ant0, ant1), Math.max(ant2, ant3));
 
             System.out.println("max steps: " + squareAnt.steps + " skip: " + Settings.SKIP);
-
             antVisualization = new AntGraphicFour(new SquareAnt(squareRules.get(0)), new SquareAnt(squareRules.get(1)), new SquareAnt(squareRules.get(2)), new SquareAnt(squareRules.get(3)));
             createMP4();
         }
     }
 
+    /**
+     * Generates animation of explanation for {@link SquareAnt}.
+     */
     public void generateSquareAntExplanation() {
         Settings.showExplanationFirstPartSettings();
         SquareAnt squareAnt = new SquareAnt(Settings.SQUARE_RULE);
@@ -123,6 +130,9 @@ public class VideoGenerator {
         createMP4();
     }
 
+    /**
+     * Generates animation of explanation for {@link HexAnt}.
+     */
     public void generateHexAntExplanation() {
         antVisualization = new HexExplanation();
         createMP4();

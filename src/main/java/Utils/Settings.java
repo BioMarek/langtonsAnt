@@ -3,6 +3,9 @@ package Utils;
 import Logic.Rule.HexRule;
 import Logic.Rule.SquareRule;
 
+/**
+ * Various setting specifying how program should behave.
+ */
 public class Settings {
     /**
      * General settings
@@ -32,7 +35,7 @@ public class Settings {
      */
     public static int VIDEO_FPS = 30; // frames per second for mp4
     public static int VIDEO_NUM_IMAGES = 180; // number of images in video, we expect 30 images per second, 240 image, 180 highway
-    public static String VIDEO_BASE_PATH = "./movies/";
+    public static String VIDEO_BASE_PATH = "./movies/"; // where to save generated videos
     public static int VIDEO_REPEAT_LAST_FRAME = 30; // how many times the last image should be repeated in video, 30 is one second
 
     // use to show only center of image and fill entire screen with even if some part already reached the border,
@@ -54,7 +57,7 @@ public class Settings {
     public static int HEX_SIDE_LEN = 6; // length of hexagon side
     public static HexRule HEX_RULE = new HexRule("L1L1L1L1R1UUUU");
     public static int HEXES_USED = 700; // smallest number of colored hexes required to save image, eliminates small highways
-    public static double STD_LIMIT = 0.09; // normalized standard deviation limit
+    public static double STD_LIMIT = 0.09; // normalized standard deviation limit, eliminates images with random distribution of colors
     public static int RANDOM_RULES_LIMIT = 100000; // try not to set to number that is higher than all rules of given length
     public static boolean RANDOM_RULES = false; // whether to use random rules or all rules of given length
     public static int HEX_MULTIPLIER = 1; // scale for Visualization, multiplies background, grid, legend size

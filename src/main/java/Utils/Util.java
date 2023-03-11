@@ -7,6 +7,9 @@ import java.awt.RenderingHints;
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * Helper functions used across the project.
+ */
 public class Util {
     private static final Random random = new Random();
 
@@ -65,14 +68,37 @@ public class Util {
         return String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
     }
 
+    /**
+     * @return width of hexagon in pixels if its side has length Settings.HEX_SIDE_LEN
+     */
     public static int getHexWidth() {
         return (int) (Settings.HEX_SIDE_LEN * 1.7); // 17 when hexagon is 10
     }
 
+    /**
+     * @return height of hexagon in pixels if its side has length Settings.HEX_SIDE_LEN
+     */
     public static int getHexHeight() {
         return (int) (Settings.HEX_SIDE_LEN * 1.5); // 15 when hexagon is 10
     }
 
+    /**
+     * Hexagons on the odd row are moved by half of width hexagon to fit in gaps created by hexagons on even line.
+     * .......*       *
+     * .....*   *   *   *
+     * ...*       *       *
+     * ...*       *       *
+     * ...| *   *   *   *   *
+     * ...|   *       *       *
+     * ...|   *       *       *
+     * ...|     *   *   *   *
+     * ...|       *       *
+     * ...|       |
+     * ...|<----->|
+     * ...Length of shift
+     *
+     * @return how much to shift starting position of hexagon on the odd line
+     */
     public static int getHexPositionShift() {
         return getHexWidth() / 2; // 15 when hexagon is 10
     }

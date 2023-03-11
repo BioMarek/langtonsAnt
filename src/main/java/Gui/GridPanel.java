@@ -1,10 +1,8 @@
-package Windows;
+package Gui;
 
 import Graphic.AntVisualization;
-import Graphic.Visualization.HexExplanation;
 import Graphic.Visualization.HexGraphicSingle;
 import Logic.Ant.SquareAnt;
-import Logic.Ant.HexAnt;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;

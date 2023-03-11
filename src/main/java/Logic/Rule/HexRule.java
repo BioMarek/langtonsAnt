@@ -16,6 +16,13 @@ public class HexRule extends Rule {
     private int rowShift = 0;
     private int columnShift = 0;
 
+    /**
+     * For highways it is good to slowdown animation when highway emerges so that it won't reach end of screen too fast.
+     *
+     * @param rule             {@link HexRule}
+     * @param slowdownSteps    after what step slowdown should occur
+     * @param slowdownModifier how much to slowdown/speedup
+     */
     public HexRule(List<HexMove> rule, int slowdownSteps, double slowdownModifier) {
         this.rule = rule;
         this.slowdownSteps = slowdownSteps;

@@ -1,4 +1,4 @@
-package Windows;
+package Gui;
 
 import javax.swing.JFrame;
 import java.awt.GraphicsDevice;

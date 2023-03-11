@@ -31,7 +31,6 @@ public class ImageParallelWorker {
         try {
             latch.await();
             long stop = System.currentTimeMillis();
-            System.out.println("\nThere is: " + (int) Math.pow(6, Settings.RULES_LENGTH) + " rules total");
             System.out.println("There is: " + totalElements(rules) + " rules generated");
             System.out.println("Skipped:  " + counter);
             System.out.println("Saved:    " + (totalElements(rules) - counter.get()));
