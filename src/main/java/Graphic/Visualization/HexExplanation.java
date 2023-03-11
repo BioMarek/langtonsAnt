@@ -18,6 +18,9 @@ import java.text.AttributedString;
 
 import static Utils.Util.hexagonalPolygon;
 
+/**
+ * Used for explaining allowed directions for {@link Logic.Ant.SquareAnt} and {@link Logic.Ant.HexAnt}.
+ */
 public class HexExplanation implements AntVisualization {
     private static final int HEXAGON_SIZE = 60;
     private static final double ROTATE_ANGLE = Math.toRadians(3);

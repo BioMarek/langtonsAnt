@@ -42,21 +42,6 @@ public class GridPanel extends JPanel implements ActionListener {
     /**
      * Hexagonal visualization
      */
-//    public GridPanel() {
-//        this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
-//        this.setFocusable(true);
-//        this.squareAnt = new SquareAnt(Settings.SQUARE_RULE);
-//
-//        Settings.generateHexagonalGridSettings();
-//
-//        this.antVisualization = new HexGraphicSingle();
-//
-//        startTimer();
-//    }
-
-    /**
-     * Hexagonal explanation
-     */
     public GridPanel() {
         this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
         this.setFocusable(true);
@@ -64,10 +49,25 @@ public class GridPanel extends JPanel implements ActionListener {
 
         Settings.generateHexagonalGridSettings();
 
-        this.antVisualization = new HexExplanation();
+        this.antVisualization = new HexGraphicSingle();
 
         startTimer();
     }
+
+    /**
+     * Hexagonal explanation
+     */
+//    public GridPanel() {
+//        this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
+//        this.setFocusable(true);
+//        this.squareAnt = new SquareAnt(Settings.SQUARE_RULE);
+//
+//        Settings.generateHexagonalGridSettings();
+//
+//        this.antVisualization = new HexExplanation();
+//
+//        startTimer();
+//    }
 
     @Override
     public void paintComponent(Graphics g) {

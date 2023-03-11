@@ -8,13 +8,13 @@ public class Settings {
      * General settings
      */
     public static int ALPHA = 200; // alpha of colors used in AntGraphic
-    public static boolean SHOW_GRID = false;
+    public static boolean SHOW_GRID = false; // whether to show grid, works only of square ant
     public static SquareRule SQUARE_RULE = new SquareRule("RL", 1, 1, 1);
     public static int TIMER_DELAY = 33; // realtime animation delay between frames
     public static int SKIP = 100; // steps to skip between frames
-    public static long MAX_MOVES = 50_000_000;
+    public static long MAX_MOVES = 50_000_000; // max moves ant will be allowed to do
     public static int SIZE_OF_SQUARE = 1; // size of square on ant board
-    public static int LEGEND_START_X = 1500;
+    public static int LEGEND_START_X = 1500; // pixel at which legend will start, 0 is at left side
     public static int GRID_WIDTH = 1500;
     public static int GRID_HEIGHT = 1080;
     public static int BACKGROUND_WIDTH = 1920;
@@ -23,9 +23,9 @@ public class Settings {
     /**
      * Settings for parallel threads image generation
      */
-    public static int RULES_LENGTH = 16;
-    public static String IMAGE_BASE_PATH = "./movies/";
-    public static int THREADS = 6;
+    public static int RULES_LENGTH = 20; // length of rules for which images will be generated
+    public static String IMAGE_BASE_PATH = "./movies/"; // folder where to save generated images
+    public static int THREADS = 6; // number of threads used to generate images
 
     /**
      * Settings for gif and mp4 generation
@@ -51,14 +51,14 @@ public class Settings {
     /**
      * Settings for hexagonal grid
      */
-    public static int HEX_SIDE_LEN = 6;
-    public static HexRule HEX_RULE = new HexRule("R1L2NR2UL1UR1R1UNNL1R1UL2L2R2");
-    public static int HEXES_USED = 700;
-    public static double STD_LIMIT = 0.09;
-    public static int RANDOM_RULES_LIMIT = 20000;
-    public static boolean RANDOM_RULES = false;
-    public static int HEX_MULTIPLIER = 1;
-    public static boolean HEX_ALTERNATIVE_COLOR = false;
+    public static int HEX_SIDE_LEN = 6; // length of hexagon side
+    public static HexRule HEX_RULE = new HexRule("L1L1L1L1R1UUUU");
+    public static int HEXES_USED = 700; // smallest number of colored hexes required to save image, eliminates small highways
+    public static double STD_LIMIT = 0.09; // normalized standard deviation limit
+    public static int RANDOM_RULES_LIMIT = 100000; // try not to set to number that is higher than all rules of given length
+    public static boolean RANDOM_RULES = false; // whether to use random rules or all rules of given length
+    public static int HEX_MULTIPLIER = 1; // scale for Visualization, multiplies background, grid, legend size
+    public static boolean HEX_ALTERNATIVE_COLOR = false; // whether to use alternative hex colors, check Colors for more info
 
     public static void showExplanationFirstPartSettings() {
         Settings.SHOW_GRID = true;

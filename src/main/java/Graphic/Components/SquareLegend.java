@@ -9,9 +9,10 @@ import Utils.Util;
 import java.awt.BasicStroke;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.geom.Arc2D;
 import java.awt.geom.RoundRectangle2D;
+
+import static Utils.Util.switchAntiAliasing;
 
 public class SquareLegend {
     public Graphics2D graphics;
@@ -19,14 +20,14 @@ public class SquareLegend {
 
     public void drawLegend(Ant ant) {
         this.ant = (SquareAnt) ant;
-        turnAntiAliasingOn(true);
+        switchAntiAliasing(graphics, true);
         drawInfo();
         drawDiagram();
-        turnAntiAliasingOn(false);
+        switchAntiAliasing(graphics, false);
     }
 
     /**
-     * Displays information about ant rule being animated and number of steps ant has made.
+     * Displays information about ant rule being animated and the number of steps the ant has made.
      */
     public void drawInfo() {
         int fontUnit = Settings.BACKGROUND_HEIGHT / 60;
@@ -145,15 +146,5 @@ public class SquareLegend {
         graphics.drawLine(x + 19, y + 1, x + 10, y - 6);
         graphics.drawLine(x + 18, y + 1, x + 9, y + 6);
         graphics.setStroke(new BasicStroke(3f));
-    }
-
-    private void turnAntiAliasingOn(boolean isOn) {
-        if (isOn) {
-            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        } else {
-            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
-            graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
-        }
     }
 }

@@ -1,9 +1,14 @@
 package Utils;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Polygon;
+import java.awt.RenderingHints;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Util {
+    private static final Random random = new Random();
 
     /**
      * Prints grid, used for debugging purposes.
@@ -121,5 +126,24 @@ public class Util {
             polygon.addPoint((int) (y + edgeSize * Math.sin(i * 2 * Math.PI / 6)),
                     (int) (x + edgeSize * Math.cos(i * 2 * Math.PI / 6)));
         return polygon;
+    }
+
+    /**
+     * Switches anti-aliasing on or off.
+     *
+     * @param isOn whether AA should be turned on
+     */
+    public static void switchAntiAliasing(Graphics2D graphics, boolean isOn) {
+        if (isOn) {
+            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        } else {
+            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
+            graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+        }
+    }
+
+    public static Color randomColor() {
+        return new Color(random.nextInt(0, 255), random.nextInt(0, 255), random.nextInt(0, 255));
     }
 }
