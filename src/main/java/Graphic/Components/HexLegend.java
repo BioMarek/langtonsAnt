@@ -212,7 +212,7 @@ public class HexLegend {
     }
 
     /**
-     * Adjusts pixel position based on Settings.HEX_MULTIPLIER
+     * Adjusts pixel position based on Settings.HEX_MULTIPLIER. Thanks to that Legend has correct scale.
      *
      * @param num number to adjust
      * @return adjust number

@@ -28,11 +28,6 @@ public class SquareRule extends Rule {
     }
 
     @Override
-    public String getType() {
-        return "square";
-    }
-
-    @Override
     public String getSquareRule() {
         return rule;
     }
@@ -45,7 +40,7 @@ public class SquareRule extends Rule {
     }
 
     /**
-     * For highways it is good to slowdown animation when highway emerges so that it won't reach end of screen too fast.
+     * For highways, it is good to slowdown animation when highway emerges so that it won't reach end of screen too fast.
      *
      * @param rule             {@link SquareRule}
      * @param slowdownSteps    after what step slowdown should occur

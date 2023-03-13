@@ -21,9 +21,6 @@ public abstract class Rule {
 
     public abstract String getElement(int position);
 
-    // TODO refactor
-    public abstract String getType();
-
     public abstract AttributedString getAttributeString(int fontUnit);
 
     public String getSquareRule() {

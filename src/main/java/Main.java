@@ -1,6 +1,11 @@
 import Graphic.VideoGenerator;
+import Gui.GridFrame;
 import Logic.Rule.HexRule;
 import Logic.Rule.SquareRule;
+import Logic.RuleGenerator.HexRuleGenerator;
+import Logic.RuleGenerator.SquareRulesGenerator;
+import Threads.ImageParallelWorker;
+import Utils.Settings;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,7 +22,7 @@ public class Main {
 
         /** Runs one rule either square or hex based on setting realtime. Go to {@link Gui.GridPanel} and uncomment
          * correct constructor */
-//        new GridFrame();
+        new GridFrame();
 
 
         /** Generates images of given length either all or limited number of randomly selected.*/
@@ -29,8 +34,8 @@ public class Main {
 
 
         /** Generates videos of rules described in {@link HexRule} or {@link SquareRule} */
-        VideoGenerator videoGenerator = new VideoGenerator();
-//        videoGenerator.generateInterestingSquare(SquareRule.getInteresting());
-        videoGenerator.generateInterestingHex(HexRule.getInteresting());
+//        VideoGenerator videoGenerator = new VideoGenerator();
+////        videoGenerator.generateInterestingSquare(SquareRule.getInteresting());
+//        videoGenerator.generateInterestingHex(HexRule.getInteresting());
     }
 }
