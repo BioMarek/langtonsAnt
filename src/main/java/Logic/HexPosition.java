@@ -3,7 +3,8 @@ package Logic;
 import java.util.List;
 
 /**
- * Degrees on hexagon
+ * Describes where the {@link Logic.Ant.HexAnt} is on the grid and its orientation. See /documentation/hexagonalGrid.png.
+ * Degrees of directions the Ant can face on hexagon:
  * ....-30    30      |      330    30
  * -90            90  |  270            90
  * ...-150    150     |      210    150
@@ -29,7 +30,7 @@ public class HexPosition {
     /**
      * Moves {@link Logic.Ant.HexAnt} based on its current orientation and color of square it is standing on.
      *
-     * @param hexMove
+     * @param hexMove move which should be performed
      */
     public void move(HexMove hexMove) {
         turn(hexMove);
@@ -40,7 +41,7 @@ public class HexPosition {
      * Calculates where {@link Logic.Ant.HexAnt} is going to be facing after one move. It depends on color of hexagon
      * the ant is standing on.
      *
-     * @param hexMove
+     * @param hexMove move which should be performed
      */
     public void turn(HexMove hexMove) {
         currentRotation += hexMove.degrees;

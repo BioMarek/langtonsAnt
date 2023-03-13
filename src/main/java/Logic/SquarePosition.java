@@ -1,5 +1,8 @@
 package Logic;
 
+/**
+ * Describes where the {@link Logic.Ant.SquareAnt} is on the grid and direction it is facing.
+ */
 public class SquarePosition {
     public int row;
     public int column;
