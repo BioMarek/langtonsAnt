@@ -31,7 +31,7 @@ public class Main {
         // HexAnt visualization
 //        new GridFrame(new GridPanel(new HexGraphicSingle()));
         // SquareAnt visualization
-        new GridFrame(new GridPanel(new AntGraphicSingle()));
+        new GridFrame(new GridPanel());
 
 
         /** Generates images of given length either all or limited number of randomly selected.*/

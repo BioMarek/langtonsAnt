@@ -83,6 +83,15 @@ public class GridPanel extends JPanel implements ActionListener {
         startTimer();
     }
 
+    public GridPanel() {
+        this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
+        this.setFocusable(true);
+        this.squareAnt = new SquareAnt(Settings.SQUARE_RULE);
+        this.antVisualization = new AntGraphicSingle();
+        ((AntGraphicSingle) antVisualization).squareAnt = squareAnt;
+        startTimer();
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
