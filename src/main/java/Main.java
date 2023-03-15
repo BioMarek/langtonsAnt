@@ -1,5 +1,9 @@
 import Graphic.VideoGenerator;
+import Graphic.Visualization.AntGraphicSingle;
+import Graphic.Visualization.HexExplanation;
+import Graphic.Visualization.HexGraphicSingle;
 import Gui.GridFrame;
+import Gui.GridPanel;
 import Logic.Rule.HexRule;
 import Logic.Rule.SquareRule;
 import Logic.RuleGenerator.HexRuleGenerator;
@@ -22,7 +26,12 @@ public class Main {
 
         /** Runs one rule either square or hex based on setting realtime. Go to {@link Gui.GridPanel} and uncomment
          * correct constructor */
-        new GridFrame();
+        // four SquareAnts per screen
+//        new GridFrame(new GridPanel(new SquareRule("RL"), new SquareRule("RLR"), new SquareRule("RLRR"), new SquareRule("RLRRR")));
+        // HexAnt visualization
+//        new GridFrame(new GridPanel(new HexGraphicSingle()));
+        // SquareAnt visualization
+        new GridFrame(new GridPanel(new AntGraphicSingle()));
 
 
         /** Generates images of given length either all or limited number of randomly selected.*/

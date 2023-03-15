@@ -53,6 +53,13 @@ public class SquareRule extends Rule {
         this.sizeOfSquare = sizeOfSquare;
     }
 
+    public SquareRule(String rule) {
+        this.rule = rule;
+        this.slowdownSteps = 1;
+        this.slowdownModifier = 1;
+        this.sizeOfSquare = 1;
+    }
+
     public void setVariables() {
         Settings.SQUARE_RULE = this;
         Settings.SIZE_OF_SQUARE = sizeOfSquare;

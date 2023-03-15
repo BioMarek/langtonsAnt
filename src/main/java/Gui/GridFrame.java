@@ -8,9 +8,9 @@ public class GridFrame extends JFrame {
     GraphicsEnvironment graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();
     GraphicsDevice device = graphics.getDefaultScreenDevice();
 
-    public GridFrame() {
+    public GridFrame(GridPanel gridPanel) {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.add(new GridPanel());
+        this.add(gridPanel);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setUndecorated(true);
