@@ -27,6 +27,7 @@ public class HexRule extends Rule {
         this.slowdownSteps = slowdownSteps;
         this.slowdownModifier = slowdownModifier;
         this.hexSize = 1;
+        setVariables();
     }
 
     public HexRule(String rule) {
@@ -34,13 +35,15 @@ public class HexRule extends Rule {
         this.slowdownSteps = 1;
         this.slowdownModifier = 1;
         this.hexSize = 1;
+        setVariables();
     }
 
-    public HexRule(String rule, int hexSize) {
+    public HexRule(String rule, int hexSideLen) {
         this.rule = stringToMoves(rule);
         this.slowdownSteps = 1;
         this.slowdownModifier = 1;
-        this.hexSize = hexSize;
+        this.hexSize = hexSideLen;
+        setVariables();
     }
 
     public HexRule(String rule, int hexSize, int rowShift, int columnShift) {
@@ -50,6 +53,7 @@ public class HexRule extends Rule {
         this.hexSize = hexSize;
         this.rowShift = rowShift;
         this.columnShift = columnShift;
+        setVariables();
     }
 
     @Override
@@ -76,7 +80,6 @@ public class HexRule extends Rule {
         return attributedString;
     }
 
-    @Override
     public void setVariables() {
         Settings.HEX_RULE = this;
         Settings.HEX_SIDE_LEN = hexSize;

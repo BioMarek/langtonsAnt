@@ -26,6 +26,4 @@ public abstract class Rule {
     public String getSquareRule() {
         return null;
     }
-
-    public abstract void setVariables();
 }

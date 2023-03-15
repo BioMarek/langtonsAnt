@@ -32,7 +32,7 @@ public class SquareRule extends Rule {
         return rule;
     }
 
-    public AttributedString getAttributeString(int fontUnit){
+    public AttributedString getAttributeString(int fontUnit) {
         AttributedString attributedString = new AttributedString(rule);
         attributedString.addAttribute(TextAttribute.SIZE, fontUnit * 1.2);
         attributedString.addAttribute(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD, 0, rule.length());
@@ -51,6 +51,7 @@ public class SquareRule extends Rule {
         this.slowdownSteps = slowdownSteps;
         this.slowdownModifier = slowdownModifier;
         this.sizeOfSquare = sizeOfSquare;
+        setVariables();
     }
 
     public SquareRule(String rule) {
@@ -58,6 +59,15 @@ public class SquareRule extends Rule {
         this.slowdownSteps = 1;
         this.slowdownModifier = 1;
         this.sizeOfSquare = 1;
+        setVariables();
+    }
+
+    public SquareRule(String rule, int sizeOfSquare) {
+        this.rule = rule;
+        this.slowdownSteps = 1;
+        this.slowdownModifier = 1;
+        this.sizeOfSquare = sizeOfSquare;
+        setVariables();
     }
 
     public void setVariables() {
@@ -217,8 +227,8 @@ public class SquareRule extends Rule {
         List<SquareRule> sixth = new ArrayList<>();
         sixth.add(new SquareRule("RRLLLLLRLLLLLLLL", 0, 1, 1));
         sixth.add(new SquareRule("LLRRRRRLRRRRRRRR", 0, 1, 1));
-        sixth.add(new SquareRule("RRLRLLRRRRRLRL", 0, 1, 2));
-        sixth.add(new SquareRule("LLRLRRLLLLLRLR", 0, 1, 2));
+        sixth.add(new SquareRule("RRLRLLRRRRRLRL", 0, 1, 1));
+        sixth.add(new SquareRule("LLRLRRLLLLLRLR", 0, 1, 1));
         interesting.add(sixth);
 
         List<SquareRule> seventh = new ArrayList<>();
@@ -247,9 +257,9 @@ public class SquareRule extends Rule {
         // Highways
         List<SquareRule> tenth = new ArrayList<>();
         tenth.add(new SquareRule("LLRRRLRLRLLR", 0, 1, 2));
-        tenth.add(new SquareRule("LLRLRRLL", 0, 1, 1));
-        tenth.add(new SquareRule("LRLRRLRLLLRLRLRL", 0, 1, 1));
-        tenth.add(new SquareRule("LLLRRRL", 0, 1, 1));
+        tenth.add(new SquareRule("LLRLRRLL", 0, 1, 2));
+        tenth.add(new SquareRule("LRLRRLRLLLRLRLRL", 0, 1, 2));
+        tenth.add(new SquareRule("LLLRRRL", 0, 1, 2));
         interesting.add(tenth);
 
         // Highways for hex video

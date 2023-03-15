@@ -48,7 +48,6 @@ public class VideoGenerator {
     public void generateInterestingSquare(List<SquareRule> interesting) {
         for (SquareRule squareRule : interesting) {
             System.out.println("working on " + squareRule.rule);
-            squareRule.setVariables();
             SquareAnt squareAnt = new SquareAnt(Settings.SQUARE_RULE);
             squareAnt.allMoves(); // calculates number of moves in total
 
@@ -70,7 +69,6 @@ public class VideoGenerator {
     public void generateInterestingHex(List<HexRule> interesting) {
         for (HexRule hexRule : interesting) {
             System.out.println("working on " + hexRule.rule);
-            hexRule.setVariables();
 
             HexAnt hexAnt = new HexAnt(hexRule);
             hexRule.setShifts(hexAnt);
@@ -95,7 +93,6 @@ public class VideoGenerator {
      */
     public void generateInteresting(Set<List<SquareRule>> interesting) {
         for (List<SquareRule> squareRules : interesting) {
-            squareRules.get(0).setVariables();
             SquareAnt squareAnt = new SquareAnt(squareRules.get(0));
             squareAnt.allMoves(); // calculates number of moves in total
             int ant0 = squareAnt.steps / Settings.VIDEO_NUM_IMAGES;

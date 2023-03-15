@@ -29,9 +29,11 @@ public class Main {
         // four SquareAnts per screen
 //        new GridFrame(new GridPanel(new SquareRule("RL"), new SquareRule("RLR"), new SquareRule("RLRR"), new SquareRule("RLRRR")));
         // HexAnt visualization
+//        Settings.HEX_RULE = new HexRule("L1L1L1L1R1UUUU", 6);
 //        new GridFrame(new GridPanel(new HexGraphicSingle()));
         // SquareAnt visualization
-        new GridFrame(new GridPanel());
+//        Settings.SQUARE_RULE = new SquareRule("RLRLL", 4);
+//        new GridFrame(new GridPanel());
 
 
         /** Generates images of given length either all or limited number of randomly selected.*/
@@ -43,8 +45,9 @@ public class Main {
 
 
         /** Generates videos of rules described in {@link HexRule} or {@link SquareRule} */
-//        VideoGenerator videoGenerator = new VideoGenerator();
-////        videoGenerator.generateInterestingSquare(SquareRule.getInteresting());
+        VideoGenerator videoGenerator = new VideoGenerator();
+        videoGenerator.generateInterestingSquare(SquareRule.getInteresting());
+//        videoGenerator.generateInteresting(SquareRule.getFour());
 //        videoGenerator.generateInterestingHex(HexRule.getInteresting());
     }
 }
