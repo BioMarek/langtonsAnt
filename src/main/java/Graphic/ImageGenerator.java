@@ -2,8 +2,8 @@ package Graphic;
 
 import Graphic.Visualization.AntGraphicSingle;
 import Logic.Ant.SquareAnt;
-import Logic.RuleGenerator.SquareRulesGenerator;
 import Logic.Rule.SquareRule;
+import Logic.RuleGenerator.SquareRulesGenerator;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;

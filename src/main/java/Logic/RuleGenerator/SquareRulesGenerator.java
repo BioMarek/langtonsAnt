@@ -1,10 +1,8 @@
 package Logic.RuleGenerator;
 
-import Logic.Rule.Rule;
 import Logic.Rule.SquareRule;
 
 import java.util.Arrays;
-import java.util.Iterator;
 
 /**
  * Rules are saved as binary array of 'R's and 'L's which correspond to 1s and 0s in binary array. Array is returned
@@ -12,7 +10,7 @@ import java.util.Iterator;
  * Also, only half of rules is generated as LRR is same as RLL but mirrored there is no need to generate complementary
  * rules.
  */
-public class SquareRulesGenerator extends RuleGenerator implements Iterator<Rule> {
+public class SquareRulesGenerator extends RuleGenerator {
     public char[] charArray;
 
     /**

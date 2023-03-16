@@ -37,17 +37,23 @@ public class Main {
 
 
         /** Generates images of given length either all or limited number of randomly selected.*/
-//        Settings.generateHexagonalGridSettingsImages();
-//        ImageParallelWorker imageParallelWorker = new ImageParallelWorker();
-////        SquareRulesGenerator squareRulesGenerator = new SquareRulesGenerator(Settings.RULES_LENGTH);
-//        HexRuleGenerator hexRuleGenerator = new HexRuleGenerator(Settings.RULES_LENGTH);
-//        imageParallelWorker.drawAllRulesInParallel(hexRuleGenerator);
+        Settings.generateHexagonalGridSettingsImages();
+        ImageParallelWorker imageParallelWorker = new ImageParallelWorker();
+
+//        SquareRulesGenerator squareRulesGenerator = new SquareRulesGenerator(Settings.RULES_LENGTH);
+//        imageParallelWorker.drawAllRulesInParallel(squareRulesGenerator);
+
+        HexRuleGenerator hexRuleGenerator = new HexRuleGenerator(Settings.RULES_LENGTH);
+        imageParallelWorker.drawAllRulesInParallel(hexRuleGenerator);
 
 
         /** Generates videos of rules described in {@link HexRule} or {@link SquareRule} */
-        VideoGenerator videoGenerator = new VideoGenerator();
-        videoGenerator.generateInterestingSquare(SquareRule.getInteresting());
+        // single ant on square grid
+//        VideoGenerator videoGenerator = new VideoGenerator();
+//        videoGenerator.generateInterestingSquare(SquareRule.getInteresting());
+        // four ants on square grid
 //        videoGenerator.generateInteresting(SquareRule.getFour());
+        // ant on hexagonal grid
 //        videoGenerator.generateInterestingHex(HexRule.getInteresting());
     }
 }

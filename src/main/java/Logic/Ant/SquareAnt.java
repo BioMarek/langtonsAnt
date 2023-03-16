@@ -1,8 +1,8 @@
 package Logic.Ant;
 
 import Logic.Direction;
-import Logic.SquarePosition;
 import Logic.Rule.Rule;
+import Logic.SquarePosition;
 import Utils.Settings;
 
 import java.util.Arrays;

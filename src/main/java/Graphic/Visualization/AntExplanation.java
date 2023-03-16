@@ -4,9 +4,9 @@ import Graphic.AntVisualization;
 import Graphic.Components.Background;
 import Graphic.Components.SquareLegend;
 import Logic.Ant.SquareAnt;
-import Utils.Colors;
 import Logic.Direction;
 import Logic.SquarePosition;
+import Utils.Colors;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;

@@ -30,6 +30,14 @@ public class HexRule extends Rule {
         setVariables();
     }
 
+    public HexRule(List<HexMove> rule, int hexSideLen) {
+        this.rule = rule;
+        this.slowdownSteps = 1;
+        this.slowdownModifier = 1;
+        this.hexSize = hexSideLen;
+        setVariables();
+    }
+
     public HexRule(String rule) {
         this.rule = stringToMoves(rule);
         this.slowdownSteps = 1;
