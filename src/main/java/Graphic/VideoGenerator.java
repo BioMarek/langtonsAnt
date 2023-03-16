@@ -57,6 +57,7 @@ public class VideoGenerator {
             squareAnt = new SquareAnt(Settings.SQUARE_RULE);
             antVisualization = new AntGraphicSingle();
             ((AntGraphicSingle) antVisualization).squareAnt = squareAnt;
+            ruleName = squareAnt.rule.toString();
             createMP4();
         }
     }
@@ -113,6 +114,7 @@ public class VideoGenerator {
 
             System.out.println("max steps: " + squareAnt.steps + " skip: " + Settings.SKIP);
             antVisualization = new AntGraphicFour(new SquareAnt(squareRules.get(0)), new SquareAnt(squareRules.get(1)), new SquareAnt(squareRules.get(2)), new SquareAnt(squareRules.get(3)));
+            ruleName = squareRules.get(0).rule + "_" + squareRules.get(1).rule + "_" +squareRules.get(2).rule + "_" +squareRules.get(3).rule;
             createMP4();
         }
     }

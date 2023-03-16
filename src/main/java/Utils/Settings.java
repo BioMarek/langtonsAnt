@@ -88,7 +88,7 @@ public class Settings {
     }
 
     public static void generateInterestingSettings() {
-        Settings.VIDEO_NUM_IMAGES = 255;
+        Settings.VIDEO_NUM_IMAGES = 240;
         Settings.IMAGE_PADDING = 500;
     }
 
