@@ -8,7 +8,6 @@ import Utils.Settings;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -16,7 +15,7 @@ import java.util.Set;
 /**
  * moves: N (no change), R1 (60° clockwise), R2 (120° clockwise), U (180°), L2 (120° counter-clockwise), L1 (60° counter-clockwise)
  */
-public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
+public class HexRuleGenerator extends RuleGenerator {
     private static final Random random = new Random();
     private final Set<String> mirroredRules = new HashSet<>();
     private final String lastRule;
@@ -56,6 +55,9 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
         }
     }
 
+    /**
+     * @return {@link HexRule} corresponding to current intArray.
+     */
     private HexRule generateRule() {
         List<HexMove> result = new ArrayList<>();
         for (int move : intArray) {
@@ -68,9 +70,15 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
                 case 5 -> result.add(HexMove.L1);
             }
         }
-        return new HexRule(result, 1, 1);
+        return new HexRule(result, Settings.HEX_SIDE_LEN);
     }
 
+    /**
+     * Generates rules based on current Settings and divides the equally into one list for each thread. If there is
+     * less tha 12 rules all calculations will be done by one thread.
+     *
+     * @return {@link List<Rule>} for each thread
+     */
     @Override
     public List<List<Rule>> getAllRulesForThreads() {
         List<List<Rule>> result = new ArrayList<>();
@@ -78,7 +86,7 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
 
         if (Settings.RANDOM_RULES) {
             for (int i = 0; i < Settings.RANDOM_RULES_LIMIT; i++) {
-                generateRandomRule();
+                generateRandomIntArray();
                 updateSets(generatedRules);
             }
         } else {
@@ -111,6 +119,9 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
         currentRuleString = getRuleString();
     }
 
+    /**
+     * @return String representing mirrored rule of current intArray. L1 -> R1, L2 -> R2, R1 -> L1, R2 -> L2
+     */
     private String getMirroredString() {
         StringBuilder result = new StringBuilder();
         for (int i : intArray) {
@@ -125,6 +136,11 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
         return result.toString();
     }
 
+    /**
+     * String as key in {@link Set} is faster and easier to use than array. This function converts intArray to String.
+     *
+     * @return String corresponding to current state of intArray
+     */
     private String getRuleString() {
         StringBuilder result = new StringBuilder();
         for (int i : intArray) {
@@ -133,7 +149,7 @@ public class HexRuleGenerator extends RuleGenerator implements Iterator<Rule> {
         return result.toString();
     }
 
-    private void generateRandomRule() {
+    private void generateRandomIntArray() {
         for (int i = 0; i < Settings.RULES_LENGTH; i++) {
             intArray[i] = random.nextInt(6);
         }

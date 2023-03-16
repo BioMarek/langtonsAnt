@@ -6,10 +6,10 @@ import Logic.Rule.Rule;
 import Utils.Settings;
 import Utils.Util;
 
+import java.util.Arrays;
+
 import static Utils.Util.calculateStandardDeviation;
 import static Utils.Util.normalize;
-
-import java.util.Arrays;
 
 public class HexAnt extends Ant {
     public HexPosition antPosition = new HexPosition();

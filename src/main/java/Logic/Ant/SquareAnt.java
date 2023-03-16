@@ -1,15 +1,15 @@
 package Logic.Ant;
 
 import Logic.Direction;
-import Logic.Position;
 import Logic.Rule.Rule;
+import Logic.SquarePosition;
 import Utils.Settings;
 
 import java.util.Arrays;
 
 public class SquareAnt extends Ant {
     public char[] charRule;
-    public Position antPosition = new Position();
+    public SquarePosition antSquarePosition = new SquarePosition();
 
     public SquareAnt(Rule rule) {
         this.gridColumns = (Settings.GRID_WIDTH + Settings.IMAGE_PADDING) / Settings.SIZE_OF_SQUARE;
@@ -20,9 +20,9 @@ public class SquareAnt extends Ant {
             grid[i] = new int[gridColumns];
             Arrays.fill(grid[i], -1);
         }
-        antPosition.row = gridRows / 2;
-        antPosition.column = gridColumns / 2;
-        antPosition.direction = Direction.NORTH;
+        antSquarePosition.row = gridRows / 2;
+        antSquarePosition.column = gridColumns / 2;
+        antSquarePosition.direction = Direction.NORTH;
 
         this.rule = rule;
         parseRule(rule.getSquareRule());
@@ -43,8 +43,8 @@ public class SquareAnt extends Ant {
      * Moves ant to next tile based on rule and on color of the square the ant is standing on.
      */
     public void nextMove() {
-        int currentRow = antPosition.row;
-        int currentColumn = antPosition.column;
+        int currentRow = antSquarePosition.row;
+        int currentColumn = antSquarePosition.column;
         grid[currentRow][currentColumn] = (grid[currentRow][currentColumn] == -1) ? 0 : grid[currentRow][currentColumn];
 
         if (charRule[grid[currentRow][currentColumn]] == 'L')
@@ -65,22 +65,22 @@ public class SquareAnt extends Ant {
      * Moves ant to the right based on direction ant is facing.
      */
     public void moveRight() {
-        switch (antPosition.direction) {
+        switch (antSquarePosition.direction) {
             case NORTH -> {
-                antPosition.direction = Direction.EAST;
-                antPosition.column++;
+                antSquarePosition.direction = Direction.EAST;
+                antSquarePosition.column++;
             }
             case EAST -> {
-                antPosition.direction = Direction.SOUTH;
-                antPosition.row++;
+                antSquarePosition.direction = Direction.SOUTH;
+                antSquarePosition.row++;
             }
             case SOUTH -> {
-                antPosition.direction = Direction.WEST;
-                antPosition.column--;
+                antSquarePosition.direction = Direction.WEST;
+                antSquarePosition.column--;
             }
             case WEST -> {
-                antPosition.direction = Direction.NORTH;
-                antPosition.row--;
+                antSquarePosition.direction = Direction.NORTH;
+                antSquarePosition.row--;
             }
         }
     }
@@ -89,22 +89,22 @@ public class SquareAnt extends Ant {
      * Moves ant to the left based on direction ant is facing.
      */
     public void moveLeft() {
-        switch (antPosition.direction) {
+        switch (antSquarePosition.direction) {
             case NORTH -> {
-                antPosition.direction = Direction.WEST;
-                antPosition.column--;
+                antSquarePosition.direction = Direction.WEST;
+                antSquarePosition.column--;
             }
             case EAST -> {
-                antPosition.direction = Direction.NORTH;
-                antPosition.row--;
+                antSquarePosition.direction = Direction.NORTH;
+                antSquarePosition.row--;
             }
             case SOUTH -> {
-                antPosition.direction = Direction.EAST;
-                antPosition.column++;
+                antSquarePosition.direction = Direction.EAST;
+                antSquarePosition.column++;
             }
             case WEST -> {
-                antPosition.direction = Direction.SOUTH;
-                antPosition.row++;
+                antSquarePosition.direction = Direction.SOUTH;
+                antSquarePosition.row++;
             }
         }
     }
@@ -113,7 +113,7 @@ public class SquareAnt extends Ant {
      * Checks whether ant moved out of grid bounds.
      */
     public void checkBorderCollision() {
-        if (antPosition.row < 0 || antPosition.column < 0 || antPosition.row == gridRows || antPosition.column == gridColumns)
+        if (antSquarePosition.row < 0 || antSquarePosition.column < 0 || antSquarePosition.row == gridRows || antSquarePosition.column == gridColumns)
             stopped = true;
     }
 

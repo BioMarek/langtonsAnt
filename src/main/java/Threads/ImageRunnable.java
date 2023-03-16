@@ -5,6 +5,7 @@ import Graphic.Visualization.HexGraphicSingle;
 import Logic.Ant.Ant;
 import Logic.Ant.HexAnt;
 import Logic.Ant.SquareAnt;
+import Logic.Rule.HexRule;
 import Logic.Rule.Rule;
 import Utils.Settings;
 
@@ -15,7 +16,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -55,7 +55,7 @@ public class ImageRunnable implements Runnable {
         System.out.println(Thread.currentThread().getName() + " working on: " + rule);
         Ant ant;
 
-        if (Objects.equals(rule.getType(), "hex")) {
+        if (rule instanceof HexRule) {
             ant = new HexAnt(rule);
             hexGraphicSingle.ant = ant;
         } else {

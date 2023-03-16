@@ -14,7 +14,6 @@ import java.awt.Graphics2D;
 import static Utils.Util.hexagonalPolygon;
 
 public class HexGraphicSingle implements AntVisualization {
-    private static final double HEXAGON_PI = 2 * Math.PI / 6;
     private Graphics2D graphics;
     public Ant ant;
     private final HexLegend hexLegend;

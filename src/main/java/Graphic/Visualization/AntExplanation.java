@@ -4,9 +4,9 @@ import Graphic.AntVisualization;
 import Graphic.Components.Background;
 import Graphic.Components.SquareLegend;
 import Logic.Ant.SquareAnt;
-import Utils.Colors;
 import Logic.Direction;
-import Logic.Position;
+import Logic.SquarePosition;
+import Utils.Colors;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
@@ -123,37 +123,37 @@ public class AntExplanation implements AntVisualization {
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 
         graphics.drawImage(antImage, op, (int) startX, (int) startY);
-        Position position = antImagePositions(squareAnt.steps);
+        SquarePosition squarePosition = antImagePositions(squareAnt.steps);
 
         if (currentCycle < explanationFrames / 2) {
-            startX = startX + position.row * 2.0 / explanationFrames;
-            startY = startY + position.column * 2.0 / explanationFrames;
+            startX = startX + squarePosition.row * 2.0 / explanationFrames;
+            startY = startY + squarePosition.column * 2.0 / explanationFrames;
         }
         if (currentCycle >= explanationFrames / 2) {
-            if (position.direction == Direction.RIGHT)
+            if (squarePosition.direction == Direction.RIGHT)
                 currentAngle += rotateAngle;
-            if (position.direction == Direction.LEFT)
+            if (squarePosition.direction == Direction.LEFT)
                 currentAngle -= rotateAngle;
         }
     }
 
-    private Position antImagePositions(int i) {
-        List<Position> positions = new ArrayList<>();
+    private SquarePosition antImagePositions(int i) {
+        List<SquarePosition> squarePositions = new ArrayList<>();
 
-        positions.add(new Position(0, 0, Direction.RIGHT));
-        positions.add(new Position(80, 0, Direction.RIGHT));
-        positions.add(new Position(0, 80, Direction.RIGHT));
-        positions.add(new Position(-80, 0, Direction.RIGHT));
+        squarePositions.add(new SquarePosition(0, 0, Direction.RIGHT));
+        squarePositions.add(new SquarePosition(80, 0, Direction.RIGHT));
+        squarePositions.add(new SquarePosition(0, 80, Direction.RIGHT));
+        squarePositions.add(new SquarePosition(-80, 0, Direction.RIGHT));
 
-        positions.add(new Position(0, -80, Direction.LEFT));
-        positions.add(new Position(-80, 0, Direction.RIGHT));
-        positions.add(new Position(0, -80, Direction.RIGHT));
-        positions.add(new Position(80, 0, Direction.RIGHT));
+        squarePositions.add(new SquarePosition(0, -80, Direction.LEFT));
+        squarePositions.add(new SquarePosition(-80, 0, Direction.RIGHT));
+        squarePositions.add(new SquarePosition(0, -80, Direction.RIGHT));
+        squarePositions.add(new SquarePosition(80, 0, Direction.RIGHT));
 
-        positions.add(new Position(0, 80, Direction.RIGHT));
-        positions.add(new Position(-80, 0, Direction.LEFT));
-        positions.add(new Position(0, 80, Direction.RIGHT));
+        squarePositions.add(new SquarePosition(0, 80, Direction.RIGHT));
+        squarePositions.add(new SquarePosition(-80, 0, Direction.LEFT));
+        squarePositions.add(new SquarePosition(0, 80, Direction.RIGHT));
 
-        return (i < positions.size()) ? positions.get(i) : new Position(0, 0, Direction.RIGHT);
+        return (i < squarePositions.size()) ? squarePositions.get(i) : new SquarePosition(0, 0, Direction.RIGHT);
     }
 }

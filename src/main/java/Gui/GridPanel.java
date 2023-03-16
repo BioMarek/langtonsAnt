@@ -1,10 +1,12 @@
-package Windows;
+package Gui;
 
 import Graphic.AntVisualization;
+import Graphic.Visualization.AntGraphicFour;
+import Graphic.Visualization.AntGraphicSingle;
 import Graphic.Visualization.HexExplanation;
 import Graphic.Visualization.HexGraphicSingle;
 import Logic.Ant.SquareAnt;
-import Logic.Ant.HexAnt;
+import Logic.Rule.SquareRule;
 import Utils.Settings;
 
 import javax.imageio.ImageIO;
@@ -24,32 +26,44 @@ public class GridPanel extends JPanel implements ActionListener {
     private final AntVisualization antVisualization;
     private Timer timer;
 
-//    public GridPanel() {
-//        this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
-//        this.setFocusable(true);
-//        this.ant = new Ant(Settings.RULE);
-//
-//        // TODO refactor
-//        Settings.generateFourImagesPerScreenSettings();
-//        Ant antTopLeft = new Ant("RL");
-//        Ant antTopRight = new Ant("RLR");
-//        Ant antBottomLeft = new Ant("RLRR");
-//        Ant antBottomRight = new Ant("RLRRR");
-//        this.antVisualization = new AntGraphicFour(antTopLeft, antTopRight, antBottomLeft, antBottomRight);
-//
-//        startTimer();
-//    }
+    public GridPanel(SquareRule rule1, SquareRule rule2, SquareRule rule3, SquareRule rule4) {
+        this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
+        this.setFocusable(true);
+        this.squareAnt = new SquareAnt(Settings.SQUARE_RULE);
+
+        Settings.generateFourImagesPerScreenSettings();
+        SquareAnt antTopLeft = new SquareAnt(rule1);
+        SquareAnt antTopRight = new SquareAnt(rule2);
+        SquareAnt antBottomLeft = new SquareAnt(rule3);
+        SquareAnt antBottomRight = new SquareAnt(rule4);
+        this.antVisualization = new AntGraphicFour(antTopLeft, antTopRight, antBottomLeft, antBottomRight);
+
+        startTimer();
+    }
+
     /**
      * Hexagonal visualization
      */
-    public GridPanel() {
+    public GridPanel(HexGraphicSingle hexGraphicSingle) {
         this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
         this.setFocusable(true);
         this.squareAnt = new SquareAnt(Settings.SQUARE_RULE);
 
         Settings.generateHexagonalGridSettings();
 
-        this.antVisualization = new HexGraphicSingle();
+        this.antVisualization = hexGraphicSingle;
+
+        startTimer();
+    }
+
+    public GridPanel(AntGraphicSingle antGraphicSingle) {
+        this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
+        this.setFocusable(true);
+        this.squareAnt = new SquareAnt(Settings.SQUARE_RULE);
+
+        Settings.generateHexagonalGridSettings();
+
+        this.antVisualization = antGraphicSingle;
 
         startTimer();
     }
@@ -57,17 +71,26 @@ public class GridPanel extends JPanel implements ActionListener {
     /**
      * Hexagonal explanation
      */
-//    public GridPanel() {
-//        this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
-//        this.setFocusable(true);
-//        this.squareAnt = new SquareAnt(Settings.SQUARE_RULE);
-//
-//        Settings.generateHexagonalGridSettings();
-//
-//        this.antVisualization = new HexExplanation();
-//
-//        startTimer();
-//    }
+    public GridPanel(HexExplanation hexExplanation) {
+        this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
+        this.setFocusable(true);
+        this.squareAnt = new SquareAnt(Settings.SQUARE_RULE);
+
+        Settings.generateHexagonalGridSettings();
+
+        this.antVisualization = hexExplanation;
+
+        startTimer();
+    }
+
+    public GridPanel() {
+        this.setPreferredSize(new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT));
+        this.setFocusable(true);
+        this.squareAnt = new SquareAnt(Settings.SQUARE_RULE);
+        this.antVisualization = new AntGraphicSingle();
+        ((AntGraphicSingle) antVisualization).squareAnt = squareAnt;
+        startTimer();
+    }
 
     @Override
     public void paintComponent(Graphics g) {

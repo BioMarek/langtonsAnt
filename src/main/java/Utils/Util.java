@@ -7,6 +7,9 @@ import java.awt.RenderingHints;
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * Helper functions used across the project.
+ */
 public class Util {
     private static final Random random = new Random();
 
@@ -24,7 +27,7 @@ public class Util {
     }
 
     /**
-     * Formats number as string with space every three numbers.
+     * Formats number as a String with space every three numbers.
      *
      * @param num number to format
      * @return num in as string with spaces
@@ -65,14 +68,37 @@ public class Util {
         return String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
     }
 
+    /**
+     * @return width of hexagon in pixels if its side has length Settings.HEX_SIDE_LEN
+     */
     public static int getHexWidth() {
         return (int) (Settings.HEX_SIDE_LEN * 1.7); // 17 when hexagon is 10
     }
 
+    /**
+     * @return height of hexagon in pixels if its side has length Settings.HEX_SIDE_LEN
+     */
     public static int getHexHeight() {
         return (int) (Settings.HEX_SIDE_LEN * 1.5); // 15 when hexagon is 10
     }
 
+    /**
+     * Hexagons on the odd row are moved by half of width hexagon to fit in gaps created by hexagons on even line.
+     * .......*       *
+     * .....*   *   *   *
+     * ...*       *       *
+     * ...*       *       *
+     * ...| *   *   *   *   *
+     * ...|   *       *       *
+     * ...|   *       *       *
+     * ...|     *   *   *   *
+     * ...|       *       *
+     * ...|       |
+     * ...|<----->|
+     * ...Length of shift
+     *
+     * @return how much to shift starting position of hexagon on the odd line
+     */
     public static int getHexPositionShift() {
         return getHexWidth() / 2; // 15 when hexagon is 10
     }
@@ -115,16 +141,16 @@ public class Util {
     /**
      * Generates {@link Polygon} composed of {@link java.awt.Point}s of hexagon
      *
-     * @param y        y-axis of hexagon first point
      * @param x        x-axis of hexagon first point
+     * @param y        y-axis of hexagon first point
      * @param edgeSize length of hexagon edge
      * @return polygon with hexagon points
      */
-    public static Polygon hexagonalPolygon(int y, int x, int edgeSize) {
+    public static Polygon hexagonalPolygon(int x, int y, int edgeSize) {
         Polygon polygon = new Polygon();
         for (int i = 0; i < 6; i++)
-            polygon.addPoint((int) (y + edgeSize * Math.sin(i * 2 * Math.PI / 6)),
-                    (int) (x + edgeSize * Math.cos(i * 2 * Math.PI / 6)));
+            polygon.addPoint((int) (x + edgeSize * Math.sin(i * 2 * Math.PI / 6)),
+                    (int) (y + edgeSize * Math.cos(i * 2 * Math.PI / 6)));
         return polygon;
     }
 
